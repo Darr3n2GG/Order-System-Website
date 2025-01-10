@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+}
+
+.nav {
+    overflow: hidden;
+    padding: 10px 165px;
+    background-color: #e28413ff;
+}
+
+.nav-right {
+    float: right;
+}
+
+#logo_button {
+    width: auto;
+    height: 42.5px;
+}
+
+#user_button {
+    width: 32.8125px;
+    height: auto;
+    margin-top: 2.421875px;
+}
+
+@media screen and (max-width: 520px) {
+    .nav{
+        padding: 10px;
+    }
+  }
