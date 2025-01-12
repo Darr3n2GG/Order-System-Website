@@ -1,16 +1,30 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
     <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="../../assets/style.css">
     <title>Menu Page</title>
 </head>
 <body>
-    <div class="nav">
-        <input id="logo_button" type="image" src="../../assets/logo+text.png" onclick="redirectToHome()">
-        <div class="nav-right">
-            <input id="user_button" type="image" src="../../assets/user-solid.svg" onclick="redirectToUser()">
-        </div>
-    </div>
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#">
+                <img class="nav_logo" src="../../assets/logo+text.png" alt="Logo">
+            </a>
+            <div class="nav_menu" id="nav-menu">
+                <ul class="nav_list">
+                    <li class="nav_item">
+                        <sl-icon-button
+                            class="nav_link" name="person-circle" label="User icon">
+                        </sl-icon-button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 </body>
 </html>

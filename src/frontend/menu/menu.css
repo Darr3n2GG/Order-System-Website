@@ -8,13 +8,17 @@ body {
     background-color: #e28413ff;
 }
 
-.nav-right {
+.nav_logo {
+    width: auto;
+    height: 42.5px;
+}
+
+.nav_menu {
     float: right;
 }
 
-#logo_button {
-    width: auto;
-    height: 42.5px;
+.nav_link {
+    font-size: 32px;
 }
 
 #user_button {
