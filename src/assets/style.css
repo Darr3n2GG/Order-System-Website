@@ -1,4 +1,4 @@
-/*=============== GOOGLE FONTS ===============*/
+/*=============== FONTS ===============*/
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
 /*=============== VARIABLES CSS ===============*/
@@ -12,7 +12,6 @@
   --container-color: hsl(14, 51%, 89%);
   --border-color: hsl(230, 25%, 80%);
 
-  /*.5rem = 8px | 1rem = 16px ...*/
   --body-font: "Lato", sans-serif;
   --h2-font-size: 1.25rem;
   --normal-font-size: .938rem;
@@ -23,4 +22,47 @@
 
   --z-fixed: 100;
   --z-modal: 1000;
+}
+
+/*=============== BASE ===============*/
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+  
+html {
+    scroll-behavior: smooth;
+}
+  
+body,
+input,
+button {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+}
+  
+body {
+    background-color: var(--body-color);
+    color: var(--text-color);
+}
+  
+input,
+button {
+    border: none;
+    outline: none;
+}
+  
+ul {
+    list-style: none;
+}
+  
+a {
+    text-decoration: none;
+}
+  
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
 }
