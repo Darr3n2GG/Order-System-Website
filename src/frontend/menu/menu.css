@@ -9,5 +9,22 @@
 }
 
 .search {
-    width: 325px;
+    width: 85%;
 }
+
+.category_dialog::part(base) {
+    position: relative;
+    margin-top: 2.5%;
+}
+
+/* @media screen and (min-width: 576px) {
+    .search {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 1150px) {
+    .search {
+        width: 272px;
+    }
+} */
