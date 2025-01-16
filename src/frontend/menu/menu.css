@@ -17,7 +17,7 @@
     margin-top: 2.5%;
 }
 
-/* @media screen and (min-width: 576px) {
+@media screen and (min-width: 576px) {
     .search {
         width: 90%;
     }
@@ -27,4 +27,4 @@
     .search {
         width: 272px;
     }
-} */
+}
