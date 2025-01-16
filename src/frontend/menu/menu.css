@@ -12,9 +12,17 @@
     width: 85%;
 }
 
-.category_dialog::part(base) {
-    position: relative;
-    margin-top: 2.5%;
+.menu {
+    margin-top: 2rem;
+}
+
+.food_item {
+    display: flex;
+    margin: 1rem auto;
+}
+
+.food_item > img {
+    width: 5rem;
 }
 
 @media screen and (min-width: 576px) {

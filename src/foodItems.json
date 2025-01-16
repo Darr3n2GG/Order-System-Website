@@ -1,0 +1,12 @@
+[
+    {
+        "name" : "test",
+        "price" : "10",
+        "image" : "/Order-System-Website/src/assets/user-regular.svg"
+    },
+    {
+        "name" : "test2",
+        "price" : "20",
+        "image" : "/Order-System-Website/src/assets/user-solid.svg"
+    }
+]
