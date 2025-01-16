@@ -16,13 +16,23 @@
             <sl-input class="search" placeholder="Search" clearable>
                 <sl-icon name="search" slot="prefix"></sl-icon>
             </sl-input>
-            <sl-icon-button class="icon_border" id="category-button" name="list-ul"></sl-icon-button>
+            <sl-dropdown class="category_dropdown" id="category-dropdown">
+                <sl-icon-button
+                    class="icon_border" id="category-button" name="list-ul" slot="trigger">
+                </sl-icon-button>
+                <sl-menu>
+                    <sl-menu-item value="taco">Taco</sl-menu-item>
+                    <sl-menu-item value="wonton">Wonton</sl-menu-item>
+                    <sl-menu-item value="noodles">Mee</sl-menu-item>
+                    <sl-menu-item value="snacks">Makanan Ringan</sl-menu-item>
+                    <sl-menu-item value="drinks">Minuman</sl-menu-item>
+                </sl-menu>
+            </sl-dropdown>
         </div>
+        <sl-dropdown>
+
+        </sl-dropdown>
     </div>
-    <sl-dialog label="Kategori" class="category_dialog" id="category-dialog">
-        Burp
-        <sl-checkbox>Hello</sl-checkbox>
-    </sl-dialog>
     <script type="text/javascript" src="menu.js"></script>
 </body>
 </html>
