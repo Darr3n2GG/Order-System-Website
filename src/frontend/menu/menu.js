@@ -10,8 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 foodItem.classList.add("food_item")
                 foodItem.innerHTML = `
                     <img src="${item.image}" alt="${item.name}">
-                    <h2>${item.name}</h2>
-                    <p><strong>Price: $${item.price}</strong></p>
+                    <div class="food_info">
+                        <h2>${item.name}</h2>
+                        <p><strong>Price: $${item.price}</strong></p>
+                    </div>
                 `;
                 menu.appendChild(foodItem);
             });
