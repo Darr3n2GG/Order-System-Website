@@ -11,7 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 foodItem.innerHTML = `
                     <img src="${item.image}" alt="${item.name}">
                     <div class="food_info">
-                        <h2>${item.name}</h2>
+                        <div class="name_tag">
+                            <h2>${item.name}</h2>
+                            <sl-tag size="small" pill>A1</sl-tag>
+                        </div>
                         <p><strong>Price: $${item.price}</strong></p>
                     </div>
                 `;
