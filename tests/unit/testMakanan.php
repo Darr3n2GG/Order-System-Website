@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-final class GreeterTest extends TestCase {
+final class MakananTest extends TestCase {
     public function testprintMakanan(): void {
         $makanan = new Makanan;
         $arrayMakanan = $makanan->getAllMakananString();

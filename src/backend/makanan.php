@@ -1,26 +1,14 @@
 <?php
 class Makanan {
+    private $MySQLConnector;
+
     public function __construct() {
-        require("rb-mysql.php");
-        R::setup(
-            "mysql:host=localhost;dbname=restorandb",
-            "root",
-            ""
-        );
+        require_once("MySQLConnector.php");
+        $this->MySQLConnector = new MySQLConnector("localhost", "root", "", "restorandb");
     }
 
-    private function getMakanan(): array {
-        $arrayMakanan = R::findAll("makanan");
+    public function getAllMakanan(): array {
+        $arrayMakanan = $this->MySQLConnector->readQuery("SELECT * FROM makanan ORDER BY id ASC");
         return $arrayMakanan;
-    }
-
-    public function getAllMakananString(): string {
-        try {
-            $arrayMakanan = $this->getMakanan();
-            $arrayMakanan = implode(',', $arrayMakanan);
-            return $arrayMakanan;
-        } catch (Exception $e) {
-            echo $e;
-        }
     }
 }
