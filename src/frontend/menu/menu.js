@@ -1,15 +1,42 @@
-const makanan_json = "/Order-System-Website/src/backend/fetchMakanan.php"
+const kategori_path = "/Order-System-Website/src/backend/fetchKategori.php"
+const makanan_path = "/Order-System-Website/src/backend/fetchMakanan.php"
 
 document.addEventListener("DOMContentLoaded", () => {
-    fetch(makanan_json)
-        .then(response => response.json())
-        .then(data => displayMakanan(data))
+    fetch(kategori_path)
+        .then(onFulfilled, onRejected)
+        .then(kategori_list => displayKategori(kategori_list))
+        .catch(error => console.error("Error loading categories:", error));
+    fetch(makanan_path)
+        .then(onFulfilled, onRejected)
+        .then(makanan => displayMakanan(makanan))
         .catch(error => console.error("Error loading food items:", error));
-});
+})
 
-function displayMakanan(data) {
+const onFulfilled = (response) => {
+    if (response.status !== 200 && !response.ok) {
+      throw new Error(`[${response.status}] Unable to fetch resource`)
+    }
+    return response.json()
+}
+  
+const onRejected = (err) => {
+    console.error(err)
+}
+
+function displayKategori(kategori_list) {
     const menu = document.getElementById("menu");
-    data.forEach(item => {
+    kategori_list.forEach(kategori => {
+        const kategoriElement = document.createElement("div");
+        kategoriElement.classList.add("kategori");
+        kategoriElement.id = kategori.label;
+        kategoriElement.innerHTML = `<h1>${kategori.name}</h1>`;
+        menu.appendChild(kategoriElement);
+    });
+}
+
+function displayMakanan(makanan) {
+    makanan.forEach(item => {
+        const kategori = document.getElementById(item.label);
         const foodItem = document.createElement("div");
         foodItem.classList.add("food_item")
         foodItem.innerHTML = `
@@ -17,11 +44,11 @@ function displayMakanan(data) {
             <div class="food_info">
                 <div class="name_tag">
                     <h2>${item.nama}</h2>
-                    <sl-tag size="small" pill>${item.kategori + item.nombor}</sl-tag>
+                    <sl-tag size="small" pill>${item.label + item.nombor}</sl-tag>
                 </div>
-                <p><strong>Price: $${item.harga}</strong></p>
+                <p><strong>Price: RM${item.harga}</strong></p>
             </div>
         `;
-        menu.appendChild(foodItem);
+        kategori.appendChild(foodItem);
     });
 }
