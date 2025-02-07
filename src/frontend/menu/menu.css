@@ -42,6 +42,10 @@
     gap: 0.5rem;
 }
 
+.kategori {
+    scroll-margin-top: calc(var(--header-height) + 10px);
+}
+
 @media screen and (min-width: 576px) {
     .search {
         width: 90%;

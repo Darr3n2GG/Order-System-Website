@@ -1,12 +1,12 @@
 const kategori_path = "/Order-System-Website/src/backend/fetchKategori.php"
 const makanan_path = "/Order-System-Website/src/backend/fetchMakanan.php"
 
-document.addEventListener("DOMContentLoaded", () => {
-    fetch(kategori_path)
+document.addEventListener("DOMContentLoaded", async () => {
+    await fetch(kategori_path)
         .then(onFulfilled, onRejected)
         .then(kategori_list => displayKategori(kategori_list))
         .catch(error => console.error("Error loading categories:", error));
-    fetch(makanan_path)
+    await fetch(makanan_path)
         .then(onFulfilled, onRejected)
         .then(makanan => displayMakanan(makanan))
         .catch(error => console.error("Error loading food items:", error));
