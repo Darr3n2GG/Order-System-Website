@@ -8,20 +8,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         .catch(error => console.error("Error loading categories:", error));
     await fetch(makanan_path)
         .then(onFulfilled, onRejected)
-        .then(makanan => displayMakanan(makanan))
+        .then(makanan => setupMakanan(makanan))
         .catch(error => console.error("Error loading food items:", error));
 })
-
-const onFulfilled = (response) => {
-    if (response.status !== 200 && !response.ok) {
-      throw new Error(`[${response.status}] Unable to fetch resource`)
-    }
-    return response.json()
-}
-  
-const onRejected = (err) => {
-    console.error(err)
-}
 
 function displayKategori(kategori_list) {
     const menu = document.getElementById("menu");
@@ -32,6 +21,11 @@ function displayKategori(kategori_list) {
         kategoriElement.innerHTML = `<h1>${kategori.name}</h1>`;
         menu.appendChild(kategoriElement);
     });
+}
+
+function setupMakanan(makanan) {
+    displayMakanan(makanan);
+    addGetItemOnClick();
 }
 
 function displayMakanan(makanan) {
@@ -46,9 +40,32 @@ function displayMakanan(makanan) {
                     <h2>${item.nama}</h2>
                     <sl-tag size="small" pill>${item.label + item.nombor}</sl-tag>
                 </div>
-                <p><strong>Price: RM${item.harga}</strong></p>
+                <div class="item_bottom">
+                    <p><strong>Price: RM${item.harga}</strong></p>
+                    <sl-icon-button class="get_item" name="plus-square"></sl-icon-button>
+                </div>
             </div>
         `;
         kategori.appendChild(foodItem);
     });
+}
+
+function addGetItemOnClick() {
+    const dialog = document.getElementById("item-dialog");
+    const addItemButtons = document.getElementsByClassName("get_item");
+
+    for (i = 0; i < addItemButtons.length; i++) {
+        addItemButtons[i].addEventListener("click", () => dialog.show());
+    }
+}
+
+const onFulfilled = (response) => {
+    if (response.status !== 200 && !response.ok) {
+      throw new Error(`[${response.status}] Unable to fetch resource`)
+    }
+    return response.json()
+}
+  
+const onRejected = (err) => {
+    console.error(err)
 }
