@@ -9,7 +9,8 @@ class Makanan {
 
     public function getAllMakanan(): array {
         $arrayMakanan = $this->MySQLConnector->readQuery(
-            "SELECT * FROM makanan INNER JOIN kategori ON makanan.kategori_id=kategori.id ORDER BY makanan.id ASC"
+            "SELECT makanan.id, makanan.nama, kategori.label, makanan.nombor, kategori.nama AS kategori_nama, makanan.harga, makanan.gambar 
+            FROM makanan INNER JOIN kategori ON makanan.kategori_id=kategori.id ORDER BY makanan.id ASC"
         );
         return $arrayMakanan;
     }
