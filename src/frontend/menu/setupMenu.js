@@ -1,6 +1,5 @@
 const kategori_path = "/Order-System-Website/src/backend/fetchKategori.php"
 const makanan_path = "/Order-System-Website/src/backend/fetchMakanan.php"
-let food_list = null
 
 document.addEventListener("DOMContentLoaded", async () => {
     await fetch(kategori_path)
@@ -25,10 +24,9 @@ function displayKategori(kategori_list) {
 }
 
 function setupMakanan(makanan_list) {
-    food_list = makanan_list;
-    console.log(food_list)
+    console.log(makanan_list)
     displayMakanan(makanan_list);
-    addClickEvent();
+    addClickEvent(makanan_list);
 }
 
 function displayMakanan(makanan_list) {
@@ -46,7 +44,7 @@ function displayMakanan(makanan_list) {
                 <div class="item_bottom">
                     <p><strong>Price: RM${item.harga}</strong></p>
                     <sl-icon-button
-                        class="dialog_button" name="plus-square" value="${item.id}">
+                        class="dialog_button" name="plus-square">
                     </sl-icon-button>
                 </div>
             </div>
@@ -55,18 +53,20 @@ function displayMakanan(makanan_list) {
     });
 }
 
-function addClickEvent() {
+function addClickEvent(makanan_list) {
     const addItemButtons = document.getElementsByClassName("dialog_button");
-    for (i = 0; i < addItemButtons.length; i++) {
-        let addItemButton = addItemButtons[i];
-        console.log(addItemButton.value);
-        addItemButton.addEventListener("click", showDialog(addItemButton.value));
+    for (let i = 0; i < addItemButtons.length; i++) {
+        addItemButtons[i].addEventListener("click", () => {
+            showDialog(makanan_list[i]);
+        });
     }
 }
 
-function showDialog(value) {
+function showDialog(makanan) {
     const dialog = document.getElementById("item-dialog");
-
+    dialog.label = makanan.label + makanan.nombor + " : " + makanan.nama;
+    dialog.querySelector(".dialog_image").src = makanan.gambar;
+    dialog.querySelector(".dialog_price").innerHTML = "Price : RM" + makanan.harga;
     dialog.show();
 }
 
