@@ -46,6 +46,13 @@
     scroll-margin-top: calc(var(--header-height) + 10px);
 }
 
+/* .item_dialog::part(footer) {
+} */
+
+.dialog_amount {
+    width: 5rem;
+}
+
 @media screen and (min-width: 576px) {
     .search {
         width: 90%;
