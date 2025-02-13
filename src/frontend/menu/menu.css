@@ -46,8 +46,12 @@
     scroll-margin-top: calc(var(--header-height) + 10px);
 }
 
-/* .item_dialog::part(footer) {
-} */
+.item_dialog::part(footer) {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    gap: 1rem;
+}
 
 .dialog_amount {
     width: 5rem;
