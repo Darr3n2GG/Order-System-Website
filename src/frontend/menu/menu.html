@@ -16,24 +16,19 @@
             <sl-input class="search" placeholder="Search" clearable>
                 <sl-icon name="search" slot="prefix"></sl-icon>
             </sl-input>
-            <sl-dropdown class="category_dropdown" id="category-dropdown" placement="bottom-end">
+            <sl-dropdown class="category_dropdown" placement="bottom-end">
                 <sl-icon-button
-                    class="icon_border" id="category-button" name="list-ul" slot="trigger">
+                    class="category_button icon_border" name="list-ul" slot="trigger">
                 </sl-icon-button>
-                <sl-menu id="category-menu">
-                    <sl-menu-item value="A">Taco</sl-menu-item>
-                    <sl-menu-item value="B">Wonton</sl-menu-item>
-                    <sl-menu-item value="C">Mee</sl-menu-item>
-                    <sl-menu-item value="D">Makanan Ringan</sl-menu-item>
-                    <sl-menu-item value="E">Minuman</sl-menu-item>
+                <sl-menu class="category_menu">
                 </sl-menu>
             </sl-dropdown>
         </div>
-        <div class="menu" id="menu">
-            <sl-dialog label="A1 : Chicken Taco" id="item-dialog">
+        <div class="menu">
+            <sl-dialog class="item_dialog" label="">
                 <img class="dialog_image" src="" alt="food image">
                 <div>
-                    <h2 class="dialog_price">Price : </h2>
+                    <h2 class="dialog_price">Harga : RM</h2>
                     <h2>Description :</h2>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </div>

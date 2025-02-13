@@ -4,7 +4,7 @@ const makanan_path = "/Order-System-Website/src/backend/fetchMakanan.php"
 document.addEventListener("DOMContentLoaded", async () => {
     await fetch(kategori_path)
         .then(onFulfilled, onRejected)
-        .then(kategori_list => displayKategori(kategori_list))
+        .then(kategori_list => setupKategori(kategori_list))
         .catch(error => console.error("Error loading categories:", error));
     await fetch(makanan_path)
         .then(onFulfilled, onRejected)
@@ -12,8 +12,23 @@ document.addEventListener("DOMContentLoaded", async () => {
         .catch(error => console.error("Error loading food items:", error));
 })
 
+function setupKategori(kategori_list) {
+    setupDropdown(kategori_list);
+    displayKategori(kategori_list);
+}
+
+function setupDropdown(kategori_list) {
+    const dropdownMenu = document.querySelector(".category_menu");
+    kategori_list.forEach(kategori => {
+        const menuItemElement = document.createElement("sl-menu-item");
+        menuItemElement.value = kategori.label;
+        menuItemElement.innerHTML = kategori.nama;
+        dropdownMenu.appendChild(menuItemElement);
+    });
+}
+
 function displayKategori(kategori_list) {
-    const menu = document.getElementById("menu");
+    const menu = document.querySelector(".menu");
     kategori_list.forEach(kategori => {
         const kategoriElement = document.createElement("div");
         kategoriElement.classList.add("kategori");
@@ -24,7 +39,6 @@ function displayKategori(kategori_list) {
 }
 
 function setupMakanan(makanan_list) {
-    console.log(makanan_list)
     displayMakanan(makanan_list);
     addClickEvent(makanan_list);
 }
@@ -37,12 +51,12 @@ function displayMakanan(makanan_list) {
         foodItem.innerHTML = `
             <img src="${item.gambar}" alt="${item.nama}">
             <div class="food_info">
-                <div class="name_tag">
+                <div class="food_row">
                     <h2>${item.nama}</h2>
                     <sl-tag size="small" pill>${item.label + item.nombor}</sl-tag>
                 </div>
-                <div class="item_bottom">
-                    <p><strong>Price: RM${item.harga}</strong></p>
+                <div class="food_row">
+                    <p><strong>Harga : RM${item.harga}</strong></p>
                     <sl-icon-button
                         class="dialog_button" name="plus-square">
                     </sl-icon-button>
@@ -63,20 +77,20 @@ function addClickEvent(makanan_list) {
 }
 
 function showDialog(makanan) {
-    const dialog = document.getElementById("item-dialog");
+    const dialog = document.querySelector(".item_dialog");
     dialog.label = makanan.label + makanan.nombor + " : " + makanan.nama;
     dialog.querySelector(".dialog_image").src = makanan.gambar;
-    dialog.querySelector(".dialog_price").innerHTML = "Price : RM" + makanan.harga;
+    dialog.querySelector(".dialog_price").innerHTML = "Harga : RM" + makanan.harga;
     dialog.show();
 }
 
 const onFulfilled = (response) => {
     if (response.status !== 200 && !response.ok) {
-      throw new Error(`[${response.status}] Unable to fetch resource`)
+      throw new Error(`[${response.status}] Unable to fetch resource`);
     }
-    return response.json()
+    return response.json();
 }
   
 const onRejected = (err) => {
-    console.error(err)
+    console.error(err);
 }
