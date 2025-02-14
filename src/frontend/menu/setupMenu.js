@@ -13,11 +13,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 })
 
 function setupKategori(kategori_list) {
-    setupDropdown(kategori_list);
+    displayDropdown(kategori_list);
     displayKategori(kategori_list);
 }
 
-function setupDropdown(kategori_list) {
+function displayDropdown(kategori_list) {
     const dropdownMenu = document.querySelector(".category_menu");
     kategori_list.forEach(kategori => {
         const menuItemElement = document.createElement("sl-menu-item");
@@ -82,6 +82,14 @@ function showDialog(makanan) {
     dialog.querySelector(".dialog_image").src = makanan.gambar;
     dialog.querySelector(".dialog_price").innerHTML = "Harga : RM" + makanan.harga;
     dialog.show();
+}
+
+function createItemForm() {
+    const form = document.querySelector(".item_form");
+    const submitter = document.querySelector(".add_item_button");
+    const formData = new formData(form, submitter);
+
+    
 }
 
 const onFulfilled = (response) => {
