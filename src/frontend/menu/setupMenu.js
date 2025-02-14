@@ -68,9 +68,9 @@ function displayMakanan(makanan_list) {
 }
 
 function addClickEvent(makanan_list) {
-    const addItemButtons = document.getElementsByClassName("dialog_button");
-    for (let i = 0; i < addItemButtons.length; i++) {
-        addItemButtons[i].addEventListener("click", () => {
+    const dialogButton = document.getElementsByClassName("dialog_button");
+    for (let i = 0; i < dialogButton.length; i++) {
+        dialogButton[i].addEventListener("click", () => {
             showDialog(makanan_list[i]);
         });
     }
@@ -81,7 +81,10 @@ function showDialog(makanan) {
     dialog.label = makanan.label + makanan.nombor + " : " + makanan.nama;
     dialog.querySelector(".dialog_image").src = makanan.gambar;
     dialog.querySelector(".dialog_price").innerHTML = "Harga : RM" + makanan.harga;
-    dialog.querySelector(".add_item_button").value = makanan.id;
+    dialog.querySelector(".add_item_button").value = {
+        id : makanan.id,
+        quantiti : 1
+    };
     dialog.show();
 }
 
