@@ -81,15 +81,8 @@ function showDialog(makanan) {
     dialog.label = makanan.label + makanan.nombor + " : " + makanan.nama;
     dialog.querySelector(".dialog_image").src = makanan.gambar;
     dialog.querySelector(".dialog_price").innerHTML = "Harga : RM" + makanan.harga;
+    dialog.querySelector(".add_item_button").value = makanan.id;
     dialog.show();
-}
-
-function createItemForm() {
-    const form = document.querySelector(".item_form");
-    const submitter = document.querySelector(".add_item_button");
-    const formData = new formData(form, submitter);
-
-    
 }
 
 const onFulfilled = (response) => {

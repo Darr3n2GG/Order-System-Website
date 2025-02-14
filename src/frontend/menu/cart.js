@@ -1,1 +1,2 @@
-const cart = [];
+const cart = {};
+
