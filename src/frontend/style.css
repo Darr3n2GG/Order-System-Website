@@ -76,11 +76,11 @@ img {
 
 .icon_border::part(base) {
     font-size: 1.5rem;
-    border: solid 1px var(--sl-color-neutral-600);
+    border: solid 1px var(--sl-input-border-color);
+    background-color: var(--sl-color-neutral-0);
 }
 
 .icon_border::part(base):hover {
-    border: solid 1px var(--sl-color-primary-600);
     background-color: var(--sl-color-primary-50);
 }
 

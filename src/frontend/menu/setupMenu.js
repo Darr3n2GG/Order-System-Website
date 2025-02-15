@@ -81,10 +81,9 @@ function showDialog(makanan) {
     dialog.label = makanan.label + makanan.nombor + " : " + makanan.nama;
     dialog.querySelector(".dialog_image").src = makanan.gambar;
     dialog.querySelector(".dialog_price").innerHTML = "Harga : RM" + makanan.harga;
-    dialog.querySelector(".add_item_button").value = {
-        id : makanan.id,
-        quantiti : 1
-    };
+    let makanan_value =  makanan;
+    makanan_value.quantiti = 1;
+    dialog.querySelector(".add_item_button").value = makanan_value;
     dialog.show();
 }
 
