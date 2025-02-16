@@ -6,6 +6,8 @@ const cartDiv = document.querySelector(".cart");
 
 addItemButton.addEventListener("click", () => {
     addItemToCart(addItemButton.value);
+    const itemDialog = document.querySelector(".item_dialog");
+    itemDialog.hide();
 });
 
 cartButton.addEventListener("click", () => {
@@ -14,10 +16,29 @@ cartButton.addEventListener("click", () => {
 })
 
 function addItemToCart(item) {
+    cart.forEach(cartItem => {
+        if (cartItem.id == item.id) {
+            cartItem.quantiti += item.quantiti;
+            addItemToCartDialog(item);
+            return;
+        }
+    });
     cart.push(item);
+    addItemToCartDialog(item);
+}
+
+function addItemToCartDialog(item) {
     const itemList = cartDiv.querySelector(".item_list");
     const itemElement = document.createElement("li");
-    itemElement.innerHTML = `${cart.label + cart.nombor} ${cart.nama} : ${cart.quantiti}`;
+    itemElement.innerHTML = `${item.label + item.nombor} ${item.nama} : ${item.quantiti}`;
     itemList.appendChild(itemElement);
 }
 
+function checkIfItemExistsInCart(item) {
+    cart.forEach(cartItem => {
+        if (cartItem.id == item.id) {
+            return true;
+        }
+    });
+    return false;
+}
