@@ -1,6 +1,6 @@
 const cart = [];
 
-// const addItemButton = document.querySelector(".add_item_button");
+const addItemButton = document.querySelector(".add_item_button");
 const cartButton = document.querySelector(".cart_button");
 const cartDiv = document.querySelector(".cart");
 
@@ -19,7 +19,7 @@ function addItemToCart(item) {
     for (let i = 0; i < cart.length; i++) {
         if (cart[i].id == item.id) {
             cart[i].quantiti += item.quantiti;
-            addItemToCartDialog(item);
+            updateItemQuantityInCartDialog(i, item.quantiti);
             return;
         }
     }
@@ -27,11 +27,26 @@ function addItemToCart(item) {
     addItemToCartDialog(item);
 }
 
+function updateItemQuantityInCartDialog(itemIndex, quantity) {
+    const itemList = cartDiv.querySelector(".item_list");
+    const itemElement = itemList.children[itemIndex];
+    itemElement.value.quantiti += quantity;
+    item = itemElement.value;
+    itemElement.innerHTML = `${item.label + item.nombor} ${item.nama} : ${item.quantiti}`;
+}
+
 function addItemToCartDialog(item) {
     const itemList = cartDiv.querySelector(".item_list");
-    const itemElement = document.createElement("li");
-    itemElement.innerHTML = `${item.label + item.nombor} ${item.nama} : ${item.quantiti}`;
+    let itemElement = document.createElement("li");
+    itemElement.value = item;
+    itemElement = updateItemHTML(itemElement);
     itemList.appendChild(itemElement);
+}
+
+function updateItemHTML(itemElement) {
+    const item = itemElement.value;
+    itemElement.innerHTML = `${item.label + item.nombor} ${item.nama} : ${item.quantiti}`;
+    return itemElement;
 }
 
 function checkIfItemExistsInCart(item) {
