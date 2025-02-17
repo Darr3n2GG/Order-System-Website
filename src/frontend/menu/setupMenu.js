@@ -81,15 +81,22 @@ function showDialog(makanan) {
     dialog.label = makanan.label + makanan.nombor + " : " + makanan.nama;
     dialog.querySelector(".dialog_image").src = makanan.gambar;
     dialog.querySelector(".dialog_price").innerHTML = "Harga : RM" + makanan.harga;
-    let makanan_value =  makanan;
-    makanan_value.quantiti = 1;
-    dialog.querySelector(".add_item_button").value = makanan_value;
+    const finalMakanan = addQuantityToMakanan(makanan);
+    const addItemButton = dialog.querySelector(".add_item_button");
+    addItemButton.value = finalMakanan;
     dialog.show();
+}
+
+// Quantity of the exact same food items
+function addQuantityToMakanan(makanan) {
+    let finalMakanan = makanan
+    finalMakanan.quantiti = 1
+    return finalMakanan
 }
 
 const onFulfilled = (response) => {
     if (response.status !== 200 && !response.ok) {
-      throw new Error(`[${response.status}] Unable to fetch resource`);
+        throw new Error(`[${response.status}] Unable to fetch resource`);
     }
     return response.json();
 }

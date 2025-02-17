@@ -1,8 +1,13 @@
 const cart = [];
 
-const addItemButton = document.querySelector(".add_item_button");
+// const addItemButton = document.querySelector(".add_item_button");
 const cartButton = document.querySelector(".cart_button");
 const cartDiv = document.querySelector(".cart");
+
+cartButton.addEventListener("click", () => {
+    const cartDialog = cartDiv.querySelector(".cart_dialog");
+    cartDialog.show();
+});
 
 addItemButton.addEventListener("click", () => {
     addItemToCart(addItemButton.value);
@@ -10,19 +15,14 @@ addItemButton.addEventListener("click", () => {
     itemDialog.hide();
 });
 
-cartButton.addEventListener("click", () => {
-    const cartDialog = cartDiv.querySelector(".cart_dialog");
-    cartDialog.show();
-})
-
 function addItemToCart(item) {
-    cart.forEach(cartItem => {
-        if (cartItem.id == item.id) {
-            cartItem.quantiti += item.quantiti;
+    for (let i = 0; i < cart.length; i++) {
+        if (cart[i].id == item.id) {
+            cart[i].quantiti += item.quantiti;
             addItemToCartDialog(item);
             return;
         }
-    });
+    }
     cart.push(item);
     addItemToCartDialog(item);
 }

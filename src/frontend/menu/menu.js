@@ -5,13 +5,23 @@ categoryDropdown.addEventListener('sl-select', event => {
     document.getElementById(selectedItem.value).scrollIntoView();
 });
 
-const dialogAmount = document.querySelector(".dialog_amount");
+const itemDialog = document.querySelector(".item_dialog");
+const dialogAmount = itemDialog.querySelector(".dialog_amount");
+const addItemButton = document.querySelector(".add_item_button");
+
+itemDialog.addEventListener("sl-after-hide", () => {
+    resetItemDialog();
+});
+
+function resetItemDialog() {
+    dialogAmount.value = 1;
+    addItemButton.value = null;
+}
 
 dialogAmount.addEventListener("sl-change", () => {
-    updateItemQuantity(dialogAmount.value);
+    updateItemQuantity(parseInt(dialogAmount.value));
 });
 
 function updateItemQuantity(value) {
-    const addItemButton = document.querySelector(".add_item_button");
-    addItemButton.value.quantiti = parseInt(value);
+    addItemButton.value.quantiti = value;
 }
