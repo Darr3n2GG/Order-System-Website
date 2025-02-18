@@ -1,6 +1,6 @@
 const cart = [];
 
-// const addItemButton = document.querySelector(".add_item_button");
+const addItemButton = document.querySelector(".add_item_button");
 const cartButton = document.querySelector(".cart_button");
 const cartDiv = document.querySelector(".cart");
 
