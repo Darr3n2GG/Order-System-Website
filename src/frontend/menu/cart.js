@@ -1,5 +1,7 @@
 const cart = [];
 
+window.cart = cart
+
 const addItemButton = document.querySelector(".add_item_button");
 const cartButton = document.querySelector(".cart_button");
 const cartDiv = document.querySelector(".cart");
@@ -9,17 +11,22 @@ cartButton.addEventListener("click", () => {
     cartDialog.show();
 });
 
-addItemButton.addEventListener("click", () => {
+addItemButton.addEventListener("click", async () => {
+    console.log(cart)
+    console.log(addItemButton.value.quantiti)
     addItemToCart(addItemButton.value);
     const itemDialog = document.querySelector(".item_dialog");
     itemDialog.hide();
 });
 
 function addItemToCart(item) {
+    console.log(cart)
     for (let i = 0; i < cart.length; i++) {
         if (cart[i].id == item.id) {
+            console.log(item.quantiti)
             cart[i].quantiti += item.quantiti;
-            updateItemQuantityInCartDialog(i, item.quantiti);
+            console.log(cart[i])
+            updateItemQuantityInCartDialog(i, cart[i].quantiti);
             return;
         }
     }
@@ -30,30 +37,15 @@ function addItemToCart(item) {
 function updateItemQuantityInCartDialog(itemIndex, quantity) {
     const itemList = cartDiv.querySelector(".item_list");
     const itemElement = itemList.children[itemIndex];
-    itemElement.value.quantiti += quantity;
-    item = itemElement.value;
+    itemElement.itemValue.quantiti = quantity;
+    const item = itemElement.itemValue;
     itemElement.innerHTML = `${item.label + item.nombor} ${item.nama} : ${item.quantiti}`;
 }
 
 function addItemToCartDialog(item) {
     const itemList = cartDiv.querySelector(".item_list");
     let itemElement = document.createElement("li");
-    itemElement.value = item;
-    itemElement = updateItemHTML(itemElement);
-    itemList.appendChild(itemElement);
-}
-
-function updateItemHTML(itemElement) {
-    const item = itemElement.value;
+    itemElement.itemValue = item;
     itemElement.innerHTML = `${item.label + item.nombor} ${item.nama} : ${item.quantiti}`;
-    return itemElement;
-}
-
-function checkIfItemExistsInCart(item) {
-    cart.forEach(cartItem => {
-        if (cartItem.id == item.id) {
-            return true;
-        }
-    });
-    return false;
+    itemList.appendChild(itemElement);
 }
