@@ -1,5 +1,7 @@
 const cart = [];
 
+window.cart = cart
+
 const addItemButton = document.querySelector(".add_item_button");
 const cartButton = document.querySelector(".cart_button");
 const cartDiv = document.querySelector(".cart");
@@ -9,17 +11,22 @@ cartButton.addEventListener("click", () => {
     cartDialog.show();
 });
 
-addItemButton.addEventListener("click", () => {
+addItemButton.addEventListener("click", async () => {
+    console.log(cart)
+    console.log(addItemButton.value.quantiti)
     addItemToCart(addItemButton.value);
     const itemDialog = document.querySelector(".item_dialog");
     itemDialog.hide();
 });
 
 function addItemToCart(item) {
+    console.log(cart)
     for (let i = 0; i < cart.length; i++) {
         if (cart[i].id == item.id) {
+            console.log(item.quantiti)
             cart[i].quantiti += item.quantiti;
-            addItemToCartDialog(item);
+            console.log(cart[i])
+            updateItemQuantityInCartDialog(i, cart[i].quantiti);
             return;
         }
     }
@@ -27,18 +34,18 @@ function addItemToCart(item) {
     addItemToCartDialog(item);
 }
 
-function addItemToCartDialog(item) {
+function updateItemQuantityInCartDialog(itemIndex, quantity) {
     const itemList = cartDiv.querySelector(".item_list");
-    const itemElement = document.createElement("li");
+    const itemElement = itemList.children[itemIndex];
+    itemElement.itemValue.quantiti = quantity;
+    const item = itemElement.itemValue;
     itemElement.innerHTML = `${item.label + item.nombor} ${item.nama} : ${item.quantiti}`;
-    itemList.appendChild(itemElement);
 }
 
-function checkIfItemExistsInCart(item) {
-    cart.forEach(cartItem => {
-        if (cartItem.id == item.id) {
-            return true;
-        }
-    });
-    return false;
+function addItemToCartDialog(item) {
+    const itemList = cartDiv.querySelector(".item_list");
+    let itemElement = document.createElement("li");
+    itemElement.itemValue = item;
+    itemElement.innerHTML = `${item.label + item.nombor} ${item.nama} : ${item.quantiti}`;
+    itemList.appendChild(itemElement);
 }
