@@ -6,7 +6,7 @@ categoryDropdown.addEventListener('sl-select', event => {
 });
 
 const itemDialog = document.querySelector(".item_dialog");
-const dialogAmount = itemDialog.querySelector(".dialog_amount");
+const dialogAmount = itemDialog.querySelector(".dialog_input");
 const addItemButton = document.querySelector(".add_item_button");
 
 itemDialog.addEventListener("sl-after-hide", () => {

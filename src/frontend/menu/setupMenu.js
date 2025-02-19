@@ -1,16 +1,16 @@
-const kategori_path = "/Order-System-Website/src/backend/fetchKategori.php"
-const makanan_path = "/Order-System-Website/src/backend/fetchMakanan.php"
+const data_path = "/Order-System-Website/src/backend/fetchItem.php"
 
-document.addEventListener("DOMContentLoaded", async () => {
-    await fetch(kategori_path)
+document.addEventListener("DOMContentLoaded", () => {
+    fetch(data_path)
         .then(onFulfilled, onRejected)
-        .then(kategori_list => setupKategori(kategori_list))
+        .then(data => setupMenu(data))
         .catch(error => console.error("Error loading categories:", error));
-    await fetch(makanan_path)
-        .then(onFulfilled, onRejected)
-        .then(makanan_list => setupMakanan(makanan_list))
-        .catch(error => console.error("Error loading food items:", error));
-})
+});
+
+function setupMenu(data) {
+    setupKategori(data.kategori);
+    setupMakanan(data.makanan);
+}
 
 function setupKategori(kategori_list) {
     displayDropdown(kategori_list);
@@ -53,7 +53,7 @@ function displayMakanan(makanan_list) {
             <div class="food_info">
                 <div class="food_row">
                     <h2>${item.nama}</h2>
-                    <sl-tag size="small" pill>${item.label + item.nombor}</sl-tag>
+                    <sl-tag size="small" pill>${item.label}</sl-tag>
                 </div>
                 <div class="food_row">
                     <p><strong>Harga : RM${item.harga}</strong></p>
@@ -78,14 +78,16 @@ function addClickEvent(makanan_list) {
 
 function showDialog(makanan) {
     const dialog = document.querySelector(".item_dialog");
-    dialog.label = makanan.label + makanan.nombor + " : " + makanan.nama;
+    dialog.label = makanan.label + " : " + makanan.nama;
     dialog.querySelector(".dialog_image").src = makanan.gambar;
     dialog.querySelector(".dialog_price").innerHTML = "Harga : RM" + makanan.harga;
-    const finalMakanan = addQuantityToMakanan(makanan);
-    const addItemButton = dialog.querySelector(".add_item_button");
-    addItemButton.value = finalMakanan;
+
     dialog.show();
 }
+
+// const finalMakanan = addQuantityToMakanan(makanan);
+// const addItemButton = dialog.querySelector(".add_item_button");
+// addItemButton.value = finalMakanan;
 
 // Quantity of the exact same food items
 function addQuantityToMakanan(makanan) {
