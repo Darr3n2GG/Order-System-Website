@@ -1,3 +1,5 @@
+import fetchHelper from "../../scripts/fetchHelper.js";
+
 const categoryDropdown = document.querySelector(".category_dropdown");
 
 categoryDropdown.addEventListener('sl-select', event => {

@@ -1,10 +1,11 @@
-const data_path = "/Order-System-Website/src/backend/fetchItem.php"
+import fetchHelper from "../../scripts/fetchHelper.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-    fetch(data_path)
-        .then(onFulfilled, onRejected)
+    const url = "/Order-System-Website/src/backend/fetchMenuData.php"
+    fetch(url)
+        .then(fetchHelper.onFulfilled,fetchHelper.onRejected)
         .then(data => setupMenu(data))
-        .catch(error => console.error("Error loading categories:", error));
+        .catch(error => console.error("Error loading data:", error));
 });
 
 function setupMenu(data) {
@@ -12,14 +13,14 @@ function setupMenu(data) {
     setupMakanan(data.makanan);
 }
 
-function setupKategori(kategori_list) {
-    displayDropdown(kategori_list);
-    displayKategori(kategori_list);
+function setupKategori(list_kategori) {
+    displayDropdown(list_kategori);
+    displayKategori(list_kategori);
 }
 
-function displayDropdown(kategori_list) {
+function displayDropdown(list_kategori) {
     const dropdownMenu = document.querySelector(".category_menu");
-    kategori_list.forEach(kategori => {
+    list_kategori.forEach(kategori => {
         const menuItemElement = document.createElement("sl-menu-item");
         menuItemElement.value = kategori.label;
         menuItemElement.innerHTML = kategori.nama;
@@ -27,9 +28,9 @@ function displayDropdown(kategori_list) {
     });
 }
 
-function displayKategori(kategori_list) {
+function displayKategori(list_kategori) {
     const menu = document.querySelector(".menu");
-    kategori_list.forEach(kategori => {
+    list_kategori.forEach(kategori => {
         const kategoriElement = document.createElement("div");
         kategoriElement.classList.add("kategori");
         kategoriElement.id = kategori.label;
@@ -38,13 +39,13 @@ function displayKategori(kategori_list) {
     });
 }
 
-function setupMakanan(makanan_list) {
-    displayMakanan(makanan_list);
-    addClickEvent(makanan_list);
+async function setupMakanan(list_makanan) {
+    await displayMakanan(list_makanan);
+    await setupItemDialog();
 }
 
-function displayMakanan(makanan_list) {
-    makanan_list.forEach(item => {
+function displayMakanan(list_makanan) {
+    list_makanan.forEach(item => {
         const kategori = document.getElementById(item.label);
         const foodItem = document.createElement("div");
         foodItem.classList.add("food_item")
@@ -53,56 +54,53 @@ function displayMakanan(makanan_list) {
             <div class="food_info">
                 <div class="food_row">
                     <h2>${item.nama}</h2>
-                    <sl-tag size="small" pill>${item.label}</sl-tag>
+                    <sl-tag size="small" pill>${item.label + item.id}</sl-tag>
                 </div>
                 <div class="food_row">
                     <p><strong>Harga : RM${item.harga}</strong></p>
                     <sl-icon-button
-                        class="dialog_button" name="plus-square">
+                        class="dialog_button" name="plus-square" id="${item.id}">
                     </sl-icon-button>
                 </div>
             </div>
         `;
         kategori.appendChild(foodItem);
     });
+    return Promise.resolve()
 }
 
-function addClickEvent(makanan_list) {
+function setupItemDialog() {
     const dialogButton = document.getElementsByClassName("dialog_button");
     for (let i = 0; i < dialogButton.length; i++) {
         dialogButton[i].addEventListener("click", () => {
-            showDialog(makanan_list[i]);
+            const itemID = dialogButton[i].id;
+            showItemDialog(itemID);
         });
     }
+    return Promise.resolve()
 }
 
-function showDialog(makanan) {
-    const dialog = document.querySelector(".item_dialog");
-    dialog.label = makanan.label + " : " + makanan.nama;
-    dialog.querySelector(".dialog_image").src = makanan.gambar;
-    dialog.querySelector(".dialog_price").innerHTML = "Harga : RM" + makanan.harga;
+function showItemDialog(item_id) {
+    const url = "/Order-System-Website/src/backend/fetchMakanan.php?" + new URLSearchParams({
+        id : item_id
+    }).toString();
+    fetch(url)
+        .then(fetchHelper.onFulfilled, fetchHelper.onRejected)
+        .then(item => renderItemDetailsAndShow(item[0]))
+        .catch(error => console.error("Error loading item:", error));
+}
 
+function renderItemDetailsAndShow(item) {
+    const dialog = document.querySelector(".item_dialog");
+    dialog.label = item.label + item.id +  " : " + item.nama;
+    dialog.querySelector(".dialog_image").src = item.gambar;
+    dialog.querySelector(".dialog_price").innerHTML = "Harga : RM" + item.harga;
     dialog.show();
 }
-
-// const finalMakanan = addQuantityToMakanan(makanan);
-// const addItemButton = dialog.querySelector(".add_item_button");
-// addItemButton.value = finalMakanan;
 
 // Quantity of the exact same food items
 function addQuantityToMakanan(makanan) {
     let finalMakanan = makanan
     finalMakanan.quantiti = 1
     return finalMakanan
-}
-
-const onFulfilled = (response) => {
-    if (response.status !== 200 && !response.ok) {
-        throw new Error(`[${response.status}] Unable to fetch resource`);
-    }
-    return response.json();
-}
-  
-const onRejected = (err) => {
-    console.error(err);
 }
