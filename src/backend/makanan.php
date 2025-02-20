@@ -17,7 +17,7 @@ class Makanan {
 
     public function getMakanan(int $id): array {
         $makanan = $this->MySQLConnector->readQuery(
-            "SELECT makanan.nama, kategori.label, makanan.detail, kategori.nama AS kategori_nama, makanan.harga, makanan.gambar 
+            "SELECT makanan.id, makanan.nama, kategori.label, makanan.detail, kategori.nama AS kategori_nama, makanan.harga, makanan.gambar 
             FROM makanan INNER JOIN kategori ON makanan.id_kategori=kategori.id 
             WHERE makanan.id = $id
             ORDER BY makanan.id ASC"
