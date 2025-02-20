@@ -7,7 +7,6 @@ try {
     $kategori = $MySQLConnector->readQuery("SELECT kategori.label, kategori.nama from kategori");
     $objek_makanan = new Makanan;
     $array_makanan = $objek_makanan->getAllMakanan();
-
     $data = ["kategori" => $kategori, "makanan" => $array_makanan];
     echo json_encode($data);
 } catch (Exception $e) {

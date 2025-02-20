@@ -39,9 +39,9 @@ function displayKategori(list_kategori) {
     });
 }
 
-async function setupMakanan(list_makanan) {
-    await displayMakanan(list_makanan);
-    await setupItemDialog();
+function setupMakanan(list_makanan) {
+    displayMakanan(list_makanan);
+    setupItemDialog();
 }
 
 function displayMakanan(list_makanan) {
@@ -66,41 +66,33 @@ function displayMakanan(list_makanan) {
         `;
         kategori.appendChild(foodItem);
     });
-    return Promise.resolve()
 }
 
+// Item Dialog
 function setupItemDialog() {
     const dialogButton = document.getElementsByClassName("dialog_button");
     for (let i = 0; i < dialogButton.length; i++) {
         dialogButton[i].addEventListener("click", () => {
             const itemID = dialogButton[i].id;
-            showItemDialog(itemID);
+            fetchAndShowItemDialog(itemID);
         });
     }
-    return Promise.resolve()
 }
 
-function showItemDialog(item_id) {
+function fetchAndShowItemDialog(item_id) {
     const url = "/Order-System-Website/src/backend/fetchMakanan.php?" + new URLSearchParams({
         id : item_id
     }).toString();
     fetch(url)
         .then(fetchHelper.onFulfilled, fetchHelper.onRejected)
-        .then(item => renderItemDetailsAndShow(item[0]))
+        .then(item => showItemDialog(item))
         .catch(error => console.error("Error loading item:", error));
 }
 
-function renderItemDetailsAndShow(item) {
+function showItemDialog(item) {
     const dialog = document.querySelector(".item_dialog");
     dialog.label = item.label + item.id +  " : " + item.nama;
     dialog.querySelector(".dialog_image").src = item.gambar;
     dialog.querySelector(".dialog_price").innerHTML = "Harga : RM" + item.harga;
     dialog.show();
-}
-
-// Quantity of the exact same food items
-function addQuantityToMakanan(makanan) {
-    let finalMakanan = makanan
-    finalMakanan.quantiti = 1
-    return finalMakanan
 }

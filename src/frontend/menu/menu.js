@@ -1,5 +1,3 @@
-import fetchHelper from "../../scripts/fetchHelper.js";
-
 const categoryDropdown = document.querySelector(".category_dropdown");
 
 categoryDropdown.addEventListener('sl-select', event => {
@@ -17,7 +15,6 @@ itemDialog.addEventListener("sl-after-hide", () => {
 
 function resetItemDialog() {
     dialogAmount.value = 1;
-    addItemButton.value = null;
 }
 
 dialogAmount.addEventListener("sl-change", () => {
@@ -25,5 +22,5 @@ dialogAmount.addEventListener("sl-change", () => {
 });
 
 function updateItemQuantity(value) {
-    addItemButton.value.quantiti = value;
+    addItemButton.value.kuantiti = value;
 }
