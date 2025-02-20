@@ -1,10 +1,12 @@
 import { eventBus } from "../../scripts/eventBus.js";
 import fetchHelper from "../../scripts/fetchHelper.js";
 
-globalThis.selectedItem = {};
+let selectedItem = {};
+globalThis.selectedItem = selectedItem; //Console accessor
 
-const dialogAmount = document.querySelector(".dialog_input");
 const itemDialog = document.querySelector(".item_dialog");
+const dialogAmount = itemDialog.querySelector(".dialog_input");
+const dialogButton = itemDialog.querySelector(".add_item_button")
 
 eventBus.addEventListener("setupItemDialog", () => {
     setupItemDialog();
@@ -35,16 +37,15 @@ function setItemAndShowDialog(item) {
 }
 
 function setSelectedItem(item) {
-    globalThis.selectedItem = item;
-    globalThis.selectedItem.kuantiti = 1
+    selectedItem = item;
+    selectedItem.kuantiti = 1
 }
 
 function showItemDialog(item) {
-    const dialog = document.querySelector(".item_dialog");
-    dialog.label = item.label + item.id +  " : " + item.nama;
-    dialog.querySelector(".dialog_image").src = item.gambar;
-    dialog.querySelector(".dialog_price").innerHTML = "Harga : RM" + item.harga;
-    dialog.show();
+    itemDialog.label = item.label + item.id +  " : " + item.nama;
+    itemDialog.querySelector(".dialog_image").src = item.gambar;
+    itemDialog.querySelector(".dialog_price").innerHTML = "Harga : RM" + item.harga;
+    itemDialog.show();
 }
 
 dialogAmount.addEventListener("sl-change", () => {
@@ -52,9 +53,16 @@ dialogAmount.addEventListener("sl-change", () => {
 });
 
 function updateItemQuantity(value) {
-    globalThis.selectedItem.kuantiti = value
+    selectedItem.kuantiti = value
 }
 
+dialogButton.addEventListener("click", () =>{
+    eventBus.emit("addItemToCart", {
+        item : selectedItem
+    });
+    dialog.hide();
+});
+
 itemDialog.addEventListener("sl-after-hide", () => {
-    globalThis.selectedItem = {};
+    selectedItem = {};
 });
