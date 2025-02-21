@@ -2,7 +2,9 @@ import { eventBus } from "../../scripts/eventBus.js";
 import fetchHelper from "../../scripts/fetchHelper.js";
 
 let selectedItem = {};
-globalThis.selectedItem = selectedItem; //Console accessor
+globalThis.logSelectedItem = (function(){
+    return selectedItem;
+});
 
 const itemDialog = document.querySelector(".item_dialog");
 const dialogAmount = itemDialog.querySelector(".dialog_input");
