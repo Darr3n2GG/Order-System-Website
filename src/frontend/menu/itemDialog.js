@@ -2,13 +2,14 @@ import { eventBus } from "../../scripts/eventBus.js";
 import fetchHelper from "../../scripts/fetchHelper.js";
 
 let selectedItem = {};
+// selectedItem Getter in console, type "logSelectedItem()"
 globalThis.logSelectedItem = (function(){
     return selectedItem;
 });
 
 const itemDialog = document.querySelector(".item_dialog");
 const dialogAmount = itemDialog.querySelector(".dialog_input");
-const dialogButton = itemDialog.querySelector(".add_item_button")
+const addItemButton = itemDialog.querySelector(".add_item_button")
 
 eventBus.addEventListener("setupItemDialog", () => {
     setupItemDialog();
@@ -29,8 +30,9 @@ function fetchItemDialogData(item_id) {
         id : item_id
     }).toString();
     fetch(url)
-        .then(fetchHelper.onFulfilled, fetchHelper.onRejected)
-        .then(item => setItemAndShowDialog(item));
+        .then(fetchHelper.onFulfilled)
+        .then(item => setItemAndShowDialog(item))
+        .catch(fetchHelper.onRejected);
 }
 
 function setItemAndShowDialog(item) {
@@ -58,13 +60,14 @@ function updateItemQuantity(value) {
     selectedItem.kuantiti = value
 }
 
-dialogButton.addEventListener("click", () =>{
+addItemButton.addEventListener("click", () =>{
     eventBus.emit("addItemToCart", {
         item : selectedItem
     });
-    dialog.hide();
+    itemDialog.hide();
 });
 
 itemDialog.addEventListener("sl-after-hide", () => {
     selectedItem = {};
+    dialogAmount.value = 1;
 });

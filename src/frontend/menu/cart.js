@@ -1,29 +1,27 @@
-globalThis.cart = [];
+import { eventBus } from "../../scripts/eventBus.js";
 
-const addItemButton = document.querySelector(".add_item_button");
+const cart = [];
+// cart Getter in console, type "logCart()"
+globalThis.cart = (function(){
+    return cart;
+});
+
 const cartButton = document.querySelector(".cart_button");
 const cartDiv = document.querySelector(".cart");
+
+eventBus.addEventListener("addItemToCart", data => {
+    addItemToCart(data.detail.item);
+});
 
 cartButton.addEventListener("click", () => {
     const cartDialog = cartDiv.querySelector(".cart_dialog");
     cartDialog.show();
 });
 
-addItemButton.addEventListener("click", async () => {
-    console.log(cart)
-    console.log(addItemButton.value.kuantiti)
-    addItemToCart(addItemButton.value);
-    const itemDialog = document.querySelector(".item_dialog");
-    itemDialog.hide();
-});
-
 function addItemToCart(item) {
-    console.log(cart)
     for (let i = 0; i < cart.length; i++) {
         if (cart[i].id == item.id) {
-            console.log(item.kuantiti)
             cart[i].kuantiti += item.kuantiti;
-            console.log(cart[i])
             updateItemQuantityInCartDialog(i, cart[i].kuantiti);
             return;
         }
@@ -37,13 +35,13 @@ function updateItemQuantityInCartDialog(itemIndex, quantity) {
     const itemElement = itemList.children[itemIndex];
     itemElement.itemValue.kuantiti = quantity;
     const item = itemElement.itemValue;
-    itemElement.innerHTML = `${item.label + item.nombor} ${item.nama} : ${item.kuantiti}`;
+    itemElement.innerHTML = `${item.label + item.id} ${item.nama} : ${item.kuantiti}`;
 }
 
 function addItemToCartDialog(item) {
     const itemList = cartDiv.querySelector(".item_list");
     let itemElement = document.createElement("li");
     itemElement.itemValue = item;
-    itemElement.innerHTML = `${item.label + item.nombor} ${item.nama} : ${item.kuantiti}`;
+    itemElement.innerHTML = `${item.label + item.id} ${item.nama} : ${item.kuantiti}`;
     itemList.appendChild(itemElement);
 }

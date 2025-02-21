@@ -6,8 +6,9 @@ import { eventBus } from "../../scripts/eventBus.js";
 document.addEventListener("DOMContentLoaded", () => {
     const url = "/Order-System-Website/src/backend/fetchMenuData.php"
     fetch(url)
-        .then(fetchHelper.onFulfilled,fetchHelper.onRejected)
-        .then(data => setupMenu(data));
+        .then(fetchHelper.onFulfilled)
+        .then(data => setupMenu(data))
+        .catch(fetchHelper.onRejected);
 });
 
 function setupMenu(data) {
@@ -69,6 +70,7 @@ function displayMakanan(list_makanan) {
         kategori.appendChild(foodItem);
     });
 }
+
 
 // Menu Linking
 
