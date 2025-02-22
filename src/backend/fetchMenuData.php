@@ -10,5 +10,6 @@ try {
     $data = ["kategori" => $kategori, "makanan" => $array_makanan];
     echo json_encode($data);
 } catch (Exception $e) {
-    echo "Message : " . $e->getMessage();
+    http_response_code(500);
+    echo json_encode(["error" => "Message : " . $e->getMessage()]);
 }

@@ -7,20 +7,20 @@ globalThis.cart = (function(){
 });
 
 const cartButton = document.querySelector(".cart_button");
-const cartDiv = document.querySelector(".cart");
+const cartDialog = document.querySelector(".cart_dialog");
+const itemList = cartDialog.querySelector(".item_list");
 
 eventBus.addEventListener("addItemToCart", data => {
     addItemToCart(data.detail.item);
 });
 
 cartButton.addEventListener("click", () => {
-    const cartDialog = cartDiv.querySelector(".cart_dialog");
     cartDialog.show();
 });
 
 function addItemToCart(item) {
     for (let i = 0; i < cart.length; i++) {
-        if (cart[i].id == item.id) {
+        if (cart[i].id === item.id) {
             cart[i].kuantiti += item.kuantiti;
             updateItemQuantityInCartDialog(i, cart[i].kuantiti);
             return;
@@ -30,18 +30,14 @@ function addItemToCart(item) {
     addItemToCartDialog(item);
 }
 
-function updateItemQuantityInCartDialog(itemIndex, quantity) {
-    const itemList = cartDiv.querySelector(".item_list");
-    const itemElement = itemList.children[itemIndex];
-    itemElement.itemValue.kuantiti = quantity;
-    const item = itemElement.itemValue;
-    itemElement.innerHTML = `${item.label + item.id} ${item.nama} : ${item.kuantiti}`;
-}
-
 function addItemToCartDialog(item) {
-    const itemList = cartDiv.querySelector(".item_list");
     let itemElement = document.createElement("li");
-    itemElement.itemValue = item;
     itemElement.innerHTML = `${item.label + item.id} ${item.nama} : ${item.kuantiti}`;
     itemList.appendChild(itemElement);
+}
+
+function updateItemQuantityInCartDialog(itemIndex, quantity) {
+    const itemElement = itemList.children[itemIndex];
+    const item = cart[itemIndex];
+    itemElement.innerHTML = `${item.label + item.id} ${item.nama} : ${quantity}`;
 }

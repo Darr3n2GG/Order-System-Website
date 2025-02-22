@@ -19,8 +19,10 @@ class Makanan {
         $makanan = $this->MySQLConnector->readQuery(
             "SELECT makanan.id, makanan.nama, kategori.label, makanan.detail, kategori.nama AS kategori_nama, makanan.harga, makanan.gambar 
             FROM makanan INNER JOIN kategori ON makanan.id_kategori=kategori.id 
-            WHERE makanan.id = $id
-            ORDER BY makanan.id ASC"
+            WHERE makanan.id = ?
+            ORDER BY makanan.id ASC",
+            "i",
+            [$id]
         );
         return $makanan;
     }
