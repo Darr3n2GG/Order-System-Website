@@ -26,34 +26,36 @@ class MySQLConnector {
         }
     }
 
-    public function readQuery(string $query): array {
-        try {
-            $stmt = $this->prepareQuery($query);
-            $stmt->execute();
-            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-            $stmt->close();
-            return $result;
-        } catch (Exception $e) {
-            echo "Message : " . $e->getMessage();
+    public function readQuery(string $query, string $types = "", array $array_of_params = null): array {
+        $stmt = $this->prepareStatement($query);
+        if ($types != "" and $array_of_params != null) {
+            $stmt->bind_param($types, ...$array_of_params);
+        } elseif ($types != "" or $array_of_params != null) {
+            throw new Exception("Both the types and array of params parameters must contain a value");
         }
+        $result = $this->readStatement($stmt);
+        $stmt->close();
+        return $result;
     }
 
     public function executeQuery(string $query, string $types, array $array_of_params): void {
-        try {
-            $stmt = $this->prepareQuery($query);
-            $stmt->bind_param($types, ...$array_of_params);
-            $stmt->execute();
-        } catch (Exception $e) {
-            echo "Message : " . $e->getMessage();
-        }
+        $stmt = $this->prepareStatement($query);
+        $stmt->bind_param($types, ...$array_of_params);
+        $stmt->execute();
         $stmt->close();
     }
 
-    private function prepareQuery(string $query): mysqli_stmt {
+    public function prepareStatement(string $query): mysqli_stmt {
         $stmt = $this->conn->prepare($query);
         if ($stmt == false) {
             throw new Exception("Unable to prepare query: " . $query);
         }
         return $stmt;
+    }
+
+    public function readStatement(mysqli_stmt $stmt): array {
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $result;
     }
 }

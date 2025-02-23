@@ -1,70 +1,69 @@
 .main {
-    margin-top: 5rem;
+  margin-top: 5rem;
 }
 
 .action_bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .search {
-    width: 70%;
+  width: 70%;
 }
 
 .menu {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .food_item {
-    display: flex;
-    margin: 1rem auto;
-    background-color: aqua;
-    align-items: center;
+  display: flex;
+  margin: 1rem auto;
+  background-color: aqua;
+  align-items: center;
+  cursor: pointer;
 }
 
 .food_item > img {
-    width: clamp(5rem, 10%, 10rem);
-    margin: 0.5rem;
-}
-
-.food_item > p {
-    margin: 0;
+  width: clamp(5rem, 10%, 10rem);
+  margin: 0.5rem;
+  pointer-events: none;
 }
 
 .food_info {
-    margin-left: 2rem;
+  margin-left: 2rem;
+  pointer-events: none;
 }
 
 .food_row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .kategori {
-    scroll-margin-top: calc(var(--header-height) + 10px);
+  scroll-margin-top: calc(var(--header-height) + 10px);
 }
 
 .item_dialog::part(footer) {
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    gap: 1rem;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 1rem;
 }
 
-.dialog_amount {
-    width: 5rem;
+.dialog_input {
+  width: 5rem;
 }
 
 @media screen and (min-width: 576px) {
-    .search {
-        width: 90%;
-    }
+  .search {
+    width: 90%;
+  }
 }
 
 @media screen and (min-width: 1150px) {
-    .search {
-        width: 272px;
-    }
+  .search {
+    width: 272px;
+  }
 }

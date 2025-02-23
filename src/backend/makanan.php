@@ -9,9 +9,21 @@ class Makanan {
 
     public function getAllMakanan(): array {
         $arrayMakanan = $this->MySQLConnector->readQuery(
-            "SELECT makanan.id, makanan.nama, kategori.label, makanan.nombor, kategori.nama AS kategori_nama, makanan.harga, makanan.gambar 
-            FROM makanan INNER JOIN kategori ON makanan.kategori_id=kategori.id ORDER BY makanan.id ASC"
+            "SELECT makanan.id, makanan.nama, kategori.label, makanan.detail, kategori.nama AS kategori_nama, makanan.harga, makanan.gambar 
+            FROM makanan INNER JOIN kategori ON makanan.id_kategori=kategori.id ORDER BY makanan.id ASC"
         );
         return $arrayMakanan;
+    }
+
+    public function getMakanan(int $id): array {
+        $makanan = $this->MySQLConnector->readQuery(
+            "SELECT makanan.id, makanan.nama, kategori.label, makanan.detail, kategori.nama AS kategori_nama, makanan.harga, makanan.gambar 
+            FROM makanan INNER JOIN kategori ON makanan.id_kategori=kategori.id 
+            WHERE makanan.id = ?
+            ORDER BY makanan.id ASC",
+            "i",
+            [$id]
+        );
+        return $makanan;
     }
 }
