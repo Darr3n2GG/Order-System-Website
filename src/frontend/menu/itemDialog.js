@@ -11,9 +11,34 @@ const itemDialog = document.querySelector(".item_dialog");
 const dialogAmount = itemDialog.querySelector(".dialog_input");
 const addItemButton = itemDialog.querySelector(".add_item_button")
 
-eventBus.addEventListener("setupItemDialog", () => {
-    setupItemDialog();
-});
+// eventBus.addEventListener("setupItemDialog", () => {
+//     setupItemDialog();
+// });
+
+document.addEventListener("DOMContentLoaded", () => {
+    setupItemDialog2();
+})
+
+function setupItemDialog2() {
+    const menu = document.querySelector(".menu");
+    menu.addEventListener("click", event => {
+        handleOnItemDialogClick(event);
+    })
+}
+
+function handleOnItemDialogClick(event) {
+    if (event.target.classList.contains("food_item")) {
+        if (detectIfNoTextSelected() === true) {
+            const itemID = event.target.id;
+            fetchItemDialogData(itemID);
+        }
+    }
+}
+
+function detectIfNoTextSelected() {
+    const noTextSelected = !window.getSelection().toString();
+    return noTextSelected;
+}
 
 function setupItemDialog() {
     const dialogButton = document.getElementsByClassName("dialog_button");

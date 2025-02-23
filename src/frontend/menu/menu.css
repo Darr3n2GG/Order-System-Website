@@ -21,19 +21,18 @@
   margin: 1rem auto;
   background-color: aqua;
   align-items: center;
+  cursor: pointer;
 }
 
 .food_item > img {
   width: clamp(5rem, 10%, 10rem);
   margin: 0.5rem;
-}
-
-.food_item > p {
-  margin: 0;
+  pointer-events: none;
 }
 
 .food_info {
   margin-left: 2rem;
+  pointer-events: none;
 }
 
 .food_row {
