@@ -11,10 +11,6 @@ const itemDialog = document.querySelector(".item_dialog");
 const dialogAmount = itemDialog.querySelector(".dialog_input");
 const addItemButton = itemDialog.querySelector(".add_item_button")
 
-// eventBus.addEventListener("setupItemDialog", () => {
-//     setupItemDialog();
-// });
-
 document.addEventListener("DOMContentLoaded", () => {
     setupItemDialog2();
 })
@@ -38,16 +34,6 @@ function handleOnItemDialogClick(event) {
 function detectIfNoTextSelected() {
     const noTextSelected = !window.getSelection().toString();
     return noTextSelected;
-}
-
-function setupItemDialog() {
-    const dialogButton = document.getElementsByClassName("dialog_button");
-    for (let i = 0; i < dialogButton.length; i++) {
-        dialogButton[i].addEventListener("click", () => {
-            const itemID = dialogButton[i].id;
-            fetchItemDialogData(itemID);
-        });
-    }
 }
 
 function fetchItemDialogData(item_id) {
