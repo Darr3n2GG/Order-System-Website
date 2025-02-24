@@ -1,7 +1,7 @@
 import { eventBus } from "../../scripts/eventBus.js";
 
 const cart = [];
-// cart Getter in console, type "logCart()"
+// cart logger in console, type "logCart()"
 globalThis.logCart = (function(){
     return cart;
 });

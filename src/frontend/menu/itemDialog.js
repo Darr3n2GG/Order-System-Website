@@ -2,7 +2,7 @@ import { eventBus } from "../../scripts/eventBus.js";
 import fetchHelper from "../../scripts/fetchHelper.js";
 
 let selectedItem = {};
-// selectedItem Getter in console, type "logSelectedItem()"
+// selectedItem logger in console, type "logSelectedItem()"
 globalThis.logSelectedItem = (function(){
     return selectedItem;
 });
@@ -12,22 +12,22 @@ const dialogAmount = itemDialog.querySelector(".dialog_input");
 const addItemButton = itemDialog.querySelector(".add_item_button")
 
 document.addEventListener("DOMContentLoaded", () => {
-    setupItemDialog2();
+    setupItemDialog();
 })
 
-function setupItemDialog2() {
+function setupItemDialog() {
     const menu = document.querySelector(".menu");
     menu.addEventListener("click", event => {
-        handleOnItemDialogClick(event);
+        if (event.target.classList.contains("food_item")) {
+            handleOnItemClick(event);
+        }
     })
 }
 
-function handleOnItemDialogClick(event) {
-    if (event.target.classList.contains("food_item")) {
-        if (detectIfNoTextSelected() === true) {
-            const itemID = event.target.id;
-            fetchItemDialogData(itemID);
-        }
+function handleOnItemClick(event) {
+    if (detectIfNoTextSelected() === true) {
+        const itemID = event.target.id;
+        fetchItemDialogData(itemID);
     }
 }
 
