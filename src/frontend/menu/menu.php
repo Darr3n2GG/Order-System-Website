@@ -6,6 +6,64 @@ $MySQLConnector = new MySQLConnector("localhost", "root", "", "restorandb");
 $array_kategori = $MySQLConnector->readQuery("SELECT kategori.label, kategori.nama from kategori");
 $objek_makanan = new Makanan;
 $array_makanan = $objek_makanan->getAllMakanan();
+
+function displayKategoriDlmDropdown($array_kategori): void {
+    foreach ($array_kategori as $kategori) {
+        $label = $kategori["label"];
+        $nama = $kategori["nama"];
+        echo "<sl-menu-item value='$label'>$nama</sl-menu-item>";
+    }
+}
+
+function displayKategoriDanItem(array $array_kategori, array &$array_makanan): void {
+    foreach ($array_kategori as $kategori) {
+        $label = $kategori["label"];
+        $nama = $kategori["nama"];
+        $array_makanan_dlm_kategori = huntArrayMakananDlmKategori($array_makanan, $nama);
+        echo "<div class='kategori' id='$label'><h1>$nama</h1>";
+        displayMakananItem($array_makanan_dlm_kategori);
+        echo "</div>";
+    }
+}
+
+function huntArrayMakananDlmKategori(array &$array_makanan, string $kategori_nama): array {
+    $array_makanan_dlm_kategori = [];
+    foreach ($array_makanan as $makanan) {
+        if ($makanan["kategori_nama"] == $kategori_nama) {
+            array_push($array_makanan_dlm_kategori, $makanan);
+            $key = array_search($makanan, $array_makanan);
+            array_splice($array_makanan, $key, 1);
+        }
+    }
+    return $array_makanan_dlm_kategori;
+}
+
+function displayMakananItem($array_makanan_dlm_kategori): void {
+    foreach ($array_makanan_dlm_kategori as $makanan) {
+        $gambar = $makanan["gambar"];
+        $nama = $makanan["nama"];
+        $id = $makanan["id"];
+        $label = $makanan["label"] . $id;
+        $harga = $makanan["harga"];
+        $makanan_item = <<<ITEM
+        <div class='food_item' id='$id'>
+            <img src='$gambar' alt='$nama'>
+            <div class='food_info'>
+                <div class='food_row'>
+                    <h2>$nama</h2>
+                    <sl-tag size='small' pill>$label</sl-tag>
+                </div>
+                <div class='food_row'>
+                    <p><strong>Harga : RM $harga</strong></p>
+                </div>
+            </div>
+        </div>
+        ITEM;
+
+        echo $makanan_item;
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -35,50 +93,14 @@ $array_makanan = $objek_makanan->getAllMakanan();
                 </sl-icon-button>
                 <sl-menu class="category_menu">
                     <?php
-                    foreach ($array_kategori as $kategori) {
-                        $label = $kategori["label"];
-                        $nama = $kategori["nama"];
-                        echo "<sl-menu-item value='$label'>$nama</sl-menu-item>";
-                    }
+                    displayKategoriDlmDropdown($array_kategori);
                     ?>
                 </sl-menu>
             </sl-dropdown>
         </div>
         <div class="menu">
             <?php
-            foreach ($array_kategori as $kategori) {
-                $label = $kategori["label"];
-                $nama = $kategori["nama"];
-                $array_makanan_dlm_kategori = [];
-                foreach ($array_makanan as $makanan) {
-                    if ($makanan["kategori_nama"] == $nama) {
-                        array_push($array_makanan_dlm_kategori, $makanan);
-                        $key = array_search($makanan, $array_makanan);
-                        array_splice($array_makanan, $key, 1);
-                    }
-                }
-                echo "<div class='kategori' id='$label'><h1>$nama</h1>";
-                foreach ($array_makanan_dlm_kategori as $makanan) {
-                    $gambar = $makanan["gambar"];
-                    $nama = $makanan["nama"];
-                    $id = $makanan["id"];
-                    $label = $makanan["label"] . $id;
-                    $harga = $makanan["harga"];
-                    echo "<div class='food_item' id='$id'>";
-                    echo "  <img src='$gambar' alt='$nama'>";
-                    echo "  <div class='food_info'>";
-                    echo "      <div class='food_row'>";
-                    echo "          <h2>$nama</h2>";
-                    echo "          <sl-tag size='small' pill>$label</sl-tag>";
-                    echo "      </div>";
-                    echo "      <div class='food_row'>";
-                    echo "          <p><strong>Harga : RM $harga</strong></p>";
-                    echo "      </div>";
-                    echo "  </div>";
-                    echo "</div>";
-                }
-                echo "</div>";
-            }
+            displayKategoriDanItem($array_kategori, $array_makanan);
             ?>
             <sl-dialog class="item_dialog" label="">
                 <img class="dialog_image" src="" alt="food image">

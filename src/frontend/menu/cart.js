@@ -2,7 +2,7 @@ import { eventBus } from "../../scripts/eventBus.js";
 
 const cart = [];
 // cart Getter in console, type "logCart()"
-globalThis.cart = (function(){
+globalThis.logCart = (function(){
     return cart;
 });
 
