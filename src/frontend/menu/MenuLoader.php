@@ -26,7 +26,7 @@ class MenuLoader {
         return $array_kategori_item;
     }
 
-    public function displayKategoriDanItem(): void {
+    public function displayKategoriDanMakanan(): void {
         foreach ($this->array_kategori as $kategori) {
             $label = $kategori["label"];
             $nama = $kategori["nama"];

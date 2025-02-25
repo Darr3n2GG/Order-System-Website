@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
-    <link rel="stylesheet" href="/Order-System-Website/src/frontend/style.css">
+<?php
+echo <<<HEADER
     <link rel="stylesheet" href="/Order-System-Website/src/frontend/header/header.css">
-</head>
-<body>
     <header class="header" id="header">
         <nav class="nav container">
             <a href="#">
@@ -37,5 +29,4 @@
     </header>
     <script type="module" src="/Order-System-Website/src/frontend/header/header.js"></script>
     <noscript>Your browser does not support JavaScript!</noscript>
-</body>
-</html>
+HEADER;
