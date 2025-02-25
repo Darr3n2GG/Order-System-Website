@@ -62,9 +62,9 @@ class MenuLoader {
         return $array_makanan_dlm_kategori;
     }
 
-    private function createArrayMakananItem(): array {
+    private function createArrayMakananItem($array_makanan): array {
         $array_makanan_item = [];
-        foreach ($this->array_makanan as $makanan) {
+        foreach ($array_makanan as $makanan) {
             $gambar = $makanan["gambar"];
             $nama = $makanan["nama"];
             $id = $makanan["id"];
