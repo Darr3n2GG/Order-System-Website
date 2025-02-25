@@ -1,8 +1,23 @@
 <?php
 class MenuLoader {
-    public static function createArrayKategoriMenuItem($array_kategori): array {
+    private $array_kategori;
+    private $array_makanan;
+
+    public function __construct($array_kategori, $array_makanan) {
+        $this->array_kategori = $array_kategori;
+        $this->array_makanan = $array_makanan;
+    }
+
+    public function displayKategoriItem(): void {
+        $array_kategori_item = $this->createArrayKategoriItem();
+        foreach ($array_kategori_item as $kategori) {
+            echo $kategori;
+        }
+    }
+
+    public function createArrayKategoriItem(): array {
         $array_kategori_item = [];
-        foreach ($array_kategori as $kategori) {
+        foreach ($this->array_kategori as $kategori) {
             $label = $kategori["label"];
             $nama = $kategori["nama"];
             $kategori_item = "<sl-menu-item value='$label'>$nama</sl-menu-item>";
@@ -11,12 +26,12 @@ class MenuLoader {
         return $array_kategori_item;
     }
 
-    public static function displayKategoriDanItem(array $array_kategori, array &$array_makanan): void {
-        foreach ($array_kategori as $kategori) {
+    public function displayKategoriDanItem(): void {
+        foreach ($this->array_kategori as $kategori) {
             $label = $kategori["label"];
             $nama = $kategori["nama"];
-            $array_makanan_dlm_kategori = self::huntArrayMakananDlmKategori($array_makanan, $nama);
-            $array_makanan_item = self::createArrayMakananItem($array_makanan_dlm_kategori);
+            $array_makanan_dlm_kategori = $this->createArrayMakananDlmKategori($nama);
+            $array_makanan_item = $this->createArrayMakananItem($array_makanan_dlm_kategori);
             echo "<div class='kategori' id='$label'><h1>$nama</h1>";
             foreach ($array_makanan_item as $makanan) {
                 echo $makanan;
@@ -25,21 +40,31 @@ class MenuLoader {
         }
     }
 
-    private static function huntArrayMakananDlmKategori(array &$array_makanan, string $kategori_nama): array {
+    private function createArrayMakananDlmKategori(string $kategori_nama): array {
         $array_makanan_dlm_kategori = [];
-        foreach ($array_makanan as $makanan) {
+        foreach ($this->array_makanan as $makanan) {
             if ($makanan["kategori_nama"] == $kategori_nama) {
                 array_push($array_makanan_dlm_kategori, $makanan);
-                $key = array_search($makanan, $array_makanan);
+            }
+        }
+        return $array_makanan_dlm_kategori;
+    }
+
+    private function huntArrayMakananDlmKategori(string $kategori_nama): array {
+        $array_makanan_dlm_kategori = [];
+        foreach ($this->array_makanan as $makanan) {
+            if ($makanan["kategori_nama"] == $kategori_nama) {
+                array_push($array_makanan_dlm_kategori, $makanan);
+                $key = array_search($makanan, $this->array_makanan);
                 array_splice($array_makanan, $key, 1);
             }
         }
         return $array_makanan_dlm_kategori;
     }
 
-    private static function createArrayMakananItem(array $array_makanan): array {
+    private function createArrayMakananItem(): array {
         $array_makanan_item = [];
-        foreach ($array_makanan as $makanan) {
+        foreach ($this->array_makanan as $makanan) {
             $gambar = $makanan["gambar"];
             $nama = $makanan["nama"];
             $id = $makanan["id"];

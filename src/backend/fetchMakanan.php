@@ -7,5 +7,6 @@ try {
     $makanan = $objek_makanan->getMakanan($makanan_id);
     echo json_encode($makanan[0]);
 } catch (Exception $e) {
-    echo "Message : " . $e->getMessage();
+    http_response_code(500);
+    json_encode(["error" => "Message : " . $e->getMessage()]);
 }

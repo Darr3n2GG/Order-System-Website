@@ -7,6 +7,7 @@ $MySQLConnector = new MySQLConnector("localhost", "root", "", "restorandb");
 $array_kategori = $MySQLConnector->readQuery("SELECT kategori.label, kategori.nama from kategori");
 $objek_makanan = new Makanan;
 $array_makanan = $objek_makanan->getAllMakanan();
+$MenuLoader = new MenuLoader($array_kategori, $array_makanan);
 ?>
 
 <!DOCTYPE html>
@@ -36,17 +37,14 @@ $array_makanan = $objek_makanan->getAllMakanan();
                 </sl-icon-button>
                 <sl-menu class="category_menu">
                     <?php
-                    $array_kategori_item = MenuLoader::createArrayKategoriMenuItem($array_kategori);
-                    foreach ($array_kategori_item as $kategori) {
-                        echo $kategori;
-                    }
+                    $MenuLoader->displayKategoriItem();
                     ?>
                 </sl-menu>
             </sl-dropdown>
         </div>
         <div class="menu">
             <?php
-            MenuLoader::displayKategoriDanItem($array_kategori, $array_makanan);
+            $MenuLoader->displayKategoriDanItem();
             ?>
             <sl-dialog class="item_dialog" label="">
                 <img class="dialog_image" src="" alt="food image">
