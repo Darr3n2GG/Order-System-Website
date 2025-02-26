@@ -1,4 +1,5 @@
 <?php
+// Server rendered header
 echo <<<HEADER
     <link rel="stylesheet" href="/Order-System-Website/src/frontend/header/header.css">
     <header class="header" id="header">

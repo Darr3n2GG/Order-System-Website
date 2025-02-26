@@ -9,6 +9,7 @@ globalThis.logCart = (function(){
 const cartButton = document.querySelector(".cart_button");
 const cartDialog = document.querySelector(".cart_dialog");
 const itemList = cartDialog.querySelector(".item_list");
+const checkoutButton = cartDialog.querySelector(".checkout_button");
 
 eventBus.addEventListener("addItemToCart", data => {
     addItemToCart(data.detail.item);
@@ -17,6 +18,10 @@ eventBus.addEventListener("addItemToCart", data => {
 cartButton.addEventListener("click", () => {
     cartDialog.show();
 });
+
+checkoutButton.addEventListener("click", () => {
+    eventBus.emit("checkout", cart);
+})
 
 function addItemToCart(item) {
     for (let i = 0; i < cart.length; i++) {
