@@ -6,6 +6,7 @@ eventBus.addEventListener("checkout", event => {
 })
 
 async function checkout(cart) {
+    // FormData allows us to submit forms without creating a form in html
     const formData = new FormData();
     formData.append("cart", JSON.stringify(cart));
 
