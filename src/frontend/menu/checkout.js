@@ -7,15 +7,18 @@ eventBus.addEventListener("checkout", event => {
 
 async function checkout(cart) {
     const formData = new FormData();
-
-    formData.append("cart", JSON.stringify(cart))
+    formData.append("cart", JSON.stringify(cart));
 
     const response = await fetch(url, {
         method: "POST",
         body: formData
     });
 
-    if (response.ok) {
+    checkResponse(response.ok)
+}
+
+function checkResponse(ok) {
+    if (ok) {
         console.log("checkout!");
         console.log(response.json());
         window.location.href = "https://www.youtube.com/watch?v=xvFZjo5PgG0";
