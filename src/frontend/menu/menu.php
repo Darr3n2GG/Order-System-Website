@@ -20,7 +20,7 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
-    <title>Menu Page</title>
+    <title>Menu</title>
 </head>
 
 <body>
@@ -46,6 +46,8 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
             <?php
             $MenuLoader->displayKategoriDanMakanan();
             ?>
+        </div>
+        <div class="item_dialog_container">
             <sl-dialog class="item_dialog" label="">
                 <img class="dialog_image" src="" alt="food image">
                 <div>
@@ -54,14 +56,14 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </div>
                 <sl-input
-                    class="dialog_input" type="number" value="1" slot="footer" required="true">
+                    class="dialog_input" type="number" value="1" slot="footer" required>
                 </sl-input>
                 <sl-button class="add_item_button" value="" slot="footer" variant="primary">Add Item</sl-button>
             </sl-dialog>
         </div>
         <div class="cart">
             <sl-dialog class="cart_dialog" label="Cart">
-                <ul class="item_list">
+                <ul class="cart_item_list">
                 </ul>
                 <sl-button class="checkout_button" slot="footer" variant="primary">Checkout</sl-button>
             </sl-dialog>

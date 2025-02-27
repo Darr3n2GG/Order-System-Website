@@ -65,6 +65,10 @@ img {
     height: auto;
 }
 
+.main {
+    margin-top: 5rem;
+}
+
 .container {
     max-width: 1120px;
     margin-inline: 1.5rem;

@@ -22,7 +22,7 @@ function checkResponse(ok) {
     if (ok) {
         console.log("checkout!");
         console.log(response.json());
-        window.location.href = "https://www.youtube.com/watch?v=xvFZjo5PgG0";
+        // window.location.href = "https://www.youtube.com/watch?v=xvFZjo5PgG0";
     } else {
         console.log("checkout failed");
     }

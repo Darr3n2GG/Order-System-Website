@@ -8,11 +8,11 @@ globalThis.logCart = (function(){
 
 const cartButton = document.querySelector(".cart_button");
 const cartDialog = document.querySelector(".cart_dialog");
-const itemList = cartDialog.querySelector(".item_list");
+const itemList = cartDialog.querySelector(".cart_item_list");
 const checkoutButton = cartDialog.querySelector(".checkout_button");
 
-eventBus.addEventListener("addItemToCart", data => {
-    addItemToCart(data.detail.item);
+eventBus.addEventListener("addItemToCart", event => {
+    addItemToCart(event.detail.item);
 });
 
 cartButton.addEventListener("click", () => {
@@ -21,6 +21,13 @@ cartButton.addEventListener("click", () => {
 
 checkoutButton.addEventListener("click", () => {
     eventBus.emit("checkout", cart);
+})
+
+itemList.addEventListener("sl-change", event => {
+    if (event.target.classList.contains("cart_item_input")) {
+        $index = getIndexOfTargetCartItem(event.target);
+        updateItemQuantityInCartDialog($index)
+    }
 })
 
 function addItemToCart(item) {
@@ -37,7 +44,10 @@ function addItemToCart(item) {
 
 function addItemToCartDialog(item) {
     let itemElement = document.createElement("li");
-    itemElement.innerHTML = `${item.label + item.id} ${item.nama} : ${item.kuantiti}`;
+    itemElement.classList.add("cart_item");
+    itemElement.id = item.id
+    itemElement.innerHTML = `${item.label + item.id} ${item.nama}
+        <sl-input class="cart_item_input" type="number" value="${item.kuantiti}" size="small" required></sl-input>`;
     itemList.appendChild(itemElement);
 }
 
@@ -45,4 +55,11 @@ function updateItemQuantityInCartDialog(itemIndex, quantity) {
     const itemElement = itemList.children[itemIndex];
     const item = cart[itemIndex];
     itemElement.innerHTML = `${item.label + item.id} ${item.nama} : ${quantity}`;
+}
+
+function getIndexOfTargetCartItem(target) {
+    const itemListChildren = itemList.children;
+    // TODO : add find target index based on given target element
+    // OR
+    // use getChildName in HTMLCollection class
 }
