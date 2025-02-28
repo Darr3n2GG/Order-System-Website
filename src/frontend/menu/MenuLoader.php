@@ -71,7 +71,7 @@ class MenuLoader {
             $label = $makanan["label"] . $id;
             $harga = $makanan["harga"];
             $makanan_item = <<<ITEM
-            <div class='food_item' id='$id'>
+            <div class='food_item' data-id='$id'>
                 <img src='$gambar' alt='$nama'>
                 <div class='food_info'>
                     <div class='food_row'>

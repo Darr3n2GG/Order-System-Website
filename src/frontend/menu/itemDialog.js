@@ -26,7 +26,7 @@ function setupItemDialog() {
 
 function handleOnItemClick(event) {
     if (detectIfNoTextSelected() === true) {
-        const itemID = event.target.id;
+        const itemID = event.target.dataset.id;
         fetchItemDialogData(itemID);
     }
 }

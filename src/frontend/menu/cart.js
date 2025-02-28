@@ -25,41 +25,62 @@ checkoutButton.addEventListener("click", () => {
 
 itemList.addEventListener("sl-change", event => {
     if (event.target.classList.contains("cart_item_input")) {
-        $index = getIndexOfTargetCartItem(event.target);
-        updateItemQuantityInCartDialog($index)
+        const parent = event.target.parentNode;
+        const id = parseInt(parent.dataset.id);
+        const value = parseInt(event.target.value);
+        updateCartItemQuantity(id, value);
     }
 })
 
+function updateCartItemQuantity(id, value) {
+    const cartItem = findCartItemByID(id);
+    cartItem.kuantiti = value;
+}
+
 function addItemToCart(item) {
-    for (let i = 0; i < cart.length; i++) {
-        if (cart[i].id === item.id) {
-            cart[i].kuantiti += item.kuantiti;
-            updateItemQuantityInCartDialog(i, cart[i].kuantiti);
-            return;
-        }
+    const cartItem = findCartItemByID(item.id);
+    if (cartItem != false) {
+        cartItem.kuantiti += item.kuantiti;
+        updateItemQuantityInCartDialog(cartItem);
+    } else {
+        cart.push(item);
+        addItemToCartDialog(item);
     }
-    cart.push(item);
-    addItemToCartDialog(item);
 }
 
 function addItemToCartDialog(item) {
     let itemElement = document.createElement("li");
+    itemElement.dataset.id = item.id;
     itemElement.classList.add("cart_item");
-    itemElement.id = item.id
-    itemElement.innerHTML = `${item.label + item.id} ${item.nama}
+    itemElement.innerHTML = `<p>${item.label + item.id} ${item.nama}</p>
         <sl-input class="cart_item_input" type="number" value="${item.kuantiti}" size="small" required></sl-input>`;
     itemList.appendChild(itemElement);
 }
 
-function updateItemQuantityInCartDialog(itemIndex, quantity) {
-    const itemElement = itemList.children[itemIndex];
-    const item = cart[itemIndex];
-    itemElement.innerHTML = `${item.label + item.id} ${item.nama} : ${quantity}`;
+function updateItemQuantityInCartDialog(item) {
+    const itemElement = findCartItemElementByID(item.id);
+    const itemInput = itemElement.querySelector(".cart_item_input");
+    itemInput.value = item.kuantiti;
 }
 
-function getIndexOfTargetCartItem(target) {
+function findCartItemByID(id) {
+    for (let i = 0; i < cart.length; i++) {
+        const item = cart[i];
+        if (item.id === id) {
+            return item;
+        }
+    }
+    return false;
+}
+
+function findCartItemElementByID(id) {
     const itemListChildren = itemList.children;
-    // TODO : add find target index based on given target element
-    // OR
-    // use getChildName in HTMLCollection class
+    for (let i = 0; i < cart.length; i++) {
+        const child = itemListChildren[i];
+        const childID = parseInt(child.dataset.id);
+        if (childID === id) {
+            return item;
+        }
+    }
+    return false;
 }

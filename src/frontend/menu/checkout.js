@@ -15,11 +15,11 @@ async function checkout(cart) {
         body: formData
     });
 
-    checkResponse(response.ok)
+    checkResponse(response)
 }
 
-function checkResponse(ok) {
-    if (ok) {
+function checkResponse(response) {
+    if (response.ok) {
         console.log("checkout!");
         console.log(response.json());
         // window.location.href = "https://www.youtube.com/watch?v=xvFZjo5PgG0";
