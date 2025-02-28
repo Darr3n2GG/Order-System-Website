@@ -74,12 +74,11 @@ function findCartItemByID(id) {
 }
 
 function findCartItemElementByID(id) {
-    const itemListChildren = itemList.children;
     for (let i = 0; i < cart.length; i++) {
-        const child = itemListChildren[i];
+        const child = itemList.children[i];
         const childID = parseInt(child.dataset.id);
         if (childID === id) {
-            return item;
+            return child;
         }
     }
     return false;
