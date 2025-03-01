@@ -54,7 +54,7 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
                 <div>
                     <h2 class="dialog_price">Harga : RM</h2>
                     <h2>Description :</h2>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    <p class="dialog_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
                 <sl-input
                     class="dialog_input" type="number" value="1" slot="footer" required>

@@ -60,6 +60,7 @@ function showItemDialog(item) {
     itemDialog.label = item.label + item.id +  " : " + item.nama;
     itemDialog.querySelector(".dialog_image").src = item.gambar;
     itemDialog.querySelector(".dialog_price").innerHTML = "Harga : RM" + item.harga;
+    itemDialog.querySelector(".dialog_description").innerHTML = item.detail;
     itemDialog.show();
 }
 
