@@ -1,0 +1,76 @@
+.action_bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search {
+  width: 70%;
+}
+
+.menu {
+  margin-top: 2rem;
+}
+
+.food_item {
+  display: flex;
+  margin: 1rem auto;
+  background-color: aqua;
+  align-items: center;
+  cursor: pointer;
+}
+
+.food_item > img {
+  width: clamp(5rem, 10%, 10rem);
+  margin: 0.5rem;
+  pointer-events: none;
+}
+
+.food_info {
+  margin-left: 2rem;
+  pointer-events: none;
+}
+
+.food_row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.kategori {
+  scroll-margin-top: calc(var(--header-height) + 10px);
+}
+
+.item_dialog::part(footer) {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dialog_input {
+  width: 5rem;
+}
+
+.cart_item_input {
+  width: 3.5rem;
+}
+
+.cart_item {
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media screen and (min-width: 576px) {
+  .search {
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 1150px) {
+  .search {
+    width: 272px;
+  }
+}
