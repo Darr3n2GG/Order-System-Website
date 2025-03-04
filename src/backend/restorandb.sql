@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2025 at 03:38 PM
+-- Generation Time: Mar 04, 2025 at 12:25 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,6 +39,7 @@ CREATE TABLE `akaun` (
 --
 
 INSERT INTO `akaun` (`id`, `nama`, `password`, `no_phone`) VALUES
+(0, 'Guest', '', ''),
 (1, 'test', '$2y$10$Iwq4fqiwI3v0n3vt4ETOFeRHkPycoFHHGcAVKF3xPFpKZw/l4b3LS', '0123456789');
 
 -- --------------------------------------------------------
@@ -49,16 +50,16 @@ INSERT INTO `akaun` (`id`, `nama`, `password`, `no_phone`) VALUES
 
 CREATE TABLE `belian` (
   `id` int(11) NOT NULL,
-  `kuantiti` int(99) NOT NULL,
+  `id_pesanan` int(11) NOT NULL,
   `id_makanan` int(11) NOT NULL,
-  `id_pesanan` int(11) NOT NULL
+  `kuantiti` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `belian`
 --
 
-INSERT INTO `belian` (`id`, `kuantiti`, `id_makanan`, `id_pesanan`) VALUES
+INSERT INTO `belian` (`id`, `id_pesanan`, `id_makanan`, `kuantiti`) VALUES
 (1, 1, 1, 1);
 
 -- --------------------------------------------------------
@@ -165,7 +166,7 @@ CREATE TABLE `pesanan` (
 --
 
 INSERT INTO `pesanan` (`id`, `akaun_id`, `status_id`, `no_meja`, `tarikh`, `cara`) VALUES
-(1, 1, 1, 1, '2025-02-04', 'online');
+(1, 1, 1, 1, '2025-02-04', '');
 
 -- --------------------------------------------------------
 
@@ -248,7 +249,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `akaun`
 --
 ALTER TABLE `akaun`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `belian`
@@ -278,7 +279,7 @@ ALTER TABLE `meja`
 -- AUTO_INCREMENT for table `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `status`
@@ -302,14 +303,6 @@ ALTER TABLE `belian`
 --
 ALTER TABLE `makanan`
   ADD CONSTRAINT `makanan_fk_1` FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id`);
-
---
--- Constraints for table `pesanan`
---
-ALTER TABLE `pesanan`
-  ADD CONSTRAINT `pesan_fk_1` FOREIGN KEY (`akaun_id`) REFERENCES `akaun` (`id`),
-  ADD CONSTRAINT `pesan_fk_2` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`),
-  ADD CONSTRAINT `pesan_fk_3` FOREIGN KEY (`no_meja`) REFERENCES `meja` (`no_meja`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -20,7 +20,9 @@ cartButton.addEventListener("click", () => {
 });
 
 checkoutButton.addEventListener("click", () => {
-    eventBus.emit("checkout", cart);
+    if (cart.length != 0) {
+        eventBus.emit("checkout", cart);
+    }
 })
 
 itemList.addEventListener("sl-change", event => {
@@ -43,7 +45,11 @@ function addItemToCart(item) {
         cartItem.kuantiti += item.kuantiti;
         updateItemQuantityInCartDialog(cartItem);
     } else {
-        cart.push(item);
+        const cartItem = {
+            id : item.id,
+            kuantiti : item.kuantiti,
+        }
+        cart.push(cartItem);
         addItemToCartDialog(item);
     }
 }

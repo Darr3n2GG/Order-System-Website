@@ -10,6 +10,6 @@ export default class fetchHelper {
     }
       
     static onRejected = (error) => {
-        console.error("Error loading item:", error);
+        console.error("Error loading:", error);
     }
 }

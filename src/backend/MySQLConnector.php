@@ -27,15 +27,19 @@ class MySQLConnector {
     }
 
     public function readQuery(string $query, string $types = "", array $array_of_params = null): array {
-        $stmt = $this->prepareStatement($query);
-        if ($types != "" and $array_of_params != null) {
-            $stmt->bind_param($types, ...$array_of_params);
-        } elseif ($types != "" or $array_of_params != null) {
-            throw new Exception("Both the types and array of params parameters must contain a value");
+        try {
+            $stmt = $this->prepareStatement($query);
+            if ($types != "" and $array_of_params != null) {
+                $stmt->bind_param($types, ...$array_of_params);
+            } elseif ($types != "" or $array_of_params != null) {
+                throw new Exception("Both the types and array of params parameters must contain a value");
+            }
+            $result = $this->readStatement($stmt);
+            $stmt->close();
+            return $result;
+        } catch (Exception $e) {
+            echo 'Message: ' . $e->getMessage();
         }
-        $result = $this->readStatement($stmt);
-        $stmt->close();
-        return $result;
     }
 
     public function executeQuery(string $query, string $types, array $array_of_params): void {
@@ -45,12 +49,22 @@ class MySQLConnector {
         $stmt->close();
     }
 
+    public function readLastInsertedID(): int {
+        $stmt = $this->prepareStatement("SELECT LAST_INSERT_ID()");
+        $result = $this->readStatement($stmt);
+        return $result[0]["LAST_INSERT_ID()"];
+    }
+
     public function prepareStatement(string $query): mysqli_stmt {
-        $stmt = $this->conn->prepare($query);
-        if ($stmt == false) {
-            throw new Exception("Unable to prepare query: " . $query);
+        try {
+            $stmt = $this->conn->prepare($query);
+            if ($stmt == false) {
+                throw new Exception("Unable to prepare query: " . $query);
+            }
+            return $stmt;
+        } catch (Exception $e) {
+            echo 'Message: ' . $e->getMessage();
         }
-        return $stmt;
     }
 
     public function readStatement(mysqli_stmt $stmt): array {
