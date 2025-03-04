@@ -1,9 +1,9 @@
 export default class fetchHelper {
     static onFulfilled = (response) => {
-        if (response.status !== 200 && !response.ok) {
+        if (!response.ok) {
             return response.json()
                 .then(err => {
-                    throw new Error(`[${response.status}] Unable to fetch resource:` + err.error);
+                    throw new Error(err.message || `HTTP error! Status: ${response.status}`);
                 });
         }
         return response.json();

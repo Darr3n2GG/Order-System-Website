@@ -1,5 +1,5 @@
 <?php
-require_once("makanan.php");
+require_once("Makanan.php");
 
 try {
     $makanan_id = isset($_GET["id"]) ? $_GET["id"] : 0;

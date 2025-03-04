@@ -1,6 +1,6 @@
 import { eventBus } from "../../scripts/eventBus.js";
 import fetchHelper from "../../scripts/fetchHelper.js";
-const url = "../../backend/receiveCheckout.php"
+const url = "../../backend/ReceiveCheckout.php"
 
 eventBus.addEventListener("checkout", event => {
     checkout(event.detail);
@@ -16,17 +16,11 @@ function checkout(cart) {
         body: formData
     })
     .then(fetchHelper.onFulfilled)
+    .then(response => {
+        if (response.ok === true) {
+            window.location.href = "../status/status.html";
+        }
+    })
     .catch(fetchHelper.onRejected);
-}
-
-function checkResponse(response) {
-    if (response.ok) {
-        console.log("checkout!");
-        console.log(response);
-        const msg = response.json()
-        console.log(msg);
-        // window.location.href = "https://www.youtube.com/watch?v=xvFZjo5PgG0";
-    } else {
-        console.log("checkout failed");
-    }
+    // rickroll?
 }

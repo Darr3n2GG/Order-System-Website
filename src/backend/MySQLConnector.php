@@ -27,19 +27,15 @@ class MySQLConnector {
     }
 
     public function readQuery(string $query, string $types = "", array $array_of_params = null): array {
-        try {
-            $stmt = $this->prepareStatement($query);
-            if ($types != "" and $array_of_params != null) {
-                $stmt->bind_param($types, ...$array_of_params);
-            } elseif ($types != "" or $array_of_params != null) {
-                throw new Exception("Both the types and array of params parameters must contain a value");
-            }
-            $result = $this->readStatement($stmt);
-            $stmt->close();
-            return $result;
-        } catch (Exception $e) {
-            echo 'Message: ' . $e->getMessage();
+        $stmt = $this->prepareStatement($query);
+        if ($types != "" and $array_of_params != null) {
+            $stmt->bind_param($types, ...$array_of_params);
+        } elseif ($types != "" or $array_of_params != null) {
+            throw new Exception("Both the types and array of params parameters must contain a value");
         }
+        $result = $this->readStatement($stmt);
+        $stmt->close();
+        return $result;
     }
 
     public function executeQuery(string $query, string $types, array $array_of_params): void {
@@ -50,21 +46,19 @@ class MySQLConnector {
     }
 
     public function readLastInsertedID(): int {
-        $stmt = $this->prepareStatement("SELECT LAST_INSERT_ID()");
-        $result = $this->readStatement($stmt);
-        return $result[0]["LAST_INSERT_ID()"];
+        $last_inserted_id = $this->conn->insert_id;
+        if ($last_inserted_id == 0) {
+            throw new Exception("No previous query on the connection or query did not update an AUTO_INCREMENT value");
+        }
+        return $last_inserted_id;
     }
 
     public function prepareStatement(string $query): mysqli_stmt {
-        try {
-            $stmt = $this->conn->prepare($query);
-            if ($stmt == false) {
-                throw new Exception("Unable to prepare query: " . $query);
-            }
-            return $stmt;
-        } catch (Exception $e) {
-            echo 'Message: ' . $e->getMessage();
+        $stmt = $this->conn->prepare($query);
+        if ($stmt == false) {
+            throw new Exception("Unable to prepare query: " . $query);
         }
+        return $stmt;
     }
 
     public function readStatement(mysqli_stmt $stmt): array {

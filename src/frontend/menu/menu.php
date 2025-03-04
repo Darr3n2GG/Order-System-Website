@@ -1,7 +1,7 @@
 <?php
 include_once("../../backend/account.php");
 require_once("../../backend/MySQLConnector.php");
-require_once("../../backend/makanan.php");
+require_once("../../backend/Makanan.php");
 require_once("MenuLoader.php");
 
 $MySQLConnector = new MySQLConnector("localhost", "root", "", "restorandb");
