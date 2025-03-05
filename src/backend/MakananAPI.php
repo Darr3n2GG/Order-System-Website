@@ -1,5 +1,6 @@
 <?php
 require_once("Makanan.php");
+require_once("JsonResponseHandlerAPI.php");
 
 try {
     $makanan_id = isset($_GET["id"]) ? $_GET["id"] : 0;
@@ -7,6 +8,5 @@ try {
     $makanan = $objek_makanan->getMakanan($makanan_id);
     echo json_encode($makanan[0]);
 } catch (Exception $e) {
-    http_response_code(500);
-    echo json_encode(["error" => "Message : " . $e->getMessage()]);
+    echoJsonException($e->getMessage());
 }

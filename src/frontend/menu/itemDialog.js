@@ -9,11 +9,26 @@ globalThis.logSelectedItem = (function(){
 
 const itemDialog = document.querySelector(".item_dialog");
 const dialogAmount = itemDialog.querySelector(".dialog_input");
-const addItemButton = itemDialog.querySelector(".add_item_button")
+const addItemButton = itemDialog.querySelector(".add_item_button");
 
 document.addEventListener("DOMContentLoaded", () => {
     setupItemDialog();
 })
+
+dialogAmount.addEventListener("sl-change", () => {
+    updateItemQuantity(parseInt(dialogAmount.value));
+});
+
+addItemButton.addEventListener("click", () =>{
+    addSelectedItemToCart();
+    itemDialog.hide();
+});
+
+// Delay reset for event to be emitted
+itemDialog.addEventListener("sl-after-hide", () => {
+    resetItemDialog();
+});
+
 
 function setupItemDialog() {
     const menu = document.querySelector(".menu");
@@ -37,7 +52,7 @@ function detectIfNoTextSelected() {
 }
 
 function fetchItemDialogData(item_id) {
-    const url = "/Order-System-Website/src/backend/fetchMakanan.php?" + new URLSearchParams({
+    const url = "/Order-System-Website/src/backend/MakananAPI.php?" + new URLSearchParams({
         id : item_id
     }).toString();
     fetch(url)
@@ -53,7 +68,7 @@ function setItemAndShowDialog(item) {
 
 function setSelectedItem(item) {
     selectedItem = item;
-    selectedItem.kuantiti = 1
+    selectedItem.kuantiti = 1;
 }
 
 function showItemDialog(item) {
@@ -64,22 +79,18 @@ function showItemDialog(item) {
     itemDialog.show();
 }
 
-dialogAmount.addEventListener("sl-change", () => {
-    updateItemQuantity(parseInt(dialogAmount.value));
-});
-
-function updateItemQuantity(value) {
-    selectedItem.kuantiti = value
-}
-
-addItemButton.addEventListener("click", () =>{
+function addSelectedItemToCart() {
     eventBus.emit("addItemToCart", {
         item : selectedItem
     });
-    itemDialog.hide();
-});
+}
 
-itemDialog.addEventListener("sl-after-hide", () => {
+function updateItemQuantity(value) {
+    selectedItem.kuantiti = value;
+}
+
+function resetItemDialog() {
     selectedItem = {};
     dialogAmount.value = 1;
-});
+}
+

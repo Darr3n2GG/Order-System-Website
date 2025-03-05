@@ -1,5 +1,5 @@
 <?php
-include_once("../../backend/account.php");
+include_once("../../backend/Session.php");
 require_once("../../backend/MySQLConnector.php");
 require_once("../../backend/Makanan.php");
 require_once("MenuLoader.php");
@@ -37,16 +37,12 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
                     class="category_button icon_border" name="list-ul" slot="trigger">
                 </sl-icon-button>
                 <sl-menu class="category_menu">
-                    <?php
-                    $MenuLoader->displayKategoriItem();
-                    ?>
+                    <?php $MenuLoader->displayKategoriItem(); ?>
                 </sl-menu>
             </sl-dropdown>
         </div>
         <div class="menu">
-            <?php
-            $MenuLoader->displayKategoriDanMakanan();
-            ?>
+            <?php $MenuLoader->displayKategoriDanMakanan(); ?>
         </div>
         <div class="item_dialog_container">
             <sl-dialog class="item_dialog" label="">

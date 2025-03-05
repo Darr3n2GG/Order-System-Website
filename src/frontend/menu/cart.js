@@ -34,6 +34,7 @@ itemList.addEventListener("sl-change", event => {
     }
 })
 
+
 function updateCartItemQuantity(id, value) {
     const cartItem = findCartItemByID(id);
     cartItem.kuantiti = value;

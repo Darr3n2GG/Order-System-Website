@@ -1,7 +1,8 @@
 <?php
-include_once("JsonExceptionHandler.php");
-include_once("account.php");
+require_once("JsonResponseHandlerAPI.php");
+include_once("Session.php");
 
+setJsonExceptionHandler();
 try {
     $user_id = getUserIDFromSession();
     $nombor_meja = 1;
@@ -26,8 +27,7 @@ try {
         $stmt->execute();
     }
 
-    echo json_encode(["ok" => true, "message" => "Fetch request processed."]);
+    echoJsonResponse(true, "Fetch request processed.");
 } catch (Exception $e) {
-    http_response_code(500);
-    echo json_encode(["ok" => false, "message" => "Fetch request failed : " . $e->getMessage()]);
+    echoJsonException("Fetch request failed : " . $e->getMessage());
 }

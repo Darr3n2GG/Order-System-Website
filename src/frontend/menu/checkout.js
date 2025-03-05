@@ -1,6 +1,8 @@
 import { eventBus } from "../../scripts/eventBus.js";
 import fetchHelper from "../../scripts/fetchHelper.js";
-const url = "../../backend/ReceiveCheckout.php"
+
+const apiUrl = "../../backend/CheckoutAPI.php";
+const redirectUrl = "../status/status.html";
 
 eventBus.addEventListener("checkout", event => {
     checkout(event.detail);
@@ -11,14 +13,14 @@ function checkout(cart) {
     const formData = new FormData();
     formData.append("cart", JSON.stringify(cart));
 
-    fetch(url, {
+    fetch(apiUrl, {
         method: "POST",
         body: formData
     })
     .then(fetchHelper.onFulfilled)
     .then(response => {
-        if (response.ok === true) {
-            window.location.href = "../status/status.html";
+        if (response.ok) {
+            window.location.href = redirectUrl;
         }
     })
     .catch(fetchHelper.onRejected);
