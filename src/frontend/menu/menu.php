@@ -6,8 +6,8 @@ require_once("MenuLoader.php");
 
 $MySQLConnector = new MySQLConnector("localhost", "root", "", "restorandb");
 $array_kategori = $MySQLConnector->readQuery("SELECT kategori.label, kategori.nama from kategori");
-$objek_makanan = new Makanan;
-$array_makanan = $objek_makanan->getAllMakanan();
+$makanan = new Makanan;
+$array_makanan = $makanan->getAllMakanan();
 $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
 ?>
 
