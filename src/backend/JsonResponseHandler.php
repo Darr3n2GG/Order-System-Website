@@ -1,6 +1,7 @@
 <?php
 function echoJsonResponse(bool $ok, string $message): void {
-    echo json_encode(["ok" => $ok, "message" => $message]);
+    $response = ["ok" => $ok, "message" => $message];
+    echo json_encode($response);
 }
 
 function echoJsonException(string $message): void {

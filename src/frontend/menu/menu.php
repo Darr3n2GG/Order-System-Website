@@ -25,7 +25,7 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
 </head>
 
 <body>
-    <sl-include class="include_header" src="../header/header.html"></sl-include>
+    <?php include_once("../header/header.php") ?>
     <div class="main container">
         <div class="action_bar">
             <sl-icon-button class="cart_button icon_border" name="bag"></sl-icon-button>

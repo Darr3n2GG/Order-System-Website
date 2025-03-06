@@ -1,15 +1,15 @@
 <?php
-require_once("JsonResponseHandlerAPI.php");
-include_once("Session.php");
+require_once("Session.php");
+require_once("JsonResponseHandler.php");
+require_once("MySQLConnector.php");
 
 setJsonExceptionHandler();
+
 try {
     $user_id = getUserIDFromSession();
     $nombor_meja = 1;
     $tarikh = date("Y-m-d");
     $cara = "dine-in";
-
-    require_once("MySQLConnector.php");
 
     $cartAssocArray = json_decode($_POST["cart"], true);
 
@@ -27,7 +27,7 @@ try {
         $stmt->execute();
     }
 
-    echoJsonResponse(true, "Fetch request processed.");
+    echoJsonResponse(true, "CheckoutAPI request processed.");
 } catch (Exception $e) {
-    echoJsonException("Fetch request failed : " . $e->getMessage());
+    echoJsonException("CheckoutAPI request failed : " . $e->getMessage());
 }

@@ -1,6 +1,6 @@
 <?php
 require_once("Makanan.php");
-require_once("JsonResponseHandlerAPI.php");
+require_once("JsonResponseHandler.php");
 
 try {
     $makanan_id = isset($_GET["id"]) ? $_GET["id"] : 0;

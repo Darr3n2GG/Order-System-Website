@@ -11,5 +11,5 @@ function getUserIDFromSession() {
 }
 
 function checkIfLoggedIn() {
-    return isset($_SESSION["user_id"]);
+    return isset($_SESSION["user_id"]) || $_SESSION["user_id"] !== 0;
 }

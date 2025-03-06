@@ -42,7 +42,7 @@ function updateCartItemQuantity(id, value) {
 
 function addItemToCart(item) {
     const cartItem = findCartItemByID(item.id);
-    if (cartItem != false) {
+    if (cartItem === true) {
         cartItem.kuantiti += item.kuantiti;
         updateItemQuantityInCartDialog(cartItem);
     } else {
