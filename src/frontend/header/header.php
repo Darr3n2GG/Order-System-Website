@@ -1,18 +1,21 @@
 <?php
+// Server rendered header
 require_once("../../backend/Session.php");
 
-if (checkIfLoggedIn() == true) {
-    $guest_nav = "";
-    $registered_nav = "show_nav";
-} else {
-    $guest_nav = "show_nav";
-    $registered_nav = "";
+function echoHeaderStylesheet(): void {
+    echo '<link rel="stylesheet" href="/Order-System-Website/src/frontend/header/header.css">';
 }
 
+function echoHeader(): void {
+    if (checkIfLoggedIn() == true) {
+        $guest_nav = "";
+        $registered_nav = "show_nav";
+    } else {
+        $guest_nav = "show_nav";
+        $registered_nav = "";
+    }
 
-// Server rendered header
-echo <<<HEADER
-    <link rel="stylesheet" href="/Order-System-Website/src/frontend/header/header.css">
+    echo <<<HEADER
     <header class="header" id="header">
         <nav class="nav container">
             <a href="#">
@@ -39,5 +42,9 @@ echo <<<HEADER
             </div>
         </nav>
     </header>
-    <noscript>Your browser does not support JavaScript!</noscript>
-HEADER;
+    HEADER;
+}
+
+function echoNoScript(): void {
+    echo '<noscript>Your browser does not support JavaScript!</noscript>';
+}

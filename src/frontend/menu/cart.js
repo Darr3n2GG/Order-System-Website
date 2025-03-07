@@ -1,9 +1,10 @@
 import { eventBus } from "../../scripts/eventBus.js";
+import { Cart } from "../../scripts/CartAPI.js";
 
-const cart = [];
+const cart = new Cart;
 // cart logger in console, type "logCart()"
 globalThis.logCart = (function(){
-    return cart;
+    return cart.getCart();
 });
 
 const cartButton = document.querySelector(".cart_button");
@@ -11,9 +12,13 @@ const cartDialog = document.querySelector(".cart_dialog");
 const itemList = cartDialog.querySelector(".cart_item_list");
 const checkoutButton = cartDialog.querySelector(".checkout_button");
 
-eventBus.addEventListener("addItemToCart", event => {
-    addItemToCart(event.detail.item);
-});
+eventBus.addEventListener("addItemToCartDialog", event => {
+    addItemToCartDialog(event.detail.newItem);
+})
+
+eventBus.addEventListener("updateItemQuantityInCartDialog", event => {
+    updateItemQuantityInCartDialog(event.detail.item);
+})
 
 cartButton.addEventListener("click", () => {
     cartDialog.show();
@@ -21,7 +26,7 @@ cartButton.addEventListener("click", () => {
 
 checkoutButton.addEventListener("click", () => {
     if (cart.length != 0) {
-        eventBus.emit("checkout", cart);
+        eventBus.emit("checkout", cart.getCart());
     }
 })
 
@@ -33,27 +38,6 @@ itemList.addEventListener("sl-change", event => {
         updateCartItemQuantity(id, value);
     }
 })
-
-
-function updateCartItemQuantity(id, value) {
-    const cartItem = findCartItemByID(id);
-    cartItem.kuantiti = value;
-}
-
-function addItemToCart(item) {
-    const cartItem = findCartItemByID(item.id);
-    if (cartItem === true) {
-        cartItem.kuantiti += item.kuantiti;
-        updateItemQuantityInCartDialog(cartItem);
-    } else {
-        const cartItem = {
-            id : item.id,
-            kuantiti : item.kuantiti,
-        }
-        cart.push(cartItem);
-        addItemToCartDialog(item);
-    }
-}
 
 function addItemToCartDialog(item) {
     let itemElement = document.createElement("li");
@@ -70,18 +54,8 @@ function updateItemQuantityInCartDialog(item) {
     itemInput.value = item.kuantiti;
 }
 
-function findCartItemByID(id) {
-    for (let i = 0; i < cart.length; i++) {
-        const item = cart[i];
-        if (item.id === id) {
-            return item;
-        }
-    }
-    return false;
-}
-
 function findCartItemElementByID(id) {
-    for (let i = 0; i < cart.length; i++) {
+    for (let i = 0; i < cart.getCartLength(); i++) {
         const child = itemList.children[i];
         const childID = parseInt(child.dataset.id);
         if (childID === id) {

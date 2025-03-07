@@ -3,6 +3,7 @@ include_once("../../backend/Session.php");
 require_once("../../backend/MySQLConnector.php");
 require_once("../../backend/Makanan.php");
 require_once("MenuLoader.php");
+include_once("../header/header.php");
 
 $MySQLConnector = new MySQLConnector("localhost", "root", "", "restorandb");
 $array_kategori = $MySQLConnector->readQuery("SELECT kategori.label, kategori.nama from kategori");
@@ -19,13 +20,14 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="menu.css">
     <link rel="stylesheet" href="../style.css">
+    <?php echoHeaderStylesheet(); ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
     <title>Menu</title>
 </head>
 
 <body>
-    <?php include_once("../header/header.php") ?>
+    <?php echoHeader(); ?>
     <div class="main container">
         <div class="action_bar">
             <sl-icon-button class="cart_button icon_border" name="bag"></sl-icon-button>
@@ -66,6 +68,7 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
             </sl-dialog>
         </div>
     </div>
+    <?php echoNoScript(); ?>
     <script type="module" src="menu.js"></script>
     <script type="module" src="itemDialog.js"></script>
     <script type="module" src="cart.js"></script>
