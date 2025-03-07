@@ -4,8 +4,8 @@ import fetchHelper from "../../scripts/fetchHelper.js";
 const apiUrl = "../../backend/CheckoutAPI.php";
 const redirectUrl = "../status/status.html";
 
-eventBus.addEventListener("checkout", event => {
-    checkout(event.detail);
+eventBus.addEventListener("checkout", ({ detail }) => {
+    checkout(detail);
 })
 
 function checkout(cart) {

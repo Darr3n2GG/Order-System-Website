@@ -5,17 +5,13 @@ export class Cart {
     cart = [];
 
     constructor() {
-        eventBus.addEventListener("addItemToCart", event => {
-            this.addItemToCart(event.detail.item);
+        eventBus.addEventListener("addItemToCart", ({ detail }) => {
+            this.addItemToCart(detail.item);
         });
     }
 
     getCart() {
         return this.cart;
-    }
-
-    getCartLength() {
-        return this.cart.length;
     }
 
     updateCartItemQuantity(id, value) {
@@ -43,13 +39,8 @@ export class Cart {
     }
 
     findCartItemByID(id) {
-        for (let i = 0; i < this.getCartLength(); i++) {
-            const item = this.cart[i];
-            if (item.id === id) {
-                return item;
-            }
-        }
-        return false;
+        const items = Array.from(this.cart);
+        return items.find(item => item.id === id) || false;
     }
 }
 

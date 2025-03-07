@@ -9,16 +9,16 @@ globalThis.logSelectedItem = (function(){
 
 const itemDialog = document.querySelector(".item_dialog");
 const dialogAmount = itemDialog.querySelector(".dialog_input");
-const addItemButton = itemDialog.querySelector(".add_item_button");
 
 document.addEventListener("DOMContentLoaded", () => {
     setupItemDialog();
 })
 
 dialogAmount.addEventListener("sl-change", () => {
-    updateItemQuantity(parseInt(dialogAmount.value));
+    updateItemQuantity(ParseInt(dialogAmount.value, 10));
 });
 
+const addItemButton = itemDialog.querySelector(".add_item_button");
 addItemButton.addEventListener("click", () =>{
     addSelectedItemToCart();
     itemDialog.hide();
@@ -32,16 +32,16 @@ itemDialog.addEventListener("sl-after-hide", () => {
 
 function setupItemDialog() {
     const menu = document.querySelector(".menu");
-    menu.addEventListener("click", event => {
-        if (event.target.classList.contains("food_item")) {
-            handleOnItemClick(event);
+    menu.addEventListener("click", ({ target }) => {
+        if (target.classList.contains("food_item")) {
+            handleOnItemClick(target);
         }
     })
 }
 
-function handleOnItemClick(event) {
+function handleOnItemClick(target) {
     if (detectIfNoTextSelected() === true) {
-        const itemID = event.target.dataset.id;
+        const itemID = parseInt(target.dataset.id, 10);
         fetchItemDialogData(itemID);
     }
 }
@@ -57,7 +57,7 @@ function fetchItemDialogData(item_id) {
     }).toString();
     fetch(url)
         .then(fetchHelper.onFulfilled)
-        .then(item => setItemAndShowDialog(item))
+        .then(({ details }) => setItemAndShowDialog(details.item))
         .catch(fetchHelper.onRejected);
 }
 
@@ -71,11 +71,11 @@ function setSelectedItem(item) {
     selectedItem.kuantiti = 1;
 }
 
-function showItemDialog(item) {
-    itemDialog.label = item.label + item.id +  " : " + item.nama;
-    itemDialog.querySelector(".dialog_image").src = item.gambar;
-    itemDialog.querySelector(".dialog_price").innerHTML = "Harga : RM" + item.harga;
-    itemDialog.querySelector(".dialog_description").innerHTML = item.detail;
+function showItemDialog({label, id, nama, gambar, harga, detail}) {
+    itemDialog.label = label + id +  " : " + nama;
+    itemDialog.querySelector(".dialog_image").src = gambar;
+    itemDialog.querySelector(".dialog_price").innerHTML = "Harga : RM" + harga;
+    itemDialog.querySelector(".dialog_description").innerHTML = detail;
     itemDialog.show();
 }
 
