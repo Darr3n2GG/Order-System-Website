@@ -1,4 +1,6 @@
-export default class fetchHelper {
+// Helper functions when doing fetch requests
+
+export default class FetchHelper {
     static onFulfilled = (response) => {
         if (!response.ok) {
             return response.json()

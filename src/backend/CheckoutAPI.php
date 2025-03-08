@@ -6,13 +6,14 @@ require_once("MySQLConnector.php");
 setJsonExceptionHandler();
 
 try {
+    $MySQLConnector = new MySQLConnector("localhost", "root", "", "restorandb");
+
     $user_id = getUserIDFromSession();
     $nombor_meja = 1;
     $tarikh = date("Y-m-d");
     $cara = "dine-in";
 
     $cart_assoc_array = json_decode($_POST["cart"], true);
-    $MySQLConnector = new MySQLConnector("localhost", "root", "", "restorandb");
 
     addPesanan($user_id, 1, $nombor_meja, $tarikh, $cara);
 

@@ -63,6 +63,10 @@
   gap: 1rem;
 }
 
+.cart_has_item {
+  display: none;
+}
+
 @media screen and (min-width: 576px) {
   .search {
     width: 90%;

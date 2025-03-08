@@ -1,11 +1,10 @@
-import { eventBus } from "../../scripts/eventBus.js";
-import fetchHelper from "../../scripts/fetchHelper.js";
+import { eventBus } from "../../scripts/EventBus.js";
+import FetchHelper from "../../scripts/FetchHelper.js";
 
+const apiUrl = "/Order-System-Website/src/backend/MakananAPI.php"
 let selectedItem = {};
 // selectedItem logger in console, type "logSelectedItem()"
-globalThis.logSelectedItem = (function(){
-    return selectedItem;
-});
+globalThis.logSelectedItem = () => selectedItem;
 
 const itemDialog = document.querySelector(".item_dialog");
 const dialogAmount = itemDialog.querySelector(".dialog_input");
@@ -15,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 dialogAmount.addEventListener("sl-change", () => {
-    updateItemQuantity(ParseInt(dialogAmount.value, 10));
+    updateItemQuantity(parseInt(dialogAmount.value, 10));
 });
 
 const addItemButton = itemDialog.querySelector(".add_item_button");
@@ -52,23 +51,16 @@ function detectIfNoTextSelected() {
 }
 
 function fetchItemDialogData(item_id) {
-    const url = "/Order-System-Website/src/backend/MakananAPI.php?" + new URLSearchParams({
+    const url = apiUrl + "?" + new URLSearchParams({
         id : item_id
     }).toString();
     fetch(url)
-        .then(fetchHelper.onFulfilled)
-        .then(({ details }) => setItemAndShowDialog(details.item))
-        .catch(fetchHelper.onRejected);
-}
-
-function setItemAndShowDialog(item) {
-    setSelectedItem(item);
-    showItemDialog(item);
-}
-
-function setSelectedItem(item) {
-    selectedItem = item;
-    selectedItem.kuantiti = 1;
+        .then(FetchHelper.onFulfilled)
+        .then(({ details }) => {
+            setSelectedItem(details.item);
+            showItemDialog(details.item);
+        })
+        .catch(FetchHelper.onRejected);
 }
 
 function showItemDialog({label, id, nama, gambar, harga, detail}) {
@@ -77,6 +69,11 @@ function showItemDialog({label, id, nama, gambar, harga, detail}) {
     itemDialog.querySelector(".dialog_price").innerHTML = "Harga : RM" + harga;
     itemDialog.querySelector(".dialog_description").innerHTML = detail;
     itemDialog.show();
+}
+
+function setSelectedItem(item) {
+    selectedItem = item;
+    selectedItem.kuantiti = 1;
 }
 
 function addSelectedItemToCart() {

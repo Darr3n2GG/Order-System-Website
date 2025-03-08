@@ -1,9 +1,8 @@
 <?php
-include_once("../../backend/Session.php");
 require_once("../../backend/MySQLConnector.php");
 require_once("../../backend/Makanan.php");
 require_once("MenuLoader.php");
-include_once("../header/header.php");
+require_once("../header/header.php");
 
 $MySQLConnector = new MySQLConnector("localhost", "root", "", "restorandb");
 $array_kategori = $MySQLConnector->readQuery("SELECT kategori.label, kategori.nama from kategori");
@@ -62,6 +61,7 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
         </div>
         <div class="cart">
             <sl-dialog class="cart_dialog" label="Cart">
+                <h1 class="cart_empty">Nothing Here!</h1>
                 <ul class="cart_item_list">
                 </ul>
                 <sl-button class="checkout_button" slot="footer" variant="primary">Checkout</sl-button>
@@ -69,6 +69,7 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
         </div>
     </div>
     <?php echoNoScript(); ?>
+    <?php echoAdminButtonScript(); ?>
     <script type="module" src="menu.js"></script>
     <script type="module" src="itemDialog.js"></script>
     <script type="module" src="cart.js"></script>

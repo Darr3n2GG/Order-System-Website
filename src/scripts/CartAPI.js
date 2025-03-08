@@ -1,4 +1,4 @@
-import { eventBus } from "./eventBus.js";
+import { eventBus } from "./EventBus.js";
 
 
 export class Cart {
@@ -6,7 +6,7 @@ export class Cart {
 
     constructor() {
         eventBus.addEventListener("addItemToCart", ({ detail }) => {
-            this.addItemToCart(detail.item);
+            this.updateCart(detail.item);
         });
     }
 
@@ -19,7 +19,7 @@ export class Cart {
         cartItem.kuantiti = value;
     }
 
-    addItemToCart(item) {
+    updateCart(item) {
         const cartItem = this.findCartItemByID(item.id);
         if (cartItem === true) {
             cartItem.kuantiti += item.kuantiti;
@@ -27,20 +27,34 @@ export class Cart {
                 item: cartItem
             });
         } else {
-            const cartItem = {
-                id: item.id,
-                kuantiti: item.kuantiti,
-            };
-            this.cart.push(cartItem);
+            this.addItemToCart(item);
             eventBus.emit("addItemToCartDialog", {
                 newItem: item
             });
         }
     }
 
+    addItemToCart(item) {
+        const cartItem = {
+            id: item.id,
+            kuantiti: item.kuantiti,
+        };
+        this.cart.push(cartItem);
+    }
+
+    deleteItem(id) {
+        const cartItem = this.findCartItemByID(id);
+        const index = this.cart.indexOf(cartItem);
+        this.cart.splice(index, 1);
+    }
+
     findCartItemByID(id) {
-        const items = Array.from(this.cart);
-        return items.find(item => item.id === id) || false;
+        const cartItem = this.cart.find(item => item.id === id);
+        console.log(cartItem)
+        if (cartItem !== undefined) {
+            return cartItem;
+        }
+        return false;
     }
 }
 
