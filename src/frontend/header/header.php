@@ -19,7 +19,7 @@ function echoHeader(): void {
     echo <<<HEADER1
     <header class="header" id="header">
         <nav class="nav container">
-            <a href="#">
+            <a href="/Order-System-Website/src/frontend/menu/menu.php">
                 <img class="nav_logo" src="/Order-System-Website/src/assets/logo+text.png" alt="Logo">
             </a>
             <div class="nav_guest $guest_nav" id="nav-guest">
