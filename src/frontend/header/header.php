@@ -1,7 +1,7 @@
 <?php
 // Server rendered header
 require_once("../../backend/Session.php");
-$admin = true;
+$admin = false;
 
 function echoHeaderStylesheet(): void {
     echo '<link rel="stylesheet" href="/Order-System-Website/src/frontend/header/header.css">';

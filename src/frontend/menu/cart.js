@@ -15,8 +15,10 @@ cartButton.addEventListener("click", () => {
 
 const checkoutButton = cartDialog.querySelector(".checkout_button");
 checkoutButton.addEventListener("click", () => {
-    if (cart.length !== 0) {
+    if (cart.getCart().length !== 0) {
         eventBus.emit("checkout", cart.getCart());
+    } else {
+        alert("No items in cart! Can't checkout.")
     }
 })
 

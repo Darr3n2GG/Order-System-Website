@@ -21,7 +21,7 @@ export class Cart {
 
     updateCart(item) {
         const cartItem = this.findCartItemByID(item.id);
-        if (cartItem === true) {
+        if (cartItem) {
             cartItem.kuantiti += item.kuantiti;
             eventBus.emit("updateItemQuantityInCartDialog", {
                 item: cartItem
