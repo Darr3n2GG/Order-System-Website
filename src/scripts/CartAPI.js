@@ -2,59 +2,66 @@ import { eventBus } from "./EventBus.js";
 
 
 export class Cart {
-    cart = [];
+    #cart;
 
     constructor() {
+        this.cart = [];
         eventBus.addEventListener("addItemToCart", ({ detail }) => {
             this.updateCart(detail.item);
         });
     }
 
-    getCart() {
-        return this.cart;
-    }
-
-    updateCartItemQuantity(id, value) {
-        const cartItem = this.findCartItemByID(id);
-        cartItem.kuantiti = value;
-    }
-
     updateCart(item) {
-        const cartItem = this.findCartItemByID(item.id);
+        if (isItemValid(item)) {
+            return;
+        }
+
+        const cartItem = this.findCartItem(item.id);
         if (cartItem) {
             cartItem.kuantiti += item.kuantiti;
-            eventBus.emit("updateItemQuantityInCartDialog", {
-                item: cartItem
-            });
+            eventBus.emit("ItemQuantityUpdated", { item: cartItem });
         } else {
-            this.addItemToCart(item);
-            eventBus.emit("addItemToCartDialog", {
-                newItem: item
-            });
+            this.addCartItem(item);
+            eventBus.emit("AddCartItem", { newItem: item });
+        }
+
+        function isItemValid(item) {
+            if (!item || typeof item.id === "undefined" || typeof item.kuantiti !== "number" || item.kuantiti < 0) {
+                console.error("Invalid item provided to updateCart:", item);
+                return false;
+            } 
+            return true;
         }
     }
 
-    addItemToCart(item) {
+    getCart() {
+        return this.#cart;
+    }
+
+    addCartItem({id, kuantiti}) {
         const cartItem = {
-            id: item.id,
-            kuantiti: item.kuantiti,
+            id: id,
+            kuantiti: kuantiti,
         };
-        this.cart.push(cartItem);
+        this.#cart.push(cartItem);
     }
 
-    deleteItem(id) {
-        const cartItem = this.findCartItemByID(id);
+    updateCartItem(id, kuantiti) {
+        const cartItem = this.#cart.findCartItem(id)
+        cartItem.kuantiti = kuantiti
+    }
+
+    deleteCartItem(id) {
+        const cartItem = this.findCartItem(id);
         const index = this.cart.indexOf(cartItem);
-        this.cart.splice(index, 1);
+        this.#cart.splice(index, 1);
     }
 
-    findCartItemByID(id) {
-        const cartItem = this.cart.find(item => item.id === id);
-        console.log(cartItem)
+    findCartItem(id) {
+        const cartItem = this.#cart.find(item => item.id === id);
         if (cartItem !== undefined) {
             return cartItem;
         }
         return false;
     }
 }
-

@@ -17,8 +17,7 @@ dialogAmount.addEventListener("sl-change", () => {
     updateItemQuantity(parseInt(dialogAmount.value, 10));
 });
 
-const addItemButton = itemDialog.querySelector(".add_item_button");
-addItemButton.addEventListener("click", () =>{
+itemDialog.querySelector(".add_item_button").addEventListener("click", () =>{
     addSelectedItemToCart();
     itemDialog.hide();
 });
