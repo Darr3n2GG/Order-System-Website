@@ -41,13 +41,6 @@
   scroll-margin-top: calc(var(--header-height) + 10px);
 }
 
-.item_dialog::part(footer) {
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  gap: 1rem;
-}
-
 .dialog_input {
   width: 5rem;
 }
@@ -65,6 +58,17 @@
 
 .cart_has_item {
   display: none;
+}
+
+.total_price {
+  margin-right: auto;
+}
+
+.dialog::part(footer) {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 1rem;
 }
 
 @media screen and (min-width: 576px) {

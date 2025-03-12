@@ -44,9 +44,10 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
         </div>
         <div class="menu">
             <?php $MenuLoader->displayKategoriDanMakanan(); ?>
+            <!-- TODO : Add AJAX menu loading -->
         </div>
         <div class="item_dialog_container">
-            <sl-dialog class="item_dialog" label="">
+            <sl-dialog class="item_dialog dialog" label="">
                 <img class="dialog_image" src="" alt="food image">
                 <div>
                     <h2 class="dialog_price">Harga : RM</h2>
@@ -60,10 +61,11 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
             </sl-dialog>
         </div>
         <div class="cart">
-            <sl-dialog class="cart_dialog" label="Cart">
+            <sl-dialog class="cart_dialog dialog" label="Cart">
                 <h1 class="cart_empty">Nothing Here!</h1>
                 <ul class="cart_item_list">
                 </ul>
+                <h2 class="total_price" slot="footer">Total Price : RM 0</h2>
                 <sl-button class="checkout_button" slot="footer" variant="primary">Checkout</sl-button>
             </sl-dialog>
         </div>

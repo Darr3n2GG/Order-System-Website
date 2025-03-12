@@ -5,14 +5,14 @@ export class Cart {
     #cart;
 
     constructor() {
-        this.cart = [];
+        this.#cart = [];
         eventBus.addEventListener("addItemToCart", ({ detail }) => {
             this.updateCart(detail.item);
         });
     }
 
     updateCart(item) {
-        if (isItemValid(item)) {
+        if (!isItemValid(item)) {
             return;
         }
 
@@ -38,23 +38,32 @@ export class Cart {
         return this.#cart;
     }
 
-    addCartItem({id, kuantiti}) {
+    addCartItem({id, kuantiti, harga}) {
         const cartItem = {
             id: id,
             kuantiti: kuantiti,
+            harga: harga
         };
         this.#cart.push(cartItem);
     }
 
     updateCartItem(id, kuantiti) {
-        const cartItem = this.#cart.findCartItem(id)
-        cartItem.kuantiti = kuantiti
+        const cartItem = this.findCartItem(id);
+        cartItem.kuantiti = kuantiti;
     }
 
     deleteCartItem(id) {
         const cartItem = this.findCartItem(id);
-        const index = this.cart.indexOf(cartItem);
+        const index = this.#cart.indexOf(cartItem);
         this.#cart.splice(index, 1);
+    }
+
+    calculateTotalPrice() {
+        let total = 0.0;
+        this.#cart.forEach((item) => {
+            total += item.harga * item.kuantiti;
+        })
+        return total;
     }
 
     findCartItem(id) {
