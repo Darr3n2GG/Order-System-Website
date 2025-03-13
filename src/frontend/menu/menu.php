@@ -27,6 +27,7 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
 
 <body>
     <?php echoHeader(); ?>
+
     <div class="main container">
         <div class="action_bar">
             <sl-icon-button class="cart_button icon_border" name="bag"></sl-icon-button>
@@ -42,10 +43,13 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
                 </sl-menu>
             </sl-dropdown>
         </div>
+
         <div class="menu">
             <?php $MenuLoader->displayKategoriDanMakanan(); ?>
-            <!-- TODO : Add AJAX menu loading -->
+            <!-- TODO : Add AJAX menu loading (refer to old code)-->
+            <!-- WE LOVE AJAX WE HATE PHP -->
         </div>
+
         <div class="item_dialog_container">
             <sl-dialog class="item_dialog dialog" label="">
                 <img class="dialog_image" src="" alt="food image">
@@ -60,6 +64,7 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
                 <sl-button class="add_item_button" value="" slot="footer" variant="primary">Add Item</sl-button>
             </sl-dialog>
         </div>
+
         <div class="cart">
             <sl-dialog class="cart_dialog dialog" label="Cart">
                 <h1 class="cart_empty">Nothing Here!</h1>
@@ -70,6 +75,22 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
             </sl-dialog>
         </div>
     </div>
+
+    <template class="food_item_template">
+        <div class='food_item' data-id='$id'>
+            <img src='$gambar' alt='$nama'>
+            <div class='food_info'>
+                <div class='food_row'>
+                    <h2></h2>
+                    <sl-tag size='small' pill></sl-tag>
+                </div>
+                <div class='food_row'>
+                    <p><strong>Harga : RM </strong></p>
+                </div>
+            </div>
+        </div>
+    </template>
+
     <?php echoNoScript(); ?>
     <?php echoAdminButtonScript(); ?>
     <script type="module" src="menu.js"></script>

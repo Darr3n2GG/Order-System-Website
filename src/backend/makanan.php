@@ -15,7 +15,7 @@ class Makanan {
         return $arrayMakanan;
     }
 
-    public function getMakanan(int $id): array {
+    public function getMakananFromID(int $id): array {
         $makanan = $this->MySQLConnector->readQuery(
             "SELECT makanan.id, makanan.nama, kategori.label, makanan.detail, kategori.nama AS kategori_nama, makanan.harga, makanan.gambar 
             FROM makanan INNER JOIN kategori ON makanan.id_kategori=kategori.id 
@@ -23,6 +23,19 @@ class Makanan {
             ORDER BY makanan.id ASC",
             "i",
             [$id]
+        );
+        return $makanan[0];
+    }
+
+    public function getMakananFromKeyword(string $keyword): array {
+        $format_keyword = "%$keyword%";
+        $makanan = $this->MySQLConnector->readQuery(
+            "SELECT makanan.id, makanan.nama, kategori.label, makanan.detail, kategori.nama AS kategori_nama, makanan.harga, makanan.gambar 
+            FROM makanan INNER JOIN kategori ON makanan.id_kategori=kategori.id 
+            WHERE makanan.nama LIKE ?
+            ORDER BY makanan.id ASC",
+            "is",
+            [$format_keyword]
         );
         return $makanan;
     }
