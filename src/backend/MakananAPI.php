@@ -32,16 +32,23 @@ function returnMakananFromKeyword(string $keyword): void {
         echoJsonResponse(true, "MakananAPI request processed.", ["items" => $array_makanan]);
     } else {
         $array_makanan = $Makanan->getMakananFromKeyword($keyword);
-        $response = [];
+        $response = generateMakananHTML($array_makanan);
+        echoJsonResponse(true, "MakananAPI request processed.", ["items" => $response]);
+    }
+}
 
-        foreach ($array_makanan as $makanan) {
-            $gambar = $makanan["gambar"];
-            $nama = $makanan["nama"];
-            $id = $makanan["id"];
-            $label = $makanan["label"] . $id;
-            $harga = $makanan["harga"];
-            $kategori = $makanan["kategori"];
-            $makanan_item = <<<ITEM
+function generateMakananHTML(array $array_makanan) {
+    $array_makanan_item = [];
+
+    foreach ($array_makanan as $makanan) {
+        $gambar = $makanan["gambar"];
+        $nama = $makanan["nama"];
+        $id = $makanan["id"];
+        $label = $makanan["label"] . $id;
+        $harga = $makanan["harga"];
+        $kategori = $makanan["kategori"];
+        $makanan_item = htmlspecialchars(
+            <<<ITEM
             <div class='food_item' data-id='$id' data-category='$kategori'>
                 <img src='$gambar' alt='$nama'>
                 <div class='food_info'>
@@ -54,11 +61,11 @@ function returnMakananFromKeyword(string $keyword): void {
                     </div>
                 </div>
             </div>
-            ITEM;
+            ITEM
+        );
 
-            array_push($response, $makanan_item);
-        }
-
-        echoJsonResponse(true, "MakananAPI request processed.", ["items" => $response]);
+        array_push($array_makanan_item, $makanan_item);
     }
+
+    return $array_makanan_item;
 }
