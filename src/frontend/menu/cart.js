@@ -1,5 +1,5 @@
 import { eventBus } from "../../scripts/EventBus.js";
-import { Cart } from "../../scripts/CartAPI.js";
+import { Cart } from "../../scripts/Cart.js";
 
 const cart = new Cart;
 // cart logger in console, type "logCart()"
