@@ -31,7 +31,7 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
     <div class="main container">
         <div class="action_bar">
             <sl-icon-button class="cart_button icon_border" name="bag"></sl-icon-button>
-            <sl-input class="search" placeholder="Search" clearable>
+            <sl-input class="search_bar" placeholder="Search" clearable>
                 <sl-icon name="search" slot="prefix"></sl-icon>
             </sl-input>
             <sl-dropdown class="category_dropdown" placement="bottom-end">
@@ -97,6 +97,7 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
     <script type="module" src="itemDialog.js"></script>
     <script type="module" src="cart.js"></script>
     <script type="module" src="checkout.js"></script>
+    <script type="module" src="search.js"></script>
 </body>
 
 </html>

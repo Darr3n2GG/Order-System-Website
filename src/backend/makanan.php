@@ -29,14 +29,14 @@ class Makanan {
 
     public function getMakananFromKeyword(string $keyword): array {
         $format_keyword = "%$keyword%";
-        $makanan = $this->MySQLConnector->readQuery(
+        $arrayMakanan = $this->MySQLConnector->readQuery(
             "SELECT makanan.id, makanan.nama, kategori.label, makanan.detail, kategori.nama AS kategori_nama, makanan.harga, makanan.gambar 
             FROM makanan INNER JOIN kategori ON makanan.id_kategori=kategori.id 
             WHERE makanan.nama LIKE ?
             ORDER BY makanan.id ASC",
-            "is",
+            "s",
             [$format_keyword]
         );
-        return $makanan;
+        return $arrayMakanan;
     }
 }

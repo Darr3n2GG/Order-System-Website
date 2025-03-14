@@ -1,4 +1,6 @@
 <?php
+header("Content-Type: application/json");
+
 require_once("Session.php");
 require_once("JsonResponseHandler.php");
 require_once("MySQLConnector.php");
