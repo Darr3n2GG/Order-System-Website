@@ -6,10 +6,3 @@ categoryDropdown.addEventListener('sl-select', ({ detail }) => {
     const selectedKategori = detail.item;
     document.getElementById(selectedKategori.value).scrollIntoView();
 });
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     const url = apiUrl + "?" + new URLSearchParams({
-//         keyword : 
-//     }).toString();
-//     fetch()
-// })

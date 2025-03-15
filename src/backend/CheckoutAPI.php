@@ -3,11 +3,14 @@ header("Content-Type: application/json");
 
 require_once("Session.php");
 require_once("JsonResponseHandler.php");
+require_once("ErrorHandler.php");
 require_once("MySQLConnector.php");
 
-setJsonExceptionHandler();
-
 try {
+    if (!isset($_POST["cart"])) {
+        throw new Exception("No cart body in API request", 400);
+    }
+
     $MySQLConnector = new MySQLConnector("localhost", "root", "", "restorandb");
 
     $user_id = getUserIDFromSession();
@@ -24,7 +27,8 @@ try {
 
     echoJsonResponse(true, "CheckoutAPI request processed.");
 } catch (Exception $e) {
-    echoJsonException("CheckoutAPI request failed at line" . $e->getLine() . " : " . $e->getMessage());
+    error_log($e->getMessage());
+    echoJsonException($e->getCode(), "CheckoutAPI request failed : " . $e->getMessage());
 }
 
 function addPesanan(int $user_id, int $status_id, int $nombor_meja, string $tarikh, string $cara): void {

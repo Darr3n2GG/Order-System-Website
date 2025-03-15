@@ -3,23 +3,24 @@ header("Content-Type: application/json");
 
 require_once("Makanan.php");
 require_once("JsonResponseHandler.php");
+require_once("ErrorHandler.php");
 
-setJsonExceptionHandler();
 
 try {
-    $id = isset($_GET["id"]) ? $_GET["id"] : null;
-    $keyword = isset($_GET["keyword"]) ? $_GET["keyword"] : null;
     $Makanan = new Makanan;
 
-    if ($id) {
+    if (isset($_GET["id"])) {
+        $id = htmlspecialchars($_GET["id"]);
         returnMakananFromID($id);
-    } elseif (isset($keyword)) {
+    } elseif (isset($_GET["keyword"])) {
+        $keyword = htmlspecialchars($_GET["keyword"]);
         returnMakananFromKeyword($keyword);
     } else {
-        throw new Exception("No parameters attached to GET request.");
+        throw new Exception("No parameters attached to GET request.", 400);
     }
 } catch (Exception $e) {
-    throw new Exception("MakananAPI request failed : " . $e->getMessage());
+    error_log($e->getMessage());
+    echoJsonException($e->getCode(), "MakananAPI request failed : " . $e->getMessage());
 }
 
 function returnMakananFromID(int $id): void {
@@ -49,7 +50,7 @@ function generateMakananHTML(array $array_makanan): array {
         $id = $makanan["id"];
         $label = $makanan["label"] . $id;
         $harga = $makanan["harga"];
-        $kategori = $makanan["kategori"];
+        $kategori = $makanan["kategori_nama"];
         $makanan_item = <<<ITEM
             <div class='food_item' data-id='$id' data-category='$kategori'>
                 <img src='$gambar' alt='$nama'>
@@ -65,7 +66,7 @@ function generateMakananHTML(array $array_makanan): array {
             </div>
         ITEM;
 
-        array_push($array_makanan_item, $makanan_item);
+        array_push($array_makanan_item, [$makanan_item, "id" => $id]);
     }
 
     return $array_makanan_item;

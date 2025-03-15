@@ -1,0 +1,3 @@
+Custom error: [2] Undefined variable $test. Error on line 12 in C:\xampp\htdocs\Order-System-Website\src\backend\ErrorHandler.php
+Custom error: [2] Undefined variable $burp. Error on line 12 in C:\xampp\htdocs\Order-System-Website\src\backend\ErrorHandler.php
+[15-Mar-2025 15:24:26 Europe/Berlin] Undefined array key "kategori"
