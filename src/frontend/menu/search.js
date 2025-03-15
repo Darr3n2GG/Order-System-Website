@@ -28,14 +28,17 @@ function fetchFoodData() {
     fetch(url)
         .then(FetchHelper.onFulfilled)
         .then(({ details }) => {
-            let menuHTML = "";
-            for (let i = 0; i < details.items.length; i++) {
-                menuHTML = menuHTML + details.items[i]
+            const kategoriTitleList = document.getElementsByClassName("kategori_title");
+            for (let i = 0; i < kategoriTitleList.length; i++) {
+                const kategoriTitle = kategoriTitleList[i]
+                const kategoriItems = details.items.find(item => item.kategori === kategoriTitle.id)
+                console.log(kategoriItems)
+                let kategoriHTML = ""
+                for (let i = 0; i < kategoriItems.length; i++) {
+                    kategoriHTML += kategoriItems[i].html;
+                }
+                kategoriTitle.innerHTML = kategoriHTML
             }
-
-            const menu = document.querySelector(".menu");
-            menu.innerHTML = menuHTML
         })
         .catch(FetchHelper.onRejected);
-}
-  
+}  

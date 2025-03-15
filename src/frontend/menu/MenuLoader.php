@@ -32,7 +32,7 @@ class MenuLoader {
             $nama = $kategori["nama"];
             $array_makanan_dlm_kategori = $this->createArrayMakananDlmKategori($nama);
             $array_makanan_item = $this->createArrayMakananItem($array_makanan_dlm_kategori);
-            echo "<div class='kategori' id='$label'><h1>$nama</h1>";
+            echo "<div class='kategori_title' id='$label'><h1>$nama</h1>";
             foreach ($array_makanan_item as $makanan) {
                 echo $makanan;
             }

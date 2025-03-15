@@ -33,12 +33,12 @@ function returnMakananFromKeyword(string $keyword): void {
     global $Makanan;
     if ($keyword == "") {
         $array_makanan = $Makanan->getAllMakanan();
-        $makananHTML = generateMakananHTML($array_makanan);
+        $response = generateMakananHTML($array_makanan);
     } else {
         $array_makanan = $Makanan->getMakananFromKeyword($keyword);
-        $makananHTML = generateMakananHTML($array_makanan);
+        $response = generateMakananHTML($array_makanan);
     }
-    echoJsonResponse(true, "MakananAPI request processed.", ["items" => $makananHTML]);
+    echoJsonResponse(true, "MakananAPI request processed.", ["items" => $response]);
 }
 
 function generateMakananHTML(array $array_makanan): array {
@@ -50,9 +50,8 @@ function generateMakananHTML(array $array_makanan): array {
         $id = $makanan["id"];
         $label = $makanan["label"] . $id;
         $harga = $makanan["harga"];
-        $kategori = $makanan["kategori_nama"];
         $makanan_item = <<<ITEM
-            <div class='food_item' data-id='$id' data-category='$kategori'>
+            <div class='food_item' data-id='$id'>
                 <img src='$gambar' alt='$nama'>
                 <div class='food_info'>
                     <div class='food_row'>
@@ -66,7 +65,7 @@ function generateMakananHTML(array $array_makanan): array {
             </div>
         ITEM;
 
-        array_push($array_makanan_item, [$makanan_item, "id" => $id]);
+        array_push($array_makanan_item, ["html" => $makanan_item, "kategori" => $label]);
     }
 
     return $array_makanan_item;
