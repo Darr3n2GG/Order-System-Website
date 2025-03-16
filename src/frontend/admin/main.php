@@ -22,6 +22,8 @@ $array_pesanan = $MySQLConnector->readQuery(
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
+    <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
     <title>Admin</title>
 </head>
 
@@ -29,6 +31,7 @@ $array_pesanan = $MySQLConnector->readQuery(
     <?php echoHeader(); ?>
     <?php echoNoScript(); ?>
     <div class="main container">
+        <div class="test-table"></div>
         <?php
         echo <<<TABLE
         <table>
@@ -56,7 +59,7 @@ $array_pesanan = $MySQLConnector->readQuery(
             </tr>
             DATA;
         }
-        // TODO : Use DataTables.js
+        // TODO : Use Tabulator.js
         ?>
     </div>
 </body>
