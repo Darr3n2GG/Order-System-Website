@@ -23,7 +23,6 @@ function fetchFoodData() {
     const url = apiUrl + "?" + new URLSearchParams({
         keyword : searchBar.value
     }).toString()
-    console.log(url)
 
     fetch(url)
         .then(FetchHelper.onFulfilled)
@@ -39,7 +38,11 @@ function renderFoodItems(items) {
         const kategoriTitle = kategoriTitleList[i]
         const foodItemsHTML = createFoodItemsHTML(kategoriTitle.id);
         kategoriTitle.querySelector(".food_item_container").innerHTML = foodItemsHTML
-        // hide category name when no food item
+        if (foodItemsHTML === "") {
+            kategoriTitle.classList.add("hide")
+        } else {
+            kategoriTitle.classList.remove("hide")
+        }
     }
 
     function createFoodItemsHTML(kategori) {

@@ -9,13 +9,19 @@ const cartDialog = document.querySelector(".cart_dialog");
 const itemList = cartDialog.querySelector(".cart_item_list");
 
 eventBus.addEventListener("AddCartItem", ({ detail }) => {
-    cartDialog.querySelector(".cart_empty").classList.add("cart_has_item");
+    cartDialog.querySelector(".cart_empty").classList.add("hide");
     addCartItemUI(detail.newItem);
     updateTotalPrice();
 })
 
 eventBus.addEventListener("ItemQuantityUpdated", ({ detail }) => {
-    updateCartItemUI(detail.item);
+    const itemElement = findCartItemElement(id);
+    if (!itemElement) {
+        console.error("Item element doesn't exist.")
+    }
+    const item = detail.item
+    updateItemTotalPrice(item.harga, item.kuantiti, itemElement)
+    updateItemInput(item.kuantiti, itemElement)
     updateTotalPrice();
 })
 
@@ -36,15 +42,16 @@ itemList.addEventListener("sl-change", ({ target }) => {
         const id = parseInt(target.parentNode.dataset.id, 10);
         const value = parseInt(target.value ,10)
         cart.updateCartItem(id, value);
-        // Refactor here
+        updateCartUI(id)
+    }
+
+    function updateCartUI(id) {
         const itemElement = findCartItemElement(id);
-        if (itemElement !== null) {
-            const cartItem = cart.findCartItem(id);
-            const totalPrice = itemElement.querySelector(".item_total_price");
-            totalPrice.innerHTML = "RM " + (cartItem.harga * cartItem.kuantiti)
-        } else {
+        if (!itemElement) {
             console.error("Item element doesn't exist.")
         }
+        const cartItem = cart.findCartItem(id);
+        updateItemTotalPrice(cartItem.harga, cartItem.kuantiti, itemElement)
         updateTotalPrice();
     }
 })
@@ -68,17 +75,28 @@ function addCartItemUI({ id, label, nama, kuantiti, harga }) {
     );
 }
 
-function updateCartItemUI({ id, kuantiti, harga }) {
-    // Refactor here
-    const itemElement = findCartItemElement(id);
-    if (itemElement !== null) {
-        const itemInput = itemElement.querySelector(".cart_item_input");
-        const totalPrice = itemElement.querySelector(".item_total_price");
-        itemInput.value = kuantiti;
-        totalPrice.innerHTML = "RM " + (harga * kuantiti)
-    } else {
-        console.error("Item element doesn't exist.")
+function updateItemTotalPrice(harga, kuantiti, itemElement) {
+    const itemTotalPrice = itemElement.querySelector(".item_total_price");
+    if (!itemTotalPrice) { 
+        console.error("Item total price element doesn't exist.") 
     }
+    itemTotalPrice.innerHTML = "RM " + (harga * kuantiti)
+}
+
+function updateItemInput(kuantiti, itemElement) {
+    const itemInput = itemElement.querySelector(".cart_item_input");
+    if (!itemInput) {
+        console.error("Item input doesn't exist.")
+    }
+    itemInput.value = kuantiti;
+}
+
+function updateTotalPrice() {
+    const totalPrice = cartDialog.querySelector(".total_price");
+    if (!totalPrice) {
+        console.error("Total price element doesn't exist.")  
+    }
+    totalPrice.innerHTML = "Total Price : RM " + cart.calculateTotalPrice();
 }
 
 function deleteCartItemUI(element) {
@@ -86,13 +104,8 @@ function deleteCartItemUI(element) {
     cart.deleteCartItem(id);
     element.remove();
     if (cart.getCart.length === 0) {
-        cartDialog.querySelector(".cart_empty").classList.remove("cart_has_item");
+        cartDialog.querySelector(".cart_empty").classList.remove("hide");
     }
-}
-
-function updateTotalPrice() {
-    const priceElement = cartDialog.querySelector(".total_price");
-    priceElement.innerHTML = "Total Price : RM " + cart.calculateTotalPrice();
 }
 
 function findCartItemElement(id) {
