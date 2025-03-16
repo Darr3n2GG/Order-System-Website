@@ -28,17 +28,27 @@ function fetchFoodData() {
     fetch(url)
         .then(FetchHelper.onFulfilled)
         .then(({ details }) => {
-            const kategoriTitleList = document.getElementsByClassName("kategori_title");
-            for (let i = 0; i < kategoriTitleList.length; i++) {
-                const kategoriTitle = kategoriTitleList[i]
-                const kategoriItems = details.items.find(item => item.kategori === kategoriTitle.id)
-                console.log(kategoriItems)
-                let kategoriHTML = ""
-                for (let i = 0; i < kategoriItems.length; i++) {
-                    kategoriHTML += kategoriItems[i].html;
-                }
-                kategoriTitle.innerHTML = kategoriHTML
-            }
+            renderFoodItems(details.items)
         })
         .catch(FetchHelper.onRejected);
-}  
+}
+
+function renderFoodItems(items) {
+    const kategoriTitleList = document.getElementsByClassName("kategori_title");
+    for (let i = 0; i < kategoriTitleList.length; i++) {
+        const kategoriTitle = kategoriTitleList[i]
+        const foodItemsHTML = createFoodItemsHTML(kategoriTitle.id);
+        kategoriTitle.querySelector(".food_item_container").innerHTML = foodItemsHTML
+        // hide category name when no food item
+    }
+
+    function createFoodItemsHTML(kategori) {
+        let foodItemsHTML = ""
+        for (let i in items) {
+            if (items[i].kategori === kategori) {
+                foodItemsHTML += items[i].html;
+            }
+        }
+        return foodItemsHTML;
+    }
+}

@@ -65,7 +65,7 @@ function generateMakananHTML(array $array_makanan): array {
             </div>
         ITEM;
 
-        array_push($array_makanan_item, ["html" => $makanan_item, "kategori" => $label]);
+        array_push($array_makanan_item, ["html" => $makanan_item, "kategori" => $makanan["label"]]);
     }
 
     return $array_makanan_item;

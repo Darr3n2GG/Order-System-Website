@@ -36,6 +36,7 @@ itemList.addEventListener("sl-change", ({ target }) => {
         const id = parseInt(target.parentNode.dataset.id, 10);
         const value = parseInt(target.value ,10)
         cart.updateCartItem(id, value);
+        // Refactor here
         const itemElement = findCartItemElement(id);
         if (itemElement !== null) {
             const cartItem = cart.findCartItem(id);
@@ -68,6 +69,7 @@ function addCartItemUI({ id, label, nama, kuantiti, harga }) {
 }
 
 function updateCartItemUI({ id, kuantiti, harga }) {
+    // Refactor here
     const itemElement = findCartItemElement(id);
     if (itemElement !== null) {
         const itemInput = itemElement.querySelector(".cart_item_input");

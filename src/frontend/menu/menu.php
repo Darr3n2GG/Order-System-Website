@@ -46,8 +46,6 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
 
         <div class="menu">
             <?php $MenuLoader->displayKategoriDanMakanan(); ?>
-            <!-- TODO : Add AJAX menu loading (refer to old code)-->
-            <!-- WE LOVE AJAX WE HATE PHP -->
         </div>
 
         <div class="item_dialog_container">
