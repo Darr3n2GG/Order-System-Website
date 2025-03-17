@@ -1,10 +1,10 @@
 <?php
 header("Content-Type: application/json");
 
-require_once("Session.php");
-require_once("JsonResponseHandler.php");
-require_once("ErrorHandler.php");
-require_once("MySQLConnector.php");
+require_once(__DIR__ . "/Session.php");
+require_once(__DIR__ . "/JsonResponseHandler.php");
+require_once(__DIR__ . "/ErrorHandler.php");
+require_once(__DIR__ . "/MySQLConnector.php");
 
 try {
     if (!isset($_POST["cart"])) {

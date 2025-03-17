@@ -1,6 +1,6 @@
 <?php
 // Server rendered header
-require_once("../../backend/Session.php");
+require_once(dirname(__FILE__, 3) . "/backend/Session.php");
 $admin = false;
 
 function echoHeaderStylesheet(): void {

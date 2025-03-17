@@ -1,6 +1,6 @@
 <?php
-require_once("../header/header.php");
-require_once("../../backend/MySQLConnector.php");
+require_once(dirname(__FILE__, 3) . "/header/header.php");
+require_once(dirname(__FILE__, 4) . "/backend/MySQLConnector.php");
 
 $MySQLConnector = new MySQLConnector("localhost", "root", "", "restorandb");
 $array_pesanan = $MySQLConnector->readQuery(
@@ -19,11 +19,12 @@ $array_pesanan = $MySQLConnector->readQuery(
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php echoHeaderStylesheet(); ?>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
     <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Admin</title>
 </head>
 
@@ -31,7 +32,8 @@ $array_pesanan = $MySQLConnector->readQuery(
     <?php echoHeader(); ?>
     <?php echoNoScript(); ?>
     <div class="main container">
-        <div class="test-table"></div>
+        <div id="test_table"></div>
+        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
         <?php
         echo <<<TABLE
         <table>
@@ -62,6 +64,7 @@ $array_pesanan = $MySQLConnector->readQuery(
         // TODO : Use Tabulator.js
         ?>
     </div>
+    <script type="module" src="dashboard.js"></script>
 </body>
 
 </html>

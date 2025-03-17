@@ -1,9 +1,9 @@
 <?php
 header("Content-Type: application/json");
 
-require_once("Makanan.php");
-require_once("JsonResponseHandler.php");
-require_once("ErrorHandler.php");
+require_once(__DIR__ . "/Makanan.php");
+require_once(__DIR__ . "/JsonResponseHandler.php");
+require_once(__DIR__ . "/ErrorHandler.php");
 
 
 try {
