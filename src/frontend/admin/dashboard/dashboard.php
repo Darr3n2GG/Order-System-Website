@@ -18,7 +18,6 @@ $array_pesanan = $MySQLConnector->readQuery(
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php echoHeaderStylesheet(); ?>
     <link rel="stylesheet" href="../../style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
@@ -29,8 +28,6 @@ $array_pesanan = $MySQLConnector->readQuery(
 </head>
 
 <body>
-    <?php echoHeader(); ?>
-    <?php echoNoScript(); ?>
     <div class="main container">
         <div id="test_table"></div>
         <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
@@ -65,6 +62,7 @@ $array_pesanan = $MySQLConnector->readQuery(
         ?>
     </div>
     <script type="module" src="dashboard.js"></script>
+    <noscript>Your browser does not support JavaScript!</noscript>
 </body>
 
 </html>

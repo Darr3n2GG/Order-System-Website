@@ -89,13 +89,13 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
         </div>
     </template>
 
-    <?php echoNoScript(); ?>
     <?php echoAdminButtonScript(); ?>
     <script type="module" src="menu.js"></script>
     <script type="module" src="itemDialog.js"></script>
     <script type="module" src="cart.js"></script>
     <script type="module" src="checkout.js"></script>
     <script type="module" src="search.js"></script>
+    <noscript>Your browser does not support JavaScript!</noscript>
 </body>
 
 </html>

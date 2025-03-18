@@ -66,7 +66,3 @@ function echoAdminButtonScript(): void {
         echo '<script type="module" src="../header/adminButton.js"></script>';
     }
 }
-
-function echoNoScript(): void {
-    echo '<noscript>Your browser does not support JavaScript!</noscript>';
-}
