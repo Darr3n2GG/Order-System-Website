@@ -54,7 +54,7 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
                 <div>
                     <h2 class="dialog_price">Harga : RM</h2>
                     <h2>Description :</h2>
-                    <p class="dialog_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p class="dialog_description"></p>
                 </div>
                 <sl-input
                     class="dialog_input" type="number" value="1" slot="footer" required>
@@ -65,29 +65,14 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
 
         <div class="cart">
             <sl-dialog class="cart_dialog dialog" label="Cart">
-                <h1 class="cart_empty">Nothing Here!</h1>
+                <h1 class="cart_empty">Tiada makanan dipesan!</h1>
                 <ul class="cart_item_list">
                 </ul>
-                <h2 class="total_price" slot="footer">Total Price : RM 0</h2>
+                <h2 class="total_price" slot="footer">Jumlah Harga : RM 0</h2>
                 <sl-button class="checkout_button" slot="footer" variant="primary">Checkout</sl-button>
             </sl-dialog>
         </div>
     </div>
-
-    <template class="food_item_template">
-        <div class='food_item' data-id='$id'>
-            <img src='$gambar' alt='$nama'>
-            <div class='food_info'>
-                <div class='food_row'>
-                    <h2></h2>
-                    <sl-tag size='small' pill></sl-tag>
-                </div>
-                <div class='food_row'>
-                    <p><strong>Harga : RM </strong></p>
-                </div>
-            </div>
-        </div>
-    </template>
 
     <?php echoAdminButtonScript(); ?>
     <script type="module" src="menu.js"></script>
