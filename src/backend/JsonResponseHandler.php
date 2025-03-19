@@ -1,6 +1,10 @@
 <?php
+ini_set("log_errors", 1);
+ini_set("error_log", __DIR__ . "/error_log.log");
+ini_set("display_errors", 0);
+
 set_exception_handler(function ($e) {
-    error_log($e->getMessage(), 1, __DIR__ . "/error.log");
+    error_log($e->getMessage() . PHP_EOL);
     echoJsonException($e->getCode() ?: 500, $e->getMessage());
 });
 

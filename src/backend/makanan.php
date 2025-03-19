@@ -1,14 +1,14 @@
 <?php
 class Makanan {
-    private $MySQLConnector;
+    private $Database;
 
     public function __construct() {
-        require_once("MySQLConnector.php");
-        $this->MySQLConnector = new MySQLConnector("localhost", "root", "", "restorandb");
+        require_once("Database.php");
+        $this->Database = DatabaseFactory();
     }
 
     public function getAllMakanan(): array {
-        $arrayMakanan = $this->MySQLConnector->readQuery(
+        $arrayMakanan = $this->Database->readQuery(
             "SELECT makanan.id, makanan.nama, kategori.label, makanan.detail, kategori.nama AS kategori_nama, makanan.harga, makanan.gambar 
             FROM makanan INNER JOIN kategori ON makanan.id_kategori=kategori.id ORDER BY makanan.id ASC"
         );
@@ -16,7 +16,7 @@ class Makanan {
     }
 
     public function getMakananFromID(int $id): array {
-        $makanan = $this->MySQLConnector->readQuery(
+        $makanan = $this->Database->readQuery(
             "SELECT makanan.id, makanan.nama, kategori.label, makanan.detail, kategori.nama AS kategori_nama, makanan.harga, makanan.gambar 
             FROM makanan INNER JOIN kategori ON makanan.id_kategori=kategori.id 
             WHERE makanan.id = ?
@@ -29,7 +29,7 @@ class Makanan {
 
     public function getMakananFromKeyword(string $keyword): array {
         $format_keyword = "%$keyword%";
-        $arrayMakanan = $this->MySQLConnector->readQuery(
+        $arrayMakanan = $this->Database->readQuery(
             "SELECT makanan.id, makanan.nama, kategori.label, makanan.detail, kategori.nama AS kategori_nama, makanan.harga, makanan.gambar 
             FROM makanan INNER JOIN kategori ON makanan.id_kategori=kategori.id 
             WHERE makanan.nama LIKE ?

@@ -4,11 +4,10 @@ header("Content-Type: application/json");
 require_once(__DIR__ . "/Makanan.php");
 require_once(__DIR__ . "/JsonResponseHandler.php");
 require_once(__DIR__ . "/ErrorHandler.php");
+require_once(__DIR__ . "/MenuLoader.php");
 
 
 try {
-    $Makanan = new Makanan;
-
     if (isset($_GET["id"])) {
         $id = htmlspecialchars($_GET["id"]);
         returnMakananFromID($id);
@@ -23,14 +22,15 @@ try {
     echoJsonException($e->getCode(), "MakananAPI request failed : " . $e->getMessage());
 }
 
+
 function returnMakananFromID(int $id): void {
-    global $Makanan;
+    $Makanan = new Makanan;
     $item_makanan = $Makanan->getMakananFromID($id);
     echoJsonResponse(true, "MakananAPI request processed.", ["item" => $item_makanan]);
 }
 
 function returnMakananFromKeyword(string $keyword): void {
-    global $Makanan;
+    $Makanan = new Makanan;
     if ($keyword == "") {
         $array_makanan = $Makanan->getAllMakanan();
         $response = generateMakananHTML($array_makanan);
@@ -45,26 +45,7 @@ function generateMakananHTML(array $array_makanan): array {
     $array_makanan_item = [];
 
     foreach ($array_makanan as $makanan) {
-        $gambar = $makanan["gambar"];
-        $nama = $makanan["nama"];
-        $id = $makanan["id"];
-        $label = $makanan["label"] . $id;
-        $harga = $makanan["harga"];
-        $makanan_item = <<<ITEM
-            <div class='food_item' data-id='$id'>
-                <img src='$gambar' alt='$nama'>
-                <div class='food_info'>
-                    <div class='food_row'>
-                        <h2>$nama</h2>
-                        <sl-tag size='small' pill>$label</sl-tag>
-                    </div>
-                    <div class='food_row'>
-                        <p><strong>Harga : RM $harga</strong></p>
-                    </div>
-                </div>
-            </div>
-        ITEM;
-
+        $makanan_item = MenuLoader::createMakananItem($makanan);
         array_push($array_makanan_item, ["html" => $makanan_item, "kategori" => $makanan["label"]]);
     }
 

@@ -74,28 +74,34 @@ class MenuLoader {
     private function createArrayMakananItem($array_makanan): array {
         $array_makanan_item = [];
         foreach ($array_makanan as $makanan) {
-            $gambar = $makanan["gambar"];
-            $nama = $makanan["nama"];
-            $id = $makanan["id"];
-            $label = $makanan["label"] . $id;
-            $harga = $makanan["harga"];
-            $makanan_item = <<<ITEM
-            <div class='food_item' data-id='$id'>
-                <img src='$gambar' alt='$nama'>
-                <div class='food_info'>
-                    <div class='food_row'>
-                        <h2>$nama</h2>
-                        <sl-tag size='small' pill>$label</sl-tag>
-                    </div>
-                    <div class='food_row'>
-                        <p><strong>Harga : RM $harga</strong></p>
-                    </div>
-                </div>
-            </div>
-            ITEM;
+            $makanan_item = self::createMakananItem($makanan);
 
             array_push($array_makanan_item, $makanan_item);
         }
         return $array_makanan_item;
+    }
+
+    public static function createMakananItem($makanan): string {
+        $gambar = $makanan["gambar"];
+        $nama = $makanan["nama"];
+        $id = $makanan["id"];
+        $label = $makanan["label"] . $id;
+        $harga = $makanan["harga"];
+        $makanan_item = <<<ITEM
+        <div class='food_item' data-id='$id'>
+            <img src='$gambar' alt='$nama'>
+            <div class='food_info'>
+                <div class='food_row'>
+                    <h2>$nama</h2>
+                    <sl-tag size='small' pill>$label</sl-tag>
+                </div>
+                <div class='food_row'>
+                    <p><strong>Harga : RM $harga</strong></p>
+                </div>
+            </div>
+        </div>
+        ITEM;
+
+        return $makanan_item;
     }
 }

@@ -1,9 +1,9 @@
 <?php
 require_once(dirname(__FILE__, 2) . "/nav_bar/nav_bar.php");
-require_once(dirname(__FILE__, 4) . "/backend/MySQLConnector.php");
+require_once(dirname(__FILE__, 4) . "/backend/Database.php");
 
-$MySQLConnector = new MySQLConnector("localhost", "root", "", "restorandb");
-$array_pesanan = $MySQLConnector->readQuery(
+$Database = DatabaseFactory();
+$array_pesanan = $Database->readQuery(
     "SELECT pesanan.id as id, akaun.nama as nama, pesanan.tarikh as tarikh,
             status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
     FROM pesanan
@@ -30,7 +30,7 @@ $array_pesanan = $MySQLConnector->readQuery(
 
 <body>
     <?php echoNavBar(); ?>
-    <div class="main container content">
+    <div class="content container">
         <div id="test_table"></div>
         <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
         <?php

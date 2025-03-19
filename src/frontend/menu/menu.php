@@ -1,11 +1,12 @@
 <?php
-require_once("../../backend/MySQLConnector.php");
-require_once("../../backend/Makanan.php");
-require_once("MenuLoader.php");
-require_once("../header/header.php");
+require_once(dirname(__FILE__, 3) .  "/backend/Database.php");
+require_once(dirname(__FILE__, 3) . "/backend/Makanan.php");
+require_once(dirname(__FILE__, 3) . "/backend/MenuLoader.php");
+require_once(dirname(__FILE__, 2) . "/header/header.php");
 
-$MySQLConnector = new MySQLConnector("localhost", "root", "", "restorandb");
-$array_kategori = $MySQLConnector->readQuery("SELECT kategori.label, kategori.nama from kategori");
+$Database = DatabaseFactory();
+
+$array_kategori = $Database->readQuery("SELECT kategori.label, kategori.nama from kategori");
 $makanan = new Makanan;
 $array_makanan = $makanan->getAllMakanan();
 $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
@@ -28,7 +29,7 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
 <body>
     <?php echoHeader(); ?>
 
-    <div class="main container">
+    <div class="content container">
         <div class="action_bar">
             <sl-icon-button class="cart_button icon_border" name="bag"></sl-icon-button>
             <sl-input class="search_bar" placeholder="Search" clearable>

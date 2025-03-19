@@ -1,3 +1,21 @@
 Custom error: [2] Undefined variable $test. Error on line 12 in C:\xampp\htdocs\Order-System-Website\src\backend\ErrorHandler.php
 Custom error: [2] Undefined variable $burp. Error on line 12 in C:\xampp\htdocs\Order-System-Website\src\backend\ErrorHandler.php
 [15-Mar-2025 15:24:26 Europe/Berlin] Undefined array key "kategori"
+[19-Mar-2025 17:14:48 Asia/Kuala_Lumpur] PHP Fatal error:  Uncaught ErrorException: error_log(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\xampp\htdocs\Order-System-Website\src\backend\JsonResponseHandler.php:3
+Stack trace:
+#0 [internal function]: {closure}(2, 'error_log(): Fa...', 'C:\\xampp\\htdocs...', 3)
+#1 C:\xampp\htdocs\Order-System-Website\src\backend\JsonResponseHandler.php(3): error_log('MySQLConnector:...', 1, 'C:\\xampp\\htdocs...')
+#2 [internal function]: {closure}(Object(TypeError))
+#3 {main}
+  thrown in C:\xampp\htdocs\Order-System-Website\src\backend\JsonResponseHandler.php on line 3
+[19-Mar-2025 17:14:48 Asia/Kuala_Lumpur] Fatal Error: Uncaught ErrorException: error_log(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\xampp\htdocs\Order-System-Website\src\backend\JsonResponseHandler.php:3
+Stack trace:
+#0 [internal function]: {closure}(2, 'error_log(): Fa...', 'C:\\xampp\\htdocs...', 3)
+#1 C:\xampp\htdocs\Order-System-Website\src\backend\JsonResponseHandler.php(3): error_log('MySQLConnector:...', 1, 'C:\\xampp\\htdocs...')
+#2 [internal function]: {closure}(Object(TypeError))
+#3 {main}
+  thrown in C:\xampp\htdocs\Order-System-Website\src\backend\JsonResponseHandler.php on line 3
+
+[19-Mar-2025 17:20:34 Asia/Kuala_Lumpur] MySQLConnector::__construct(): Argument #1 ($hostname) must be of type string, null given, called in C:\xampp\htdocs\Order-System-Website\src\backend\Database.php on line 13
+
+[19-Mar-2025 17:23:48 Asia/Kuala_Lumpur] Undefined variable $Database
