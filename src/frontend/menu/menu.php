@@ -45,6 +45,7 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
         </div>
 
         <div class="menu">
+            <h2 class="menu_empty hide">Tiada makanan</h2>
             <?php $MenuLoader->displayKategoriDanMakanan(); ?>
         </div>
 
@@ -65,7 +66,7 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
 
         <div class="cart">
             <sl-dialog class="cart_dialog dialog" label="Cart">
-                <h1 class="cart_empty">Tiada makanan dipesan!</h1>
+                <h1 class="cart_empty">Tiada makanan di cart</h1>
                 <ul class="cart_item_list">
                 </ul>
                 <h2 class="total_price" slot="footer">Jumlah Harga : RM 0</h2>

@@ -4,13 +4,18 @@ const searchBar = document.querySelector(".search_bar");
 
 const startFetching = debounce(fetchFoodData, 1000)
 
-searchBar.addEventListener("sl-input", () => {
-    startFetching()
-});
+searchBar.addEventListener("sl-change", () => {
+    fetchFoodData()
+})
+
+// TODO : change mode based on action
+// searchBar.addEventListener("sl-input", () => {
+//     startFetching()
+// });
 
 function debounce(callback, delay) {
     let timer
-    return function() {
+    return function () {
         clearTimeout(timer)
         timer = setTimeout(() => {
             callback();
@@ -21,7 +26,7 @@ function debounce(callback, delay) {
 function fetchFoodData() {
     const apiUrl = "../../backend/MakananAPI.php"
     const url = apiUrl + "?" + new URLSearchParams({
-        keyword : searchBar.value
+        keyword: searchBar.value
     }).toString()
 
     fetch(url)
@@ -33,6 +38,8 @@ function fetchFoodData() {
 }
 
 function renderFoodItems(items) {
+    let emptyKategoriHTMLCount = 0
+
     const kategoriTitleList = document.getElementsByClassName("kategori_title");
     for (let i = 0; i < kategoriTitleList.length; i++) {
         const kategoriTitle = kategoriTitleList[i]
@@ -40,9 +47,17 @@ function renderFoodItems(items) {
         kategoriTitle.querySelector(".food_item_container").innerHTML = foodItemsHTML
         if (foodItemsHTML === "") {
             kategoriTitle.classList.add("hide")
+            emptyKategoriHTMLCount += 1
         } else {
             kategoriTitle.classList.remove("hide")
         }
+    }
+
+    const menuEmpty = document.querySelector(".menu_empty")
+    if (emptyKategoriHTMLCount === kategoriTitleList.length) {
+        menuEmpty.classList.remove("hide")
+    } else {
+        menuEmpty.classList.add("hide")
     }
 
     function createFoodItemsHTML(kategori) {
