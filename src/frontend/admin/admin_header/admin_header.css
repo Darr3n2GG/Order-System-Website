@@ -1,0 +1,18 @@
+.header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 85%;
+    background-color: var(--first-color);
+    box-shadow: 0 2px 16px hsla(230, 75%, 32%, .15);
+    z-index: var(--z-fixed);
+}
+
+.nav {
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 70%;
+    margin-inline: 1.5rem;
+}

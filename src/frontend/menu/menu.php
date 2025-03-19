@@ -32,9 +32,11 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
     <div class="content container">
         <div class="action_bar">
             <sl-icon-button class="cart_button icon_border" name="bag"></sl-icon-button>
-            <sl-input class="search_bar" placeholder="Search" clearable>
-                <sl-icon name="search" slot="prefix"></sl-icon>
-            </sl-input>
+            <div class="search_container">
+                <sl-input class="search_bar" placeholder="Search" clearable>
+                    <sl-icon name="search" slot="prefix"></sl-icon>
+                </sl-input>
+            </div>
             <sl-dropdown class="category_dropdown" placement="bottom-end">
                 <sl-icon-button
                     class="category_button icon_border" name="list-ul" slot="trigger">

@@ -1,3 +1,5 @@
+/* IMPORTANT : MAKE SURE TO USE THIS STYLE IN ALL HTML AS THIS IS A DEPENDENCY */
+
 /*=============== FONTS ===============*/
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
@@ -7,7 +9,7 @@
 
   --first-color: hsl(33, 84%, 48%);
   --title-color: hsl(0, 0%, 0%);
-  --text-color: hsl(230, 12%, 40%);
+  --text-color: hsl(240, 100%, 7%);
   --body-color: hsl(15, 50%, 97%);
   --container-color: hsl(14, 51%, 89%);
   --border-color: hsl(230, 25%, 80%);

@@ -40,7 +40,7 @@ cartDialog.querySelector(".checkout_button").addEventListener("click", () => {
 itemList.addEventListener("sl-change", ({ target }) => {
     if (target.classList.contains("cart_item_input")) {
         const id = parseInt(target.parentNode.dataset.id, 10);
-        const value = parseInt(target.value ,10)
+        const value = parseInt(target.value, 10)
         cart.updateCartItem(id, value);
         updateCartUI(id)
     }
@@ -65,7 +65,7 @@ itemList.addEventListener("click", ({ target }) => {
 
 
 function addCartItemUI({ id, label, nama, kuantiti, harga }) {
-    itemList.insertAdjacentHTML("beforeend", 
+    itemList.insertAdjacentHTML("beforeend",
         `<li data-id="${id}" class="cart_item">
             <p>${label + id} ${nama}</p>
             <sl-input class="cart_item_input" type="number" value="${kuantiti}" size="small" required></sl-input>
@@ -77,8 +77,8 @@ function addCartItemUI({ id, label, nama, kuantiti, harga }) {
 
 function updateItemTotalPrice(harga, kuantiti, itemElement) {
     const itemTotalPrice = itemElement.querySelector(".item_total_price");
-    if (!itemTotalPrice) { 
-        console.error("Item total price element doesn't exist.") 
+    if (!itemTotalPrice) {
+        console.error("Item total price element doesn't exist.")
     }
     itemTotalPrice.innerHTML = "RM " + (harga * kuantiti)
 }
@@ -94,9 +94,9 @@ function updateItemInput(kuantiti, itemElement) {
 function updateTotalPrice() {
     const totalPrice = cartDialog.querySelector(".total_price");
     if (!totalPrice) {
-        console.error("Total price element doesn't exist.")  
+        console.error("Total price element doesn't exist.")
     }
-    totalPrice.innerHTML = "Total Price : RM " + cart.calculateTotalPrice();
+    totalPrice.innerHTML = "Jumlah Harga : RM " + cart.calculateTotalPrice();
 }
 
 function deleteCartItemUI(element) {
