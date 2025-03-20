@@ -47,4 +47,5 @@ function addBelian(int $id_pesanan, array $cart_assoc_array): void {
         $stmt->bind_param("iii", $id_pesanan, $cart_item["id"], $cart_item["kuantiti"]);
         $stmt->execute();
     }
+    $stmt->close();
 }

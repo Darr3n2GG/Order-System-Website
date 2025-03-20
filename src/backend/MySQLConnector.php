@@ -11,7 +11,7 @@ class MySQLConnector {
     ) {
         $this->conn = mysqli_connect($hostname, $username, $password, $database);
         if ($this->conn->connect_error) {
-            throw new Exception("Failed to connect to MySQL: " . $this->conn->connect_error);
+            throw new MySQLConnectorException("Failed to connect to MySQL: " . $this->conn->connect_error);
         }
     }
 
@@ -24,7 +24,7 @@ class MySQLConnector {
         if ($types != "" and $array_of_params != null) {
             $stmt->bind_param($types, ...$array_of_params);
         } elseif ($types != "" or $array_of_params != null) {
-            throw new Exception("Both the types and array of params parameters must contain a value");
+            throw new MySQLConnectorException("Both the types and array of params parameters must contain a value");
         }
         $result = $this->readStatement($stmt);
         $stmt->close();
@@ -41,7 +41,7 @@ class MySQLConnector {
     public function readLastInsertedID(): int {
         $last_inserted_id = $this->conn->insert_id;
         if ($last_inserted_id == 0) {
-            throw new Exception("No previous query on the connection or query did not update an AUTO_INCREMENT value");
+            throw new MySQLConnectorException("No previous query on the connection or query did not update an AUTO_INCREMENT value");
         }
         return $last_inserted_id;
     }
@@ -49,14 +49,23 @@ class MySQLConnector {
     public function prepareStatement(string $query): mysqli_stmt {
         $stmt = $this->conn->prepare($query);
         if ($stmt == false) {
-            throw new Exception("Unable to prepare query: " . $query);
+            throw new MySQLConnectorException("Unable to prepare query: " . $query);
         }
         return $stmt;
     }
 
-    public function readStatement(mysqli_stmt $stmt): array {
+    public function readStatement(mysqli_stmt $stmt, int $fetch_mode = MYSQLI_ASSOC): array {
         $stmt->execute();
-        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        $result = $stmt->get_result()->fetch_all($fetch_mode);
         return $result;
+    }
+}
+
+
+class MySQLConnectorException extends Exception {
+    public function errorMessage() {
+        $errorMsg = "MySQLConnector error on line " . $this->getLine() . " in " . $this->getFile()
+            . ": <b>" . $this->getMessage() . "</b>";
+        return $errorMsg;
     }
 }
