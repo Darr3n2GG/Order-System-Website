@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-function getUserIDFromSession() {
+function getPelangganIDFromSession() {
     if (checkIfLoggedIn() == true) {
         return $_SESSION["user_id"];
     } else {

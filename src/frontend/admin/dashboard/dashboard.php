@@ -5,11 +5,11 @@ require_once(dirname(__FILE__, 4) . "/backend/Database.php");
 
 $Database = DatabaseFactory();
 $array_pesanan = $Database->readQuery(
-    "SELECT pesanan.id as id, akaun.nama as nama, pesanan.tarikh as tarikh,
+    "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
             status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
     FROM pesanan
-    INNER JOIN akaun ON pesanan.akaun_id = akaun.id
-    INNER JOIN status ON pesanan.status_id = status.id
+    INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
+    INNER JOIN status ON pesanan.id_status = status.id
     "
 );
 ?>

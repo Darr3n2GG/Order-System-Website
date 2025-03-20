@@ -24,7 +24,7 @@ function debounce(callback, delay) {
 }
 
 function fetchFoodData() {
-    const apiUrl = "../../backend/MakananAPI.php"
+    const apiUrl = "../../backend/ProdukAPI.php"
     const url = apiUrl + "?" + new URLSearchParams({
         keyword: searchBar.value
     }).toString()

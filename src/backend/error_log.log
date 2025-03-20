@@ -19,3 +19,8 @@ Stack trace:
 [19-Mar-2025 17:20:34 Asia/Kuala_Lumpur] MySQLConnector::__construct(): Argument #1 ($hostname) must be of type string, null given, called in C:\xampp\htdocs\Order-System-Website\src\backend\Database.php on line 13
 
 [19-Mar-2025 17:23:48 Asia/Kuala_Lumpur] Undefined variable $Database
+[20-Mar-2025 18:37:30 Asia/Kuala_Lumpur] Class "MenuLoader" not found
+
+[20-Mar-2025 18:43:16 Asia/Kuala_Lumpur] Undefined variable $pelanggan_id
+[20-Mar-2025 18:43:41 Asia/Kuala_Lumpur] Unknown column 'pelanggan_id' in 'field list'
+[20-Mar-2025 18:43:56 Asia/Kuala_Lumpur] Unknown column 'status_id' in 'field list'

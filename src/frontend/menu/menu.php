@@ -1,15 +1,15 @@
 <?php
 require_once(dirname(__FILE__, 3) .  "/backend/Database.php");
-require_once(dirname(__FILE__, 3) . "/backend/Makanan.php");
+require_once(dirname(__FILE__, 3) . "/backend/Produk.php");
 require_once(dirname(__FILE__, 3) . "/backend/MenuLoader.php");
 require_once(dirname(__FILE__, 2) . "/header/header.php");
 
 $Database = DatabaseFactory();
 
 $array_kategori = $Database->readQuery("SELECT kategori.label, kategori.nama from kategori");
-$makanan = new Makanan;
-$array_makanan = $makanan->getAllMakanan();
-$MenuLoader = new MenuLoader($array_kategori, $array_makanan);
+$Produk = new Produk;
+$array_produk = $Produk->getSemuaProduk();
+$MenuLoader = new MenuLoader($array_kategori, $array_produk);
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +49,7 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
 
         <div class="menu">
             <h2 class="menu_empty hide">Tiada makanan</h2>
-            <?php $MenuLoader->displayKategoriDanMakanan(); ?>
+            <?php $MenuLoader->displayKategoriDanProduk(); ?>
         </div>
 
         <div class="item_dialog_container">

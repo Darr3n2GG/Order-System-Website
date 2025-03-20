@@ -13,14 +13,14 @@ try {
 
     $Database = DatabaseFactory();
 
-    $user_id = getUserIDFromSession();
+    $id_pelanggan = getPelangganIDFromSession();
     $nombor_meja = 1;
     $tarikh = date("Y-m-d");
     $cara = "dine-in";
 
     $cart_assoc_array = json_decode($_POST["cart"], true);
 
-    addPesanan($user_id, 1, $nombor_meja, $tarikh, $cara);
+    addPesanan($id_pelanggan, 1, $nombor_meja, $tarikh, $cara);
 
     $id_pesanan = $Database->readLastInsertedID();
     addBelian($id_pesanan, $cart_assoc_array);
@@ -31,12 +31,12 @@ try {
     echoJsonException($e->getCode(), "CheckoutAPI request failed : " . $e->getMessage());
 }
 
-function addPesanan(int $user_id, int $status_id, int $nombor_meja, string $tarikh, string $cara): void {
+function addPesanan(int $id_pelanggan, int $id_status, int $nombor_meja, string $tarikh, string $cara): void {
     global $Database;
     $Database->executeQuery(
-        "INSERT INTO pesanan (akaun_id, status_id, no_meja, tarikh, cara) VALUES (?, ?, ?, ?, ?)",
+        "INSERT INTO pesanan (id_pelanggan, id_status, no_meja, tarikh, cara) VALUES (?, ?, ?, ?, ?)",
         "iiiss",
-        [$user_id, $status_id, $nombor_meja, $tarikh, $cara]
+        [$id_pelanggan, $id_status, $nombor_meja, $tarikh, $cara]
     );
 }
 

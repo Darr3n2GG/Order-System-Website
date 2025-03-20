@@ -1,7 +1,7 @@
 import { eventBus } from "../../scripts/EventBus.js";
 import FetchHelper from "../../scripts/FetchHelper.js";
 
-const apiUrl = "/Order-System-Website/src/backend/MakananAPI.php"
+const apiUrl = "/Order-System-Website/src/backend/ProdukAPI.php"
 let selectedItem = {};
 // selectedItem logger in console, type "logSelectedItem()"
 globalThis.logSelectedItem = () => selectedItem;
@@ -17,7 +17,7 @@ dialogAmount.addEventListener("sl-change", () => {
     updateItemQuantity(parseInt(dialogAmount.value, 10));
 });
 
-itemDialog.querySelector(".add_item_button").addEventListener("click", () =>{
+itemDialog.querySelector(".add_item_button").addEventListener("click", () => {
     addSelectedItemToCart();
     itemDialog.hide();
 });
@@ -51,7 +51,7 @@ function detectIfNoTextSelected() {
 
 function fetchItemDialogData(item_id) {
     const url = apiUrl + "?" + new URLSearchParams({
-        id : item_id
+        id: item_id
     }).toString();
     fetch(url)
         .then(FetchHelper.onFulfilled)
@@ -62,8 +62,8 @@ function fetchItemDialogData(item_id) {
         .catch(FetchHelper.onRejected);
 }
 
-function showItemDialog({label, id, nama, gambar, harga, detail}) {
-    itemDialog.label = label + id +  " : " + nama;
+function showItemDialog({ label, id, nama, gambar, harga, detail }) {
+    itemDialog.label = label + id + " : " + nama;
     itemDialog.querySelector(".dialog_image").src = gambar;
     itemDialog.querySelector(".dialog_price").innerHTML = "Harga : RM" + harga;
     itemDialog.querySelector(".dialog_description").innerHTML = detail;
@@ -77,7 +77,7 @@ function setSelectedItem(item) {
 
 function addSelectedItemToCart() {
     eventBus.emit("addItemToCart", {
-        item : selectedItem
+        item: selectedItem
     });
 }
 
