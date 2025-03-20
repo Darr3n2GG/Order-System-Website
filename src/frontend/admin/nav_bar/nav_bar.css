@@ -24,6 +24,7 @@
 }
 
 .nav_link a {
+    color: var(--text-color);
     margin: 1rem 0;
     display: flex;
     padding: 8px 16px;

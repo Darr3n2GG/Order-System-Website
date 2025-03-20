@@ -20,6 +20,7 @@ $array_pesanan = $Database->readQuery(
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="dashboard.css">
     <?php
     echoNavBarStylesheet();
     echoAdminHeaderStylesheet();
@@ -38,7 +39,7 @@ $array_pesanan = $Database->readQuery(
     echoAdminHeader("Dashboard");
     ?>
     <div class="content container">
-        <div id="test_table"></div>
+        <div id="table_pesanan"></div>
         <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
         <?php
         echo <<<TABLE
@@ -71,6 +72,7 @@ $array_pesanan = $Database->readQuery(
         ?>
     </div>
     <script type="module" src="dashboard.js"></script>
+    <script type="module" src="table_pesanan.js"></script>
     <noscript>Your browser does not support JavaScript!</noscript>
 </body>
 

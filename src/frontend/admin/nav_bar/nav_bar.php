@@ -10,7 +10,7 @@ function echoNavBar(): void {
                 <img class="nav_logo" src="/Order-System-Website/src/assets/logo+text.png" alt="Logo">
             </a>
             <li class="nav_link">
-                <a class="active" href="#">
+                <a class="active" href="/Order-System-Website/src/frontend/admin/dashboard/dashboard.php">
                     <sl-icon name="graph-up-arrow"></sl-icon>
                     Dashboard
                 </a>
