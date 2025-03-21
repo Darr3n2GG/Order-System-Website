@@ -1,17 +1,6 @@
 <?php
 require_once(dirname(__FILE__, 2) . "/nav_bar/nav_bar.php");
 require_once(dirname(__FILE__, 2) . "/admin_header/admin_header.php");
-require_once(dirname(__FILE__, 4) . "/backend/Database.php");
-
-$Database = DatabaseFactory();
-$array_pesanan = $Database->readQuery(
-    "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
-            status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
-    FROM pesanan
-    INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
-    INNER JOIN status ON pesanan.id_status = status.id
-    "
-);
 ?>
 
 <html lang="en">
@@ -40,36 +29,8 @@ $array_pesanan = $Database->readQuery(
     ?>
     <div class="content container">
         <div id="table_pesanan"></div>
+        <canvas id="carta_revenue"></canvas>
         <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
-        <?php
-        echo <<<TABLE
-        <table>
-            <tr>
-                <th>id</th>
-                <th>nama</th>
-                <th>tarikh</th>
-                <th>status</th>
-                <th>cara</th>
-            </tr>
-        TABLE;
-        foreach ($array_pesanan as $pesanan) {
-            $id = $pesanan["id"];
-            $nama = $pesanan["nama"];
-            $tarikh = $pesanan["tarikh"];
-            $status = $pesanan["status"];
-            $cara = $pesanan["cara"];
-            echo <<<DATA
-            <tr>
-                <td>$id</td>
-                <td>$nama</td>
-                <td>$tarikh</td>
-                <td>$status</td>
-                <td>$cara</td>
-            </tr>
-            DATA;
-        }
-        // TODO : Use Tabulator.js
-        ?>
     </div>
     <script type="module" src="dashboard.js"></script>
     <script type="module" src="table_pesanan.js"></script>

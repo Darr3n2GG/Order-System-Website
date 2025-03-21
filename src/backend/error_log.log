@@ -24,3 +24,35 @@ Stack trace:
 [20-Mar-2025 18:43:16 Asia/Kuala_Lumpur] Undefined variable $pelanggan_id
 [20-Mar-2025 18:43:41 Asia/Kuala_Lumpur] Unknown column 'pelanggan_id' in 'field list'
 [20-Mar-2025 18:43:56 Asia/Kuala_Lumpur] Unknown column 'status_id' in 'field list'
+[21-Mar-2025 17:25:37 Asia/Kuala_Lumpur] Array to string conversion
+
+[21-Mar-2025 17:27:55 Asia/Kuala_Lumpur] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '[nombor belian]
+        FROM belian
+        WHERE id_pesanan = ?' at line 1
+
+[21-Mar-2025 17:28:21 Asia/Kuala_Lumpur] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'belian
+        FROM belian
+        WHERE id_pesanan = ?' at line 1
+
+[21-Mar-2025 17:28:27 Asia/Kuala_Lumpur] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '[nombor_belian]
+        FROM belian
+        WHERE id_pesanan = ?' at line 1
+
+[21-Mar-2025 17:28:47 Asia/Kuala_Lumpur] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '[nombor belian]
+        FROM belian
+        WHERE id_pesanan = ?' at line 1
+
+[21-Mar-2025 17:40:19 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+
+[21-Mar-2025 17:40:27 Asia/Kuala_Lumpur] Unknown column 'id_makanan' in 'field list'
+
+[21-Mar-2025 17:40:34 Asia/Kuala_Lumpur] Undefined variable $belian_length
+
+[21-Mar-2025 17:44:12 Asia/Kuala_Lumpur] Undefined array key "harga"
+
+[21-Mar-2025 17:45:09 Asia/Kuala_Lumpur] Undefined array key "harga"
+
+[21-Mar-2025 17:45:29 Asia/Kuala_Lumpur] Array to string conversion
+
+[21-Mar-2025 17:46:07 Asia/Kuala_Lumpur] Undefined array key "harga"
+

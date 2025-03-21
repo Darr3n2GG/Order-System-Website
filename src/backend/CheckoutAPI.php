@@ -15,7 +15,7 @@ try {
 
     $id_pelanggan = getPelangganIDFromSession();
     $nombor_meja = 1;
-    $tarikh = date("Y-m-d");
+    $tarikh = date(DATE_FORMAT);
     $cara = "dine-in";
 
     $cart_assoc_array = json_decode($_POST["cart"], true);
@@ -42,7 +42,7 @@ function addPesanan(int $id_pelanggan, int $id_status, int $nombor_meja, string 
 
 function addBelian(int $id_pesanan, array $cart_assoc_array): void {
     global $Database;
-    $stmt = $Database->prepareStatement("INSERT INTO belian (id_pesanan, id_makanan, kuantiti) VALUES (?, ?, ?)");
+    $stmt = $Database->prepareStatement("INSERT INTO belian (id_pesanan, id_produk, kuantiti) VALUES (?, ?, ?)");
     foreach ($cart_assoc_array as $cart_item) {
         $stmt->bind_param("iii", $id_pesanan, $cart_item["id"], $cart_item["kuantiti"]);
         $stmt->execute();
