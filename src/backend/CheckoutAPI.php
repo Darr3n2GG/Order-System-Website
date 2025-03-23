@@ -11,7 +11,7 @@ try {
         throw new Exception("No cart body in API request", 400);
     }
 
-    $Database = DatabaseFactory();
+    $Database = createDatabaseConn();
 
     $id_pelanggan = getPelangganIDFromSession();
     $nombor_meja = 1;

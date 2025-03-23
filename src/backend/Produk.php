@@ -3,8 +3,8 @@ class Produk {
     private $Database;
 
     public function __construct() {
-        require_once("Database.php");
-        $this->Database = DatabaseFactory();
+        require_once(__DIR__ . "/Database.php");
+        $this->Database = createDatabaseConn();
     }
 
     public function getSemuaProduk(): array {

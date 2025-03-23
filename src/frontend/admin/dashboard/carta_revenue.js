@@ -1,7 +1,23 @@
+import FetchHelper from "../../../scripts/FetchHelper.js";
 
+const ApiUrl = "/Order-System-Website/src/backend/RevenueAPI.php"
 
-const ApiUrl = ""
+const response = await fetch(ApiUrl)
+    .then(FetchHelper.onFulfilled)
+    .then(({ details }) => {
+        console.log(details)
+        return details
+    })
+    .catch(FetchHelper.onRejected)
 
+const xValues = []
+const yValues = [1, 2, 3, 4, 5, 6, 7]
+
+await response.data.forEach(day => {
+    day.forEach(income => {
+        xValues.push(income)
+    })
+});
 
 new Chart("#carta_revenue", {
     type: "line",

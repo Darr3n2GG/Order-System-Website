@@ -9,7 +9,7 @@ class MySQLConnector {
         string $password,
         string $database,
     ) {
-        $this->conn = mysqli_connect($hostname, $username, $password, $database);
+        $this->conn = new mysqli($hostname, $username, $password, $database);
         if ($this->conn->connect_error) {
             throw new MySQLConnectorException("Failed to connect to MySQL: " . $this->conn->connect_error);
         }
@@ -24,7 +24,7 @@ class MySQLConnector {
         if ($types != "" and $array_of_params != null) {
             $stmt->bind_param($types, ...$array_of_params);
         } elseif ($types != "" or $array_of_params != null) {
-            throw new MySQLConnectorException("Both the types and array of params parameters must contain a value");
+            throw new MySQLConnectorException("Both the { types } and { array of params } parameters must contain a value");
         }
         $result = $this->readStatement($stmt);
         $stmt->close();

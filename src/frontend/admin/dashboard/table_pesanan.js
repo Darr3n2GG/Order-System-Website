@@ -5,7 +5,7 @@ const ApiUrl = "/Order-System-Website/src/backend/PesananAPI.php"
 
 new Tabulator("#table_pesanan", {
     ajaxURL: ApiUrl,
-    ajaxRequestFunc: function (url, config) {
+    ajaxRequestFunc: (url, config) => {
         return fetch(url, config)
             .then(FetchHelper.onFulfilled)
             .then(data => {

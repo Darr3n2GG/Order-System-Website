@@ -4,7 +4,7 @@ require_once(dirname(__FILE__, 3) . "/backend/Produk.php");
 require_once(dirname(__FILE__, 3) . "/backend/MenuLoader.php");
 require_once(dirname(__FILE__, 2) . "/header/header.php");
 
-$Database = DatabaseFactory();
+$Database = createDatabaseConn();
 
 $array_kategori = $Database->readQuery("SELECT kategori.label, kategori.nama from kategori");
 $Produk = new Produk;

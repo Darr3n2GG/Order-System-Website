@@ -9,6 +9,6 @@ define("PASSWORD", "");
 define("DATABASE", "restorandb");
 define("DATE_FORMAT", "Y-m-d");
 
-function DatabaseFactory(): MySQLConnector {
+function createDatabaseConn(): MySQLConnector {
     return new MySQLConnector(HOST, USER, PASSWORD, DATABASE);
 }

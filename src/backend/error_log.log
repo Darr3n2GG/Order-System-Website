@@ -56,3 +56,23 @@ Stack trace:
 
 [21-Mar-2025 17:46:07 Asia/Kuala_Lumpur] Undefined array key "harga"
 
+[23-Mar-2025 12:41:39 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+
+[23-Mar-2025 12:52:44 Asia/Kuala_Lumpur] A non-numeric value encountered
+
+[23-Mar-2025 12:53:07 Asia/Kuala_Lumpur] A non-numeric value encountered
+
+[23-Mar-2025 12:55:24 Asia/Kuala_Lumpur] A non-numeric value encountered
+
+[23-Mar-2025 12:56:44 Asia/Kuala_Lumpur] A non-numeric value encountered
+
+[23-Mar-2025 12:57:07 Asia/Kuala_Lumpur] A non-numeric value encountered
+
+[23-Mar-2025 12:58:03 Asia/Kuala_Lumpur] A non-numeric value encountered
+
+[23-Mar-2025 13:53:43 Asia/Kuala_Lumpur] Undefined variable $week_start
+
+[23-Mar-2025 13:54:07 Asia/Kuala_Lumpur] Undefined variable $week_start
+
+[23-Mar-2025 13:58:22 Asia/Kuala_Lumpur] getWeekStart(): Return value must be of type int, string returned
+

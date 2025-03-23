@@ -29,11 +29,11 @@ require_once(dirname(__FILE__, 2) . "/admin_header/admin_header.php");
     ?>
     <div class="content container">
         <div id="table_pesanan"></div>
-        <canvas id="carta_revenue"></canvas>
-        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+        <canvas id="carta_revenue" style="width:100%;max-width:700px"></canvas>
     </div>
-    <script type="module" src="dashboard.js"></script>
+
     <script type="module" src="table_pesanan.js"></script>
+    <script type="module" src="carta_revenue.js"></script>
     <noscript>Your browser does not support JavaScript!</noscript>
 </body>
 

@@ -7,7 +7,7 @@ require_once(__DIR__ . "/ErrorHandler.php");
 
 
 try {
-    $Database = DatabaseFactory();
+    $Database = createDatabaseConn();
     $array_pesanan = $Database->readQuery(
         "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
         status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
