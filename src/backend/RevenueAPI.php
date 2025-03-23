@@ -14,7 +14,7 @@ $Database = createDatabaseConn();
 $array_pesanan = getArrayPesananThisWeek();
 
 // The array is arranged like this: [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
-$array_jumlah_harga_by_day = [[], [], [], [], [], [], []];
+$array_jumlah_harga_by_day = [0, 0, 0, 0, 0, 0, 0];
 
 $jumlah_harga = 0.0;
 
@@ -31,6 +31,7 @@ foreach ($array_pesanan as $pesanan) {
         $kuantiti = $belian["kuantiti"];
 
         $jumlah_harga_belian = $harga * $kuantiti;
+
         $jumlah_harga += $jumlah_harga_belian;
     }
 
@@ -45,10 +46,10 @@ foreach ($array_pesanan as $pesanan) {
     $day = ($current_day - $week_start) / SECONDS_IN_A_DAY;
 
     if (filter_var($day, FILTER_VALIDATE_FLOAT)) {
-        throw new Exception("day_in_seconds cannot be float.");
+        throw new Exception("[day] cannot be float.");
     }
 
-    array_push($array_jumlah_harga_by_day[$day], $jumlah_harga_belian);
+    $array_jumlah_harga_by_day[$day] = $jumlah_harga_belian;
 }
 
 echoJsonResponse(true, "RevenueAPI request processed", ["data" => $array_jumlah_harga_by_day, "total" => $jumlah_harga]);
@@ -67,7 +68,7 @@ function getArrayPesananThisWeek(): array {
     global $Database;
 
     $week_start = getWeekStart();
-    $week_end = getWeekStart();
+    $week_end = getWeekEnd();
 
     return $Database->readQuery(
         "SELECT id, tarikh FROM pesanan

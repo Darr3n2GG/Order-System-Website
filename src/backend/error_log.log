@@ -76,3 +76,7 @@ Stack trace:
 
 [23-Mar-2025 13:58:22 Asia/Kuala_Lumpur] getWeekStart(): Return value must be of type int, string returned
 
+[23-Mar-2025 17:53:22 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+
+[23-Mar-2025 17:56:27 Asia/Kuala_Lumpur] Array to string conversion
+

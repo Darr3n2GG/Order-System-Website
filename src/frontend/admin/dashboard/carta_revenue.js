@@ -5,36 +5,60 @@ const ApiUrl = "/Order-System-Website/src/backend/RevenueAPI.php"
 const response = await fetch(ApiUrl)
     .then(FetchHelper.onFulfilled)
     .then(({ details }) => {
-        console.log(details)
         return details
     })
     .catch(FetchHelper.onRejected)
 
-const xValues = []
-const yValues = [1, 2, 3, 4, 5, 6, 7]
+// The array is arranged like this: [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
+const xValues = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+const yValues = []
 
-await response.data.forEach(day => {
-    day.forEach(income => {
-        xValues.push(income)
-    })
+await response.data.forEach(incomeByDay => {
+    yValues.push(incomeByDay)
 });
 
-new Chart("#carta_revenue", {
+const carta_revenue = document.getElementById("carta_revenue")
+new Chart(carta_revenue, {
     type: "line",
     data: {
         labels: xValues,
         datasets: [{
-            fill: false,
-            lineTension: 0,
+            labels: "Income",
             backgroundColor: "rgba(0,0,255,1.0)",
-            borderColor: "rgba(0,0,255,0.1)",
             data: yValues
         }]
     },
     options: {
-        legend: { display: false },
-        scales: {
-            yAxes: [{ ticks: { min: 6, max: 16 } }],
+        responsive: true,
+        x: {
+            title: {
+                display: true,
+                text: "Days",
+                padding: { top: 20, left: 0, right: 0, bottom: 0 }
+            }
+        },
+        y: {
+            title: {
+                display: true,
+                text: "Revenue ($)",
+                font: {
+                    family: 'Times',
+                    size: 20,
+                    style: 'normal',
+                    lineHeight: 1.2
+                },
+                font: {
+                    family: 'Comic Sans MS',
+                    size: 20,
+                    weight: 'bold',
+                    lineHeight: 1.2,
+                },
+                padding: { top: 20, left: 0, right: 0, bottom: 0 }
+            },
+            beginAtZero: true,
+            ticks: {
+                stepSize: 10
+            }
         }
     }
 });
