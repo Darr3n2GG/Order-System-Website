@@ -80,3 +80,41 @@ Stack trace:
 
 [23-Mar-2025 17:56:27 Asia/Kuala_Lumpur] Array to string conversion
 
+[25-Mar-2025 19:18:07 Asia/Kuala_Lumpur] Constant SECONDS_IN_A_DAY already defined
+
+[25-Mar-2025 19:18:09 Asia/Kuala_Lumpur] Constant SECONDS_IN_A_DAY already defined
+
+[25-Mar-2025 19:19:13 Asia/Kuala_Lumpur] [day] cannot be float.
+
+[25-Mar-2025 19:19:15 Asia/Kuala_Lumpur] [day] cannot be float.
+
+[25-Mar-2025 19:19:49 Asia/Kuala_Lumpur] [day] cannot be float.
+
+[25-Mar-2025 19:20:07 Asia/Kuala_Lumpur] [day] cannot be float.
+
+[25-Mar-2025 19:20:17 Asia/Kuala_Lumpur] [day] cannot be float.
+
+[25-Mar-2025 19:20:26 Asia/Kuala_Lumpur] [day] cannot be float.
+
+[25-Mar-2025 19:20:46 Asia/Kuala_Lumpur] [day] cannot be float.
+
+[25-Mar-2025 19:21:40 Asia/Kuala_Lumpur] [day] cannot be float.
+
+[25-Mar-2025 19:21:49 Asia/Kuala_Lumpur] [day] cannot be float.
+
+[25-Mar-2025 20:30:00 Asia/Kuala_Lumpur] Undefined variable $jumlah_harga_pesanan
+
+[25-Mar-2025 20:30:06 Asia/Kuala_Lumpur] Undefined variable $jumlah_harga_pesanan
+
+[25-Mar-2025 20:30:07 Asia/Kuala_Lumpur] Undefined variable $jumlah_harga_pesanan
+
+[25-Mar-2025 20:30:08 Asia/Kuala_Lumpur] Undefined variable $jumlah_harga_pesanan
+
+[25-Mar-2025 20:30:09 Asia/Kuala_Lumpur] Undefined variable $jumlah_harga_pesanan
+
+[25-Mar-2025 20:30:10 Asia/Kuala_Lumpur] Undefined variable $jumlah_harga_pesanan
+
+[25-Mar-2025 20:30:11 Asia/Kuala_Lumpur] Undefined variable $jumlah_harga_pesanan
+
+[25-Mar-2025 20:30:17 Asia/Kuala_Lumpur] Undefined variable $jumlah_harga_pesanan
+

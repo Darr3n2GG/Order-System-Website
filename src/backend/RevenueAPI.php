@@ -4,6 +4,7 @@ header("Content-Type: application/json");
 require_once(__DIR__ . "/Database.php");
 require_once(__DIR__ . "/JsonResponseHandler.php");
 require_once(__DIR__ . "/ErrorHandler.php");
+require_once(__DIR__ . "/Masa.php");
 
 $Database = createDatabaseConn();
 
@@ -24,45 +25,29 @@ $jumlah_harga = 0.0;
  */
 
 foreach ($array_pesanan as $pesanan) {
+    $jumlah_harga_pesanan = 0;
     $array_belian = getArrayBelianFromID($pesanan["id"]);
 
     foreach ($array_belian as $belian) {
         $harga = getHargaFromIDProduk($belian["id_produk"]);
         $kuantiti = $belian["kuantiti"];
 
-        $jumlah_harga_belian = $harga * $kuantiti;
-
-        $jumlah_harga += $jumlah_harga_belian;
+        $jumlah_harga_pesanan += $harga * $kuantiti;
     }
 
     /**
      * arrange income based on when the order was added
      */
 
-    define("SECONDS_IN_A_DAY", 86400);
-
     $current_day = strtotime($pesanan["tarikh"]);
     $week_start = strtotime(getWeekStart());
-    $day = ($current_day - $week_start) / SECONDS_IN_A_DAY;
 
-    if (filter_var($day, FILTER_VALIDATE_FLOAT)) {
-        throw new Exception("[day] cannot be float.");
-    }
+    $day = ($current_day - $week_start) / SECONDS_IN_A_DAY; // Seconds in a day
 
-    $array_jumlah_harga_by_day[$day] = $jumlah_harga_belian;
+    $array_jumlah_harga_by_day[$day] += $jumlah_harga_pesanan;
 }
 
 echoJsonResponse(true, "RevenueAPI request processed", ["data" => $array_jumlah_harga_by_day, "total" => $jumlah_harga]);
-
-function getWeekStart(): string {
-    $day = date("w");
-    return date(DATE_FORMAT, strtotime("-" . $day . " days"));
-}
-
-function getWeekEnd(): string {
-    $day = date("w");
-    return date(DATE_FORMAT, strtotime("+" . (6 - $day) . " days"));
-}
 
 function getArrayPesananThisWeek(): array {
     global $Database;

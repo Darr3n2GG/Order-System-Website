@@ -15,7 +15,7 @@ new Tabulator("#table_pesanan", {
     },
     height: 205,
     rowHeight: 40,
-    layout: "fitColumns",
+    layout: "fitData",
     columns: [
         { title: "Nama", field: "nama", width: 150 },
         { title: "Tarikh", field: "tarikh" },

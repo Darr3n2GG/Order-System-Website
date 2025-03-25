@@ -17,8 +17,21 @@ await response.data.forEach(incomeByDay => {
     yValues.push(incomeByDay)
 });
 
-const carta_revenue = document.getElementById("carta_revenue")
-new Chart(carta_revenue, {
+const cartaRevenueCanvas = document.getElementById("carta_revenue").getContext("2d")
+
+const plugin = {
+    id: 'customCanvasBackgroundColor',
+    beforeDraw: (chart, args, options) => {
+        const { ctx } = chart;
+        ctx.save();
+        ctx.globalCompositeOperation = 'destination-over';
+        ctx.fillStyle = options.color || '#99ffff';
+        ctx.fillRect(0, 0, chart.width, chart.height);
+        ctx.restore();
+    }
+};
+
+const CartaRevenue = new Chart(cartaRevenueCanvas, {
     type: "line",
     data: {
         labels: xValues,
@@ -59,6 +72,12 @@ new Chart(carta_revenue, {
             ticks: {
                 stepSize: 10
             }
+        },
+        plugins: {
+            customCanvasBackgroundColor: {
+                color: 'lightgray',
+            }
         }
-    }
+    },
+    plugins: [plugin]
 });
