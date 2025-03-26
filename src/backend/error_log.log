@@ -118,3 +118,13 @@ Stack trace:
 
 [25-Mar-2025 20:30:17 Asia/Kuala_Lumpur] Undefined variable $jumlah_harga_pesanan
 
+[26-Mar-2025 20:07:17 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+[26-Mar-2025 20:07:25 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+[26-Mar-2025 20:24:28 Asia/Kuala_Lumpur] Undefined constant "DATE_FORMAT"
+
+[26-Mar-2025 20:24:29 Asia/Kuala_Lumpur] Undefined constant "DATE_FORMAT"
+
+[26-Mar-2025 20:24:29 Asia/Kuala_Lumpur] Undefined constant "DATE_FORMAT"
+
+[26-Mar-2025 20:24:30 Asia/Kuala_Lumpur] Undefined constant "DATE_FORMAT"
+

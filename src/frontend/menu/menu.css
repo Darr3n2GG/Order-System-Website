@@ -74,14 +74,14 @@
   gap: 1rem;
 }
 
-@media screen and (min-width: 576px) {
+/* @media screen and (min-width: 576px) {
   .search_container {
     width: 90%;
   }
-}
+} */
 
 @media screen and (min-width: 1150px) {
   .search_container {
-    width: 272px;
+    width: 90%;
   }
 }
