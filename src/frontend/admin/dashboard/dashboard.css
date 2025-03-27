@@ -18,6 +18,11 @@
     gap: 20px;
 }
 
+.row_kecil {
+    display: flex;
+    gap: 20px;
+}
+
 .item_besar {
     max-width: 50%;
     max-height: 50%;

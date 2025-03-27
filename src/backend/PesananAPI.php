@@ -13,7 +13,7 @@ try {
         status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
         FROM pesanan
         INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
-        INNER JOIN status ON pesanan.id_status = status.id",
+        INNER JOIN status ON pesanan.id_status = status.id"
     );
 
     echoJsonResponse(true, "PesananAPI request processed.", $array_pesanan);

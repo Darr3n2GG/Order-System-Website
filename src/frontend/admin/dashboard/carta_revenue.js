@@ -41,8 +41,10 @@ const CartaRevenue = new Chart(cartaRevenueCanvas, {
             data: yValues
         }]
     },
+
     options: {
         responsive: true,
+
         x: {
             title: {
                 display: true,
@@ -50,6 +52,7 @@ const CartaRevenue = new Chart(cartaRevenueCanvas, {
                 padding: { top: 20, left: 0, right: 0, bottom: 0 }
             }
         },
+
         y: {
             title: {
                 display: true,
@@ -71,8 +74,12 @@ const CartaRevenue = new Chart(cartaRevenueCanvas, {
             beginAtZero: true,
             ticks: {
                 stepSize: 10
+            },
+            legend: {
+                display: false,
             }
         },
+
         plugins: {
             customCanvasBackgroundColor: {
                 color: 'lightgray',
