@@ -25,7 +25,7 @@ function echoHeader(): void {
             <div class="nav_guest $guest_nav" id="nav-guest">
                 <ul class="nav_list">
                     <li class="nav_item">
-                        <sl-button>Log Masuk</sl-button>
+                        <sl-button href="../login/login.php">Log Masuk</sl-button>
                     </li>
                     <li class="nav_item">
                         <sl-button variant="primary">Daftar</sl-button>

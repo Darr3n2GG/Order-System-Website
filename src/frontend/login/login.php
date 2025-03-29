@@ -18,9 +18,9 @@ require_once(dirname(__FILE__, 2) . "/header/header.php");
 
 <body>
     <?php echoHeader(); ?>
-    <div class="main container">
+    <div class="main container content">
         <h2>Login</h2>
-        <form action="" method="post">
+        <form action="/Order-System-Website/src/backend/Authenticate.php" method="post">
             <div class="form_group">
                 <label for="nama">Nama</label>
                 <div class="form_input">

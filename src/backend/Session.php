@@ -3,7 +3,7 @@ session_start();
 
 function getPelangganIDFromSession() {
     if (checkIfLoggedIn() == true) {
-        return $_SESSION["user_id"];
+        return $_SESSION["id_pelanggan"];
     } else {
         return 0; // id 0 is the guest account ( temporary implementation for testing orders )
         // TODO : show popup
@@ -11,5 +11,5 @@ function getPelangganIDFromSession() {
 }
 
 function checkIfLoggedIn() {
-    return isset($_SESSION["user_id"]);
+    return isset($_SESSION["id_pelanggan"]);
 }
