@@ -22,23 +22,25 @@ require_once(dirname(__FILE__, 2) . "/header/header.php");
         <h2>Login</h2>
         <form action="/Order-System-Website/src/backend/Authenticate.php" method="post">
             <div class="form_group">
-                <label for="nama">Nama</label>
+                <label for="input_nama">Nama</label>
                 <div class="form_input">
-                    <sl-input id="nama" type="text" name="nama" placeholder="Masukkan nama" required></sl-input>
+                    <sl-input id="input_nama" type="text" name="nama" placeholder="Masukkan nama" required></sl-input>
                 </div>
             </div>
-            <div class="form_group">
-                <label for="password">Password</label>
-                <div class="form_input">
-                    <sl-input id="password" type="password" name="password" placeholder="Masukkan password" required=""></sl-input>
-                </div>
-            </div>
+
             <!-- <div class="form_group">
                 <label for="phone">Nombor Phone</label>
                 <div class="form_input">
                     <sl-input id="phone" type="tel" name="phone" placeholder="Masukkan nombor phone" required=""></sl-input>
                 </div>
             </div> -->
+
+            <div class="form_group">
+                <label for="input_password">Password</label>
+                <div class="form_input">
+                    <sl-input id="input_password" type="password" name="password" placeholder="Masukkan password" required=""></sl-input>
+                </div>
+            </div>
             <sl-button class="login_button" type="submit">Login</sl-button>
             <sl-button href="" variant="text">Register</sl-button>
         </form>
