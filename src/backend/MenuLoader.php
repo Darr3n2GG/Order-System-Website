@@ -104,6 +104,7 @@ class MenuLoader {
                 </div>
                 <div class='food_row'>
                     <p><strong>Harga : RM $harga</strong></p>
+                    <sl-icon-button name="plus-square"></sl-icon-button>
                 </div>
             </div>
         </div>

@@ -70,8 +70,7 @@ $MenuLoader = new MenuLoader($array_kategori, $array_produk);
         <div class="cart">
             <sl-dialog class="cart_dialog dialog" label="Cart">
                 <h1 class="cart_empty">Tiada makanan di cart</h1>
-                <ul class="cart_item_list">
-                </ul>
+                <ul class="cart_item_list"></ul>
                 <h2 class="total_price" slot="footer">Jumlah Harga : RM 0</h2>
                 <sl-button class="checkout_button" slot="footer" variant="primary">Checkout</sl-button>
             </sl-dialog>

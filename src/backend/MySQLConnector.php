@@ -48,7 +48,7 @@ class MySQLConnector {
 
     public function prepareStatement(string $query): mysqli_stmt {
         $stmt = $this->conn->prepare($query);
-        if ($stmt == false) {
+        if (!$stmt) {
             throw new MySQLConnectorException("Unable to prepare query: " . $query);
         }
         return $stmt;

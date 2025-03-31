@@ -18,9 +18,14 @@
 .food_item {
   display: flex;
   margin: 1rem auto;
-  background-color: aqua;
+  padding: 3px;
   align-items: center;
   cursor: pointer;
+  background-color: peachpuff;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 20px;
+  border-color: grey;
 }
 
 .food_item > img {
@@ -74,11 +79,10 @@
   gap: 1rem;
 }
 
-/* @media screen and (min-width: 576px) {
-  .search_container {
-    width: 90%;
-  }
-} */
+.dialog_image {
+  width: 50%;
+  height: auto;
+}
 
 @media screen and (min-width: 1150px) {
   .search_container {

@@ -38,9 +38,9 @@ function echoHeader(): void {
             <div class="nav_registered $registered_nav" id="nav-registered">
                 <ul class="nav_list">
                     <li class="nav_item">
-                        <sl-icon-button
-                            class="icon" name="person" label="User icon">
-                        </sl-icon-button>
+                        <a href=#>
+                            <sl-avatar class="user_button" label="user button"></sl-avatar>
+                        </a>
                     </li>
                 </ul>
             </div>
