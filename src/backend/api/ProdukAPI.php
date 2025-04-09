@@ -1,11 +1,7 @@
 <?php
 header("Content-Type: application/json");
 
-require_once(__DIR__ . "/Produk.php");
-require_once(__DIR__ . "/JsonResponseHandler.php");
-require_once(__DIR__ . "/ErrorHandler.php");
-require_once(__DIR__ . "/MenuLoader.php");
-
+require_once dirname(__FILE__, 3) . "/vendor/autoload.php";
 
 try {
     if (isset($_GET["id"])) {

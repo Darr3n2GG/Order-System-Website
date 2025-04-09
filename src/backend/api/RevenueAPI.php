@@ -6,11 +6,10 @@
 
 header("Content-Type: application/json");
 
-require_once(__DIR__ . "/Database.php");
-require_once(__DIR__ . "/JsonResponseHandler.php");
-require_once(__DIR__ . "/ErrorHandler.php");
-require_once(__DIR__ . "/Masa.php");
-require_once(__DIR__ . "/Produk.php");
+require_once dirname(__FILE__, 3) . "/vendor/autoload.php";
+require_once(dirname(__FILE__, 2) . "/Database.php");
+require_once(dirname(__FILE__, 2) . "/JsonResponseHandler.php");
+require_once(dirname(__FILE__, 2) . "/Masa.php");
 
 try {
     $Database = createDatabaseConn();
@@ -42,7 +41,7 @@ try {
         $current_day = strtotime($pesanan["tarikh"]);
         $week_start = strtotime(getWeekStart());
 
-        $day = ($current_day - $week_start) / SECONDS_IN_A_DAY; // Seconds in a day
+        $day = ($current_day - $week_start) / 86400; // Seconds in a day
         if (gettype($day) != "integer") {
             throw new Exception("Day value must be an integer");
         }
@@ -82,7 +81,7 @@ function getArrayBelianFromID(int $id): array {
     );
 }
 
-function getHargaFromIDProduk($id): int {
+function getHargaFromIDProduk($id): float {
     $Produk = new Produk;
     $produk = $Produk->getProdukFromID($id);
     return $produk["harga"];

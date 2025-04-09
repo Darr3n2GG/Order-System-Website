@@ -1,7 +1,6 @@
 <?php
+require dirname(__FILE__, 4) . "/vendor/autoload.php";
 require_once(dirname(__FILE__, 3) .  "/backend/Database.php");
-require_once(dirname(__FILE__, 3) . "/backend/Produk.php");
-require_once(dirname(__FILE__, 3) . "/backend/MenuLoader.php");
 require_once(dirname(__FILE__, 2) . "/header/header.php");
 
 $Database = createDatabaseConn();

@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . "/Database.php");
+require_once dirname(__FILE__, 2) . "/Database.php";
 
 session_start();
 
@@ -27,13 +27,19 @@ if (check_nama_exists($nama)) {
 function check_nama_exists(string $nama): bool {
     global $Database;
 
-    $result = $Database->readQuery(
-        "SELECT id FROM pelanggan WHERE nama = ?",
-        "s",
-        [$nama]
-    );
+    $stmt = $Database->prepareStatement("SELECT id FROM pelanggan WHERE nama = ?");
+    $stmt->bind_param("s", $nama);
+    $result = $stmt->execute();
 
-    return $result ? true : false;
+    return $result == 0 ? false : true;
+
+    // $result = $Database->readQuery(
+    //     "SELECT id FROM pelanggan WHERE nama = ?",
+    //     "s",
+    //     [$nama]
+    // );
+
+    // return $result ? true : false;
 }
 
 function get_password_from(string $nama): string {

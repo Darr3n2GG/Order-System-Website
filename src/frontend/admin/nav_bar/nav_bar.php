@@ -6,9 +6,7 @@ function echoNavBarStylesheet(): void {
 function echoNavBar(): void {
     echo <<<NAV
         <ul class="side_nav">
-            <a href="#">
-                <img class="nav_logo" src="/Order-System-Website/src/assets/logo+text.png" alt="Logo">
-            </a>
+            <img class="nav_logo" src="/Order-System-Website/src/assets/logo+text.png" alt="Logo">
             <li class="nav_link">
                 <a class="active" href="/Order-System-Website/src/frontend/admin/dashboard/dashboard.php">
                     <sl-icon name="graph-up-arrow"></sl-icon>
@@ -16,7 +14,7 @@ function echoNavBar(): void {
                 </a>
             </li>
             <li class="nav_link">
-                <a href="#">
+                <a href="/Order-System-Website/src/frontend/admin/pengguna/pengguna.php">
                     <sl-icon name="person-gear"></sl-icon>
                     Pengguna
                 </a>

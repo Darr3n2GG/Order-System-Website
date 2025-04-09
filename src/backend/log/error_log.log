@@ -128,3 +128,13 @@ Stack trace:
 
 [26-Mar-2025 20:24:30 Asia/Kuala_Lumpur] Undefined constant "DATE_FORMAT"
 
+[04-Apr-2025 10:06:19 Asia/Kuala_Lumpur] getHargaFromIDProduk(): Return value must be of type int, float returned
+
+[04-Apr-2025 10:06:39 Asia/Kuala_Lumpur] getHargaFromIDProduk(): Return value must be of type int, float returned
+
+[04-Apr-2025 10:06:46 Asia/Kuala_Lumpur] getHargaFromIDProduk(): Return value must be of type int, float returned
+
+[09-Apr-2025 13:19:45 Europe/Berlin] Call to undefined function createDatabaseConn()
+
+[09-Apr-2025 19:20:26 Asia/Kuala_Lumpur] Class "Pesanan" not found
+

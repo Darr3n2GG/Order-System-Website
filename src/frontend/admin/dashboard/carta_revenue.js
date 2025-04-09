@@ -1,6 +1,6 @@
 import FetchHelper from "../../../scripts/FetchHelper.js";
 
-const ApiUrl = "/Order-System-Website/src/backend/RevenueAPI.php"
+const ApiUrl = "/Order-System-Website/src/backend/api/RevenueAPI.php"
 
 const response = await fetch(ApiUrl)
     .then(FetchHelper.onFulfilled)

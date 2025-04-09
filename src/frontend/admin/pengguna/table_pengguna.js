@@ -1,9 +1,9 @@
 import FetchHelper from "../../../scripts/FetchHelper.js";
 
-const ApiUrl = "/Order-System-Website/src/backend/api/PesananAPI.php"
+const ApiUrl = ""
 
 
-new Tabulator("#table_pesanan", {
+new Tabulator("#table_pengguna", {
     ajaxURL: ApiUrl,
     ajaxRequestFunc: (url, config) => {
         return fetch(url, config)
@@ -13,13 +13,9 @@ new Tabulator("#table_pesanan", {
             })
             .catch(FetchHelper.onRejected);
     },
-    height: 205,
+    height: "auto",
     rowHeight: 40,
     layout: "fitData",
     columns: [
-        { title: "Nama", field: "nama", width: 150 },
-        { title: "Tarikh", field: "tarikh" },
-        { title: "Cara", field: "cara" },
-        { title: "Nombor Meja", field: "no_meja" },
     ],
 });

@@ -1,9 +1,13 @@
 <?php
+
+namespace lib\Produk;
+
+require_once dirname(__FILE__, 2) . "/Database.php";
+
 class Produk {
     private $Database;
 
     public function __construct() {
-        require_once(__DIR__ . "/Database.php");
         $this->Database = createDatabaseConn();
     }
 

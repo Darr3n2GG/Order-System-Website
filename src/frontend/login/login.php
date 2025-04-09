@@ -20,7 +20,7 @@ require_once(dirname(__FILE__, 2) . "/header/header.php");
     <?php echoHeader(); ?>
     <div class="main container content">
         <h2>Login</h2>
-        <form action="/Order-System-Website/src/backend/Authenticate.php" method="post">
+        <form action="/Order-System-Website/src/backend/api/Authenticate.php" method="post">
             <div class="form_group">
                 <label for="input_nama">Nama</label>
                 <div class="form_input">
@@ -41,8 +41,8 @@ require_once(dirname(__FILE__, 2) . "/header/header.php");
                     <sl-input id="input_password" type="password" name="password" placeholder="Masukkan password" required=""></sl-input>
                 </div>
             </div>
-            <sl-button class="login_button" type="submit">Login</sl-button>
-            <sl-button href="" variant="text">Register</sl-button>
+            <sl-button class="login_button" type="submit">Log Masuk</sl-button>
+            <sl-button href="" variant="text">Daftar</sl-button>
         </form>
     </div>
     <noscript>Your browser does not support JavaScript!</noscript>

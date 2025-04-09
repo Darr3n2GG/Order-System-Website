@@ -1,5 +1,5 @@
 <?php
-define("SECONDS_IN_A_DAY", 86400);
+require_once __DIR__ . "/Constants.php";
 
 function getWeekStart(): string {
     $day = date("w");

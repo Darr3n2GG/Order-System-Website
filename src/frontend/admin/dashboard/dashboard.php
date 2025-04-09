@@ -3,22 +3,20 @@ require_once(dirname(__FILE__, 2) . "/nav_bar/nav_bar.php");
 require_once(dirname(__FILE__, 2) . "/admin_header/admin_header.php");
 require_once(dirname(__FILE__, 4) . "/backend/Database.php");
 require_once(dirname(__FILE__, 4) . "/backend/Masa.php");
-require_once(dirname(__FILE__, 4) . "/backend/Pesanan.php");
+require_once(dirname(__FILE__, 4) . "/backend/lib/Pesanan.php");
 
 $Database = createDatabaseConn();
 
 $array_pesanan_id = getArrayPesananIDThisWeek();
+if ($array_pesanan_id != []) {
+    $produk_popular = getProdukPopular($array_pesanan_id);
+    $id_produk = $produk_popular["id_produk"];
+    $nama_produk = getNamaProduk($id_produk);
+} else {
+    $nama_produk = "Kosong";
+}
 
-$belian = getArrayBelianFromArrayIDPesanan($array_pesanan_id)[0];
-
-$id_produk = $belian["id_produk"];
-$nama_produk = getNamaProduk($id_produk);
-
-$pesanan_count = $Database->readQuery(
-    "SELECT COUNT(*) AS pesanan_count FROM pesanan WHERE tarikh >= ? and tarikh < ?",
-    "ss",
-    [getWeekStart(), getWeekEnd()]
-)[0]["pesanan_count"];
+$pesanan_count = getPesananCount();
 ?>
 
 <!DOCTYPE html>
@@ -81,12 +79,7 @@ $pesanan_count = $Database->readQuery(
 <?php
 function getArrayPesananIDThisWeek(): array {
     $Pesanan = new Pesanan;
-    $array_pesanan = $Pesanan->getArrayPesananWhere(
-        "tarikh >= ? and tarikh < ?",
-        "ss",
-        [getWeekStart(), getWeekEnd()]
-    );
-
+    $array_pesanan = $Pesanan->getArrayPesananThisWeek();
     $array_pesanan_id = [];
     foreach ($array_pesanan as $pesanan) {
         array_push($array_pesanan_id, $pesanan["id"]);
@@ -95,22 +88,17 @@ function getArrayPesananIDThisWeek(): array {
     return $array_pesanan_id;
 }
 
-function getArrayBelianFromArrayIDPesanan(array $array_id_pesanan): array {
+function getProdukPopular(array $array_id_pesanan): array {
     global $Database;
 
     $in = join(',', array_fill(0, count($array_id_pesanan), '?'));
 
     return $Database->readQuery(
-        "SELECT id_produk, 
-        CAST(SUM(kuantiti) AS UNSIGNED) AS jumlah_kuantiti
-        FROM belian
-        WHERE id_pesanan IN ( $in )
-        GROUP BY id_produk
-        ORDER BY jumlah_kuantiti DESC
-        LIMIT 1",
+        "SELECT id_produk, CAST(SUM(kuantiti) AS UNSIGNED) AS jumlah_kuantiti
+        FROM belian WHERE id_pesanan IN ( $in ) GROUP BY id_produk ORDER BY jumlah_kuantiti DESC LIMIT 1",
         str_repeat('i', count($array_id_pesanan)),
         $array_id_pesanan
-    );
+    )[0];
 }
 
 function getNamaProduk($id_produk): string {
@@ -121,5 +109,25 @@ function getNamaProduk($id_produk): string {
         "i",
         [$id_produk]
     )[0]["nama"];
+}
+
+function getKuantitiPesanan(): int {
+    global $Database;
+
+    return $Database->readQuery(
+        "SELECT COUNT(*) AS pesanan_count FROM pesanan WHERE tarikh >= ? and tarikh < ?",
+        "ss",
+        [getWeekStart(), getWeekEnd()]
+    )[0]["pesanan_count"];
+}
+
+function getPesananCount(): int {
+    global $Database;
+
+    return $Database->readQuery(
+        "SELECT COUNT(*) AS pesanan_count FROM pesanan WHERE tarikh >= ? and tarikh < ?",
+        "ss",
+        [getWeekStart(), getWeekEnd()]
+    )[0]["pesanan_count"];
 }
 ?>
