@@ -45,6 +45,7 @@ $pesanan_count = getPesananCount();
     echoAdminHeader("Dashboard");
     ?>
     <div class="content container">
+        Minggu ini :
         <div class="row_kecil">
             <div class="item_kecil">
                 <h2>Most ordered food / drink</h2>
@@ -78,7 +79,7 @@ $pesanan_count = getPesananCount();
 
 <?php
 function getArrayPesananIDThisWeek(): array {
-    $Pesanan = new Pesanan;
+    $Pesanan = new lib\Pesanan;
     $array_pesanan = $Pesanan->getArrayPesananThisWeek();
     $array_pesanan_id = [];
     foreach ($array_pesanan as $pesanan) {

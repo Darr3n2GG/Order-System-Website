@@ -1,6 +1,6 @@
 <?php
 
-namespace lib\Belian;
+namespace lib;
 
 require_once dirname(__FILE__, 2) . "/Database.php";
 

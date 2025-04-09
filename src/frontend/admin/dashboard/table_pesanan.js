@@ -1,17 +1,23 @@
 import FetchHelper from "../../../scripts/FetchHelper.js";
 
-const ApiUrl = "/Order-System-Website/src/backend/api/PesananAPI.php"
+const ApiUrl = "/Order-System-Website/src/backend/api/PesananAPI.php?"
 
 
 new Tabulator("#table_pesanan", {
-    ajaxURL: ApiUrl,
-    ajaxRequestFunc: (url, config) => {
-        return fetch(url, config)
-            .then(FetchHelper.onFulfilled)
-            .then(data => {
-                return data.details;
-            })
-            .catch(FetchHelper.onRejected);
+    ajaxURL: ApiUrl + new URLSearchParams({
+        range: "week"
+    }).toString(),
+    ajaxRequestFunc: async (url, config) => {
+        try {
+            const response = await fetch(url, config);
+            const data = await FetchHelper.onFulfilled(response);
+            if (data.details === undefined) {
+                return [];
+            }
+            return data.details;
+        } catch (error) {
+            return FetchHelper.onRejected(error);
+        }
     },
     height: 205,
     rowHeight: 40,

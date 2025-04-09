@@ -1,6 +1,6 @@
 <?php
 
-namespace lib\MySQLConnector;
+namespace lib;
 
 class MySQLConnector {
     private $conn;

@@ -1,6 +1,10 @@
 <?php
 // Server rendered header
-require_once(dirname(__FILE__, 3) . "/backend/Session.php");
+
+require_once(dirname(__FILE__, 3) . "/backend/lib/Session.php");
+
+$Session = new lib\Session;
+
 $admin = false;
 
 function echoHeaderStylesheet(): void {
@@ -8,7 +12,9 @@ function echoHeaderStylesheet(): void {
 }
 
 function echoHeader(): void {
-    if (checkIfLoggedIn() == true) {
+    global $Session;
+
+    if ($Session->sudahLogMasuk()) {
         $guest_nav = "";
         $registered_nav = "show_nav";
     } else {

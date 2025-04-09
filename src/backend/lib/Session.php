@@ -1,6 +1,6 @@
 <?php
 
-namespace lib\Session;
+namespace lib;
 
 class Session {
     private $log_masuk;

@@ -6,7 +6,6 @@
 
 header("Content-Type: application/json");
 
-require_once dirname(__FILE__, 3) . "/vendor/autoload.php";
 require_once(dirname(__FILE__, 2) . "/Database.php");
 require_once(dirname(__FILE__, 2) . "/JsonResponseHandler.php");
 require_once(dirname(__FILE__, 2) . "/Masa.php");
@@ -82,7 +81,7 @@ function getArrayBelianFromID(int $id): array {
 }
 
 function getHargaFromIDProduk($id): float {
-    $Produk = new Produk;
+    $Produk = new lib\Produk;
     $produk = $Produk->getProdukFromID($id);
     return $produk["harga"];
 }

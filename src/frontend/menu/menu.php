@@ -1,14 +1,14 @@
 <?php
-require dirname(__FILE__, 4) . "/vendor/autoload.php";
 require_once(dirname(__FILE__, 3) .  "/backend/Database.php");
+require_once(dirname(__FILE__, 3) . "/backend/Autoloader.php");
 require_once(dirname(__FILE__, 2) . "/header/header.php");
 
 $Database = createDatabaseConn();
 
 $array_kategori = $Database->readQuery("SELECT kategori.label, kategori.nama from kategori");
-$Produk = new Produk;
+$Produk = new lib\Produk;
 $array_produk = $Produk->getSemuaProduk();
-$MenuLoader = new MenuLoader($array_kategori, $array_produk);
+$MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
 ?>
 
 <!DOCTYPE html>

@@ -1,6 +1,6 @@
 <?php
 
-namespace lib\MenuLoader;
+namespace lib;
 
 class MenuLoader {
     private $array_kategori;

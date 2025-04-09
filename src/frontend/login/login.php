@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__, 2) . "/header/header.php");
+require_once dirname(__FILE__, 2) . "/header/header.php";
 ?>
 
 <!DOCTYPE html>

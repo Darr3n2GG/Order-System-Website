@@ -1,6 +1,6 @@
 <?php
 
-namespace lib\Pesanan;
+namespace lib;
 
 require_once dirname(__FILE__, 2) . "/Database.php";
 require_once dirname(__FILE__, 2) . "/Masa.php";
@@ -27,7 +27,11 @@ class Pesanan {
         $week_end = getWeekEnd();
 
         return $this->Database->readQuery(
-            "SELECT id, tarikh FROM pesanan
+            "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
+            status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
+            FROM pesanan
+            INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
+            INNER JOIN status ON pesanan.id_status = status.id
             WHERE tarikh >= ? and tarikh < ?
             ORDER BY tarikh ASC",
             "ss",
