@@ -1,7 +1,7 @@
 import { eventBus } from "../../scripts/EventBus.js";
 import FetchHelper from "../../scripts/FetchHelper.js";
 
-const apiUrl = "/Order-System-Website/src/backend/CheckoutAPI.php";
+const apiUrl = "/Order-System-Website/src/backend/api/CheckoutAPI.php";
 const redirectUrl = "../status/status.html";
 
 eventBus.addEventListener("checkout", ({ detail }) => {

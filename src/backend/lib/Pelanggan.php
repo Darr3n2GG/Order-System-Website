@@ -2,5 +2,18 @@
 
 namespace lib;
 
+require_once dirname(__FILE__, 2) . "/Database.php";
+
 class Pelanggan {
+    private $Database;
+
+    public function __construct() {
+        $this->Database = createDatabaseConn();
+    }
+
+    public function getSemuaPelanggan(): array {
+        return $this->Database->readQuery(
+            "SELECT id, nama, no_phone FROM pelanggan ORDER BY id ASC"
+        );
+    }
 }

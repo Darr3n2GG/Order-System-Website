@@ -4,7 +4,7 @@ require_once dirname(__FILE__, 2) . "/Database.php";
 session_start();
 
 $Database = createDatabaseConn();
-$RedirectUrl = "../frontend/menu/menu.php";
+$RedirectUrl = "../../frontend/menu/menu.php";
 
 if (!isset($_POST["nama"], $_POST["password"])) {
     exit("Please fill both the name and password fields!");
@@ -29,17 +29,10 @@ function check_nama_exists(string $nama): bool {
 
     $stmt = $Database->prepareStatement("SELECT id FROM pelanggan WHERE nama = ?");
     $stmt->bind_param("s", $nama);
-    $result = $stmt->execute();
+    $stmt->execute();
+    $stmt->store_result();
 
-    return $result == 0 ? false : true;
-
-    // $result = $Database->readQuery(
-    //     "SELECT id FROM pelanggan WHERE nama = ?",
-    //     "s",
-    //     [$nama]
-    // );
-
-    // return $result ? true : false;
+    return $stmt->num_rows == 1 ? true : false;
 }
 
 function get_password_from(string $nama): string {

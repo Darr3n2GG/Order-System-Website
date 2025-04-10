@@ -1,7 +1,8 @@
 <?php
 header("Content-Type: application/json");
 
-require_once dirname(__FILE__, 3) . "/vendor/autoload.php";
+require_once dirname(__FILE__, 2) . "/Autoloader.php";
+require_once dirname(__FILE__, 2) . "/JsonResponseHandler.php";
 
 try {
     $Produk = new lib\Produk;

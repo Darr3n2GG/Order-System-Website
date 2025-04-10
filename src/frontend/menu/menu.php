@@ -76,7 +76,6 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
         </div>
     </div>
 
-    <?php echoAdminButtonScript(); ?>
     <script type="module" src="menu.js"></script>
     <script type="module" src="itemDialog.js"></script>
     <script type="module" src="cart.js"></script>

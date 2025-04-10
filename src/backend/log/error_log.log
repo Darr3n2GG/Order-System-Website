@@ -138,3 +138,11 @@ Stack trace:
 
 [09-Apr-2025 19:20:26 Asia/Kuala_Lumpur] Class "Pesanan" not found
 
+[10-Apr-2025 22:58:39 Asia/Kuala_Lumpur] No previous query on the connection or query did not update an AUTO_INCREMENT value
+[10-Apr-2025 22:58:51 Asia/Kuala_Lumpur] No previous query on the connection or query did not update an AUTO_INCREMENT value
+[10-Apr-2025 22:59:30 Asia/Kuala_Lumpur] No previous query on the connection or query did not update an AUTO_INCREMENT value
+[10-Apr-2025 23:01:21 Asia/Kuala_Lumpur] No previous query on the connection or query did not update an AUTO_INCREMENT value
+[10-Apr-2025 23:01:27 Asia/Kuala_Lumpur] No previous query on the connection or query did not update an AUTO_INCREMENT value
+[10-Apr-2025 23:02:22 Asia/Kuala_Lumpur] No previous query on the connection or query did not update an AUTO_INCREMENT value, value = 0
+[10-Apr-2025 23:04:21 Asia/Kuala_Lumpur] No previous query on the connection or query did not update an AUTO_INCREMENT value.
+[10-Apr-2025 23:06:01 Asia/Kuala_Lumpur] Unknown column 'id_produk' in 'field list'

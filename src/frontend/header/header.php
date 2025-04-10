@@ -22,7 +22,7 @@ function echoHeader(): void {
         $registered_nav = "";
     }
 
-    echo <<<HEADER1
+    echo <<<HEADER
     <header class="header" id="header">
         <nav class="nav container">
             <a href="/Order-System-Website/src/frontend/menu/menu.php">
@@ -36,9 +36,6 @@ function echoHeader(): void {
                     <li class="nav_item">
                         <sl-button variant="primary">Daftar</sl-button>
                     </li>
-    HEADER1;
-    echoAdminButton(); // Temporary implementation
-    echo <<<HEADER2
                 </ul>
             </div>
             <div class="nav_registered $registered_nav" id="nav-registered">
@@ -52,23 +49,5 @@ function echoHeader(): void {
             </div>
         </nav>
     </header>
-    HEADER2;
-}
-
-function echoAdminButton(): void {
-    global $admin;
-    if ($admin == true) {
-        echo <<<ADMIN
-                    <li class="nav_item">
-                        <sl-button class="admin_button" variant="neutral">Go to Admin</sl-button>
-                    </li>
-        ADMIN;
-    }
-}
-
-function echoAdminButtonScript(): void {
-    global $admin;
-    if ($admin == true) {
-        echo '<script type="module" src="../header/adminButton.js"></script>';
-    }
+    HEADER;
 }

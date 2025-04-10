@@ -6,9 +6,10 @@
 
 header("Content-Type: application/json");
 
-require_once(dirname(__FILE__, 2) . "/Database.php");
-require_once(dirname(__FILE__, 2) . "/JsonResponseHandler.php");
-require_once(dirname(__FILE__, 2) . "/Masa.php");
+require_once dirname(__FILE__, 2) . "/Autoloader.php";
+require_once dirname(__FILE__, 2) . "/Database.php";
+require_once dirname(__FILE__, 2) . "/JsonResponseHandler.php";
+require_once dirname(__FILE__, 2) . "/Masa.php";
 
 try {
     $Database = createDatabaseConn();
@@ -42,7 +43,7 @@ try {
 
         $day = ($current_day - $week_start) / 86400; // Seconds in a day
         if (gettype($day) != "integer") {
-            throw new Exception("Day value must be an integer");
+            throw new Exception("Value of variable (day) must be an integer");
         }
 
         $array_jumlah_harga_by_day[$day] += $jumlah_harga_pesanan;
@@ -71,6 +72,7 @@ function getArrayPesananThisWeek(): array {
 
 function getArrayBelianFromID(int $id): array {
     global $Database;
+
     return $Database->readQuery(
         "SELECT id_produk, kuantiti
         FROM belian

@@ -13,25 +13,25 @@ require_once dirname(__FILE__, 2) . "/admin_header/admin_header.php";
     <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
     <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="pengguna.css">
+    <link rel="stylesheet" href="pelanggan.css">
     <?php
     echoAdminHeaderStylesheet();
     echoNavBarStylesheet();
     ?>
-    <title>List Pengguna</title>
+    <title>List Pelanggan</title>
 </head>
 
 <body>
     <?php
-    echoNavBar();
-    echoAdminHeader("Pengguna");
+    echoNavBar("pelanggan");
+    echoAdminHeader("List Pelanggan");
     ?>
     <div class="content container">
         <div class="table_container">
-            <div id="table_pengguna"></div>
+            <div id="table_pelanggan"></div>
         </div>
     </div>
-    <script type="module" src="table_pengguna.js"></script>
+    <script type="module" src="table_pelanggan.js"></script>
 </body>
 
 </html>

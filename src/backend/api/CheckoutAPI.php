@@ -1,16 +1,16 @@
 <?php
 header("Content-Type: application/json");
 
-require_once dirname(__FILE__, 3) . "/vendor/autoload.php";
-require_once __DIR__ . "/Database.php";
+require_once dirname(__FILE__, 2) . "/Database.php";
 require_once dirname(__FILE__, 2) . "/JsonResponseHandler.php";
+require_once dirname(__FILE__, 2) . "/Autoloader.php";
 
 try {
     if (!isset($_POST["cart"])) {
         throw new Exception("No cart body in API request", 400);
     }
 
-    $Session = new Session;
+    $Session = new lib\Session;
     $Database = createDatabaseConn();
 
     $id_pelanggan = $Session->getPelangganIDFromSession();
@@ -20,11 +20,11 @@ try {
 
     $cart_assoc_array = json_decode($_POST["cart"], true);
 
-    $Pesanan = new Pesanan;
+    $Pesanan = new lib\Pesanan;
     $Pesanan->addPesanan($id_pelanggan, 1, $nombor_meja, $tarikh, $cara);
 
-    $Belian = new Belian;
-    $id_pesanan = $Database->readLastInsertedID();
+    $Belian = new lib\Belian;
+    $id_pesanan = $Pesanan->getLastInsertedIDOfPesanan();
     $Belian->addBelian($id_pesanan, $cart_assoc_array);
 
     echoJsonResponse(true, "CheckoutAPI request processed.");

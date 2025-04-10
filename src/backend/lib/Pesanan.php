@@ -58,11 +58,15 @@ class Pesanan {
         return $array_pesanan;
     }
 
-    function addPesanan(int $id_pelanggan, int $id_status, int $nombor_meja, string $tarikh, string $cara): void {
+    public function addPesanan(int $id_pelanggan, int $id_status, int $nombor_meja, string $tarikh, string $cara): void {
         $this->Database->executeQuery(
             "INSERT INTO pesanan (id_pelanggan, id_status, no_meja, tarikh, cara) VALUES (?, ?, ?, ?, ?)",
             "iiiss",
             [$id_pelanggan, $id_status, $nombor_meja, $tarikh, $cara]
         );
+    }
+
+    public function getLastInsertedIDOfPesanan(): int {
+        return $this->Database->readLastInsertedID();
     }
 }

@@ -4,6 +4,7 @@ namespace lib;
 
 class Session {
     private $log_masuk;
+    private $admin;
 
     public function __construct() {
         session_start();

@@ -41,7 +41,7 @@ $pesanan_count = getPesananCount();
 
 <body>
     <?php
-    echoNavBar();
+    echoNavBar("dashboard");
     echoAdminHeader("Dashboard");
     ?>
     <div class="content container">
