@@ -1,5 +1,14 @@
 <?php
 require_once dirname(__FILE__, 2) . "/header/header.php";
+require_once dirname(__FILE__, 3) . "/backend/lib/Session.php";
+
+$redirect_url = "../../frontend/menu/menu.php";
+
+$Session = new lib\Session;
+
+if ($Session->sudahLogMasuk()) {
+    header("Location: " . $redirect_url);
+}
 ?>
 
 <!DOCTYPE html>

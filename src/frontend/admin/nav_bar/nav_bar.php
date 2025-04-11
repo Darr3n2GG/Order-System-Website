@@ -1,19 +1,24 @@
 <?php
+define("NAVBAR_DASHBOARD", 1);
+define("NAVBAR_PELANGGAN", 2);
+define("NAVBAR_MENU", 3);
+define("NAVBAR_PESANAN", 4);
+
 function echoNavBarStylesheet(): void {
     echo '<link rel="stylesheet" href="/Order-System-Website/src/frontend/admin/nav_bar/nav_bar.css">';
 }
 
-function echoNavBar(string $selected): void {
+function echoNavBar(int $selected): void {
     $dashboard = "";
     $pelanggan = "";
     $menu = "";
     $pesanan = "";
 
     switch ($selected) {
-        case "dashboard":
+        case NAVBAR_DASHBOARD:
             $dashboard = "active";
             break;
-        case "pelanggan":
+        case NAVBAR_PELANGGAN:
             $pelanggan = "active";
             break;
     }

@@ -1,4 +1,10 @@
 #table_pelanggan {
-    width: 85%;
+    width: 50%;
     border-radius: 10px;
+    float: left;
+    margin-right: 2vw;
+}
+
+.toolbar {
+    float: left;
 }

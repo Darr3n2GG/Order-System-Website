@@ -23,12 +23,34 @@ require_once dirname(__FILE__, 2) . "/admin_header/admin_header.php";
 
 <body>
     <?php
-    echoNavBar("pelanggan");
+    echoNavBar(NAVBAR_PELANGGAN);
     echoAdminHeader("List Pelanggan");
     ?>
     <div class="content container">
         <div class="table_container">
             <div id="table_pelanggan"></div>
+        </div>
+        <div class="toolbar">
+            <h2>Toolbar</h2>
+            <form action="">
+                <sl-input placeholder="Nama" required>
+                    <sl-icon name="person-circle" slot="prefix"></sl-icon>
+                </sl-input>
+                <sl-input placeholder="Nombor Phone" required>
+                    <sl-icon name="telephone" slot="prefix"></sl-icon>
+                </sl-input>
+                <sl-input placeholder="Password" required>
+                    <sl-icon name="key" slot="prefix"></sl-icon>
+                </sl-input>
+                <sl-button type="submit">
+                    <sl-icon slot="prefix" name="plus-square"></sl-icon>
+                    Tambah pelanggan
+                </sl-button>
+                <sl-button>
+                    Import CSV
+                </sl-button>
+                <input type="file" hidden>
+            </form>
         </div>
     </div>
     <script type="module" src="table_pelanggan.js"></script>

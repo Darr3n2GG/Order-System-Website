@@ -4,7 +4,7 @@ require_once dirname(__FILE__, 2) . "/Database.php";
 session_start();
 
 $Database = createDatabaseConn();
-$RedirectUrl = "../../frontend/menu/menu.php";
+$redirect_url = "../../frontend/menu/menu.php";
 
 if (!isset($_POST["nama"], $_POST["password"])) {
     exit("Please fill both the name and password fields!");
@@ -20,7 +20,7 @@ if (check_nama_exists($nama)) {
         session_regenerate_id();
         $_SESSION["nama"] = $nama;
         $_SESSION["id_pelanggan"] = $id;
-        header("Location: " . $RedirectUrl);
+        header("Location: " . $redirect_url);
     }
 }
 
