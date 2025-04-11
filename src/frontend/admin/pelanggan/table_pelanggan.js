@@ -24,6 +24,17 @@ new Tabulator("#table_pelanggan", {
         { title: "ID", field: "id" },
         { title: "Nama", field: "nama" },
         { title: "Nombor Phone", field: "no_phone" },
+        {
+            title: "",
+            field: "delete",
+            hozAlign: "center",
+            headerSort: false,
+            formatter: function () {
+                return '<sl-icon-button name="trash"></sl-icon-button>';
+            },
+            cellClick: function (e, cell) {
+            }
+        },
     ],
 });
 
