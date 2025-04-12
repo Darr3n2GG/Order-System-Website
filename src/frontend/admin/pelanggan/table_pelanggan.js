@@ -22,7 +22,7 @@ new Tabulator("#table_pelanggan", {
     layout: "fitData",
     columns: [
         { title: "ID", field: "id" },
-        { title: "Nama", field: "nama" },
+        { title: "Nama", field: "nama", width: 305 },
         { title: "Nombor Phone", field: "no_phone" },
         {
             title: "",

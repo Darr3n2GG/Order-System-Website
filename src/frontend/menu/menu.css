@@ -15,9 +15,15 @@
   margin-top: 2rem;
 }
 
+.food_item_container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 1vw;
+  max-width: 60%;
+}
+
 .food_item {
   display: flex;
-  margin: 1rem auto;
   padding: 3px;
   align-items: center;
   cursor: pointer;

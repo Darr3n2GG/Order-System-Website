@@ -101,7 +101,7 @@ class MenuLoader {
             <img src='$gambar' alt='$nama'>
             <div class='food_info'>
                 <div class='food_row'>
-                    <h2>$nama</h2>
+                    <h3>$nama</h3>
                     <sl-tag size='small' pill>$label</sl-tag>
                 </div>
                 <div class='food_row'>
