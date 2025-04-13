@@ -1,7 +1,8 @@
 <?php
-require_once(dirname(__FILE__, 3) .  "/backend/Database.php");
-require_once(dirname(__FILE__, 3) . "/backend/Autoloader.php");
-require_once(dirname(__FILE__, 2) . "/header/header.php");
+require_once dirname(__FILE__, 3) .  "/backend/Database.php";
+require_once dirname(__FILE__, 3) . "/backend/Autoloader.php";
+require_once dirname(__FILE__, 2) . "/header/header.php";
+require_once dirname(__FILE__, 2) . "/dependencies.php";
 
 $Database = createDatabaseConn();
 
@@ -17,11 +18,12 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="menu.css">
-    <link rel="stylesheet" href="../style.css">
-    <?php echoHeaderStylesheet(); ?>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
+    <link rel="stylesheet" href="<?php echo auto_version("menu.css"); ?>">
+    <link rel="stylesheet" href="<?php echo auto_version("../style.css"); ?>">
+    <?php
+    echoHeaderStylesheet();
+    echoShoelaceStyle();
+    ?>
     <title>Menu</title>
 </head>
 
@@ -76,14 +78,15 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
         </div>
     </div>
 
-    <footer>HELLO</footer>
-
     <script type="module" src="menu.js"></script>
     <script type="module" src="itemDialog.js"></script>
     <script type="module" src="cart.js"></script>
     <script type="module" src="checkout.js"></script>
     <script type="module" src="search.js"></script>
-    <noscript>Your browser does not support JavaScript!</noscript>
+    <?php
+    echoShoelaceAutoloader();
+    echoNoScript();
+    ?>
 </body>
 
 </html>

@@ -22,8 +22,19 @@ new Tabulator("#table_pelanggan", {
     layout: "fitData",
     columns: [
         { title: "ID", field: "id" },
-        { title: "Nama", field: "nama", width: 305 },
+        { title: "Nama", field: "nama" },
         { title: "Nombor Phone", field: "no_phone" },
+        {
+            title: "",
+            field: "update",
+            hozAlign: "center",
+            headerSort: false,
+            formatter: function () {
+                return '<sl-icon-button name="pencil"></sl-icon-button>';
+            },
+            cellClick: function (e, cell) {
+            }
+        },
         {
             title: "",
             field: "delete",

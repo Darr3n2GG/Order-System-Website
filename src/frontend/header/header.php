@@ -28,7 +28,7 @@ function echoHeader(): void {
             <a href="/Order-System-Website/src/frontend/menu/menu.php">
                 <img class="nav_logo" src="/Order-System-Website/src/assets/logo+text.png" alt="Logo">
             </a>
-            <div class="nav_guest $guest_nav" id="nav-guest">
+            <div class="nav_guest $guest_nav">
                 <ul class="nav_list">
                     <li class="nav_item">
                         <sl-button href="../login/login.php">Log Masuk</sl-button>
@@ -38,7 +38,7 @@ function echoHeader(): void {
                     </li>
                 </ul>
             </div>
-            <div class="nav_registered $registered_nav" id="nav-registered">
+            <div class="nav_registered $registered_nav">
                 <ul class="nav_list">
                     <li class="nav_item">
                         <a href=#>

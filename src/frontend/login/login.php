@@ -15,6 +15,7 @@ if ($Session->sudahLogMasuk()) {
 <html lang="en">
 
 <head>
+    <meta http-equiv="refresh" content="300">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
@@ -22,7 +23,6 @@ if ($Session->sudahLogMasuk()) {
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
 </head>
 
 <body>
@@ -54,6 +54,7 @@ if ($Session->sudahLogMasuk()) {
             <sl-button href="" variant="text">Daftar</sl-button>
         </form>
     </div>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
     <noscript>Your browser does not support JavaScript!</noscript>
 </body>
 
