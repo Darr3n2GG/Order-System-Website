@@ -45,7 +45,7 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
                     <sl-icon slot="prefix" name="plus-square"></sl-icon>
                     Tambah pelanggan
                 </sl-button>
-                <sl-button class="">
+                <sl-button class="file_input">
                     Import CSV
                 </sl-button>
                 <input type="file" accept="image/png, image/jpeg" hidden>

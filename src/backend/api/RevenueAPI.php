@@ -37,7 +37,7 @@ try {
             $jumlah_harga_pesanan += $harga * $kuantiti;
         }
 
-        //arrange income based on when the order was added
+        // Arrange income based on when the order was added
         $current_day = strtotime($pesanan["tarikh"]);
         $week_start = strtotime(getWeekStart());
 
