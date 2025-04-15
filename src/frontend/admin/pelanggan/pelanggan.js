@@ -1,14 +1,29 @@
-import { inputFile } from "../../../scripts/FileInput";
+import { FileInput } from "../../../scripts/FileInput.js";
 
-let file_received;
+let files_received;
+globalThis.logFiles = () => {
+    return files_received;
+};
 
-const fileInput = document.querySelector(".file_input");
+const CSVInput = document.querySelector(".csv_input");
+const filesList = document.querySelector(".files_list")
 
-fileInput.addEventListener("click", () => {
-    inputFile(false, ".csv").addEventListener("file_received", ({ files }) => {
-        file_received = files;
-        console.log(file_received)
-    });
+const fileInput = new FileInput(true, ".csv");
+
+CSVInput.addEventListener("click", () => {
+    fileInput.clickInput()
+    filesList.innerHTML = ""
+})
+
+fileInput.getInput().addEventListener("change", ({ target }) => {
+    console.log("files added : ")
+
+    files_received = target.files
+    for (const file of files_received) {
+        filesList.insertAdjacentHTML("beforeend",
+            `<li>${file.name}</li>`
+        )
+    }
 })
 
 

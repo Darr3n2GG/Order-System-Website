@@ -25,5 +25,4 @@ function checkout(cart) {
             }
         })
         .catch(FetchHelper.onRejected);
-    // rickroll?
 }

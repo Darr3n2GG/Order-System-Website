@@ -4,6 +4,7 @@ require_once dirname(__FILE__, 2) . "/admin_header/admin_header.php";
 require_once dirname(__FILE__, 3) . "/dependencies.php";
 ?>
 
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -45,10 +46,10 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
                     <sl-icon slot="prefix" name="plus-square"></sl-icon>
                     Tambah pelanggan
                 </sl-button>
-                <sl-button class="file_input">
+                <sl-button class="csv_input">
                     Import CSV
                 </sl-button>
-                <input type="file" accept="image/png, image/jpeg" hidden>
+                <ul class="files_list"></ul>
             </form>
         </div>
     </div>
