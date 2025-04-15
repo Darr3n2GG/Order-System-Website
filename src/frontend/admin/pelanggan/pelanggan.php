@@ -12,8 +12,8 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
     <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="pelanggan.css">
+    <link rel="stylesheet" href="<?php echo auto_version("../../style.css"); ?>">
+    <link rel="stylesheet" href="<?php echo auto_version("pelanggan.css"); ?>">
     <?php
     echoAdminHeaderStylesheet();
     echoNavBarStylesheet();

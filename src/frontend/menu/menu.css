@@ -1,5 +1,6 @@
 .action_bar {
   top: 4rem;
+  gap: 1vw;
   position: sticky;
   display: flex;
   justify-content: space-between;
@@ -99,7 +100,8 @@
 
 @media screen and (min-width: 1150px) {
   .search_container {
-    width: 90%;
+    width: 55%;
+    margin-right: auto;
   }
 
   .food_item_container {

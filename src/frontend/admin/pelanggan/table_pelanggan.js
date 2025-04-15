@@ -17,7 +17,7 @@ new Tabulator("#table_pelanggan", {
             return FetchHelper.onRejected(error);
         }
     },
-    height: "80%",
+    height: 510,
     rowHeight: 40,
     layout: "fitData",
     columns: [
