@@ -32,14 +32,14 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
         </div>
         <div class="toolbar">
             <h2>Toolbar</h2>
-            <form action="">
-                <sl-input placeholder="Nama" required>
+            <form class="pelanggan_form" action="">
+                <sl-input placeholder="Nama" id="nama" name="nama" required>
                     <sl-icon name="person-circle" slot="prefix"></sl-icon>
                 </sl-input>
-                <sl-input placeholder="Nombor Phone" required>
+                <sl-input placeholder="Nombor Phone" id="no_phone" name="no_phone" required>
                     <sl-icon name="telephone" slot="prefix"></sl-icon>
                 </sl-input>
-                <sl-input placeholder="Password" required>
+                <sl-input placeholder="Password" id="password" name="password" required>
                     <sl-icon name="key" slot="prefix"></sl-icon>
                 </sl-input>
                 <sl-button type="submit">

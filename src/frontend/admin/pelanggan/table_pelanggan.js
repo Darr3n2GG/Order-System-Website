@@ -20,14 +20,17 @@ new Tabulator("#table_pelanggan", {
     height: 510,
     rowHeight: 40,
     layout: "fitData",
+    resizableRows: false,
     columns: [
-        { title: "ID", field: "id" },
-        { title: "Nama", field: "nama" },
-        { title: "Nombor Phone", field: "no_phone" },
+        { title: "ID", field: "id", resizable: false },
+        { title: "Nama", field: "nama", width: 177.8, resizable: false },
+        { title: "Nombor Phone", field: "no_phone", resizable: false },
+        { title: "Pesanan", field: "kuantiti_pesanan", resizable: false },
         {
             title: "",
             field: "update",
             hozAlign: "center",
+            resizable: false,
             headerSort: false,
             formatter: function () {
                 return '<sl-icon-button name="pencil"></sl-icon-button>';
@@ -39,6 +42,7 @@ new Tabulator("#table_pelanggan", {
             title: "",
             field: "delete",
             hozAlign: "center",
+            resizable: false,
             headerSort: false,
             formatter: function () {
                 return '<sl-icon-button name="trash"></sl-icon-button>';
