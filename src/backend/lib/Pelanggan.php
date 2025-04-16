@@ -16,4 +16,12 @@ class Pelanggan {
             "SELECT id, nama, no_phone FROM pelanggan ORDER BY id ASC"
         );
     }
+
+    public function addPelanggan(string $nama, int $password, string $no_phone): void {
+        $this->Database->executeQuery(
+            "INSERT INTO pelanggan (nama, password, no_phone) VALUES ( ?, ?, ? )",
+            "sis",
+            [$nama, $password, $no_phone]
+        );
+    }
 }

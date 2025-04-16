@@ -52,7 +52,7 @@ function generateProdukHTML(array $array_produk): array {
 
     foreach ($array_produk as $produk) {
         $item_produk = lib\MenuLoader::createItemProdukHTML($produk);
-        array_push($array_item_produk, ["html" => $item_produk, "kategori" => $produk["label"]]);
+        $array_item_produk[] = ["html" => $item_produk, "kategori" => $produk["label"]];
     }
 
     return $array_item_produk;

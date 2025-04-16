@@ -18,13 +18,13 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
     echoAdminHeaderStylesheet();
     echoNavBarStylesheet();
     ?>
-    <title>List Pelanggan</title>
+    <title>Senarai Pelanggan</title>
 </head>
 
 <body>
     <?php
     echoNavBar(NAVBAR_PELANGGAN);
-    echoAdminHeader("List Pelanggan");
+    echoAdminHeader("Senarai Pelanggan");
     ?>
     <div class="content container">
         <div class="table_container">
@@ -32,8 +32,8 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
         </div>
         <div class="toolbar">
             <h2>Toolbar</h2>
-            <form class="pelanggan_form" action="">
-                <sl-input placeholder="Nama" id="nama" name="nama" required>
+            <form class="pelanggan_form">
+                <sl-input placeholder="Nama" id="nama" name="nama" pattern="/^[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/" required>
                     <sl-icon name="person-circle" slot="prefix"></sl-icon>
                 </sl-input>
                 <sl-input placeholder="Nombor Phone" id="no_phone" name="no_phone" required>
@@ -46,9 +46,7 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
                     <sl-icon slot="prefix" name="plus-square"></sl-icon>
                     Tambah pelanggan
                 </sl-button>
-                <sl-button class="csv_input">
-                    Import CSV
-                </sl-button>
+                <sl-button class="csv_input">Import CSV</sl-button>
                 <ul class="files_list"></ul>
             </form>
         </div>

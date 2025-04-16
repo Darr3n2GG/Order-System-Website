@@ -52,7 +52,7 @@ class Pesanan {
 
         foreach ($array_id as $id) {
             $pesanan = $this->getPesananByID($id);
-            array_push($array_pesanan, $pesanan);
+            $array_pesanan[] = $pesanan;
         }
 
         return $array_pesanan;

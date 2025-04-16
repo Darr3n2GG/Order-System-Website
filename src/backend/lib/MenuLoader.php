@@ -22,7 +22,7 @@ class MenuLoader {
         $array_item_kategori = [];
         foreach ($this->array_kategori as $kategori) {
             $item_kategori = self::createItemKategoriHTML($kategori);
-            array_push($array_item_kategori, $item_kategori);
+            $array_item_kategori[] = $item_kategori;
         }
         return $array_item_kategori;
     }
@@ -61,7 +61,7 @@ class MenuLoader {
         $array_produk_dalam_kategori = [];
         foreach ($this->array_produk as $produk) {
             if ($produk["kategori_nama"] == $nama_kategori) {
-                array_push($array_produk_dalam_kategori, $produk);
+                $array_produk_dalam_kategori[] = $produk;
             }
         }
         return $array_produk_dalam_kategori;
@@ -71,7 +71,7 @@ class MenuLoader {
         $array_produk_dalam_kategori = [];
         foreach ($this->array_produk as $produk) {
             if ($produk["kategori_nama"] == $nama_kategori) {
-                array_push($array_produk_dalam_kategori, $produk);
+                $array_produk_dalam_kategori[] = $produk;
                 $key = array_search($produk, $this->array_produk);
                 array_splice($this->array_produk, $key, 1);
             }
@@ -84,7 +84,7 @@ class MenuLoader {
         foreach ($array_produk as $produk) {
             $item_produk = self::createItemProdukHTML($produk);
 
-            array_push($array_item_produk, $item_produk);
+            $array_item_produk[] = $item_produk;
         }
         return $array_item_produk;
     }

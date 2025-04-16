@@ -5,6 +5,9 @@ const ApiUrl = "/Order-System-Website/src/backend/api/PelangganAPI.php"
 
 new Tabulator("#table_pelanggan", {
     ajaxURL: ApiUrl,
+    ajaxConfig: {
+        method: "GET"
+    },
     ajaxRequestFunc: async (url, config) => {
         try {
             const response = await fetch(url, config);

@@ -10,11 +10,15 @@ try {
     $Database = createDatabaseConn();
     $Pelanggan = new lib\Pelanggan;
 
-    $array_pelanggan = getDataSemuaPelanggan();
-    echoJsonResponse(true, "PelangganAPI request processed.", $array_pelanggan);
+    if ($_SERVER["REQUEST_METHOD"] === "GET") {
+        $array_pelanggan = getDataSemuaPelanggan();
+        echoJsonResponse(true, "PelangganAPI request processed.", $array_pelanggan);
+    } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        return;
+    }
 } catch (Exception $e) {
     error_log($e->getMessage());
-    echoJsonException($e->getCode(), "PelangganAPI request failed : " . $e->getMessage());
+    echoJsonException($e->getCode(), "PelangganAPI " . $_SERVER["REQUEST_METHOD"] . " request failed : " . $e->getMessage());
 }
 
 function getDataSemuaPelanggan(): array {

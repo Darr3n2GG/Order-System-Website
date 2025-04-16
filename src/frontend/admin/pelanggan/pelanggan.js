@@ -10,8 +10,9 @@ const pelangganForm = document.querySelector(".pelanggan_form");
 
 pelangganForm.addEventListener("submit", (event) => {
     if (files_received != null) {
-        pelangganForm.submit()
         console.log("files included so no error msg")
+    } else if (!pelangganForm.checkValidity()) {
+        console.log("not valid")
     }
 })
 
@@ -25,25 +26,25 @@ pelangganForm.addEventListener("submit", (event) => {
 // }
 // })
 
-const namaField = document.getElementById("nama");
-namaField.addEventListener("input", () => {
-    const name = namaField.value.trim();
+// const namaField = document.getElementById("nama");
+// namaField.addEventListener("input", () => {
+//     const name = namaField.value.trim();
 
-    if (name === "") {
-        namaField.setCustomValidity("Please enter your name.");
-        namaField.reportValidity();
-    } else if (!isValidName(name)) {
-        namaField.setCustomValidity("Please enter a name with valid characters.");
-        namaField.reportValidity();
-    } else {
-        namaField.setCustomValidity("");
-    }
-})
+//     if (name === "") {
+//         namaField.setCustomValidity("Please enter your name.");
+//         namaField.reportValidity();
+//     } else if (!isValidName(name)) {
+//         namaField.setCustomValidity("Please enter a name with valid characters.");
+//         namaField.reportValidity();
+//     } else {
+//         namaField.setCustomValidity("");
+//     }
+// })
 
-function isValidName(name) {
-    const whitelistPattern = /^[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/;
-    return whitelistPattern.test(name);
-}
+// function isValidName(name) {
+//     const whitelistPattern = /^[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/;
+//     return whitelistPattern.test(name);
+// }
 
 
 const CSVInput = document.querySelector(".csv_input");

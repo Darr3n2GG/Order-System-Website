@@ -83,7 +83,7 @@ function getArrayPesananIDThisWeek(): array {
     $array_pesanan = $Pesanan->getArrayPesananThisWeek();
     $array_pesanan_id = [];
     foreach ($array_pesanan as $pesanan) {
-        array_push($array_pesanan_id, $pesanan["id"]);
+        $array_pesanan_id[] = $pesanan["id"];
     }
 
     return $array_pesanan_id;
