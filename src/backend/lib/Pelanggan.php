@@ -13,7 +13,7 @@ class Pelanggan {
 
     public function getSemuaPelanggan(): array {
         return $this->Database->readQuery(
-            "SELECT id, nama, no_phone FROM pelanggan ORDER BY id ASC"
+            "SELECT id, nama, no_phone FROM pelanggan WHERE searchable = 1 ORDER BY id ASC"
         );
     }
 
@@ -22,6 +22,14 @@ class Pelanggan {
             "INSERT INTO pelanggan (nama, password, no_phone) VALUES ( ?, ?, ? )",
             "sis",
             [$nama, $password, $no_phone]
+        );
+    }
+
+    public function deletePelanggan(int $id): void {
+        $this->Database->executeQuery(
+            "DELETE FROM pelanggan WHERE id = ?",
+            "i",
+            [$id]
         );
     }
 }

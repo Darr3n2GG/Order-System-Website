@@ -13,9 +13,12 @@
   width: 70%;
 }
 
+.menu {
+  margin-bottom: 5vw;
+}
+
 .food_item_container {
   display: grid;
-  grid-template-columns: 50% 50%;
   gap: 1vw;
 }
 
@@ -100,14 +103,15 @@
 
 @media screen and (min-width: 1150px) {
   .search_container {
-    width: 55%;
+    width: 56.5%;
     margin-right: auto;
   }
 
-  .food_item_container {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    gap: 1vw;
+  .menu {
     max-width: 60%;
-  }  
+  }
+
+  .food_item_container {
+    grid-template-columns: 50% 50%;
+  }
 }

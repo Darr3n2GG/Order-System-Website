@@ -65,7 +65,7 @@ function fetchItemDialogData(item_id) {
 function showItemDialog({ label, id, nama, gambar, harga, detail }) {
     itemDialog.label = label + id + " : " + nama;
     itemDialog.querySelector(".dialog_image").src = gambar;
-    itemDialog.querySelector(".dialog_price").innerHTML = "Harga : RM" + harga;
+    itemDialog.querySelector(".dialog_price").innerHTML = "Harga : RM " + harga;
     itemDialog.querySelector(".dialog_description").innerHTML = detail;
     itemDialog.show();
 }

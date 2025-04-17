@@ -78,11 +78,11 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
         </div>
     </div>
 
-    <script type="module" src="menu.js"></script>
-    <script type="module" src="itemDialog.js"></script>
-    <script type="module" src="cart.js"></script>
-    <script type="module" src="checkout.js"></script>
-    <script type="module" src="search.js"></script>
+    <script type="module" src="<?php echo auto_version("menu.js"); ?>"></script>
+    <script type="module" src="<?php echo auto_version("itemDialog.js"); ?>"></script>
+    <script type="module" src="<?php echo auto_version("cart.js"); ?>"></script>
+    <script type="module" src="<?php echo auto_version("checkout.js"); ?>"></script>
+    <script type="module" src="<?php echo auto_version("search.js"); ?>"></script>
     <?php
     echoShoelaceAutoloader();
     echoNoScript();

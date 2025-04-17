@@ -10,11 +10,16 @@ try {
     $Database = createDatabaseConn();
     $Pelanggan = new lib\Pelanggan;
 
-    if ($_SERVER["REQUEST_METHOD"] === "GET") {
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $array_pelanggan = getDataSemuaPelanggan();
-        echoJsonResponse(true, "PelangganAPI request processed.", $array_pelanggan);
-    } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        return;
+        echoJsonResponse(true, "PelangganAPI GET request processed.", $array_pelanggan);
+    } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        echoJsonResponse(true, "PelangganAPI POST request processed.");
+    } else if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
+        $id = htmlspecialchars($_GET["id"]);
+        $Pelanggan->deletePelanggan($id);
+
+        echoJsonResponse(true, "PelangganAPI DELETE request processed.");
     }
 } catch (Exception $e) {
     error_log($e->getMessage());

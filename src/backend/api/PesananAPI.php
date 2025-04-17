@@ -9,15 +9,18 @@ try {
 
     if (isset($_GET["range"])) {
         $range = htmlspecialchars($_GET["range"]);
-        if ($range == "*") {
-            $array_pesanan = $Pesanan->getSemuaPesanan();
 
-            echoJsonResponse(true, "PesananAPI request processed.", $array_pesanan);
-        } elseif ($range = "week") {
-            $array_pesanan = $Pesanan->getArrayPesananThisWeek();
-
-            echoJsonResponse(true, "PesananAPI request processed.", $array_pesanan);
+        // Switch case untuk flex haha
+        switch ($range) {
+            case "*":
+                $array_pesanan = $Pesanan->getSemuaPesanan();
+                break;
+            case "week":
+                $array_pesanan = $Pesanan->getArrayPesananThisWeek();
+                break;
         }
+
+        echoJsonResponse(true, "PesananAPI GET request processed.", $array_pesanan);
     }
 } catch (Exception $e) {
     error_log($e->getMessage());

@@ -3,7 +3,7 @@ import FetchHelper from "../../../scripts/FetchHelper.js";
 const ApiUrl = "/Order-System-Website/src/backend/api/PelangganAPI.php"
 
 
-new Tabulator("#table_pelanggan", {
+const tablePelanggan = new Tabulator("#table_pelanggan", {
     ajaxURL: ApiUrl,
     ajaxConfig: {
         method: "GET"
@@ -50,11 +50,34 @@ new Tabulator("#table_pelanggan", {
             formatter: function () {
                 return '<sl-icon-button name="trash"></sl-icon-button>';
             },
-            cellClick: function (e, cell) {
-            }
+            cellClick: deletePelanggan
         },
     ],
 });
+
+async function deletePelanggan(e, cell) {
+    const row = cell.getRow();
+    const id = row.getData().id;
+
+    const url = ApiUrl + "?" + new URLSearchParams({
+        id: id
+    }).toString();
+
+    try {
+        const response = await fetch(url, {
+            method: "DELETE",
+        });
+        const data = await FetchHelper.onFulfilled(response);
+
+        if (response.ok) {
+            row.delete();
+        }
+    } catch (error) {
+        return FetchHelper.onRejected(error);
+    }
+
+    alert("Pelanggan dengan id : " + id + " sudah dipadamkan.")
+}
 
 function returnNoContent() {
     console.log("No content in table : table_pengguna.");

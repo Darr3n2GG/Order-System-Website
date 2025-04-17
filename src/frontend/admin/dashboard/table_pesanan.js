@@ -7,6 +7,9 @@ new Tabulator("#table_pesanan", {
     ajaxURL: ApiUrl + "?" + new URLSearchParams({
         range: "week"
     }).toString(),
+    ajaxConfig: {
+        method: "GET"
+    },
     ajaxRequestFunc: async (url, config) => {
         try {
             const response = await fetch(url, config);
