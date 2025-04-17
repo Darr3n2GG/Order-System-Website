@@ -18,10 +18,12 @@ class Pelanggan {
     }
 
     public function addPelanggan(string $nama, int $password, string $no_phone): void {
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
         $this->Database->executeQuery(
             "INSERT INTO pelanggan (nama, password, no_phone) VALUES ( ?, ?, ? )",
             "sis",
-            [$nama, $password, $no_phone]
+            [$nama, $hashed_password, $no_phone]
         );
     }
 

@@ -64,16 +64,14 @@ async function deletePelanggan(e, cell) {
     }).toString();
 
     try {
-        const response = await fetch(url, {
-            method: "DELETE",
-        });
+        const response = await fetch(url, { method: "DELETE" });
         const data = await FetchHelper.onFulfilled(response);
 
         if (response.ok) {
             row.delete();
         }
     } catch (error) {
-        return FetchHelper.onRejected(error);
+        FetchHelper.onRejected(error);
     }
 
     alert("Pelanggan dengan id : " + id + " sudah dipadamkan.")

@@ -14,7 +14,7 @@ try {
         $array_pelanggan = getDataSemuaPelanggan();
         echoJsonResponse(true, "PelangganAPI GET request processed.", $array_pelanggan);
     } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        echoJsonResponse(true, "PelangganAPI POST request processed.");
+        handlePostPesanan();
     } else if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
         $id = htmlspecialchars($_GET["id"]);
         $Pelanggan->deletePelanggan($id);
@@ -45,4 +45,36 @@ function getDataSemuaPelanggan(): array {
     }
 
     return $array_pelanggan;
+}
+
+function handlePostPesanan(): void {
+    if (isset($_FILES["files"])) {
+        parseCSVFile($_FILES["files"]);
+    } else if (isset($_POST["data_pelanggan"])) {
+        return;
+    }
+}
+
+function parseCSVFile(array $files): void {
+    global $Pelanggan;
+
+    if ($files['error'] === UPLOAD_ERR_OK) {
+        echoJsonResponse(false, "PelangganAPI POST request failed: File upload error: " . $_FILES['myfile']['error']);
+        return;
+    }
+
+    $handle = fopen($files["tmp_name"], "r");
+    $header = fgetcsv($handle, 1000);
+
+    if ($handle) {
+        while (($data = fgetcsv($handle, 1000)) !== false) {
+            $nama = $data[0];
+            $password = $data[1];
+            $no_phone = $data[2];
+
+            $Pelanggan->addPelanggan($nama, $password, $no_phone);
+        }
+
+        fclose($handle);
+    }
 }

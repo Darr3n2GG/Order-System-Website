@@ -27,9 +27,7 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
     echoAdminHeader("Senarai Pelanggan");
     ?>
     <div class="content container">
-        <div class="table_container">
-            <div id="table_pelanggan"></div>
-        </div>
+        <div id="table_pelanggan"></div>
         <div class="toolbar">
             <h2>Toolbar</h2>
             <form class="pelanggan_form">
