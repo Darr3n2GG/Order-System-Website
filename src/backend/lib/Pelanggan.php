@@ -11,7 +11,7 @@ class Pelanggan {
         $this->Database = createDatabaseConn();
     }
 
-    public function getSemuaPelanggan(): array {
+    public function getSemuaSearchablePelanggan(): array {
         return $this->Database->readQuery(
             "SELECT id, nama, no_phone FROM pelanggan WHERE searchable = 1 ORDER BY id ASC"
         );

@@ -30,7 +30,7 @@ function getDataSemuaPelanggan(): array {
     global $Pelanggan;
     global $Database;
 
-    $array_pelanggan = $Pelanggan->getSemuaPelanggan();
+    $array_pelanggan = $Pelanggan->getSemuaSearchablePelanggan();
 
     foreach ($array_pelanggan as &$pelanggan) {
         $id = $pelanggan["id"];
