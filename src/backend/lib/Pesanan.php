@@ -32,7 +32,7 @@ class Pesanan {
             FROM pesanan
             INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
             INNER JOIN status ON pesanan.id_status = status.id
-            WHERE tarikh >= ? and tarikh < ?
+            WHERE tarikh >= ? and tarikh <= ?
             ORDER BY tarikh ASC",
             "ss",
             [$week_start, $week_end]

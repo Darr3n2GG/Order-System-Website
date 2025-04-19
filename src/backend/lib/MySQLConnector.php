@@ -58,12 +58,8 @@ class MySQLConnector {
 
     public function readStatement(\mysqli_stmt $stmt, int $fetch_mode = MYSQLI_ASSOC): array {
         $stmt->execute();
-        $result = $this->fetchFromStatement($stmt, $fetch_mode);
+        $result = $stmt->get_result()->fetch_all($fetch_mode);
         return $result;
-    }
-
-    public function fetchFromStatement(\mysqli_stmt $stmt, int $fetch_mode = MYSQLI_ASSOC): array {
-        return $stmt->get_result()->fetch_all($fetch_mode);
     }
 }
 

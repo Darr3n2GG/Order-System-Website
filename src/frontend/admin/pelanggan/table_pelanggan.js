@@ -26,9 +26,8 @@ const tablePelanggan = new Tabulator("#table_pelanggan", {
     resizableRows: false,
     columns: [
         { title: "ID", field: "id", resizable: false },
-        { title: "Nama", field: "nama", width: 177.8, resizable: false },
+        { title: "Nama", field: "nama", width: 177.8 + 87, resizable: false },
         { title: "Nombor Phone", field: "no_phone", resizable: false },
-        { title: "Pesanan", field: "kuantiti_pesanan", resizable: false },
         {
             title: "",
             field: "update",
@@ -74,7 +73,7 @@ async function deletePelanggan(e, cell) {
         FetchHelper.onRejected(error);
     }
 
-    alert("Pelanggan dengan id : " + id + " sudah dipadamkan.")
+    alert("Pelanggan dengan ID : " + id + " sudah dipadamkan.")
 }
 
 function returnNoContent() {

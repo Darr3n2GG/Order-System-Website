@@ -49,11 +49,11 @@ $pesanan_count = getPesananCount();
         <div class="row_kecil">
             <div class="item_kecil">
                 <h2>Most ordered food / drink</h2>
-                <?php echo "<h1>$nama_produk</h1>"; ?>
+                <h1><?php echo $nama_produk; ?></h1>
             </div>
             <div class="item_kecil">
                 <h2>Number of orders this week</h2>
-                <?php echo "<h1>$pesanan_count</h1>"; ?>
+                <h1><?php echo $pesanan_count; ?></h1>
             </div>
         </div>
         <div class="row_besar">
@@ -81,7 +81,7 @@ $pesanan_count = getPesananCount();
 function getArrayPesananIDThisWeek(): array {
     $Pesanan = new lib\Pesanan;
     $array_pesanan = $Pesanan->getArrayPesananThisWeek();
-    $array_pesanan_id = [];
+
     foreach ($array_pesanan as $pesanan) {
         $array_pesanan_id[] = $pesanan["id"];
     }

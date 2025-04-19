@@ -2,13 +2,27 @@
 
 namespace lib;
 
+require_once dirname(__FILE__) . "/Pelanggan.php";
+
 class Session {
     private $log_masuk;
     private $admin;
 
     public function __construct() {
         session_start();
-        $this->log_masuk = isset($_SESSION["id_pelanggan"]);
+
+        $this->log_masuk = !isset($_SESSION["id_pelanggan"]) ? false : $this->checkIdPelangganValid();
+    }
+
+    private function checkIdPelangganValid(): bool {
+        $Pelanggan = new Pelanggan;
+
+        if ($Pelanggan->checkPelangganExists($_SESSION["id_pelanggan"])) {
+            return true;
+        } else {
+            unset($_SESSION["id_pelanggan"]);
+            return false;
+        }
     }
 
     public function sudahLogMasuk() {

@@ -31,20 +31,22 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
         <div class="toolbar">
             <h2>Toolbar</h2>
             <form class="pelanggan_form">
-                <sl-input placeholder="Nama" id="nama">
+                <sl-input placeholder="Nama" id="nama" type="text">
                     <sl-icon name="person-circle" slot="prefix"></sl-icon>
                 </sl-input>
-                <sl-input placeholder="Nombor Phone" id="no_phone">
+                <sl-input placeholder="Nombor Phone" id="no_phone" type="tel">
                     <sl-icon name="telephone" slot="prefix"></sl-icon>
                 </sl-input>
-                <sl-input placeholder="Password" id="password">
+                <sl-input placeholder="Password" id="password" type="password" password-toggle>
                     <sl-icon name="key" slot="prefix"></sl-icon>
                 </sl-input>
                 <sl-button type="submit">
                     <sl-icon slot="prefix" name="plus-square"></sl-icon>
                     Tambah pelanggan
                 </sl-button>
-                <sl-button class="csv_input">Import CSV</sl-button>
+                <sl-tooltip content="CSV must have a header">
+                    <sl-button class="csv_input">Import CSV</sl-button>
+                </sl-tooltip>
                 <ul class="files_list"></ul>
             </form>
         </div>

@@ -163,3 +163,19 @@ Stack trace:
 
 [17-Apr-2025 23:32:50 Asia/Kuala_Lumpur] fopen(): Argument #1 ($filename) must be of type string, array given
 
+[18-Apr-2025 22:55:32 Asia/Kuala_Lumpur] fopen(): Argument #1 ($filename) must be of type string, array given
+
+[18-Apr-2025 23:03:09 Asia/Kuala_Lumpur] Undefined array key "error"
+[18-Apr-2025 23:11:45 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+[18-Apr-2025 23:11:48 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+[18-Apr-2025 23:11:58 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+[18-Apr-2025 23:12:32 Asia/Kuala_Lumpur] Undefined array key "myfile"
+[18-Apr-2025 23:13:50 Asia/Kuala_Lumpur] lib\Pelanggan::addPelanggan(): Argument #2 ($password) must be of type int, string given, called in C:\xampp\htdocs\Order-System-Website\src\backend\api\PelangganAPI.php on line 85
+
+[18-Apr-2025 23:31:50 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+[18-Apr-2025 23:31:51 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+[18-Apr-2025 23:31:51 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+[19-Apr-2025 10:47:26 Asia/Kuala_Lumpur] Cannot delete or update a parent row: a foreign key constraint fails (`restorandb`.`pesanan`, CONSTRAINT `pesanan_fk1` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id`))
+[19-Apr-2025 10:47:43 Asia/Kuala_Lumpur] Cannot delete or update a parent row: a foreign key constraint fails (`restorandb`.`pesanan`, CONSTRAINT `pesanan_fk1` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id`))
+[19-Apr-2025 10:51:36 Asia/Kuala_Lumpur] Cannot delete or update a parent row: a foreign key constraint fails (`restorandb`.`belian`, CONSTRAINT `belian_fk_2` FOREIGN KEY (`id_pesanan`) REFERENCES `pesanan` (`id`))
+[19-Apr-2025 11:37:07 Asia/Kuala_Lumpur] Undefined variable $array_jumlah_harga_by_day

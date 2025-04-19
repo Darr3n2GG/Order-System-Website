@@ -17,7 +17,7 @@ try {
     $array_pesanan = getArrayPesananThisWeek();
 
     // The array is arranged like this: [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
-    $array_jumlah_harga_by_day = [0, 0, 0, 0, 0, 0, 0];
+    $jumlah_harga_mingguan = [0, 0, 0, 0, 0, 0, 0];
 
     $jumlah_harga = 0.0;
 
@@ -46,10 +46,11 @@ try {
             throw new Exception("Value of variable (day) must be an integer");
         }
 
-        $array_jumlah_harga_by_day[$day] += $jumlah_harga_pesanan;
+        $jumlah_harga += $jumlah_harga_pesanan;
+        $jumlah_harga_mingguan[$day] += $jumlah_harga_pesanan;
     }
 
-    echoJsonResponse(true, "RevenueAPI request processed", ["data" => $array_jumlah_harga_by_day, "total" => $jumlah_harga]);
+    echoJsonResponse(true, "RevenueAPI request processed", ["data" => $jumlah_harga_mingguan, "total" => $jumlah_harga]);
 } catch (Exception $e) {
     error_log($e->getMessage());
     echoJsonException($e->getCode(), "RevenueAPI request failed : " . $e->getMessage());
@@ -63,7 +64,7 @@ function getArrayPesananThisWeek(): array {
 
     return $Database->readQuery(
         "SELECT id, tarikh FROM pesanan
-        WHERE tarikh >= ? and tarikh < ?
+        WHERE tarikh >= ? and tarikh <= ?
         ORDER BY tarikh ASC",
         "ss",
         [$week_start, $week_end]

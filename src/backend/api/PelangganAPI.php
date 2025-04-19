@@ -11,7 +11,7 @@ try {
     $Pelanggan = new lib\Pelanggan;
 
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
-        $array_pelanggan = getDataSemuaPelanggan();
+        $array_pelanggan = $Pelanggan->getSemuaSearchablePelanggan();
         echoJsonResponse(true, "PelangganAPI GET request processed.", $array_pelanggan);
     } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
         handlePostPesanan();
@@ -49,8 +49,18 @@ function getDataSemuaPelanggan(): array {
 
 function handlePostPesanan(): void {
     if (isset($_FILES["files"])) {
-        parseCSVFile($_FILES["files"]);
-    } else if (isset($_POST["data_pelanggan"])) {
+        foreach ($_FILES["files"]["name"] as $index => $name) {
+            $file = [
+                "name" => $name,
+                "tmp_name" => $_FILES["files"]["tmp_name"][$index],
+                "type" => $_FILES["files"]["type"][$index],
+                "size" => $_FILES["files"]["size"][$index],
+                "error" => $_FILES["files"]["error"][$index]
+            ];
+
+            parseCSVFile($file);
+        }
+    } else if (isset($_POST["pelanggan"])) {
         return;
     }
 }
@@ -58,8 +68,8 @@ function handlePostPesanan(): void {
 function parseCSVFile(array $files): void {
     global $Pelanggan;
 
-    if ($files['error'] === UPLOAD_ERR_OK) {
-        echoJsonResponse(false, "PelangganAPI POST request failed: File upload error: " . $_FILES['myfile']['error']);
+    if ($files['error'] !== UPLOAD_ERR_OK) {
+        echoJsonResponse(false, "PelangganAPI POST request failed, file upload error: " . $files["error"]);
         return;
     }
 
@@ -76,5 +86,6 @@ function parseCSVFile(array $files): void {
         }
 
         fclose($handle);
+        echoJsonResponse(true, "PelangganAPI POST request processed.");
     }
 }

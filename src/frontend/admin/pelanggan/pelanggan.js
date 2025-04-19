@@ -11,11 +11,12 @@ const ApiUrl = "/Order-System-Website/src/backend/api/PelangganAPI.php";
 
 const pelangganForm = document.querySelector(".pelanggan_form");
 
-pelangganForm.addEventListener("submit", (event) => {
-    if (validateForm()) {
-        // submit
-    } else if (files_received != null) {
+pelangganForm.addEventListener("submit", (_event) => {
+    if (files_received != null) {
         postCSVFile();
+    } else if (validateForm()) {
+        // submit
+        return;
     }
 });
 
@@ -31,8 +32,12 @@ async function postCSVFile() {
             body: data
         })
 
-        if (response.ok) {
+        const message = await FetchHelper.onFulfilled(response)
+        if (message.ok) {
             alert("Fail CSV dihantar.");
+            setTimeout(location.reload(), 500)
+        } else {
+            console.error(message.message);
         }
     } catch (error) {
         FetchHelper.onRejected(error);
@@ -40,45 +45,66 @@ async function postCSVFile() {
 }
 
 
-pelangganForm.addEventListener("input", () => {
-    validateForm();
+pelangganForm.addEventListener("input", (event) => {
+    const id = event.target.id;
+    validateField(id);
 })
 
 
 const formValidity = {
-    nama: { condition: (value) => handleNamaInputValidation(value) },
-    password: { condition: (value) => { } },
-    no_phone: { condition: (value) => { } }
+    nama: { condition: (value) => handleNamaValidation(value) },
+    no_phone: { condition: (value) => { } },
+    password: { condition: (value) => handlePasswordValidation(value) }
+}
+
+function validateField(fieldId) {
+    const { condition } = formValidity[fieldId];
+    const field = document.getElementById(fieldId);
+
+    const message = condition(field.value.trim())
+    if (message === "") {
+        field.setCustomValidity("");
+    } else {
+        field.setCustomValidity(message);
+        field.reportValidity();
+        return false;
+    }
 }
 
 function validateForm() {
     for (const fieldId in formValidity) {
-        const { condition } = formValidity[fieldId];
-        const field = document.getElementById(fieldId);
-
-        const message = condition(field.value.trim())
-        if (message !== "") {
-            field.setCustomValidity(message);
-            field.reportValidity();
-            return false;
-        }
+        if (validateField(fieldId) === false) { return false }
     }
     return true;
 }
 
-function handleNamaInputValidation(value) {
+function handleNamaValidation(value) {
     if (value === "") {
         return "Field nama kosong.";
-    } else if (!isNamaMatchWhitelist(value)) {
+    } else if (!isValidCharacters(value)) {
         return "Field nama terdapat character invalid.";
-    } else {
-        return "";
+    } else if (value.length >= 100) {
+        return "Field nama mesti kurang daripada 100.";
     }
 
-    function isNamaMatchWhitelist(name) {
-        const whitelistPattern = /^[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/;
-        return whitelistPattern.test(name);
+    return "";
+}
+
+function handlePasswordValidation(value) {
+    if (value === "") {
+        return "Field password kosong.";
+    } else if (!isValidCharacters(value)) {
+        return "Field password terdapat character invalid.";
+    } else if (value.length <= 8 || value.length >= 128) {
+        return "Field password mesti melebihi 8 dan kurang daripada 128.";
     }
+
+    return "";
+}
+
+function isValidCharacters(value) {
+    const whitelistPattern = /^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]+$/;
+    return whitelistPattern.test(value);
 }
 
 
