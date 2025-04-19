@@ -26,6 +26,7 @@ try {
     echoJsonException($e->getCode(), "PelangganAPI " . $_SERVER["REQUEST_METHOD"] . " request failed : " . $e->getMessage());
 }
 
+
 function getDataSemuaPelanggan(): array {
     global $Pelanggan;
     global $Database;
@@ -61,7 +62,14 @@ function handlePostPesanan(): void {
             parseCSVFile($file);
         }
     } else if (isset($_POST["pelanggan"])) {
-        return;
+        global $Pelanggan;
+
+        $data = $_POST["pelanggan"];
+        $nama = $data["nama"];
+        $password = $data["password"];
+        $no_phone = $data["no_phone"];
+
+        $Pelanggan->addPelanggan($nama, $password, $no_phone);
     }
 }
 

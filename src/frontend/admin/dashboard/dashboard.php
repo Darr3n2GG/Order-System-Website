@@ -116,7 +116,7 @@ function getKuantitiPesanan(): int {
     global $Database;
 
     return $Database->readQuery(
-        "SELECT COUNT(*) AS pesanan_count FROM pesanan WHERE tarikh >= ? and tarikh < ?",
+        "SELECT COUNT(*) AS pesanan_count FROM pesanan WHERE tarikh >= ? and tarikh <= ?",
         "ss",
         [getWeekStart(), getWeekEnd()]
     )[0]["pesanan_count"];
@@ -126,7 +126,7 @@ function getPesananCount(): int {
     global $Database;
 
     return $Database->readQuery(
-        "SELECT COUNT(*) AS pesanan_count FROM pesanan WHERE tarikh >= ? and tarikh < ?",
+        "SELECT COUNT(*) AS pesanan_count FROM pesanan WHERE tarikh >= ? and tarikh <= ?",
         "ss",
         [getWeekStart(), getWeekEnd()]
     )[0]["pesanan_count"];

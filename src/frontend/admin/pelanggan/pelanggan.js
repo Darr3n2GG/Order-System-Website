@@ -15,29 +15,33 @@ pelangganForm.addEventListener("submit", (_event) => {
     if (files_received != null) {
         postCSVFile();
     } else if (validateForm()) {
-        // submit
-        return;
+        const data = new FormData(pelangganForm)
+        postPelangganData(data, "Pelanggan ditambah.");
     }
 });
 
-async function postCSVFile() {
+function postCSVFile() {
     const data = new FormData();
     for (const file of files_received) {
         data.append("files[]", file)
     }
 
+    postPelangganData(data, "File CSV dihantar.")
+}
+
+async function postPelangganData(formData, message) {
     try {
         const response = await fetch(ApiUrl, {
             method: "POST",
-            body: data
+            body: formData
         })
 
-        const message = await FetchHelper.onFulfilled(response)
-        if (message.ok) {
-            alert("Fail CSV dihantar.");
+        const responseMessage = await FetchHelper.onFulfilled(response)
+        if (responseMessage.ok) {
+            alert(message);
             setTimeout(location.reload(), 500)
         } else {
-            console.error(message.message);
+            console.error(responseMessage.message);
         }
     } catch (error) {
         FetchHelper.onRejected(error);
@@ -53,7 +57,7 @@ pelangganForm.addEventListener("input", (event) => {
 
 const formValidity = {
     nama: { condition: (value) => handleNamaValidation(value) },
-    no_phone: { condition: (value) => { } },
+    no_phone: { condition: (value) => handleNoPasswordValidation(value) },
     password: { condition: (value) => handlePasswordValidation(value) }
 }
 
@@ -102,8 +106,23 @@ function handlePasswordValidation(value) {
     return "";
 }
 
+function handleNoPasswordValidation(value) {
+    if (value === "") {
+        return "Field nombor phone kosong.";
+    } else if (!isValidPhoneNumber(value)) {
+        return "Field password invalid.";
+    }
+
+    return "";
+}
+
 function isValidCharacters(value) {
     const whitelistPattern = /^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]+$/;
+    return whitelistPattern.test(value);
+}
+
+function isValidPhoneNumber(value) {
+    const whitelistPattern = /^(\+?6?01)[02-46-9]-*[0-9]{7}$|^(\+?6?01)[1]-*[0-9]{8}$/;
     return whitelistPattern.test(value);
 }
 
