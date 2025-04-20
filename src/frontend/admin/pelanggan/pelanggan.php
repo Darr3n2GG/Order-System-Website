@@ -30,7 +30,7 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
         <div id="table_pelanggan"></div>
         <div class="toolbar">
             <h2>Toolbar</h2>
-            <form class="pelanggan_form">
+            <form class="form_pelanggan">
                 <sl-input placeholder="Nama" id="nama" name="nama" type="text">
                     <sl-icon name="person-circle" slot="prefix"></sl-icon>
                 </sl-input>
@@ -47,8 +47,10 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
                 <sl-tooltip content="CSV must have a header">
                     <sl-button class="csv_input">Import CSV</sl-button>
                 </sl-tooltip>
-                <ul class="files_list"></ul>
             </form>
+            <ul class="files_list">
+                <p class="include_tag hide">Files included :</p>
+            </ul>
         </div>
     </div>
     <script type="module" src="<?php echo auto_version("table_pelanggan.js"); ?>"></script>

@@ -61,7 +61,7 @@ function handlePostPesanan(): void {
 
             parseCSVFile($file);
         }
-    } else if (isset($_POST)) {
+    } else if (arrayCheckKeysExist(["nama", "password", "no_phone"], $_POST)) {
         global $Pelanggan;
 
         $nama = $_POST["nama"];
@@ -98,4 +98,13 @@ function parseCSVFile(array $files): void {
         fclose($handle);
     }
     echoJsonResponse(true, "PelangganAPI POST request processed.");
+}
+
+function arrayCheckKeysExist(array $keys, array $array): bool {
+    foreach ($keys as $key) {
+        if (!array_key_exists($key, $array)) {
+            return !array_key_exists($key, $array);
+        }
+    }
+    return true;
 }

@@ -8,3 +8,11 @@
 .toolbar {
     float: left;
 }
+
+.form_pelanggan > sl-input {
+    margin: 8px 0;
+}
+
+.files_list {
+    list-style: inside;
+}

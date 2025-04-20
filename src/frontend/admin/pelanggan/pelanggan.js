@@ -9,15 +9,14 @@ globalThis.logFiles = () => {
 const ApiUrl = "/Order-System-Website/src/backend/api/PelangganAPI.php";
 
 
-const pelangganForm = document.querySelector(".pelanggan_form");
+const formPelanggan = document.querySelector(".form_pelanggan");
 
-pelangganForm.addEventListener("submit", (event) => {
+formPelanggan.addEventListener("submit", (event) => {
     event.preventDefault();
     if (files_received != null) {
         postCSVFile();
     } else if (validateForm()) {
-        const data = new FormData(pelangganForm);
-        console.log(Object.fromEntries(data));
+        const data = new FormData(formPelanggan);
         postPelangganData(data, "Pelanggan ditambah.");
     }
 });
@@ -38,11 +37,7 @@ async function postPelangganData(formData, message) {
             body: formData
         })
 
-        console.log(response)
-
         const responseMessage = await FetchHelper.onFulfilled(response)
-        console.log(responseMessage)
-
         if (responseMessage.ok) {
             alert(message);
             setTimeout(location.reload(), 500)
@@ -55,7 +50,7 @@ async function postPelangganData(formData, message) {
 }
 
 
-pelangganForm.addEventListener("input", (event) => {
+formPelanggan.addEventListener("input", (event) => {
     const id = event.target.id;
     validateField(id);
 })
@@ -65,7 +60,7 @@ const formValidity = {
     nama: { condition: (value) => handleNamaValidation(value) },
     no_phone: { condition: (value) => handleNoPasswordValidation(value) },
     password: { condition: (value) => handlePasswordValidation(value) }
-}
+};
 
 function validateField(fieldId) {
     const { condition } = formValidity[fieldId];
@@ -74,6 +69,7 @@ function validateField(fieldId) {
     const message = condition(field.value.trim())
     if (message === "") {
         field.setCustomValidity("");
+        return true;
     } else {
         field.setCustomValidity(message);
         field.reportValidity();
@@ -83,7 +79,7 @@ function validateField(fieldId) {
 
 function validateForm() {
     for (const fieldId in formValidity) {
-        if (validateField(fieldId) === false) { return false }
+        if (validateField(fieldId) === false) { return false; }
     }
     return true;
 }
@@ -134,21 +130,28 @@ function isValidPhoneNumber(value) {
 
 
 const CSVInput = document.querySelector(".csv_input");
-const filesList = document.querySelector(".files_list")
+const filesList = document.querySelector(".files_list");
 
 const fileInput = new FileInput(true, ".csv");
 
 CSVInput.addEventListener("click", () => {
     fileInput.clickInput();
-    filesList.innerHTML = "";
+    filesList.innerHTML = "<p class='include_tag hide'>Files included :</p>";
     files_received = null;
-})
+});
 
 fileInput.getInput().addEventListener("change", ({ target }) => {
     files_received = target.files;
-    for (const file of files_received) {
-        filesList.insertAdjacentHTML("beforeend",
-            `<li>${file.name}</li>`
-        );
+
+    const includeTag = filesList.querySelector(".include_tag");
+    if (files_received.length === 0) {
+        includeTag.classList.add("hide");
+    } else {
+        includeTag.classList.remove("hide");
+        for (const file of files_received) {
+            filesList.insertAdjacentHTML("beforeend",
+                `<li>${file.name}</li>`
+            );
+        }
     }
-})
+});
