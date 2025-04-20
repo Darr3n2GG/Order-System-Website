@@ -36,7 +36,7 @@ const CartaRevenue = new Chart(cartaRevenueCanvas, {
     data: {
         labels: xValues,
         datasets: [{
-            labels: "Income",
+            label: "Revenue (RM)",
             backgroundColor: "rgba(0,0,255,1.0)",
             data: yValues
         }]

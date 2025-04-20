@@ -30,6 +30,6 @@ function echoJsonResponse(bool $ok, string $message, array|null $details = null)
 }
 
 function echoJsonException(int $code, string $message): void {
-    http_response_code($code ?: 500);
+    http_response_code($code);
     echo json_encode(["ok" => false, "message" => $message]);
 }

@@ -77,7 +77,7 @@ function parseCSVFile(array $files): void {
     global $Pelanggan;
 
     if ($files['error'] !== UPLOAD_ERR_OK) {
-        echoJsonResponse(false, "PelangganAPI POST request failed, file upload error: " . $files["error"]);
+        echoJsonException(422, "PelangganAPI POST request failed, file upload error: " . $files["error"]);
         return;
     }
 
@@ -94,6 +94,6 @@ function parseCSVFile(array $files): void {
         }
 
         fclose($handle);
-        echoJsonResponse(true, "PelangganAPI POST request processed.");
     }
+    echoJsonException(true, "PelangganAPI POST request processed.");
 }
