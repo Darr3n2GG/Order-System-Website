@@ -179,3 +179,4 @@ Stack trace:
 [19-Apr-2025 10:47:43 Asia/Kuala_Lumpur] Cannot delete or update a parent row: a foreign key constraint fails (`restorandb`.`pesanan`, CONSTRAINT `pesanan_fk1` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id`))
 [19-Apr-2025 10:51:36 Asia/Kuala_Lumpur] Cannot delete or update a parent row: a foreign key constraint fails (`restorandb`.`belian`, CONSTRAINT `belian_fk_2` FOREIGN KEY (`id_pesanan`) REFERENCES `pesanan` (`id`))
 [19-Apr-2025 11:37:07 Asia/Kuala_Lumpur] Undefined variable $array_jumlah_harga_by_day
+[20-Apr-2025 10:53:11 Asia/Kuala_Lumpur] Undefined array key "pelanggan"

@@ -82,6 +82,8 @@ function getArrayPesananIDThisWeek(): array {
     $Pesanan = new lib\Pesanan;
     $array_pesanan = $Pesanan->getArrayPesananThisWeek();
 
+    $array_pesanan_id = [];
+
     foreach ($array_pesanan as $pesanan) {
         $array_pesanan_id[] = $pesanan["id"];
     }

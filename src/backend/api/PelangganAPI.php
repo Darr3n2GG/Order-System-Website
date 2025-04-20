@@ -61,15 +61,17 @@ function handlePostPesanan(): void {
 
             parseCSVFile($file);
         }
-    } else if (isset($_POST["pelanggan"])) {
+    } else if (isset($_POST)) {
         global $Pelanggan;
 
-        $data = $_POST["pelanggan"];
-        $nama = $data["nama"];
-        $password = $data["password"];
-        $no_phone = $data["no_phone"];
+        $nama = $_POST["nama"];
+        $password = $_POST["password"];
+        $no_phone = $_POST["no_phone"];
 
         $Pelanggan->addPelanggan($nama, $password, $no_phone);
+        echoJsonResponse(true, "PelangganAPI POST request processed.");
+    } else {
+        throw new Exception("No parameters attached to POST request.", 400);
     }
 }
 
@@ -95,5 +97,5 @@ function parseCSVFile(array $files): void {
 
         fclose($handle);
     }
-    echoJsonException(true, "PelangganAPI POST request processed.");
+    echoJsonResponse(true, "PelangganAPI POST request processed.");
 }

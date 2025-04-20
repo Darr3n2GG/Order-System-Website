@@ -11,17 +11,19 @@ const ApiUrl = "/Order-System-Website/src/backend/api/PelangganAPI.php";
 
 const pelangganForm = document.querySelector(".pelanggan_form");
 
-pelangganForm.addEventListener("submit", (_event) => {
+pelangganForm.addEventListener("submit", (event) => {
+    event.preventDefault();
     if (files_received != null) {
         postCSVFile();
     } else if (validateForm()) {
-        const data = new FormData(pelangganForm)
+        const data = new FormData(pelangganForm);
+        console.log(Object.fromEntries(data));
         postPelangganData(data, "Pelanggan ditambah.");
     }
 });
 
 function postCSVFile() {
-    const data = new FormData();
+    const data = new FormData;
     for (const file of files_received) {
         data.append("files[]", file)
     }
@@ -36,7 +38,11 @@ async function postPelangganData(formData, message) {
             body: formData
         })
 
+        console.log(response)
+
         const responseMessage = await FetchHelper.onFulfilled(response)
+        console.log(responseMessage)
+
         if (responseMessage.ok) {
             alert(message);
             setTimeout(location.reload(), 500)
