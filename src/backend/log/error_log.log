@@ -180,3 +180,4 @@ Stack trace:
 [19-Apr-2025 10:51:36 Asia/Kuala_Lumpur] Cannot delete or update a parent row: a foreign key constraint fails (`restorandb`.`belian`, CONSTRAINT `belian_fk_2` FOREIGN KEY (`id_pesanan`) REFERENCES `pesanan` (`id`))
 [19-Apr-2025 11:37:07 Asia/Kuala_Lumpur] Undefined variable $array_jumlah_harga_by_day
 [20-Apr-2025 10:53:11 Asia/Kuala_Lumpur] Undefined array key "pelanggan"
+[21-Apr-2025 17:44:53 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it

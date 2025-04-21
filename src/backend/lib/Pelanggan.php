@@ -44,6 +44,26 @@ class Pelanggan {
         );
     }
 
+    public function updatePelanggan(int $id, array $data): void {
+        $set = "";
+        $types = "";
+        $values = [];
+
+        foreach ($data as $key => $value) {
+            $set .= $key . "= ?";
+            $values[] =  ($key == "password") ? password_hash($value, PASSWORD_DEFAULT) : $value;
+            $types .= $this->Database->getMysqliType($value);
+        }
+        $values[] = $id;
+        $types .= "i";
+
+        $this->Database->executeQuery(
+            "UPDATE pelanggan SET $set WHERE id = ?",
+            $types,
+            $values
+        );
+    }
+
     public function deletePelanggan(int $id): void {
         $this->Database->executeQuery(
             "DELETE FROM pelanggan WHERE id = ?",

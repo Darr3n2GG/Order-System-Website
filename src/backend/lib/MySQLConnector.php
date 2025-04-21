@@ -61,6 +61,14 @@ class MySQLConnector {
         $result = $stmt->get_result()->fetch_all($fetch_mode);
         return $result;
     }
+
+    public function getMysqliType($var) {
+        if (is_int($var)) return 'i';
+        if (is_float($var)) return 'd';
+        if (is_string($var)) return 's';
+        if (is_null($var)) return 's';
+        return 'b';
+    }
 }
 
 

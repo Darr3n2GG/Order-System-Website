@@ -91,9 +91,9 @@ function handleNamaValidation(value) {
         return "Field nama terdapat character invalid.";
     } else if (value.length >= 100) {
         return "Field nama mesti kurang daripada 100.";
+    } else {
+        return "";
     }
-
-    return "";
 }
 
 function handlePasswordValidation(value) {
@@ -103,9 +103,9 @@ function handlePasswordValidation(value) {
         return "Field password terdapat character invalid.";
     } else if (value.length <= 8 || value.length >= 128) {
         return "Field password mesti melebihi 8 dan kurang daripada 128.";
+    } else {
+        return "";
     }
-
-    return "";
 }
 
 function handleNoPasswordValidation(value) {
@@ -113,9 +113,9 @@ function handleNoPasswordValidation(value) {
         return "Field nombor phone kosong.";
     } else if (!isValidPhoneNumber(value)) {
         return "Field password invalid.";
+    } else {
+        return "";
     }
-
-    return "";
 }
 
 function isValidCharacters(value) {

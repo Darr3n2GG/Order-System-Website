@@ -14,12 +14,27 @@ try {
         $array_pelanggan = $Pelanggan->getSemuaSearchablePelanggan();
         echoJsonResponse(true, "PelangganAPI GET request processed.", $array_pelanggan);
     } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        handlePostPesanan();
+        if (isset($_FILES["files"])) {
+            postCSVFiles($_FILES["files"]);
+        } else if (arrayCheckKeysExist(["nama", "password", "no_phone"], $_POST)) {
+            addPelangganData($_POST["nama"], $_POST["password"], $_POST["no_phone"]);
+        } else {
+            throw new Exception("No parameters attached to POST request.", 400);
+        }
     } else if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
-        $id = htmlspecialchars($_GET["id"]);
-        $Pelanggan->deletePelanggan($id);
+        if (isset($_GET["id"])) {
+            $id = htmlspecialchars($_GET["id"]);
+            $Pelanggan->deletePelanggan($id);
+            echoJsonResponse(true, "PelangganAPI DELETE request processed.");
+        } else {
+            throw new Exception("No parameters attached to DELETE request.", 400);
+        }
+    } else if ($_SERVER["REQUEST_METHOD"] == "PATCH") {
+        $body = getPatchBody();
+        $id = $body["id"];
+        $data = $body["data"];
 
-        echoJsonResponse(true, "PelangganAPI DELETE request processed.");
+        $Pelanggan->updatePelanggan($id, $data);
     }
 } catch (Exception $e) {
     error_log($e->getMessage());
@@ -48,39 +63,26 @@ function getDataSemuaPelanggan(): array {
     return $array_pelanggan;
 }
 
-function handlePostPesanan(): void {
-    if (isset($_FILES["files"])) {
-        foreach ($_FILES["files"]["name"] as $index => $name) {
-            $file = [
-                "name" => $name,
-                "tmp_name" => $_FILES["files"]["tmp_name"][$index],
-                "type" => $_FILES["files"]["type"][$index],
-                "size" => $_FILES["files"]["size"][$index],
-                "error" => $_FILES["files"]["error"][$index]
-            ];
+function postCSVFiles(array $files): void {
+    foreach ($files["name"] as $index => $name) {
+        $file = [
+            "name" => $name,
+            "tmp_name" => $files["tmp_name"][$index],
+            "type" => $files["type"][$index],
+            "size" => $files["size"][$index],
+            "error" => $files["error"][$index]
+        ];
 
-            parseCSVFile($file);
-        }
-    } else if (arrayCheckKeysExist(["nama", "password", "no_phone"], $_POST)) {
-        global $Pelanggan;
-
-        $nama = $_POST["nama"];
-        $password = $_POST["password"];
-        $no_phone = $_POST["no_phone"];
-
-        $Pelanggan->addPelanggan($nama, $password, $no_phone);
-        echoJsonResponse(true, "PelangganAPI POST request processed.");
-    } else {
-        throw new Exception("No parameters attached to POST request.", 400);
+        parseCSVFile($file);
     }
+    echoJsonResponse(true, "PelangganAPI POST request processed.");
 }
 
 function parseCSVFile(array $files): void {
     global $Pelanggan;
 
     if ($files['error'] !== UPLOAD_ERR_OK) {
-        echoJsonException(422, "PelangganAPI POST request failed, file upload error: " . $files["error"]);
-        return;
+        throw new Exception("PelangganAPI POST request failed, file upload error: " . $files["error"] . 422);
     }
 
     $handle = fopen($files["tmp_name"], "r");
@@ -100,11 +102,32 @@ function parseCSVFile(array $files): void {
     echoJsonResponse(true, "PelangganAPI POST request processed.");
 }
 
+
+function addPelangganData(string $nama, string $password, string $no_phone) {
+    global $Pelanggan;
+
+    $nama = $_POST["nama"];
+    $password = $_POST["password"];
+    $no_phone = $_POST["no_phone"];
+
+    $Pelanggan->addPelanggan($nama, $password, $no_phone);
+    echoJsonResponse(true, "PelangganAPI POST request processed.");
+}
+
 function arrayCheckKeysExist(array $keys, array $array): bool {
     foreach ($keys as $key) {
-        if (!array_key_exists($key, $array)) {
-            return !array_key_exists($key, $array);
-        }
+        if (!array_key_exists($key, $array)) return false;
     }
     return true;
+}
+
+function getPatchBody(): array {
+    $rawInput = file_get_contents('php://input');
+    $body = json_decode($rawInput, true);
+
+    if (!is_array($body)) {
+        throw new Exception("Invalid JSON input.");
+    }
+
+    return $body;
 }
