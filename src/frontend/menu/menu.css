@@ -1,5 +1,6 @@
 .action_bar {
-  top: 4rem;
+  width: 100%;
+  top: 4.7rem;
   gap: 1vw;
   position: sticky;
   display: flex;
@@ -18,8 +19,8 @@
 }
 
 .food_item_container {
-  display: grid;
-  gap: 1vw;
+  display: grid;    
+  gap: 1rem;
 }
 
 .food_item {
@@ -48,16 +49,20 @@
 
 .food_row {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.5rem;
 }
 
+.food_row:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
 .food_row > h3 {
-  margin-block: 0 1em;
+  margin-block: 0 0;
 }
 
 .food_row > p {
-  margin-block: 0.5em 0;
+  margin-block: 0 0;
 }
 
 .kategori_title {
@@ -68,7 +73,18 @@
   width: 5rem;
 }
 
-.cart_item_input {
+.dialog_kuantiti {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 0.25vw;
+}
+
+.cart_container {
+  display: none;
+}
+
+.cart_dialog_item_input {
   width: 3.5rem;
 }
 
@@ -79,11 +95,19 @@
   gap: 1rem;
 }
 
-.total_price {
+.cart_dialog_total_price {
   margin-right: auto;
 }
 
-.dialog::part(footer) {
+sl-dialog::part(body) {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  overflow-x: auto;
+}
+
+sl-dialog::part(footer) {
   display: flex;
   justify-content: right;
   align-items: center;
@@ -98,16 +122,66 @@
 }
 
 @media screen and (min-width: 1150px) {
+  .content {
+    display: grid;
+    grid-template-columns: 60% 35%;
+    gap: 5%;
+  }
+
+  .left_content {
+    display: flex;
+    float: left;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .search_container {
-    width: 56.5%;
+    width: 100%;
     margin-right: auto;
   }
 
-  .menu {
-    max-width: 60%;
+  .cart_button {
+    display: none;
   }
 
   .food_item_container {
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 47.5% 47.5%;
+    gap: 5%;
   }
+
+  .cart_container {
+    position: sticky;
+    top: 4.7rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 85vh;
+    padding: 2rem;
+    background-color: peachpuff;
+    border-color: grey;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;
+  }
+}
+
+.cart_container h2 {
+  margin-top: 0;
+}
+
+.cart_items {
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.cart_summary {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: auto;
+  margin-bottom: 10px;
+}
+
+.imej_item {
+  width: 50px;
+  height: auto;
 }

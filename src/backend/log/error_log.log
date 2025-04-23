@@ -181,3 +181,5 @@ Stack trace:
 [19-Apr-2025 11:37:07 Asia/Kuala_Lumpur] Undefined variable $array_jumlah_harga_by_day
 [20-Apr-2025 10:53:11 Asia/Kuala_Lumpur] Undefined array key "pelanggan"
 [21-Apr-2025 17:44:53 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+[23-Apr-2025 20:48:22 Asia/Kuala_Lumpur] The number of elements in the type definition string must match the number of bind variables
+

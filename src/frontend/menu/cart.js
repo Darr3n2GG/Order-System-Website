@@ -6,11 +6,11 @@ const cart = new Cart;
 globalThis.logCart = () => cart.getCart();
 
 const cartDialog = document.querySelector(".cart_dialog");
-const itemList = cartDialog.querySelector(".cart_item_list");
+const itemList = cartDialog.querySelector(".cart_dialog_items");
 
 eventBus.addEventListener("AddCartItem", ({ detail }) => {
-    cartDialog.querySelector(".cart_empty").classList.add("hide");
-    addCartItemUI(detail.newItem);
+    cartDialog.querySelector(".cart_dialog_empty").classList.add("hide");
+    addCartDialogItemUI(detail.newItem);
     updateTotalPrice();
 })
 
@@ -57,21 +57,24 @@ itemList.addEventListener("sl-change", ({ target }) => {
 })
 
 itemList.addEventListener("click", ({ target }) => {
-    if (target.classList.contains("cart_delete_item")) {
-        deleteCartItemUI(target.parentNode)
+    if (target.classList.contains("cart_dialog_delete_item")) {
+        deleteCartDialogItemUI(target.parentNode)
         updateTotalPrice();
     }
 })
 
 
-function addCartItemUI({ id, label, nama, kuantiti, harga }) {
+function addCartDialogItemUI({ id, label, nama, kuantiti, harga }) {
     itemList.insertAdjacentHTML("beforeend",
-        `<li data-id="${id}" class="cart_item">
-            <p>${label + id} ${nama}</p>
-            <sl-input class="cart_item_input" type="number" value="${kuantiti}" size="small" required></sl-input>
-            <sl-icon-button class="cart_delete_item" name="trash"></sl-icon-button>
-            <p class="item_total_price">RM ${harga}</p>
-        </li>`
+        `<div data-id="${id}" class="cart_item">
+            <span>${label + id} ${nama}</span>
+            <div class="cart_dialog_spinbox">
+                <sl-icon-button class="cart_dialog_delete_item" name="trash"></sl-icon-button>
+                <sl-input class="cart_dialog_item_input" type="number" value="${kuantiti}" size="small" required></sl-input>
+                <sl-icon-button class="cart_dialog_add" name="plus-square"></sl-icon-button>
+            </div>
+            <span class="item_total_price">RM ${harga}</span>
+        </div>`
     );
 }
 
@@ -92,19 +95,19 @@ function updateItemInput(kuantiti, itemElement) {
 }
 
 function updateTotalPrice() {
-    const totalPrice = cartDialog.querySelector(".total_price");
+    const totalPrice = cartDialog.querySelector(".cart_dialog_total_price");
     if (!totalPrice) {
         console.error("Total price element doesn't exist.")
     }
     totalPrice.innerHTML = "Jumlah Harga : RM " + cart.calculateTotalPrice();
 }
 
-function deleteCartItemUI(element) {
+function deleteCartDialogItemUI(element) {
     const id = parseInt(element.dataset.id, 10);
     cart.deleteCartItem(id);
     element.remove();
     if (cart.getCart.length === 0) {
-        cartDialog.querySelector(".cart_empty").classList.remove("hide");
+        cartDialog.querySelector(".cart_dialog_empty").classList.remove("hide");
     }
 }
 

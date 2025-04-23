@@ -20,16 +20,6 @@
     height: 42.5px;
 }
 
-.nav_guest,
-.nav_registered {
-    margin-left: auto;
-    display: none;
-}
-
-.show_nav {
-    display: block;
-}
-
 .nav_list {
     display: flex;
     flex-direction: row;
