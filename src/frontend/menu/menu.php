@@ -20,6 +20,7 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo auto_version("menu.css"); ?>">
     <link rel="stylesheet" href="<?php echo auto_version("../style.css"); ?>">
+    <link rel="stylesheet" href="<?php echo auto_version("../spinbox/spinbox.css"); ?>">
     <?php
     echoHeaderStylesheet();
     echoShoelaceStyle();
@@ -62,11 +63,15 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
                     <img class="imej_item" src="../../assets/produk/1.png" alt="">
                     <span class="item_name">Burger</span>
                     <span class="item_price">$5.99</span>
-                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                        <sl-button id="decrement" size="small" variant="default">−</sl-button>
-                        <sl-input id="spinbox" type="number" value="0" style="width: 100px;"></sl-input>
-                        <sl-button id="increment" size="small" variant="default">+</sl-button>
-                    </div>
+                    <sl-button-group class="spinbox">
+                        <sl-button class="spinbox_decrement" variant="default" size="small" pill>
+                            <sl-icon name="dash-lg"></sl-icon>
+                        </sl-button>
+                        <sl-input class="spinbox_input" data-width="40px" type="number" value="0" size="small" no-spin-buttons></sl-input>
+                        <sl-button class="spinbox_increment" variant="default" size="small" pill>
+                            <sl-icon name="plus-lg"></sl-icon>
+                        </sl-button>
+                    </sl-button-group>
                 </div>
                 <div class="cart_item">
                     <span class="item_name">🍔 Burger</span>
@@ -95,17 +100,15 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
             <h2>Description :</h2>
             <span class="dialog_description"></span>
         </div>
-        <div class="dialog_kuantiti" slot="footer">
-            <sl-button size="small">
-                <sl-icon name="dash-square"></sl-icon>
+        <sl-button-group class="spinbox" slot="footer">
+            <sl-button class="spinbox_decrement" variant="default" size="medium" pill>
+                <sl-icon name="dash-lg"></sl-icon>
             </sl-button>
-            <sl-input
-                class="dialog_input" type="number" value="1" required>
-            </sl-input>
-            <sl-button size="small">
-                <sl-icon name="plus-square"></sl-icon>
+            <sl-input class="spinbox_input dialog_input" data-width="50px" type="number" value="0" size="medium" no-spin-buttons></sl-input>
+            <sl-button class="spinbox_increment" variant="default" size="medium" pill>
+                <sl-icon name="plus-lg"></sl-icon>
             </sl-button>
-        </div>
+        </sl-button-group>
         <sl-button class="add_item_button" value="" slot="footer" variant="primary">Add Item</sl-button>
     </sl-dialog>
 
@@ -121,6 +124,7 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
     <script type="module" src="<?php echo auto_version("cart.js"); ?>"></script>
     <script type="module" src="<?php echo auto_version("checkout.js"); ?>"></script>
     <script type="module" src="<?php echo auto_version("search.js"); ?>"></script>
+    <script type="module" src="<?php echo auto_version("../spinbox/spinbox.js"); ?>"></script>
     <?php
     echoShoelaceAutoloader();
     echoNoScript();

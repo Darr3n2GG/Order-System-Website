@@ -1,0 +1,21 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css"/>
+    <link rel="stylesheet" href="../style.css">
+    <title>spinbox</title>
+</head>
+<body>
+    <sl-button-group class="spinbox">
+        <sl-button class="spinbox_decrement" variant="default" size="small" pill>
+            <sl-icon name="dash-lg"></sl-icon>
+        </sl-button>
+        <sl-input class="spinbox_input" data-width="40px" type="number" value="0" size="small" no-spin-buttons></sl-input>
+        <sl-button class="spinbox_increment" variant="default" size="small" pill>
+            <sl-icon name="plus-lg"></sl-icon>
+        </sl-button>
+    </sl-button-group>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
+</body>
+</html>
