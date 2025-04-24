@@ -4,6 +4,11 @@ require_once dirname(__FILE__, 3) . "/backend/Autoloader.php";
 require_once dirname(__FILE__, 2) . "/header/header.php";
 require_once dirname(__FILE__, 2) . "/dependencies.php";
 
+$Session = new lib\Session;
+if ($Session->sudahLogMasuk() or $Session->isAdmin()) {
+    header("Location: ../admin/dashboard/dashboard.php");
+}
+
 $Database = createDatabaseConn();
 
 $array_kategori = $Database->readQuery("SELECT kategori.label, kategori.nama from kategori");
@@ -31,7 +36,6 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
 
 <body>
     <?php echoHeader(); ?>
-
     <div class="content container">
         <div class="left_content">
             <div class="action_bar">
@@ -97,7 +101,7 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
             <sl-button class="spinbox_decrement" variant="default" size="medium" pill>
                 <sl-icon name="dash-lg"></sl-icon>
             </sl-button>
-            <sl-input class="spinbox_input dialog_input" type="number" value="0" size="medium" no-spin-buttons></sl-input>
+            <sl-input class="spinbox_input dialog_input" type="number" value="1" size="medium" no-spin-buttons></sl-input>
             <sl-button class="spinbox_increment" variant="default" size="medium" pill>
                 <sl-icon name="plus-lg"></sl-icon>
             </sl-button>

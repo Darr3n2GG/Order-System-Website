@@ -6,12 +6,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: antiquewhite;
+}
+
+.category_button {
+  box-shadow: 0 2px 16px hsla(230, 75%, 32%, .15);
+}
+
+.cart_button {
   box-shadow: 0 2px 16px hsla(230, 75%, 32%, .15);
 }
 
 .search_container {
   width: 70%;
+  box-shadow: 0 2px 16px hsla(230, 75%, 32%, .15);
 }
 
 .menu {

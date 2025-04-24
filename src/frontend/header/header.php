@@ -6,8 +6,6 @@ require_once dirname(__FILE__, 2) . "/dependencies.php";
 
 $Session = new lib\Session;
 
-$admin = false;
-
 function echoHeaderStylesheet(): void {
     $url = auto_version("/Order-System-Website/src/frontend/header/header.css");
     echo "<link rel='stylesheet' href=$url>";

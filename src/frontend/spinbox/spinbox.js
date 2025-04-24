@@ -14,15 +14,15 @@ document.addEventListener("click", (event) => {
         return;
     } else if (button.classList.contains('spinbox_increment')) {
         button.previousElementSibling.value++
-        emitInputEvent(button)
+        emitInputEvent(button.previousElementSibling)
     } else if (button.classList.contains('spinbox_decrement')) {
         button.nextElementSibling.value--
-        emitInputEvent(button)
+        emitInputEvent(button.nextElementSibling)
     }
 });
 
-function emitInputEvent(button) {
-    button.dispatchEvent(new CustomEvent("sl-change", {
+function emitInputEvent(target) {
+    target.dispatchEvent(new CustomEvent("sl-change", {
         bubbles: true,
         composed: true,
     }));

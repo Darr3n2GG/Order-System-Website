@@ -22,7 +22,7 @@ class Pelanggan {
             "SELECT id, nama, no_phone FROM pelanggan WHERE searchable = 1 AND id = ?",
             "i",
             [$id]
-        );
+        )[0];
     }
 
     public function checkPelangganExists(string $id): bool {
@@ -32,6 +32,16 @@ class Pelanggan {
         $stmt->store_result();
 
         return ($stmt->num_rows > 0);
+    }
+
+    public function getTahapPelanggan(string $id): string {
+        return $this->Database->readQuery(
+            "SELECT tahap.tahap AS tahap 
+            FROM pelanggan INNER JOIN tahap ON pelanggan.tahap = tahap.id
+            WHERE pelanggan.id = ?",
+            "i",
+            [$id]
+        )[0]["tahap"];
     }
 
     public function addPelanggan(string $nama, string $password, string $no_phone): void {

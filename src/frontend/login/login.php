@@ -47,7 +47,7 @@ if ($Session->sudahLogMasuk()) {
             <div class="form_group">
                 <label for="input_password">Password</label>
                 <div class="form_input">
-                    <sl-input id="input_password" type="password" name="password" placeholder="Masukkan password" required=""></sl-input>
+                    <sl-input id="input_password" type="password" name="password" placeholder="Masukkan password" password-toggle required></sl-input>
                 </div>
             </div>
             <sl-button class="login_button" type="submit">Log Masuk</sl-button>

@@ -2,6 +2,16 @@
     display: none;
 }
 
+.cart_dialog::part(panel) {
+    height: 50vh;
+}
+
+.cart_dialog_items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .cart_dialog_item {
     display: flex;
     justify-content: baseline;

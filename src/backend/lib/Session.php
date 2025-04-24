@@ -6,12 +6,20 @@ require_once dirname(__FILE__) . "/Pelanggan.php";
 
 class Session {
     private $log_masuk;
-    private $admin;
+    private $admin = false;
+    private $id_pelanggan;
 
     public function __construct() {
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 
         $this->log_masuk = !isset($_SESSION["id_pelanggan"]) ? false : $this->checkIdPelangganValid();
+
+        if ($this->log_masuk) {
+            $this->id_pelanggan = $_SESSION["id_pelanggan"];
+            $this->setAdmin();
+        }
     }
 
     private function checkIdPelangganValid(): bool {
@@ -25,13 +33,22 @@ class Session {
         }
     }
 
+    private function setAdmin(): void {
+        $Pelanggan = new Pelanggan;
+        $this->admin = $Pelanggan->getTahapPelanggan($this->id_pelanggan) === "admin";
+    }
+
     public function sudahLogMasuk() {
         return $this->log_masuk;
     }
 
+    public function isAdmin(): bool {
+        return $this->admin;
+    }
+
     public function getPelangganIDFromSession() {
         if ($this->log_masuk) {
-            return $_SESSION["id_pelanggan"];
+            return $this->id_pelanggan;
         } else {
             return 0; // id 0 is the guest account ( temporary implementation for testing orders )
             // TODO : show popup

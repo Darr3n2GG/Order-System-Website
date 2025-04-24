@@ -20,7 +20,7 @@ eventBus.addEventListener("ItemQuantityUpdated", ({ detail }) => {
         console.error("Item element doesn't exist.")
     }
     const item = detail.item
-    updateItemTotalPrice(item.harga, item.kuantiti, itemElement)
+    updateItemTotalPrice(item.harga, itemElement)
     updateItemInput(item.kuantiti, itemElement)
     updateTotalPrice();
 })
@@ -51,7 +51,7 @@ itemList.addEventListener("sl-change", ({ target }) => {
             console.error("Item element doesn't exist.")
         }
         const cartItem = cart.findCartItem(id);
-        updateItemTotalPrice(cartItem.harga, cartItem.kuantiti, itemElement)
+        updateItemTotalPrice(cartItem.harga, itemElement)
         updateTotalPrice();
     }
 })
@@ -78,17 +78,17 @@ function addCartDialogItemUI({ id, label, nama, kuantiti, harga }) {
                 </sl-button>
             </sl-button-group>
             <sl-icon-button class="cart_dialog_delete_item" name="trash"></sl-icon-button>
-            <span class="item_total_price">RM ${harga}</span>
+            <span class="cart_dialog_item_price">RM ${harga}</span>
         </div>`
     );
 }
 
-function updateItemTotalPrice(harga, kuantiti, itemElement) {
-    const itemTotalPrice = itemElement.querySelector(".item_total_price");
+function updateItemTotalPrice(harga, itemElement) {
+    const itemTotalPrice = itemElement.querySelector(".cart_dialog_item_price");
     if (!itemTotalPrice) {
         console.error("Item total price element doesn't exist.")
     }
-    itemTotalPrice.innerHTML = "RM " + (harga * kuantiti)
+    itemTotalPrice.innerHTML = "RM " + (harga)
 }
 
 function updateItemInput(kuantiti, itemElement) {
@@ -111,7 +111,7 @@ function deleteCartDialogItemUI(element) {
     const id = parseInt(element.dataset.id, 10);
     cart.deleteCartItem(id);
     element.remove();
-    if (cart.getCart.length === 0) {
+    if (cart.getCart().length === 0) {
         cartDialog.querySelector(".cart_dialog_empty").classList.remove("hide");
     }
 }
