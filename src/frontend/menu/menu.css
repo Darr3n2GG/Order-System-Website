@@ -70,7 +70,7 @@
 }
 
 .dialog_input {
-  width: 5rem;
+  width: 50px;
 }
 
 .dialog_kuantiti {
@@ -78,25 +78,6 @@
   justify-content: right;
   align-items: center;
   gap: 0.25vw;
-}
-
-.cart_container {
-  display: none;
-}
-
-.cart_dialog_item_input {
-  width: 3.5rem;
-}
-
-.cart_item {
-  display: flex;
-  justify-content: baseline;
-  align-items: center;
-  gap: 1rem;
-}
-
-.cart_dialog_total_price {
-  margin-right: auto;
 }
 
 sl-dialog::part(body) {
@@ -148,40 +129,4 @@ sl-dialog::part(footer) {
     grid-template-columns: 47.5% 47.5%;
     gap: 5%;
   }
-
-  .cart_container {
-    position: sticky;
-    top: 4.7rem;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 85vh;
-    padding: 2rem;
-    background-color: peachpuff;
-    border-color: grey;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 20px;
-  }
-}
-
-.cart_container h2 {
-  margin-top: 0;
-}
-
-.cart_items {
-  overflow-y: scroll;
-  height: 100%;
-}
-
-.cart_summary {
-  font-weight: bold;
-  font-size: 18px;
-  margin-top: auto;
-  margin-bottom: 10px;
-}
-
-.imej_item {
-  width: 50px;
-  height: auto;
 }

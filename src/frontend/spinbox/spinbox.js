@@ -14,14 +14,16 @@ document.addEventListener("click", (event) => {
         return;
     } else if (button.classList.contains('spinbox_increment')) {
         button.previousElementSibling.value++
+        emitInputEvent(button)
     } else if (button.classList.contains('spinbox_decrement')) {
         button.nextElementSibling.value--
+        emitInputEvent(button)
     }
 });
 
-document.querySelectorAll(".spinbox_input[data-width]").forEach(input => {
-    const width = input.getAttribute("data-width");
-    if (width) {
-        input.style.width = width;
-    }
-});
+function emitInputEvent(button) {
+    button.dispatchEvent(new CustomEvent("sl-change", {
+        bubbles: true,
+        composed: true,
+    }));
+}
