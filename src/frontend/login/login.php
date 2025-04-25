@@ -20,21 +20,28 @@ if ($Session->sudahLogMasuk()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <?php echoHeaderStylesheet(); ?>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="<?php echo auto_version("login.css"); ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
 </head>
 
 <body>
-    <?php echoHeader(); ?>
-    <div class="container content">
+    <div class="content">
         <div class="form_container">
-            <h2>Login</h2>
+            <div class="form_header">
+                <h2>Login</h2>
+                <sl-button class="balik_menu_button" variant="text" href="/Order-System-Website/src/frontend/menu/menu.php">
+                    <span>Balik Menu</span>
+                    <sl-icon slot="prefix" name="house"></sl-icon>
+                </sl-button>
+            </div>
             <form class="form_login" action="/Order-System-Website/src/backend/api/Authenticate.php" method="post">
                 <div class="form_group">
                     <div class="form_input">
-                        <sl-input id="nama" autocomplete="username" type="text" name="nama" placeholder="Masukkan nama" label="Nama" pill required></sl-input>
+                        <sl-input id="nama" autocomplete="username" type="text" name="nama" placeholder="Masukkan nama" pill required>
+                            <label slot="label">Nama</label>
+                            <sl-icon name="person" slot="prefix"></sl-icon>
+                        </sl-input>
                     </div>
                 </div>
 
@@ -47,7 +54,10 @@ if ($Session->sudahLogMasuk()) {
 
                 <div class="form_group">
                     <div class="form_input">
-                        <sl-input id="password" type="password" autocomplete="current-password" name="password" placeholder="Masukkan password" label="Password" password-toggle pill required></sl-input>
+                        <sl-input id="password" type="password" autocomplete="current-password" name="password" placeholder="Masukkan password" password-toggle pill required>
+                            <label slot="label">Password</label>
+                            <sl-icon name="key" slot="prefix"></sl-icon>
+                        </sl-input>
                     </div>
                 </div>
                 <div>

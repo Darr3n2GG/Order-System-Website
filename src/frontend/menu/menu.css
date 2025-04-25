@@ -117,7 +117,7 @@ sl-dialog::part(footer) {
   .content {
     display: grid;
     grid-template-columns: 60% 35%;
-    gap: 5%;
+    gap: 3rem;
   }
 
   .left_content {

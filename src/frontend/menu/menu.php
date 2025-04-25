@@ -66,10 +66,136 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
             <div class="cart_items">
                 <div class="cart_item">
                     <img src="../../assets/produk/1.png" alt="">
-                    <div class="cart_item_options">
-                        <div class="cart_item_data">
-                            <span class="item_name">Name</span>
-                            <span class="item_price">RM 5.99</span>
+                    <div class="cart_item_data">
+                        <div class="cart_item_label">
+                            <span class="cart_item_name">Name</span>
+                            <span class="cart_item_price">RM 5.99</span>
+                        </div>
+                        <sl-button-group class="spinbox">
+                            <sl-button class="spinbox_decrement" variant="default" size="small" pill>
+                                <sl-icon name="dash-lg"></sl-icon>
+                            </sl-button>
+                            <sl-input class="spinbox_input cart_spinbox_input" type="number" value="0" size="small" no-spin-buttons></sl-input>
+                            <sl-button class="spinbox_increment" variant="default" size="small" pill>
+                                <sl-icon name="plus-lg"></sl-icon>
+                            </sl-button>
+                        </sl-button-group>
+                    </div>
+                </div>
+                <div class="cart_item">
+                    <img src="../../assets/produk/1.png" alt="">
+                    <div class="cart_item_data">
+                        <div class="cart_item_label">
+                            <span class="cart_item_name">Name</span>
+                            <span class="cart_item_price">RM 5.99</span>
+                        </div>
+                        <sl-button-group class="spinbox">
+                            <sl-button class="spinbox_decrement" variant="default" size="small" pill>
+                                <sl-icon name="dash-lg"></sl-icon>
+                            </sl-button>
+                            <sl-input class="spinbox_input cart_spinbox_input" type="number" value="0" size="small" no-spin-buttons></sl-input>
+                            <sl-button class="spinbox_increment" variant="default" size="small" pill>
+                                <sl-icon name="plus-lg"></sl-icon>
+                            </sl-button>
+                        </sl-button-group>
+                    </div>
+                </div>
+                <div class="cart_item">
+                    <img src="../../assets/produk/1.png" alt="">
+                    <div class="cart_item_data">
+                        <div class="cart_item_label">
+                            <span class="cart_item_name">Name</span>
+                            <span class="cart_item_price">RM 5.99</span>
+                        </div>
+                        <sl-button-group class="spinbox">
+                            <sl-button class="spinbox_decrement" variant="default" size="small" pill>
+                                <sl-icon name="dash-lg"></sl-icon>
+                            </sl-button>
+                            <sl-input class="spinbox_input cart_spinbox_input" type="number" value="0" size="small" no-spin-buttons></sl-input>
+                            <sl-button class="spinbox_increment" variant="default" size="small" pill>
+                                <sl-icon name="plus-lg"></sl-icon>
+                            </sl-button>
+                        </sl-button-group>
+                    </div>
+                </div>
+                <div class="cart_item">
+                    <img src="../../assets/produk/1.png" alt="">
+                    <div class="cart_item_data">
+                        <div class="cart_item_label">
+                            <span class="cart_item_name">Name</span>
+                            <span class="cart_item_price">RM 5.99</span>
+                        </div>
+                        <sl-button-group class="spinbox">
+                            <sl-button class="spinbox_decrement" variant="default" size="small" pill>
+                                <sl-icon name="dash-lg"></sl-icon>
+                            </sl-button>
+                            <sl-input class="spinbox_input cart_spinbox_input" type="number" value="0" size="small" no-spin-buttons></sl-input>
+                            <sl-button class="spinbox_increment" variant="default" size="small" pill>
+                                <sl-icon name="plus-lg"></sl-icon>
+                            </sl-button>
+                        </sl-button-group>
+                    </div>
+                </div>
+                <div class="cart_item">
+                    <img src="../../assets/produk/1.png" alt="">
+                    <div class="cart_item_data">
+                        <div class="cart_item_label">
+                            <span class="cart_item_name">Name</span>
+                            <span class="cart_item_price">RM 5.99</span>
+                        </div>
+                        <sl-button-group class="spinbox">
+                            <sl-button class="spinbox_decrement" variant="default" size="small" pill>
+                                <sl-icon name="dash-lg"></sl-icon>
+                            </sl-button>
+                            <sl-input class="spinbox_input cart_spinbox_input" type="number" value="0" size="small" no-spin-buttons></sl-input>
+                            <sl-button class="spinbox_increment" variant="default" size="small" pill>
+                                <sl-icon name="plus-lg"></sl-icon>
+                            </sl-button>
+                        </sl-button-group>
+                    </div>
+                </div>
+                <div class="cart_item">
+                    <img src="../../assets/produk/1.png" alt="">
+                    <div class="cart_item_data">
+                        <div class="cart_item_label">
+                            <span class="cart_item_name">Name</span>
+                            <span class="cart_item_price">RM 5.99</span>
+                        </div>
+                        <sl-button-group class="spinbox">
+                            <sl-button class="spinbox_decrement" variant="default" size="small" pill>
+                                <sl-icon name="dash-lg"></sl-icon>
+                            </sl-button>
+                            <sl-input class="spinbox_input cart_spinbox_input" type="number" value="0" size="small" no-spin-buttons></sl-input>
+                            <sl-button class="spinbox_increment" variant="default" size="small" pill>
+                                <sl-icon name="plus-lg"></sl-icon>
+                            </sl-button>
+                        </sl-button-group>
+                    </div>
+                </div>
+                <div class="cart_item">
+                    <img src="../../assets/produk/1.png" alt="">
+                    <div class="cart_item_data">
+                        <div class="cart_item_label">
+                            <span class="cart_item_name">Name</span>
+                            <span class="cart_item_price">RM 5.99</span>
+                        </div>
+                        <sl-button-group class="spinbox">
+                            <sl-button class="spinbox_decrement" variant="default" size="small" pill>
+                                <sl-icon name="dash-lg"></sl-icon>
+                            </sl-button>
+                            <sl-input class="spinbox_input cart_spinbox_input" type="number" value="0" size="small" no-spin-buttons></sl-input>
+                            <sl-button class="spinbox_increment" variant="default" size="small" pill>
+                                <sl-icon name="plus-lg"></sl-icon>
+                            </sl-button>
+                        </sl-button-group>
+                    </div>
+                </div>
+                <div class="cart_item">
+                    <img src="../../assets/produk/1.png" alt="">
+                    <div class="cart_item_data">
+                        <div class="cart_item_label">
+                            <span class="cart_item_name">DOJSSDHDJSJF FJJBFJSBJ</span>
+                            <span class="cart_item_price">RM 5.99</span>
                         </div>
                         <sl-button-group class="spinbox">
                             <sl-button class="spinbox_decrement" variant="default" size="small" pill>

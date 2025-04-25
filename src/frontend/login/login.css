@@ -11,13 +11,30 @@
     margin-top: 5%;
 }
 
-.form_container > h2 {
-    margin-top: 0;
+.form_container h2 {
+    margin: 0;
+}
+
+.form_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.balik_menu_button > span, sl-icon {
+    font-size: medium;
 }
 
 .form_login {
-    width: 25vw;
+    width: 20rem;
     gap: 10px;
     display: flex;
     flex-direction: column;
+}
+
+.form_input > sl-input > label {
+    display: inline-block;
+    font-size: medium;
+    margin-bottom: 0.5rem;
 }
