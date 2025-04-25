@@ -48,7 +48,7 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
                     </sl-menu>
                 </sl-dropdown>
                 <div class="search_container">
-                    <sl-input class="search_bar" placeholder="Search" clearable>
+                    <sl-input class="search_bar" placeholder="Cari Makanan..." clearable>
                         <sl-icon name="search" slot="prefix"></sl-icon>
                     </sl-input>
                 </div>
@@ -85,7 +85,7 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
             </div>
             <footer class="cart_summary">
                 <p>Total: $10.97</p>
-                <sl-button>Checkout</sl-button>
+                <sl-button variant="primary">Checkout</sl-button>
             </footer>
         </aside>
     </div>

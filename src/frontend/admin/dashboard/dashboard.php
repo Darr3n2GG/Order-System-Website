@@ -1,14 +1,8 @@
 <?php
-require_once(dirname(__FILE__, 2) . "/nav_bar/nav_bar.php");
-require_once(dirname(__FILE__, 2) . "/admin_header/admin_header.php");
-require_once(dirname(__FILE__, 4) . "/backend/Database.php");
-require_once(dirname(__FILE__, 4) . "/backend/Masa.php");
-require_once(dirname(__FILE__, 4) . "/backend/Autoloader.php");
-
-$Session = new lib\Session;
-if (!$Session->isAdmin()) {
-    header("Location: ../../menu/menu.php");
-}
+require_once dirname(__FILE__, 2) . "/adminBootstrap.php";
+require_once dirname(__FILE__, 4) . "/backend/Database.php";
+require_once dirname(__FILE__, 4) . "/backend/Masa.php";
+require_once dirname(__FILE__, 4) . "/backend/Autoloader.php";
 
 $Database = createDatabaseConn();
 

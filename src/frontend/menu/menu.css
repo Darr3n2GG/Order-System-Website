@@ -26,7 +26,7 @@
 }
 
 .food_item_container {
-  display: grid;    
+  display: grid;
   gap: 1rem;
 }
 
@@ -39,7 +39,7 @@
   background-color: peachpuff;
   border-style: solid;
   border-width: 1px;
-  border-radius: 20px;
+  border-radius: var(--default-border-radius);
   border-color: grey;
 }
 
@@ -74,6 +74,10 @@
 
 .kategori_title {
   scroll-margin-top: calc(var(--header-height) + 65px);
+}
+
+.kategori_title:not(:last-child) {
+  margin-bottom: 2rem;
 }
 
 .dialog_input {
@@ -134,6 +138,7 @@ sl-dialog::part(footer) {
 
   .food_item_container {
     grid-template-columns: 47.5% 47.5%;
-    gap: 5%;
+    gap: 1rem;
+    justify-content: center;
   }
 }

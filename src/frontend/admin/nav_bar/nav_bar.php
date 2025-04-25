@@ -1,11 +1,14 @@
 <?php
+require_once dirname(__FILE__, 3) . "/dependencies.php";
+
 define("NAVBAR_DASHBOARD", 1);
 define("NAVBAR_PELANGGAN", 2);
 define("NAVBAR_MENU", 3);
 define("NAVBAR_PESANAN", 4);
 
 function echoNavBarStylesheet(): void {
-    echo '<link rel="stylesheet" href="/Order-System-Website/src/frontend/admin/nav_bar/nav_bar.css">';
+    $url = auto_version("/Order-System-Website/src/frontend/admin/nav_bar/nav_bar.css");
+    echo "<link rel='stylesheet' href='$url'>";
 }
 
 function echoNavBar(int $selected): void {

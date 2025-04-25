@@ -1,6 +1,5 @@
 <?php
-require_once dirname(__FILE__, 2) . "/nav_bar/nav_bar.php";
-require_once dirname(__FILE__, 2) . "/admin_header/admin_header.php";
+require_once dirname(__FILE__, 2) . "/adminBootstrap.php";
 require_once dirname(__FILE__, 3) . "/dependencies.php";
 ?>
 

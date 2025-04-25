@@ -38,13 +38,13 @@ function setupItemDialog() {
 }
 
 function handleOnItemClick(target) {
-    if (detectIfNoTextSelected() === true) {
+    if (isNoTextSelected()) {
         const itemID = parseInt(target.dataset.id, 10);
         fetchItemDialogData(itemID);
     }
 }
 
-function detectIfNoTextSelected() {
+function isNoTextSelected() {
     const noTextSelected = !window.getSelection().toString();
     return noTextSelected;
 }

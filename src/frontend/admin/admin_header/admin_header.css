@@ -1,4 +1,4 @@
-.header {
+.admin_header {
     position: fixed;
     top: 0;
     right: 0;
@@ -8,7 +8,7 @@
     z-index: var(--z-fixed);
 }
 
-.nav {
+.admin_header_container {
     height: var(--header-height);
     display: flex;
     justify-content: space-between;

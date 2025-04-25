@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__FILE__, 2) . "/header/header.php";
 require_once dirname(__FILE__, 3) . "/backend/lib/Session.php";
+require_once dirname(__FILE__, 2) . "/dependencies.php";
 
 $redirect_url = "../../frontend/menu/menu.php";
 
@@ -21,38 +22,40 @@ if ($Session->sudahLogMasuk()) {
     <title>Login</title>
     <?php echoHeaderStylesheet(); ?>
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="<?php echo auto_version("login.css"); ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
 </head>
 
 <body>
     <?php echoHeader(); ?>
-    <div class="main container content">
-        <h2>Login</h2>
-        <form action="/Order-System-Website/src/backend/api/Authenticate.php" method="post">
-            <div class="form_group">
-                <label for="input_nama">Nama</label>
-                <div class="form_input">
-                    <sl-input id="input_nama" type="text" name="nama" placeholder="Masukkan nama" required></sl-input>
+    <div class="container content">
+        <div class="form_container">
+            <h2>Login</h2>
+            <form class="form_login" action="/Order-System-Website/src/backend/api/Authenticate.php" method="post">
+                <div class="form_group">
+                    <div class="form_input">
+                        <sl-input id="nama" autocomplete="username" type="text" name="nama" placeholder="Masukkan nama" label="Nama" pill required></sl-input>
+                    </div>
                 </div>
-            </div>
 
-            <!-- <div class="form_group">
-                <label for="phone">Nombor Phone</label>
-                <div class="form_input">
-                    <sl-input id="phone" type="tel" name="phone" placeholder="Masukkan nombor phone" required=""></sl-input>
-                </div>
-            </div> -->
+                <!-- <div class="form_group">
+                    <label for="phone">Nombor Phone</label>
+                    <div class="form_input">
+                        <sl-input id="phone" type="tel" name="phone" placeholder="Masukkan nombor phone" required=""></sl-input>
+                    </div>
+                </div> -->
 
-            <div class="form_group">
-                <label for="input_password">Password</label>
-                <div class="form_input">
-                    <sl-input id="input_password" type="password" name="password" placeholder="Masukkan password" password-toggle required></sl-input>
+                <div class="form_group">
+                    <div class="form_input">
+                        <sl-input id="password" type="password" autocomplete="current-password" name="password" placeholder="Masukkan password" label="Password" password-toggle pill required></sl-input>
+                    </div>
                 </div>
-            </div>
-            <sl-button class="login_button" type="submit">Log Masuk</sl-button>
-            <sl-button href="" variant="text">Daftar</sl-button>
-        </form>
+                <div>
+                    <sl-button class="login_button" type="submit">Log Masuk</sl-button>
+                    <sl-button href="" variant="text">Daftar</sl-button>
+                </div>
+            </form>
+        </div>
     </div>
     <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
     <noscript>Your browser does not support JavaScript!</noscript>

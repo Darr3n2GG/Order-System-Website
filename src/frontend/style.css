@@ -24,6 +24,8 @@
 
   --z-fixed: 699;
   --z-modal: 10000;
+
+  --default-border-radius: var(--sl-border-radius-x-large)
 }
 
 /*=============== BASE ===============*/
