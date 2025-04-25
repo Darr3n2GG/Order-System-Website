@@ -33,6 +33,8 @@ function setupItemDialog() {
     menu.addEventListener("click", ({ target }) => {
         if (target.classList.contains("food_item")) {
             handleOnItemClick(target);
+        } else if (target.closest(".food_item")) {
+            handleOnItemClick(target.closest(".food_item"));
         }
     })
 }

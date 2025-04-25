@@ -105,9 +105,11 @@ class MenuLoader {
                     <sl-tag size='small' pill>$label</sl-tag>
                 </div>
                 <div class='food_row'>
-                    <p><strong>Harga : RM $harga</strong></p>
-                    <sl-icon-button name="plus-square"></sl-icon-button>
+                    <p><strong>RM $harga</strong></p>
                 </div>
+                <sl-button size="small" circle>
+                    <sl-icon name="plus-lg"></sl-icon>
+                </sl-button>
             </div>
         </div>
         ITEM;
