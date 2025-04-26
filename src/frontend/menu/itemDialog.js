@@ -22,7 +22,6 @@ itemDialog.querySelector(".add_item_button").addEventListener("click", () => {
     itemDialog.hide();
 });
 
-// Delay reset for event to be emitted
 itemDialog.addEventListener("sl-after-hide", () => {
     resetItemDialog();
 });

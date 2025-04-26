@@ -10,18 +10,23 @@ if (!isset($_POST["nama"], $_POST["password"])) {
     exit("Please fill both the name and password fields!");
 }
 
-$nama = $_POST["nama"];
-$password = $_POST["password"];
+try {
+    $nama = $_POST["nama"];
+    $password = $_POST["password"];
 
-if (check_nama_exists($nama)) {
-    $hashed_password = get_password_from($nama);
-    if (password_verify($password, $hashed_password)) {
-        $id = get_id_from($nama);
-        session_regenerate_id();
-        $_SESSION["nama"] = $nama;
-        $_SESSION["id_pelanggan"] = $id;
-        header("Location: " . $redirect_url);
+    if (check_nama_exists($nama)) {
+        $hashed_password = get_password_from($nama);
+        if (password_verify($password, $hashed_password)) {
+            $id = get_id_from($nama);
+            session_regenerate_id();
+            $_SESSION["nama"] = $nama;
+            $_SESSION["id_pelanggan"] = $id;
+            header("Location: " . $redirect_url);
+        }
     }
+} catch (Exception $e) {
+    error_log($e->getMessage() . PHP_EOL, dirname(__FILE__, 2) . "/log/error_log.log");
+    exit($e->getMessage());
 }
 
 function check_nama_exists(string $nama): bool {
@@ -32,7 +37,7 @@ function check_nama_exists(string $nama): bool {
     $stmt->execute();
     $stmt->store_result();
 
-    return $stmt->num_rows == 1 ? true : false;
+    return $stmt->num_rows == 1;
 }
 
 function get_password_from(string $nama): string {

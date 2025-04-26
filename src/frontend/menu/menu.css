@@ -4,6 +4,7 @@
   gap: 1vw;
   position: sticky;
   display: flex;
+  z-index: 1;
   justify-content: space-between;
   align-items: center;
 }
@@ -33,6 +34,7 @@
 
 .food_item {
   display: flex;
+  position: relative;
   height: 108px;
   padding: 3px;
   align-items: center;
@@ -47,19 +49,17 @@
 .food_item > img {
   width: clamp(5rem, 10%, 10rem);
   margin: 0.5rem;
-  pointer-events: none;
+}
+
+.food_item > sl-button {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }
 
 .food_info {
-  position: relative;
   width: 100%;
-  margin-left: 2rem;
-}
-
-.food_info > sl-button {
-  position: absolute;
-  left: 80%;
-  bottom: -20%;
+  margin-left: 1rem;
 }
 
 .food_row {

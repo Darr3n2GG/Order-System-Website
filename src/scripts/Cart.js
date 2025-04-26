@@ -22,14 +22,13 @@ export class Cart {
             eventBus.emit("ItemQuantityUpdated", { item: cartItem });
         } else {
             this.addCartItem(item);
-            eventBus.emit("AddCartItem", { newItem: item });
         }
 
         function isItemValid(item) {
             if (!item || typeof item.id === "undefined" || typeof item.kuantiti !== "number" || item.kuantiti < 0) {
                 console.error("Invalid item provided to updateCart:", item);
                 return false;
-            } 
+            }
             return true;
         }
     }
@@ -38,16 +37,20 @@ export class Cart {
         return this.#cart;
     }
 
-    addCartItem({id, kuantiti, harga}) {
+    addCartItem(item) {
+        const { id, label, kuantiti, harga, gambar } = item;
         const cartItem = {
             id: id,
+            label: label,
             kuantiti: kuantiti,
-            harga: harga
+            harga: harga,
+            gambar: gambar
         };
         this.#cart.push(cartItem);
+        eventBus.emit("AddCartItem", { newItem: item });
     }
 
-    updateCartItem(id, kuantiti) {
+    updateItemKuantitiWithId(id, kuantiti) {
         const cartItem = this.findCartItem(id);
         cartItem.kuantiti = kuantiti;
     }
@@ -72,5 +75,9 @@ export class Cart {
             return cartItem;
         }
         return false;
+    }
+
+    resetCart() {
+        this.#cart = [];
     }
 }
