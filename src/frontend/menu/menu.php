@@ -5,7 +5,7 @@ require_once dirname(__FILE__, 2) . "/header/header.php";
 require_once dirname(__FILE__, 2) . "/dependencies.php";
 
 $Session = new lib\Session;
-if ($Session->sudahLogMasuk() or $Session->isAdmin()) {
+if ($Session->isAdmin()) {
     header("Location: ../admin/dashboard/dashboard.php");
 }
 
@@ -37,7 +37,7 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
 <body>
     <?php echoHeader(); ?>
     <div class="content container">
-        <div class="left_content">
+        <div class="main_content">
             <div class="action_bar">
                 <sl-dropdown class="category_dropdown" placement="bottom-start">
                     <sl-icon-button

@@ -5,7 +5,7 @@ namespace lib;
 require_once dirname(__FILE__) . "/Pelanggan.php";
 
 class Session {
-    private $log_masuk;
+    private $log_masuk = false;
     private $admin = false;
     private $id_pelanggan;
 
@@ -14,7 +14,7 @@ class Session {
             session_start();
         }
 
-        $this->log_masuk = !isset($_SESSION["id_pelanggan"]) ? false : $this->checkIdPelangganValid();
+        if (isset($_SESSION["id_pelanggan"])) $this->log_masuk = $this->checkIdPelangganValid();
 
         if ($this->log_masuk) {
             $this->id_pelanggan = $_SESSION["id_pelanggan"];
