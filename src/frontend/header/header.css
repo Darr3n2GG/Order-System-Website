@@ -20,20 +20,14 @@
     height: 42.5px;
 }
 
-.nav_guest,
-.nav_registered {
-    margin-left: auto;
-    display: none;
-}
-
-.show_nav {
-    display: block;
-}
-
 .nav_list {
     display: flex;
     flex-direction: row;
     column-gap: .1rem;
+}
+
+.user_button {
+    --size: 40px
 }
 
 @media screen and (min-width: 1023px) {

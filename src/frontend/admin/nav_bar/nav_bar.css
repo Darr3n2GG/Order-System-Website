@@ -1,0 +1,46 @@
+.side_nav {
+    width: 15%;
+    height: 100%;
+    background-color: peru;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.content {
+    padding: 0.75rem 2rem;
+    margin-left: 15%;
+}
+
+.nav_logo {
+    width: calc(100% - 31px);
+    flex: 1 1 auto;
+    margin: 1rem 1rem;
+    box-sizing: border-box
+}
+
+.nav_link a {
+    color: var(--text-color);
+    margin: 1rem 0;
+    display: flex;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-size: large;
+    align-items: center;
+    gap: 7px;
+}
+
+.nav_link a.active {
+    background-color: #04AA6D;
+    color: white;
+}
+  
+.nav_link a:hover:not(.active) {
+    transition: background 0.5s, color 0.5s;
+    background-color: #555;
+    color: white;
+}

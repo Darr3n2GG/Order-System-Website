@@ -1,9 +1,12 @@
-import { eventBus } from "../../scripts/eventBus.js";
-import fetchHelper from "../../scripts/fetchHelper.js";
-const url = "../../backend/ReceiveCheckout.php"
+import { eventBus } from "../../scripts/EventBus.js";
+import FetchHelper from "../../scripts/FetchHelper.js";
 
-eventBus.addEventListener("checkout", event => {
-    checkout(event.detail);
+const apiUrl = "/Order-System-Website/src/backend/api/CheckoutAPI.php";
+const redirectUrl = "../status/status.html";
+
+eventBus.addEventListener("checkout", ({ detail }) => {
+    const cart = detail;
+    checkout(cart);
 })
 
 function checkout(cart) {
@@ -11,16 +14,15 @@ function checkout(cart) {
     const formData = new FormData();
     formData.append("cart", JSON.stringify(cart));
 
-    fetch(url, {
+    fetch(apiUrl, {
         method: "POST",
         body: formData
     })
-    .then(fetchHelper.onFulfilled)
-    .then(response => {
-        if (response.ok === true) {
-            window.location.href = "../status/status.html";
-        }
-    })
-    .catch(fetchHelper.onRejected);
-    // rickroll?
+        .then(FetchHelper.onFulfilled)
+        .then(response => {
+            if (response.ok) {
+                window.location.href = redirectUrl;
+            }
+        })
+        .catch(FetchHelper.onRejected);
 }

@@ -1,14 +1,20 @@
 <?php
-include_once("../../backend/account.php");
-require_once("../../backend/MySQLConnector.php");
-require_once("../../backend/Makanan.php");
-require_once("MenuLoader.php");
+require_once dirname(__FILE__, 3) .  "/backend/Database.php";
+require_once dirname(__FILE__, 3) . "/backend/Autoloader.php";
+require_once dirname(__FILE__, 2) . "/header/header.php";
+require_once dirname(__FILE__, 2) . "/dependencies.php";
 
-$MySQLConnector = new MySQLConnector("localhost", "root", "", "restorandb");
-$array_kategori = $MySQLConnector->readQuery("SELECT kategori.label, kategori.nama from kategori");
-$objek_makanan = new Makanan;
-$array_makanan = $objek_makanan->getAllMakanan();
-$MenuLoader = new MenuLoader($array_kategori, $array_makanan);
+$Session = new lib\Session;
+if ($Session->isAdmin()) {
+    header("Location: ../admin/dashboard/dashboard.php");
+}
+
+$Database = createDatabaseConn();
+
+$array_kategori = $Database->readQuery("SELECT kategori.label, kategori.nama from kategori");
+$Produk = new lib\Produk;
+$array_produk = $Produk->getSemuaProduk();
+$MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
 ?>
 
 <!DOCTYPE html>
@@ -17,63 +23,92 @@ $MenuLoader = new MenuLoader($array_kategori, $array_makanan);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="menu.css">
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
+    <link rel="stylesheet" href="<?php echo auto_version("menu.css"); ?>">
+    <link rel="stylesheet" href="<?php echo auto_version("cart.css"); ?>">
+    <link rel="stylesheet" href="<?php echo auto_version("../style.css"); ?>">
+    <link rel="stylesheet" href="<?php echo auto_version("../spinbox/spinbox.css"); ?>">
+    <?php
+    echoHeaderStylesheet();
+    echoShoelaceStyle();
+    ?>
     <title>Menu</title>
 </head>
 
 <body>
-    <sl-include class="include_header" src="../header/header.html"></sl-include>
-    <div class="main container">
-        <div class="action_bar">
-            <sl-icon-button class="cart_button icon_border" name="bag"></sl-icon-button>
-            <sl-input class="search" placeholder="Search" clearable>
-                <sl-icon name="search" slot="prefix"></sl-icon>
-            </sl-input>
-            <sl-dropdown class="category_dropdown" placement="bottom-end">
-                <sl-icon-button
-                    class="category_button icon_border" name="list-ul" slot="trigger">
-                </sl-icon-button>
-                <sl-menu class="category_menu">
-                    <?php
-                    $MenuLoader->displayKategoriItem();
-                    ?>
-                </sl-menu>
-            </sl-dropdown>
-        </div>
-        <div class="menu">
-            <?php
-            $MenuLoader->displayKategoriDanMakanan();
-            ?>
-        </div>
-        <div class="item_dialog_container">
-            <sl-dialog class="item_dialog" label="">
-                <img class="dialog_image" src="" alt="food image">
-                <div>
-                    <h2 class="dialog_price">Harga : RM</h2>
-                    <h2>Description :</h2>
-                    <p class="dialog_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    <?php echoHeader(); ?>
+    <div class="content container">
+        <div class="main_content">
+            <div class="action_bar">
+                <sl-dropdown class="category_dropdown" placement="bottom-start">
+                    <sl-icon-button
+                        class="category_button icon_border" name="list-ul" slot="trigger">
+                    </sl-icon-button>
+                    <sl-menu class="category_menu">
+                        <?php $MenuLoader->displayKategoriItem(); ?>
+                    </sl-menu>
+                </sl-dropdown>
+                <div class="search_container">
+                    <sl-input class="search_bar" placeholder="Cari Makanan..." clearable>
+                        <sl-icon name="search" slot="prefix"></sl-icon>
+                    </sl-input>
                 </div>
-                <sl-input
-                    class="dialog_input" type="number" value="1" slot="footer" required>
-                </sl-input>
-                <sl-button class="add_item_button" value="" slot="footer" variant="primary">Add Item</sl-button>
-            </sl-dialog>
+                <sl-icon-button class="cart_button icon_border" name="bag"></sl-icon-button>
+            </div>
+
+            <div class="menu">
+                <h2 class="menu_empty hide">Tiada makanan</h2>
+                <?php $MenuLoader->displayKategoriDanProduk(); ?>
+            </div>
         </div>
-        <div class="cart">
-            <sl-dialog class="cart_dialog" label="Cart">
-                <ul class="cart_item_list">
-                </ul>
-                <sl-button class="checkout_button" slot="footer" variant="primary">Checkout</sl-button>
-            </sl-dialog>
-        </div>
+
+        <aside class="cart_container">
+            <h2>Cart</h2>
+            <div class="cart_items">
+                <h2 class="cart_empty">Tiada makanan di cart</h2>
+            </div>
+            <footer class="cart_summary">
+                <p class="cart_total_price">Jumlah Harga : RM 0</p>
+                <sl-button class="checkout_button" variant="primary">Checkout</sl-button>
+            </footer>
+        </aside>
     </div>
-    <script type="module" src="menu.js"></script>
-    <script type="module" src="itemDialog.js"></script>
-    <script type="module" src="cart.js"></script>
-    <script type="module" src="checkout.js"></script>
+
+    <sl-dialog class="item_dialog" label="">
+        <img class="dialog_image" src="" alt="food image">
+        <div>
+            <h2 class="dialog_price">Harga : RM</h2>
+            <h2>Description :</h2>
+            <span class="dialog_description"></span>
+        </div>
+        <sl-button-group class="spinbox" slot="footer">
+            <sl-button class="spinbox_decrement" variant="default" size="medium" pill>
+                <sl-icon name="dash-lg"></sl-icon>
+            </sl-button>
+            <sl-input class="spinbox_input dialog_input" type="number" value="1" size="medium" no-spin-buttons></sl-input>
+            <sl-button class="spinbox_increment" variant="default" size="medium" pill>
+                <sl-icon name="plus-lg"></sl-icon>
+            </sl-button>
+        </sl-button-group>
+        <sl-button class="add_item_button" value="" slot="footer" variant="primary">Add Item</sl-button>
+    </sl-dialog>
+
+    <sl-dialog class="cart_dialog" label="Cart">
+        <h1 class="cart_dialog_empty">Tiada makanan di cart</h1>
+        <div class="cart_dialog_items"></div>
+        <h2 class="cart_dialog_total_price" slot="footer">Jumlah Harga : RM 0</h2>
+        <sl-button class="dialog_checkout_button" slot="footer" variant="primary">Checkout</sl-button>
+    </sl-dialog>
+
+    <script type="module" src="<?php echo auto_version("menu.js"); ?>"></script>
+    <script type="module" src="<?php echo auto_version("itemDialog.js"); ?>"></script>
+    <script type="module" src="<?php echo auto_version("cart.js"); ?>"></script>
+    <script type="module" src="<?php echo auto_version("checkout.js"); ?>"></script>
+    <script type="module" src="<?php echo auto_version("search.js"); ?>"></script>
+    <script type="module" src="<?php echo auto_version("../spinbox/spinbox.js"); ?>"></script>
+    <?php
+    echoShoelaceAutoloader();
+    echoNoScript();
+    ?>
 </body>
 
 </html>

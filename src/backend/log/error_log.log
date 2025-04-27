@@ -1,0 +1,185 @@
+Custom error: [2] Undefined variable $test. Error on line 12 in C:\xampp\htdocs\Order-System-Website\src\backend\ErrorHandler.php
+Custom error: [2] Undefined variable $burp. Error on line 12 in C:\xampp\htdocs\Order-System-Website\src\backend\ErrorHandler.php
+[15-Mar-2025 15:24:26 Europe/Berlin] Undefined array key "kategori"
+[19-Mar-2025 17:14:48 Asia/Kuala_Lumpur] PHP Fatal error:  Uncaught ErrorException: error_log(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\xampp\htdocs\Order-System-Website\src\backend\JsonResponseHandler.php:3
+Stack trace:
+#0 [internal function]: {closure}(2, 'error_log(): Fa...', 'C:\\xampp\\htdocs...', 3)
+#1 C:\xampp\htdocs\Order-System-Website\src\backend\JsonResponseHandler.php(3): error_log('MySQLConnector:...', 1, 'C:\\xampp\\htdocs...')
+#2 [internal function]: {closure}(Object(TypeError))
+#3 {main}
+  thrown in C:\xampp\htdocs\Order-System-Website\src\backend\JsonResponseHandler.php on line 3
+[19-Mar-2025 17:14:48 Asia/Kuala_Lumpur] Fatal Error: Uncaught ErrorException: error_log(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\xampp\htdocs\Order-System-Website\src\backend\JsonResponseHandler.php:3
+Stack trace:
+#0 [internal function]: {closure}(2, 'error_log(): Fa...', 'C:\\xampp\\htdocs...', 3)
+#1 C:\xampp\htdocs\Order-System-Website\src\backend\JsonResponseHandler.php(3): error_log('MySQLConnector:...', 1, 'C:\\xampp\\htdocs...')
+#2 [internal function]: {closure}(Object(TypeError))
+#3 {main}
+  thrown in C:\xampp\htdocs\Order-System-Website\src\backend\JsonResponseHandler.php on line 3
+
+[19-Mar-2025 17:20:34 Asia/Kuala_Lumpur] MySQLConnector::__construct(): Argument #1 ($hostname) must be of type string, null given, called in C:\xampp\htdocs\Order-System-Website\src\backend\Database.php on line 13
+
+[19-Mar-2025 17:23:48 Asia/Kuala_Lumpur] Undefined variable $Database
+[20-Mar-2025 18:37:30 Asia/Kuala_Lumpur] Class "MenuLoader" not found
+
+[20-Mar-2025 18:43:16 Asia/Kuala_Lumpur] Undefined variable $pelanggan_id
+[20-Mar-2025 18:43:41 Asia/Kuala_Lumpur] Unknown column 'pelanggan_id' in 'field list'
+[20-Mar-2025 18:43:56 Asia/Kuala_Lumpur] Unknown column 'status_id' in 'field list'
+[21-Mar-2025 17:25:37 Asia/Kuala_Lumpur] Array to string conversion
+
+[21-Mar-2025 17:27:55 Asia/Kuala_Lumpur] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '[nombor belian]
+        FROM belian
+        WHERE id_pesanan = ?' at line 1
+
+[21-Mar-2025 17:28:21 Asia/Kuala_Lumpur] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'belian
+        FROM belian
+        WHERE id_pesanan = ?' at line 1
+
+[21-Mar-2025 17:28:27 Asia/Kuala_Lumpur] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '[nombor_belian]
+        FROM belian
+        WHERE id_pesanan = ?' at line 1
+
+[21-Mar-2025 17:28:47 Asia/Kuala_Lumpur] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '[nombor belian]
+        FROM belian
+        WHERE id_pesanan = ?' at line 1
+
+[21-Mar-2025 17:40:19 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+
+[21-Mar-2025 17:40:27 Asia/Kuala_Lumpur] Unknown column 'id_makanan' in 'field list'
+
+[21-Mar-2025 17:40:34 Asia/Kuala_Lumpur] Undefined variable $belian_length
+
+[21-Mar-2025 17:44:12 Asia/Kuala_Lumpur] Undefined array key "harga"
+
+[21-Mar-2025 17:45:09 Asia/Kuala_Lumpur] Undefined array key "harga"
+
+[21-Mar-2025 17:45:29 Asia/Kuala_Lumpur] Array to string conversion
+
+[21-Mar-2025 17:46:07 Asia/Kuala_Lumpur] Undefined array key "harga"
+
+[23-Mar-2025 12:41:39 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+
+[23-Mar-2025 12:52:44 Asia/Kuala_Lumpur] A non-numeric value encountered
+
+[23-Mar-2025 12:53:07 Asia/Kuala_Lumpur] A non-numeric value encountered
+
+[23-Mar-2025 12:55:24 Asia/Kuala_Lumpur] A non-numeric value encountered
+
+[23-Mar-2025 12:56:44 Asia/Kuala_Lumpur] A non-numeric value encountered
+
+[23-Mar-2025 12:57:07 Asia/Kuala_Lumpur] A non-numeric value encountered
+
+[23-Mar-2025 12:58:03 Asia/Kuala_Lumpur] A non-numeric value encountered
+
+[23-Mar-2025 13:53:43 Asia/Kuala_Lumpur] Undefined variable $week_start
+
+[23-Mar-2025 13:54:07 Asia/Kuala_Lumpur] Undefined variable $week_start
+
+[23-Mar-2025 13:58:22 Asia/Kuala_Lumpur] getWeekStart(): Return value must be of type int, string returned
+
+[23-Mar-2025 17:53:22 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+
+[23-Mar-2025 17:56:27 Asia/Kuala_Lumpur] Array to string conversion
+
+[25-Mar-2025 19:18:07 Asia/Kuala_Lumpur] Constant SECONDS_IN_A_DAY already defined
+
+[25-Mar-2025 19:18:09 Asia/Kuala_Lumpur] Constant SECONDS_IN_A_DAY already defined
+
+[25-Mar-2025 19:19:13 Asia/Kuala_Lumpur] [day] cannot be float.
+
+[25-Mar-2025 19:19:15 Asia/Kuala_Lumpur] [day] cannot be float.
+
+[25-Mar-2025 19:19:49 Asia/Kuala_Lumpur] [day] cannot be float.
+
+[25-Mar-2025 19:20:07 Asia/Kuala_Lumpur] [day] cannot be float.
+
+[25-Mar-2025 19:20:17 Asia/Kuala_Lumpur] [day] cannot be float.
+
+[25-Mar-2025 19:20:26 Asia/Kuala_Lumpur] [day] cannot be float.
+
+[25-Mar-2025 19:20:46 Asia/Kuala_Lumpur] [day] cannot be float.
+
+[25-Mar-2025 19:21:40 Asia/Kuala_Lumpur] [day] cannot be float.
+
+[25-Mar-2025 19:21:49 Asia/Kuala_Lumpur] [day] cannot be float.
+
+[25-Mar-2025 20:30:00 Asia/Kuala_Lumpur] Undefined variable $jumlah_harga_pesanan
+
+[25-Mar-2025 20:30:06 Asia/Kuala_Lumpur] Undefined variable $jumlah_harga_pesanan
+
+[25-Mar-2025 20:30:07 Asia/Kuala_Lumpur] Undefined variable $jumlah_harga_pesanan
+
+[25-Mar-2025 20:30:08 Asia/Kuala_Lumpur] Undefined variable $jumlah_harga_pesanan
+
+[25-Mar-2025 20:30:09 Asia/Kuala_Lumpur] Undefined variable $jumlah_harga_pesanan
+
+[25-Mar-2025 20:30:10 Asia/Kuala_Lumpur] Undefined variable $jumlah_harga_pesanan
+
+[25-Mar-2025 20:30:11 Asia/Kuala_Lumpur] Undefined variable $jumlah_harga_pesanan
+
+[25-Mar-2025 20:30:17 Asia/Kuala_Lumpur] Undefined variable $jumlah_harga_pesanan
+
+[26-Mar-2025 20:07:17 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+[26-Mar-2025 20:07:25 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+[26-Mar-2025 20:24:28 Asia/Kuala_Lumpur] Undefined constant "DATE_FORMAT"
+
+[26-Mar-2025 20:24:29 Asia/Kuala_Lumpur] Undefined constant "DATE_FORMAT"
+
+[26-Mar-2025 20:24:29 Asia/Kuala_Lumpur] Undefined constant "DATE_FORMAT"
+
+[26-Mar-2025 20:24:30 Asia/Kuala_Lumpur] Undefined constant "DATE_FORMAT"
+
+[04-Apr-2025 10:06:19 Asia/Kuala_Lumpur] getHargaFromIDProduk(): Return value must be of type int, float returned
+
+[04-Apr-2025 10:06:39 Asia/Kuala_Lumpur] getHargaFromIDProduk(): Return value must be of type int, float returned
+
+[04-Apr-2025 10:06:46 Asia/Kuala_Lumpur] getHargaFromIDProduk(): Return value must be of type int, float returned
+
+[09-Apr-2025 13:19:45 Europe/Berlin] Call to undefined function createDatabaseConn()
+
+[09-Apr-2025 19:20:26 Asia/Kuala_Lumpur] Class "Pesanan" not found
+
+[10-Apr-2025 22:58:39 Asia/Kuala_Lumpur] No previous query on the connection or query did not update an AUTO_INCREMENT value
+[10-Apr-2025 22:58:51 Asia/Kuala_Lumpur] No previous query on the connection or query did not update an AUTO_INCREMENT value
+[10-Apr-2025 22:59:30 Asia/Kuala_Lumpur] No previous query on the connection or query did not update an AUTO_INCREMENT value
+[10-Apr-2025 23:01:21 Asia/Kuala_Lumpur] No previous query on the connection or query did not update an AUTO_INCREMENT value
+[10-Apr-2025 23:01:27 Asia/Kuala_Lumpur] No previous query on the connection or query did not update an AUTO_INCREMENT value
+[10-Apr-2025 23:02:22 Asia/Kuala_Lumpur] No previous query on the connection or query did not update an AUTO_INCREMENT value, value = 0
+[10-Apr-2025 23:04:21 Asia/Kuala_Lumpur] No previous query on the connection or query did not update an AUTO_INCREMENT value.
+[10-Apr-2025 23:06:01 Asia/Kuala_Lumpur] Unknown column 'id_produk' in 'field list'
+[16-Apr-2025 16:30:26 Asia/Kuala_Lumpur] Undefined array key "kuantiti_pesanan"
+[16-Apr-2025 16:30:51 Asia/Kuala_Lumpur] Undefined array key "kuantiti_pesanan"
+[16-Apr-2025 16:31:03 Asia/Kuala_Lumpur] Undefined array key "kuantiti_pesanan"
+[16-Apr-2025 16:31:17 Asia/Kuala_Lumpur] Undefined array key "kuantiti_pesanan"
+[16-Apr-2025 16:31:38 Asia/Kuala_Lumpur] Undefined array key "kuantiti_pesanan"
+[16-Apr-2025 16:31:53 Asia/Kuala_Lumpur] Undefined array key "kuantiti_pesanan"
+[16-Apr-2025 16:32:04 Asia/Kuala_Lumpur] Undefined array key "kuantiti_pesanan"
+[16-Apr-2025 16:32:15 Asia/Kuala_Lumpur] Undefined array key "kuantiti_pesanan"
+[16-Apr-2025 16:32:21 Asia/Kuala_Lumpur] Undefined array key "kuantiti_pesanan"
+[16-Apr-2025 16:32:44 Asia/Kuala_Lumpur] Array to string conversion
+[16-Apr-2025 16:34:55 Asia/Kuala_Lumpur] Undefined array key "kuantiti_pesanan"
+[17-Apr-2025 23:28:50 Asia/Kuala_Lumpur] fopen(): Argument #1 ($filename) must be of type string, array given
+
+[17-Apr-2025 23:30:51 Asia/Kuala_Lumpur] fopen(): Argument #1 ($filename) must be of type string, array given
+
+[17-Apr-2025 23:32:50 Asia/Kuala_Lumpur] fopen(): Argument #1 ($filename) must be of type string, array given
+
+[18-Apr-2025 22:55:32 Asia/Kuala_Lumpur] fopen(): Argument #1 ($filename) must be of type string, array given
+
+[18-Apr-2025 23:03:09 Asia/Kuala_Lumpur] Undefined array key "error"
+[18-Apr-2025 23:11:45 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+[18-Apr-2025 23:11:48 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+[18-Apr-2025 23:11:58 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+[18-Apr-2025 23:12:32 Asia/Kuala_Lumpur] Undefined array key "myfile"
+[18-Apr-2025 23:13:50 Asia/Kuala_Lumpur] lib\Pelanggan::addPelanggan(): Argument #2 ($password) must be of type int, string given, called in C:\xampp\htdocs\Order-System-Website\src\backend\api\PelangganAPI.php on line 85
+
+[18-Apr-2025 23:31:50 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+[18-Apr-2025 23:31:51 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+[18-Apr-2025 23:31:51 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+[19-Apr-2025 10:47:26 Asia/Kuala_Lumpur] Cannot delete or update a parent row: a foreign key constraint fails (`restorandb`.`pesanan`, CONSTRAINT `pesanan_fk1` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id`))
+[19-Apr-2025 10:47:43 Asia/Kuala_Lumpur] Cannot delete or update a parent row: a foreign key constraint fails (`restorandb`.`pesanan`, CONSTRAINT `pesanan_fk1` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id`))
+[19-Apr-2025 10:51:36 Asia/Kuala_Lumpur] Cannot delete or update a parent row: a foreign key constraint fails (`restorandb`.`belian`, CONSTRAINT `belian_fk_2` FOREIGN KEY (`id_pesanan`) REFERENCES `pesanan` (`id`))
+[19-Apr-2025 11:37:07 Asia/Kuala_Lumpur] Undefined variable $array_jumlah_harga_by_day
+[20-Apr-2025 10:53:11 Asia/Kuala_Lumpur] Undefined array key "pelanggan"
+[21-Apr-2025 17:44:53 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
+[23-Apr-2025 20:48:22 Asia/Kuala_Lumpur] The number of elements in the type definition string must match the number of bind variables
+

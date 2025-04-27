@@ -1,0 +1,3 @@
+.spinbox_input::part(input) {
+    text-align: center; 
+}
