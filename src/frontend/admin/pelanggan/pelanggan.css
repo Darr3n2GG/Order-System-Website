@@ -9,10 +9,19 @@
     float: left;
 }
 
-.form_pelanggan > sl-input {
+.form_pelanggan > sl-input, sl-select {
     margin: 8px 0;
 }
 
 .files_list {
     list-style: inside;
+}
+
+.form_container {
+    display: flex;
+    justify-content: center;
+}
+
+.edit_form {
+    width: 75%;
 }

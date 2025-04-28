@@ -57,9 +57,10 @@ formPelanggan.addEventListener("input", (event) => {
 
 
 const formValidity = {
-    nama: { condition: (value) => handleNamaValidation(value) },
-    no_phone: { condition: (value) => handleNoPasswordValidation(value) },
-    password: { condition: (value) => handlePasswordValidation(value) }
+    tambah_nama: { condition: (value) => handleNamaValidation(value) },
+    tambah_no_phone: { condition: (value) => handleNoPasswordValidation(value) },
+    tambah_password: { condition: (value) => handlePasswordValidation(value) },
+    tambah_tahap: { condition: (value) => handleTahapValidation(value) }
 };
 
 function validateField(fieldId) {
@@ -118,6 +119,14 @@ function handleNoPasswordValidation(value) {
     }
 }
 
+function handleTahapValidation(value) {
+    if (value === "") {
+        return "Field tahap kosong.";
+    } else {
+        return "";
+    }
+}
+
 function isValidCharacters(value) {
     const whitelistPattern = /^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]+$/;
     return whitelistPattern.test(value);
@@ -155,3 +164,10 @@ fileInput.getInput().addEventListener("change", ({ target }) => {
         }
     }
 });
+
+
+const editDialog = document.querySelector(".edit_dialog");
+
+editDialog.querySelector(".cancel_button").addEventListener("click", () => {
+    editDialog.hide()
+})

@@ -30,15 +30,19 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
         <div class="toolbar">
             <h2>Toolbar</h2>
             <form class="form_pelanggan" autocomplete="off">
-                <sl-input placeholder="Nama" id="nama" name="nama" type="text" autocomplete="off">
+                <sl-input placeholder="Nama" id="tambah_nama" name="nama" type="text" autocomplete="off">
                     <sl-icon name="person-circle" slot="prefix"></sl-icon>
                 </sl-input>
-                <sl-input placeholder="Nombor Phone" id="no_phone" name="no_phone" type="tel" autocomplete="off">
+                <sl-input placeholder="Nombor Phone" id="tambah_no_phone" name="no_phone" type="tel" autocomplete="off">
                     <sl-icon name="telephone" slot="prefix"></sl-icon>
                 </sl-input>
-                <sl-input placeholder="Password" id="password" name="password" type="password" autocomplete="off" password-toggle>
+                <sl-input placeholder="Password" id="tambah_password" name="password" type="password" autocomplete="off" password-toggle>
                     <sl-icon name="key" slot="prefix"></sl-icon>
                 </sl-input>
+                <sl-select placeholder="Tahap" id="tambah_tahap" placement="bottom">
+                    <sl-option value="1">User</sl-option>
+                    <sl-option value="2">Admin</sl-option>
+                </sl-select>
                 <sl-button type="submit">
                     <sl-icon slot="prefix" name="plus-square"></sl-icon>
                     Tambah pelanggan
@@ -52,6 +56,22 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
             </ul>
         </div>
     </div>
+
+    <sl-dialog class="edit_dialog" label="Edit Dialog">
+        <div class="form_container">
+            <form class="edit_form">
+                <sl-input id="edit_nama" label="Nama" placeholder="Masukkan Nama" required></sl-input>
+                <sl-input id="edit_nombor_phone" label="Nombor Phone" placeholder="Masukkan Nombor Phone" required></sl-input>
+                <sl-select value="1" id="edit_tahap" placement="bottom">
+                    <sl-option value="1">User</sl-option>
+                    <sl-option value="2">Admin</sl-option>
+                </sl-select>
+            </form>
+        </div>
+        <sl-button slot="footer">Edit</sl-button>
+        <sl-button type="submit" form="edit_form" class="cancel_button" slot="footer" variant="danger">Cancel</sl-button>
+    </sl-dialog>
+
     <script type="module" src="<?php echo auto_version("table_pelanggan.js"); ?>"></script>
     <script type="module" src="<?php echo auto_version("pelanggan.js"); ?>"></script>
     <?php

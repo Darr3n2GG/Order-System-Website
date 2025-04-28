@@ -2,7 +2,7 @@ import FetchHelper from "../../../scripts/FetchHelper.js";
 
 const ApiUrl = "/Order-System-Website/src/backend/api/PelangganAPI.php"
 
-let editingRow = null;
+const editDialog = document.querySelector(".edit_dialog");
 
 const tablePelanggan = new Tabulator("#table_pelanggan", {
     ajaxURL: ApiUrl,
@@ -12,29 +12,10 @@ const tablePelanggan = new Tabulator("#table_pelanggan", {
     rowHeight: 40,
     layout: "fitData",
     columns: [
-        {
-            title: "ID",
-            field: "id",
-        },
-        {
-            title: "Nama",
-            field: "nama",
-            width: 177.8 + 87,
-            editor: "input",
-            editable: (cell) => updateEditable(cell),
-            cellEditing: function (cell) {
-                editingRow = cell.getRow();
-            }
-        },
-        {
-            title: "Nombor Phone",
-            field: "no_phone",
-            editor: "input",
-            editable: (cell) => updateEditable(cell),
-            cellEditing: function (cell) {
-                editingRow = cell.getRow();
-            }
-        },
+        { title: "ID", field: "id", },
+        { title: "Nama", field: "nama", width: 177.8 + 73 },
+        { title: "Nombor Phone", field: "no_phone", },
+        { title: "Tahap", field: "tahap" },
         {
             title: "",
             field: "update",
@@ -44,7 +25,7 @@ const tablePelanggan = new Tabulator("#table_pelanggan", {
             formatter: function () {
                 return '<sl-icon-button name="pencil"></sl-icon-button>';
             },
-            cellClick: (e, cell) => toggleUpdate(e, cell)
+            cellClick: (e, cell) => showEditDialog(e, cell)
         },
         {
             title: "",
@@ -58,29 +39,7 @@ const tablePelanggan = new Tabulator("#table_pelanggan", {
             cellClick: (e, cell) => deletePelanggan(e, cell)
         },
     ],
-    // TODO : fix this aaaa 11:33pm
-    rowUpdated: function (row) {
-        const data = row.getData();
-        console.log("Row was updated:", data);
-    }
 });
-
-document.addEventListener("mousedown", (event) => {
-    if (!editingRow) return;
-
-    const rowElement = editingRow.getElement();
-    // TODO : make sure when id column pressed it will still lose focus
-    if (!rowElement.contains(event.target)) {
-        handleEditLostFocus(editingRow);
-        editingRow = null;
-    }
-});
-
-function handleEditLostFocus(row) {
-    const data = row.getData();
-    data._editable = false;
-    row.update(data, { done: true });
-}
 
 async function getTableData(url, config) {
     try {
@@ -100,48 +59,20 @@ async function getTableData(url, config) {
     }
 }
 
-function toggleUpdate(e, cell) {
+const tahap_enum = {
+    user: "1",
+    admin: "2"
+}
+
+function showEditDialog(e, cell) {
     const row = cell.getRow();
     const data = row.getData();
-    const isCurrentlyEditable = data._editable;
 
-    resetEditable(cell)
+    document.getElementById("edit_nama").value = data.nama;
+    document.getElementById("edit_nombor_phone").value = data.no_phone;
+    document.getElementById("edit_tahap").value = tahap_enum[data.tahap];
 
-    if (!isCurrentlyEditable) {
-        data._editable = !data._editable;
-        row.update(data).then(() => {
-            const columns = cell.getTable().getColumns();
-
-            for (let col of columns) {
-                const field = col.getField();
-                const colDef = col.getDefinition();
-
-                if (field && colDef.editable) {
-                    const editableCell = row.getCell(field);
-                    if (editableCell) {
-                        editableCell.edit();
-                        break;
-                    }
-                }
-            }
-        });
-    }
-}
-
-function resetEditable(cell) {
-    const table = cell.getTable();
-    table.getRows().forEach(row => {
-        const data = row.getData();
-        if (data._editable) {
-            data._editable = false;
-            row.update(data);
-        }
-    });
-}
-
-function updateEditable(cell) {
-    const data = cell.getRow().getData();
-    return data._editable;
+    editDialog.show()
 }
 
 async function deletePelanggan(e, cell) {

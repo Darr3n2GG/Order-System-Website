@@ -13,13 +13,17 @@ class Pelanggan {
 
     public function getSemuaSearchablePelanggan(): array {
         return $this->Database->readQuery(
-            "SELECT id, nama, no_phone FROM pelanggan WHERE searchable = 1 ORDER BY id ASC"
+            "SELECT pelanggan.id, pelanggan.nama, pelanggan.no_phone, tahap.tahap
+            FROM pelanggan INNER JOIN tahap ON pelanggan.tahap = tahap.id
+            WHERE searchable = 1 ORDER BY id ASC"
         );
     }
 
     public function findPelanggan(string $id): array {
         return $this->Database->readQuery(
-            "SELECT id, nama, no_phone FROM pelanggan WHERE searchable = 1 AND id = ?",
+            "SELECT pelanggan.id, pelanggan.nama, pelanggan.no_phone, tahap.tahap
+            FROM pelanggan INNER JOIN tahap ON pelanggan.tahap = tahap.id
+            WHERE searchable = 1 AND id = ?",
             "i",
             [$id]
         )[0];

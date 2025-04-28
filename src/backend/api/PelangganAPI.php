@@ -93,6 +93,7 @@ function parseCSVFile(array $files): void {
             $nama = $data[0];
             $password = $data[1];
             $no_phone = $data[2];
+            $tahap = $data[3];
 
             $Pelanggan->addPelanggan($nama, $password, $no_phone);
         }

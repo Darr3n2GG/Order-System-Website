@@ -24,8 +24,8 @@ $pesanan_count = getPesananCount();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="<?php echo auto_version("../../style.css"); ?>">
+    <link rel="stylesheet" href="<?php echo auto_version("dashboard.css"); ?>">
     <?php
     echoNavBarStylesheet();
     echoAdminHeaderStylesheet();
@@ -44,7 +44,7 @@ $pesanan_count = getPesananCount();
     echoAdminHeader("Dashboard");
     ?>
     <div class="content container">
-        Minggu ini :
+        <h2>Minggu ini :</h2>
         <div class="row_kecil">
             <div class="item_kecil">
                 <h2>Most ordered food / drink</h2>

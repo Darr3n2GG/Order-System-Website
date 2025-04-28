@@ -25,7 +25,9 @@
   --z-fixed: 699;
   --z-modal: 10000;
 
-  --default-border-radius: var(--sl-border-radius-x-large)
+  --shadow-medium: var(--sl-shadow-medium);
+
+  --radius-x-large: var(--sl-border-radius-x-large);
 }
 
 /*=============== BASE ===============*/

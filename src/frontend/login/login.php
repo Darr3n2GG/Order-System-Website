@@ -20,13 +20,16 @@ if ($Session->sudahLogMasuk()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="<?php echo auto_version("../style.css"); ?>">
     <link rel="stylesheet" href="<?php echo auto_version("login.css"); ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
 </head>
 
 <body>
     <div class="content">
+        <div class="image_container">
+            <img src="../../assets/gong.png" alt="Logo">
+        </div>
         <div class="form_container">
             <div class="form_header">
                 <h2>Login</h2>

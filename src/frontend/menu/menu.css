@@ -10,16 +10,16 @@
 }
 
 .category_button {
-  box-shadow: 0 2px 16px hsla(230, 75%, 32%, .15);
+  box-shadow: var(--shadow-medium);
 }
 
 .cart_button {
-  box-shadow: 0 2px 16px hsla(230, 75%, 32%, .15);
+  box-shadow: var(--shadow-medium);
 }
 
 .search_container {
   width: 70%;
-  box-shadow: 0 2px 16px hsla(230, 75%, 32%, .15);
+  box-shadow: var(--shadow-medium);
 }
 
 .menu {
@@ -43,7 +43,7 @@
   background-color: peachpuff;
   border-style: solid;
   border-width: 1px;
-  border-radius: var(--default-border-radius);
+  border-radius: var(--radius-x-large);
   border-color: grey;
 }
 

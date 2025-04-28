@@ -29,11 +29,12 @@ itemDialog.addEventListener("sl-after-hide", () => {
 
 function setupItemDialog() {
     const menu = document.querySelector(".menu");
-    menu.addEventListener("click", ({ target }) => {
-        if (target.classList.contains("food_item")) {
-            handleOnItemClick(target);
-        } else if (target.closest(".food_item")) {
-            handleOnItemClick(target.closest(".food_item"));
+    menu.addEventListener("click", (event) => {
+        if (event.target.classList.contains("food_item")) {
+            handleOnItemClick(event.target);
+        } else if (event.target.closest(".food_item")) {
+            event.stopPropagation();
+            handleOnItemClick(event.target.closest(".food_item"));
         }
     })
 }

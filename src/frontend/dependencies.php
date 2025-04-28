@@ -28,8 +28,6 @@ function echoNoScript(): void {
  *  Given a file, i.e. /css/base.css, replaces it with a string containing the
  *  file's mtime, i.e. /css/base.1221534296.css.
  *
- *  Updates browser cache ( I think ) when file is updated.
- *
  *  @param $file  The file to be loaded. works on all type of paths.
  */
 function auto_version($file) {
