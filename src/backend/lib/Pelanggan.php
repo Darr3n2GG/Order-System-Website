@@ -29,6 +29,16 @@ class Pelanggan {
         )[0];
     }
 
+    public function findPelangganWhere(string $nama, string $no_phone): array {
+        return $this->Database->readQuery(
+            "SELECT pelanggan.id, pelanggan.nama, pelanggan.no_phone, tahap.tahap
+            FROM pelanggan INNER JOIN tahap ON pelanggan.tahap = tahap.id
+            WHERE searchable = 1 AND pelanggan.nama = ? AND pelanggan.no_phone = ?",
+            "ss",
+            [$nama, $no_phone]
+        );
+    }
+
     public function checkPelangganExists(string $id): bool {
         $stmt = $this->Database->prepareStatement("SELECT id FROM pelanggan WHERE searchable = 1 AND id = ?");
         $stmt->bind_param("i", $id);

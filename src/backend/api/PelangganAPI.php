@@ -11,8 +11,11 @@ try {
     $Pelanggan = new lib\Pelanggan;
 
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
-        $array_pelanggan = $Pelanggan->getSemuaSearchablePelanggan();
-        echoJsonResponse(true, "PelangganAPI GET request processed.", $array_pelanggan);
+        if (isset($_GET)) {
+            $array_pelanggan = $Pelanggan->getSemuaSearchablePelanggan();
+            echoJsonResponse(true, "PelangganAPI GET request processed.", $array_pelanggan);
+        } else if (isset($_GET["nama"]) or isset($_GET["no_phone"])) {
+        }
     } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_FILES["files"])) {
             postCSVFiles($_FILES["files"]);

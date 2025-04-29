@@ -44,26 +44,28 @@ $pesanan_count = getPesananCount();
     echoAdminHeader("Dashboard");
     ?>
     <div class="content container">
-        <h2>Minggu ini :</h2>
-        <div class="row_kecil">
-            <div class="item_kecil">
-                <h2>Most ordered food / drink</h2>
-                <h1><?php echo $nama_produk; ?></h1>
+        <div class="dashboard_container">
+            <h2>Minggu ini :</h2>
+            <div class="row_kecil">
+                <div class="item_kecil">
+                    <h2>Most ordered food / drink</h2>
+                    <h1><?php echo $nama_produk; ?></h1>
+                </div>
+                <div class="item_kecil">
+                    <h2>Number of orders this week</h2>
+                    <h1><?php echo $pesanan_count; ?></h1>
+                </div>
             </div>
-            <div class="item_kecil">
-                <h2>Number of orders this week</h2>
-                <h1><?php echo $pesanan_count; ?></h1>
-            </div>
-        </div>
-        <div class="row_besar">
-            <div class="item_besar">
-                <h2>Table Pesanan</h2>
-                <div id="table_pesanan"></div>
-            </div>
-            <div class="item_besar">
-                <div class="container_carta">
-                    <h2>Carta Revenue</h2>
-                    <canvas id="carta_revenue"></canvas>
+            <div class="row_besar">
+                <div class="item_besar">
+                    <h2>Table Pesanan</h2>
+                    <div id="table_pesanan"></div>
+                </div>
+                <div class="item_besar">
+                    <div class="container_carta">
+                        <h2>Carta Revenue</h2>
+                        <canvas id="carta_revenue"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
