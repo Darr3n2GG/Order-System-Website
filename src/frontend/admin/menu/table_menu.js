@@ -1,6 +1,5 @@
 import FetchHelper from "../../../scripts/FetchHelper.js";
 
-
 const ApiUrl = "/Order-System-Website/src/backend/api/ProdukAPI.php"
 
 const editProdukDialog = document.querySelector(".edit_produk_dialog");
@@ -11,6 +10,7 @@ const tablePelanggan = new Tabulator("#table_menu", {
     }).toString(),
     ajaxConfig: { method: "GET" },
     ajaxRequestFunc: (url, config) => getTableData(url, config),
+    printAsHtml: true,
     height: 510,
     rowHeight: 40,
     layout: "fitData",

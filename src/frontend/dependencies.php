@@ -9,11 +9,11 @@ function echoShoelaceAutoloader(): void {
 }
 
 function echoTabulatorStyle(): void {
-    echo '<link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">';
+    echo '<link href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/6.3.1/css/tabulator.min.css" rel="stylesheet">';
 }
 
 function echoTabulator(): void {
-    echo '<script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>';
+    echo '<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/6.3.1/js/tabulator.min.js"></script>';
 }
 
 function echoChartJS(): void {
