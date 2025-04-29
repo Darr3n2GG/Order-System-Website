@@ -183,3 +183,31 @@ Stack trace:
 [21-Apr-2025 17:44:53 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
 [23-Apr-2025 20:48:22 Asia/Kuala_Lumpur] The number of elements in the type definition string must match the number of bind variables
 
+[29-Apr-2025 20:53:11 Asia/Kuala_Lumpur] Invalid JSON input.
+[29-Apr-2025 20:54:17 Asia/Kuala_Lumpur] Invalid JSON input.
+[29-Apr-2025 20:59:49 Asia/Kuala_Lumpur] Invalid JSON input:Syntax error
+[29-Apr-2025 21:11:34 Asia/Kuala_Lumpur] Invalid JSON input:Syntax error
+[29-Apr-2025 21:13:05 Asia/Kuala_Lumpur] Invalid JSON input:Syntax error
+[29-Apr-2025 21:13:43 Asia/Kuala_Lumpur] implode(): Argument #1 ($array) must be of type array, string given
+
+[29-Apr-2025 21:15:07 Asia/Kuala_Lumpur] ------WebKitFormBoundarySLhujxEjt9yhMCxs
+Content-Disposition: form-data; name="id"
+
+1
+------WebKitFormBoundarySLhujxEjt9yhMCxs
+Content-Disposition: form-data; name="nama"
+
+test
+------WebKitFormBoundarySLhujxEjt9yhMCxs
+Content-Disposition: form-data; name="no_phone"
+
+0123456789
+------WebKitFormBoundarySLhujxEjt9yhMCxs
+Content-Disposition: form-data; name="tahap"
+
+1
+------WebKitFormBoundarySLhujxEjt9yhMCxs--
+
+[29-Apr-2025 21:15:07 Asia/Kuala_Lumpur] Invalid JSON input:Syntax error
+[29-Apr-2025 21:20:27 Asia/Kuala_Lumpur] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?nama= ?no_phone= ? WHERE id = ?' at line 1
+[29-Apr-2025 21:22:14 Asia/Kuala_Lumpur] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE id = ?' at line 1

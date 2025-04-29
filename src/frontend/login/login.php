@@ -19,7 +19,7 @@ if ($Session->sudahLogMasuk()) {
     <meta http-equiv="refresh" content="300">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Log Masuk</title>
     <link rel="stylesheet" href="<?php echo auto_version("../style.css"); ?>">
     <link rel="stylesheet" href="<?php echo auto_version("login.css"); ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
@@ -32,7 +32,7 @@ if ($Session->sudahLogMasuk()) {
         </div>
         <div class="form_container">
             <div class="form_header">
-                <h2>Login</h2>
+                <h2>Log Masuk</h2>
                 <sl-button class="balik_menu_button" variant="text" href="/Order-System-Website/src/frontend/menu/menu.php">
                     <span>Balik Menu</span>
                     <sl-icon slot="prefix" name="house"></sl-icon>

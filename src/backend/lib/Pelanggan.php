@@ -69,15 +69,16 @@ class Pelanggan {
     }
 
     public function updatePelanggan(int $id, array $data): void {
-        $set = "";
-        $types = "";
+        $fields = [];
         $values = [];
+        $types = "";
 
         foreach ($data as $key => $value) {
-            $set .= $key . "= ?";
-            $values[] =  ($key == "password") ? password_hash($value, PASSWORD_DEFAULT) : $value;
+            $fields[] = "$key = ?";
+            $values[] = ($key == "password") ? password_hash($value, PASSWORD_DEFAULT) : $value;
             $types .= $this->Database->getMysqliType($value);
         }
+        $set = implode(', ', $fields);
         $values[] = $id;
         $types .= "i";
 
@@ -87,6 +88,7 @@ class Pelanggan {
             $values
         );
     }
+
 
     public function deletePelanggan(int $id): void {
         $this->Database->executeQuery(

@@ -35,7 +35,7 @@ $pesanan_count = getPesananCount();
     <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>Admin</title>
+    <title>Dashboard</title>
 </head>
 
 <body>

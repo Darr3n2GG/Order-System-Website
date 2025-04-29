@@ -33,11 +33,12 @@ try {
             throw new Exception("No parameters attached to DELETE request.", 400);
         }
     } else if ($_SERVER["REQUEST_METHOD"] == "PATCH") {
-        $body = getPatchBody();
-        $id = $body["id"];
-        $data = $body["data"];
+        $data = getPatchBody();
+        $id = $data["id"];
+        unset($data["id"]);
 
         $Pelanggan->updatePelanggan($id, $data);
+        echoJsonResponse(true, "PelangganAPI PATCH request processed.");
     }
 } catch (Exception $e) {
     error_log($e->getMessage());
@@ -129,8 +130,12 @@ function getPatchBody(): array {
     $rawInput = file_get_contents('php://input');
     $body = json_decode($rawInput, true);
 
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        throw new Exception("Invalid JSON input:" . json_last_error_msg());
+    }
+
     if (!is_array($body)) {
-        throw new Exception("Invalid JSON input.");
+        throw new Exception("Expected JSON object as associative array.");
     }
 
     return $body;

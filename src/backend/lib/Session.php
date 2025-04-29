@@ -28,7 +28,7 @@ class Session {
         if ($Pelanggan->checkPelangganExists($_SESSION["id_pelanggan"])) {
             return true;
         } else {
-            unset($_SESSION["id_pelanggan"]);
+            session_destroy();
             return false;
         }
     }

@@ -24,6 +24,9 @@ function echoNavBar(int $selected): void {
         case NAVBAR_PELANGGAN:
             $pelanggan = "active";
             break;
+        case NAVBAR_MENU:
+            $menu = "active";
+            break;
     }
 
     echo <<<NAV
@@ -42,7 +45,7 @@ function echoNavBar(int $selected): void {
             </a>
         </li>
         <li class="nav_link">
-            <a class="$menu" href="#">
+            <a class="$menu" href="/Order-System-Website/src/frontend/admin/menu/senarai_menu.php">
                 <sl-icon name="menu-button-wide"></sl-icon>
                 Menu
             </a>

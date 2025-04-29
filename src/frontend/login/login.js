@@ -1,41 +1,21 @@
+import FormValidator from "../../scripts/FormValidator.js";
+
 const formLogin = document.querySelector(".form_login");
 
 formLogin.addEventListener("submit", (event) => {
     event.preventDefault()
-    if (validateForm(formLoginValidity)) { formLogin.submit() }
+    if (FormValidator.validateForm(formLoginValidity)) { formLogin.submit() }
 })
 
 formLogin.addEventListener("input", (event) => {
     const id = event.target.id;
-    validateField(formLoginValidity, id);
+    FormValidator.validateField(formLoginValidity, id);
 })
 
 const formLoginValidity = {
     nama: { condition: (value) => handleNamaValidation(value) },
     password: { condition: (value) => handlePasswordValidation(value) }
 };
-
-function validateField(formValidity, fieldId) {
-    const { condition } = formValidity[fieldId];
-    const field = document.getElementById(fieldId);
-
-    const message = condition(field.value.trim())
-    if (message === "") {
-        field.setCustomValidity("");
-        return true;
-    } else {
-        field.setCustomValidity(message);
-        field.reportValidity();
-        return false;
-    }
-}
-
-function validateForm(formValidity) {
-    for (const fieldId in formValidity) {
-        if (validateField(formValidity, fieldId) === false) { return false; }
-    }
-    return true;
-}
 
 function handleNamaValidation(value) {
     if (value === "") {

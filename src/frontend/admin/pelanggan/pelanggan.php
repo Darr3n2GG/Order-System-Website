@@ -78,16 +78,17 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
     <sl-dialog class="edit_dialog" label="Edit Dialog">
         <div class="form_container">
             <form class="edit_form">
-                <sl-input id="edit_nama" label="Nama" placeholder="Masukkan Nama" required></sl-input>
-                <sl-input id="edit_nombor_phone" label="Nombor Phone" placeholder="Masukkan Nombor Phone" required></sl-input>
-                <sl-select value="1" id="edit_tahap" placement="bottom">
+                <input id="edit_id" name="id" type="text" hidden>
+                <sl-input id="edit_nama" name="nama" label="Nama" placeholder="Masukkan Nama" required></sl-input>
+                <sl-input id="edit_nombor_phone" name="no_phone" label="Nombor Phone" placeholder="Masukkan Nombor Phone" required></sl-input>
+                <sl-select id="edit_tahap" name="tahap" value="1" placement="bottom">
                     <sl-option value="1">User</sl-option>
                     <sl-option value="2">Admin</sl-option>
                 </sl-select>
             </form>
         </div>
-        <sl-button slot="footer">Edit</sl-button>
-        <sl-button type="submit" form="edit_form" class="cancel_button" slot="footer" variant="danger">Cancel</sl-button>
+        <sl-button class="edit_button" slot="footer">Edit</sl-button>
+        <sl-button class="cancel_button" slot="footer" variant="danger">Cancel</sl-button>
     </sl-dialog>
 
     <script type="module" src="<?php echo auto_version("table_pelanggan.js"); ?>"></script>
