@@ -1,9 +1,12 @@
-.container_pelanggan {
-    padding: 2rem;
+.container_menu {
     height: 100%;
     display: grid;
     grid-template-columns: 47.5% 25%;
     gap: 3rem;
+}
+
+.menu_tab_group {
+    padding: 2rem;
 }
 
 .table_container {
@@ -14,6 +17,11 @@
 
 .table_container sl-input {
     width: 75%;
+}
+
+.gambar_produk {
+    width: 35px;
+    height: auto;
 }
 
 .filter, .filter_item {
@@ -30,7 +38,7 @@
     margin-right: 0.5rem;
 }
 
-#table_pelanggan {
+#table_menu {
     border-radius: 10px;
     float: left;
 }
@@ -39,7 +47,7 @@
     float: left;
 }
 
-.form_pelanggan > sl-input, sl-select {
+.form_menu > sl-input, sl-select, sl-textarea {
     margin: 8px 0;
 }
 

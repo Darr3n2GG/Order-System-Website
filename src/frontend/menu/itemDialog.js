@@ -51,15 +51,16 @@ function isNoTextSelected() {
     return noTextSelected;
 }
 
-function fetchItemDialogData(item_id) {
+function fetchItemDialogData(itemID) {
     const url = apiUrl + "?" + new URLSearchParams({
-        id: item_id
+        type: "data",
+        id: itemID
     }).toString();
     fetch(url)
         .then(FetchHelper.onFulfilled)
         .then(({ details }) => {
-            setSelectedItem(details.item);
-            showItemDialog(details.item);
+            setSelectedItem(details);
+            showItemDialog(details);
         })
         .catch(FetchHelper.onRejected);
 }

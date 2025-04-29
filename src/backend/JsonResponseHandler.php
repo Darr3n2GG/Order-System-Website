@@ -21,7 +21,7 @@ register_shutdown_function(function () {
     }
 });
 
-function echoJsonResponse(bool $ok, string $message, array|null $details = null): void {
+function echoJsonResponse(bool $ok, string $message, mixed $details = null): void {
     $response = ["ok" => $ok, "message" => $message];
     if ($details) {
         $response = array_merge($response, ["details" => $details]);

@@ -73,7 +73,7 @@ img {
 }
 
 .content {
-    margin-top: 5rem;
+    margin-top: var(--header-height);
 }
 
 .container {

@@ -26,13 +26,14 @@ function debounce(callback, delay) {
 
 function fetchFoodData() {
     const url = apiUrl + "?" + new URLSearchParams({
+        type: "html",
         keyword: searchBar.value
     }).toString()
 
     fetch(url)
         .then(FetchHelper.onFulfilled)
         .then(({ details }) => {
-            renderFoodItems(details.items)
+            renderFoodItems(details)
         })
         .catch(FetchHelper.onRejected);
 }

@@ -9,11 +9,11 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
-    <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo auto_version("../../style.css"); ?>">
     <link rel="stylesheet" href="<?php echo auto_version("pelanggan.css"); ?>">
     <?php
+    echoShoelaceStyle();
+    echoTabulatorStyle();
     echoAdminHeaderStylesheet();
     echoNavBarStylesheet();
     ?>
@@ -41,7 +41,7 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
                 <div id="table_pelanggan"></div>
             </div>
             <div class="toolbar">
-                <h2>Toolbar</h2>
+                <h2>Tambah Pelanggan</h2>
                 <form class="form_pelanggan" autocomplete="off">
                     <sl-input placeholder="Nama" id="tambah_nama" name="nama" type="text" autocomplete="off">
                         <label slot="label">Nama</label>
@@ -60,13 +60,15 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
                         <sl-option value="1">User</sl-option>
                         <sl-option value="2">Admin</sl-option>
                     </sl-select>
-                    <sl-button type="submit">
-                        <sl-icon slot="prefix" name="plus-square"></sl-icon>
-                        Tambah pelanggan
-                    </sl-button>
-                    <sl-tooltip content="CSV must have a header">
-                        <sl-button class="csv_input">Import CSV</sl-button>
-                    </sl-tooltip>
+                    <div class="form_buttons">
+                        <sl-button type="submit">
+                            <sl-icon slot="prefix" name="plus-square"></sl-icon>
+                            Tambah pelanggan
+                        </sl-button>
+                        <sl-tooltip content="CSV mesti ada header">
+                            <sl-button class="csv_input">Import CSV</sl-button>
+                        </sl-tooltip>
+                    </div>
                 </form>
                 <ul class="files_list">
                     <p class="include_tag hide">Files included :</p>
