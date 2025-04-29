@@ -7,7 +7,7 @@ $Database = createDatabaseConn();
 $redirect_url = "../../frontend/menu/menu.php";
 
 if (!isset($_POST["nama"], $_POST["password"])) {
-    exit("Please fill both the name and password fields!");
+    exit("Sila masukkan field nama dan password.");
 }
 
 try {

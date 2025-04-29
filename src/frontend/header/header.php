@@ -34,7 +34,7 @@ function echoHeader(): void {
                     <sl-button href="../login/login.php">Log Masuk</sl-button>
                 </li>
                 <li class="nav_item">
-                    <sl-button variant="primary">Daftar</sl-button>
+                    <sl-button href="../daftar/daftar.php" variant="primary">Daftar</sl-button>
                 </li>
             </ul>
         </div>

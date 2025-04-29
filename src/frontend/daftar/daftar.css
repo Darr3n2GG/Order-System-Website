@@ -38,7 +38,7 @@ body {
     font-size: medium;
 }
 
-.form_login {
+.form_daftar {
     width: 20rem;
     gap: 10px;
     display: flex;
@@ -54,7 +54,7 @@ body {
 @media screen and (min-width: 1150px) {
     .content {
         padding: 2rem;
-        margin: 9% 0;
+        margin: 6% 0;
         gap: 5%;
         background-color: var(--body-color);
         border-radius: var(--radius-x-large);
