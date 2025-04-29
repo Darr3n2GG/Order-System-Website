@@ -26,34 +26,36 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
     echoAdminHeader("Senarai Pelanggan");
     ?>
     <div class="content container">
-        <div id="table_pelanggan"></div>
-        <div class="toolbar">
-            <h2>Toolbar</h2>
-            <form class="form_pelanggan" autocomplete="off">
-                <sl-input placeholder="Nama" id="tambah_nama" name="nama" type="text" autocomplete="off">
-                    <sl-icon name="person-circle" slot="prefix"></sl-icon>
-                </sl-input>
-                <sl-input placeholder="Nombor Phone" id="tambah_no_phone" name="no_phone" type="tel" autocomplete="off">
-                    <sl-icon name="telephone" slot="prefix"></sl-icon>
-                </sl-input>
-                <sl-input placeholder="Password" id="tambah_password" name="password" type="password" autocomplete="off" password-toggle>
-                    <sl-icon name="key" slot="prefix"></sl-icon>
-                </sl-input>
-                <sl-select placeholder="Tahap" id="tambah_tahap" placement="bottom">
-                    <sl-option value="1">User</sl-option>
-                    <sl-option value="2">Admin</sl-option>
-                </sl-select>
-                <sl-button type="submit">
-                    <sl-icon slot="prefix" name="plus-square"></sl-icon>
-                    Tambah pelanggan
-                </sl-button>
-                <sl-tooltip content="CSV must have a header">
-                    <sl-button class="csv_input">Import CSV</sl-button>
-                </sl-tooltip>
-            </form>
-            <ul class="files_list">
-                <p class="include_tag hide">Files included :</p>
-            </ul>
+        <div class="container_pelanggan">
+            <div id="table_pelanggan"></div>
+            <div class="toolbar">
+                <h2>Toolbar</h2>
+                <form class="form_pelanggan" autocomplete="off">
+                    <sl-input placeholder="Nama" id="tambah_nama" name="nama" type="text" autocomplete="off">
+                        <sl-icon name="person-circle" slot="prefix"></sl-icon>
+                    </sl-input>
+                    <sl-input placeholder="Nombor Phone" id="tambah_no_phone" name="no_phone" type="tel" autocomplete="off">
+                        <sl-icon name="telephone" slot="prefix"></sl-icon>
+                    </sl-input>
+                    <sl-input placeholder="Password" id="tambah_password" name="password" type="password" autocomplete="off" password-toggle>
+                        <sl-icon name="key" slot="prefix"></sl-icon>
+                    </sl-input>
+                    <sl-select placeholder="Tahap" id="tambah_tahap" placement="bottom">
+                        <sl-option value="1">User</sl-option>
+                        <sl-option value="2">Admin</sl-option>
+                    </sl-select>
+                    <sl-button type="submit">
+                        <sl-icon slot="prefix" name="plus-square"></sl-icon>
+                        Tambah pelanggan
+                    </sl-button>
+                    <sl-tooltip content="CSV must have a header">
+                        <sl-button class="csv_input">Import CSV</sl-button>
+                    </sl-tooltip>
+                </form>
+                <ul class="files_list">
+                    <p class="include_tag hide">Files included :</p>
+                </ul>
+            </div>
         </div>
     </div>
 

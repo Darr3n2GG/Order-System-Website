@@ -1,3 +1,8 @@
+.container_pelanggan {
+    padding: 4rem;
+    height: 100%;
+}
+
 #table_pelanggan {
     width: 50%;
     border-radius: 10px;

@@ -40,11 +40,11 @@ function validateForm(formValidity) {
 
 function handleNamaValidation(value) {
     if (value === "") {
-        return "Field nama kosong.";
+        return "Input nama kosong.";
     } else if (!isValidCharacters(value)) {
-        return "Field nama terdapat character invalid.";
+        return "Input nama terdapat character tidak sah.";
     } else if (value.length >= 100) {
-        return "Field nama mesti kurang daripada 100.";
+        return "Input nama mesti kurang daripada 100.";
     } else {
         return "";
     }
@@ -52,9 +52,9 @@ function handleNamaValidation(value) {
 
 function handlePhoneValidation(value) {
     if (value === "") {
-        return "Field nombor phone kosong.";
+        return "Input nombor phone kosong.";
     } else if (!isValidPhoneNumber(value)) {
-        return "Field password invalid.";
+        return "Input password tidak sah.";
     } else {
         return "";
     }
@@ -62,11 +62,11 @@ function handlePhoneValidation(value) {
 
 function handlePasswordValidation(value) {
     if (value === "") {
-        return "Field password kosong.";
+        return "Input password kosong.";
     } else if (!isValidCharacters(value)) {
-        return "Field password terdapat character invalid.";
+        return "Input password terdapat character tidak sah.";
     } else if (value.length <= 8 || value.length >= 128) {
-        return "Field password mesti melebihi 8 dan kurang daripada 128.";
+        return "Input password mesti melebihi 8 dan kurang daripada 128.";
     } else {
         return "";
     }

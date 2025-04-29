@@ -22,7 +22,17 @@ try {
             $_SESSION["nama"] = $nama;
             $_SESSION["id_pelanggan"] = $id;
             header("Location: " . $redirect_url);
+        } else {
+            echo "<script type='text/javascript'>
+                    alert('Password tidak betul.');
+                    window.location.href = '/Order-System-Website/src/frontend/login/login.php';
+                </script>";
         }
+    } else {
+        echo "<script type='text/javascript'>
+                alert('Nama tidak wujud.');
+                window.location.href = '/Order-System-Website/src/frontend/login/login.php';
+            </script>";
     }
 } catch (Exception $e) {
     error_log($e->getMessage() . PHP_EOL, dirname(__FILE__, 2) . "/log/error_log.log");
