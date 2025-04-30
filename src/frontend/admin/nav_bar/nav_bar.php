@@ -41,7 +41,7 @@ function echoNavBar(int $selected): void {
         <li class="nav_link">
             <a class="$pelanggan" href="/Order-System-Website/src/frontend/admin/pelanggan/pelanggan.php">
                 <sl-icon name="person-gear"></sl-icon>
-                Pengguna
+                Pelanggan
             </a>
         </li>
         <li class="nav_link">

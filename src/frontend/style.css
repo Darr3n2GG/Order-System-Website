@@ -35,6 +35,19 @@
     box-sizing: border-box;
 }
   
+:not(:defined) {
+    visibility: hidden;
+}
+
+/* body {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+  
+body.loaded {
+    opacity: 1;
+} */
+
 html {
     scroll-behavior: smooth;
 }
@@ -50,10 +63,6 @@ body {
     background-color: var(--body-color);
     color: var(--text-color);
     margin: 0;
-}
-
-:not(:defined) {
-    visibility: hidden;
 }
   
 input,

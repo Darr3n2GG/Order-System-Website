@@ -20,6 +20,10 @@ function echoChartJS(): void {
     echo '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>';
 }
 
+function echoScreenTransition(): void {
+    echo '<script type="module" src="../../../scripts/ScreenTransition.js"></script>';
+}
+
 function echoNoScript(): void {
     echo '<noscript>Your browser does not support JavaScript!</noscript>';
 }
