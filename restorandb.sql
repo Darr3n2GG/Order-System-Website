@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2025 at 02:09 PM
+-- Generation Time: Apr 30, 2025 at 01:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,7 +43,11 @@ INSERT INTO `belian` (`id`, `id_pesanan`, `id_produk`, `kuantiti`) VALUES
 (19, 25, 1, 1),
 (20, 26, 2, 1),
 (23, 29, 1, 5),
-(24, 29, 4, 16);
+(24, 29, 4, 16),
+(25, 30, 1, 1),
+(26, 31, 2, 1),
+(27, 31, 19, 1),
+(28, 32, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -110,7 +114,7 @@ INSERT INTO `pelanggan` (`id`, `nama`, `password`, `no_phone`, `tahap`, `searcha
 (0, 'Guest', '', '', 1, 0),
 (1, 'test', '$2y$10$Iwq4fqiwI3v0n3vt4ETOFeRHkPycoFHHGcAVKF3xPFpKZw/l4b3LS', '0123456789', 1, 1),
 (21, 'admin', '$2y$10$1o7IcyhanhddKtxPoGW1..0zORzucPlyCQtY1y1/X1HdYZcGDaQlC', '0116664444', 2, 1),
-(22, 'Henery', '$2y$10$.Voyd0P.Zg5HkbwouZYkb.4H5RdDg0qgUIClYkMJwjzgXu3.eN0tW', '0128889898', 1, 1);
+(22, 'Henry', '$2y$10$XnKg.DPR3epk0nhudRj7R.V5xYE/It.ElHf8PAwWPFKDskM./VxF2', '0123456789', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -135,7 +139,10 @@ INSERT INTO `pesanan` (`id`, `id_pelanggan`, `id_status`, `no_meja`, `tarikh`, `
 (24, 0, 1, 1, '2025-04-10', 'dine-in'),
 (25, 0, 1, 1, '2025-04-10', 'dine-in'),
 (26, 1, 1, 1, '2025-04-16', 'dine-in'),
-(29, 0, 1, 1, '2025-04-26', 'dine-in');
+(29, 0, 1, 1, '2025-04-26', 'dine-in'),
+(30, 0, 1, 1, '2025-04-29', 'dine-in'),
+(31, 22, 1, 1, '2025-04-30', 'dine-in'),
+(32, 22, 1, 1, '2025-04-30', 'dine-in');
 
 -- --------------------------------------------------------
 
@@ -175,7 +182,7 @@ INSERT INTO `produk` (`id`, `nama`, `id_kategori`, `detail`, `harga`, `gambar`) 
 (16, '100-plus', 5, '', 2, ''),
 (17, 'Sprite', 5, '', 2, ''),
 (18, 'Pepsi', 5, '', 2, ''),
-(19, 'Chrysanthemum tea', 5, '', 3, ''),
+(19, 'Kekwa tea', 5, '', 3, ''),
 (20, 'Hibiscus tea', 5, '', 4, ''),
 (21, 'Water', 5, '', 0.5, '');
 
@@ -286,7 +293,7 @@ ALTER TABLE `tahap`
 -- AUTO_INCREMENT for table `belian`
 --
 ALTER TABLE `belian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -304,13 +311,13 @@ ALTER TABLE `meja`
 -- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `produk`
