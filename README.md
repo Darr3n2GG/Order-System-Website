@@ -6,6 +6,6 @@
 - Tabulator
 - Chart.js
 
-## Dependencies ( not really needed )
+## Dependencies ( not required )
 - Composer
 - PHPUnit
