@@ -3,6 +3,8 @@ import FetchHelper from "../../../scripts/FetchHelper.js";
 
 const ApiUrl = "/Order-System-Website/src/backend/api/KategoriAPI.php"
 
+const editKategoriDialog = document.querySelector(".edit_kategori_dialog");
+
 const tablePelanggan = new Tabulator("#table_kategori", {
     ajaxURL: ApiUrl,
     ajaxConfig: { method: "GET" },
@@ -56,3 +58,15 @@ async function getTableData(url, config) {
         return FetchHelper.onRejected(error);
     }
 }
+
+function showEditDialog(e, cell) {
+    const row = cell.getRow();
+    const data = row.getData();
+
+    document.getElementById("edit_kategori_id").value = data.id;
+    document.getElementById("edit_kategori_label").value = data.label;
+    document.getElementById("edit_kategori_nama").value = data.nama;
+
+    editKategoriDialog.show()
+}
+

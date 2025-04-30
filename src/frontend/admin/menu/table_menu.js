@@ -85,3 +85,7 @@ function showEditDialog(e, cell) {
 
     editProdukDialog.show()
 }
+
+tablePelanggan.on("tableBuilt", () => {
+    // tablePelanggan.print();
+});

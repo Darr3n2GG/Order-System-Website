@@ -34,6 +34,7 @@ $Database = createDatabaseConn();
                 <sl-tab slot="nav" panel="produk">Produk</sl-tab>
                 <sl-tab slot="nav" panel="kategori">Kategori</sl-tab>
 
+                <!-- Produk Panel -->
                 <sl-tab-panel name="produk">
                     <div class="container_menu">
                         <div class="table_container">
@@ -82,6 +83,8 @@ $Database = createDatabaseConn();
                         </div>
                     </div>
                 </sl-tab-panel>
+
+                <!-- Kategori Panel -->
                 <sl-tab-panel name="kategori">
                     <div class="container_menu">
                         <div class="table_container">
@@ -142,8 +145,26 @@ $Database = createDatabaseConn();
                 </sl-button>
             </form>
         </div>
-        <sl-button class="edit_button" slot="footer">Edit</sl-button>
-        <sl-button class="cancel_button" slot="footer" variant="danger">Cancel</sl-button>
+        <sl-button id="edit_produk_button" class="edit_button" slot="footer">Edit</sl-button>
+        <sl-button id="cancel_edit_produk_button" class="cancel_button" slot="footer" variant="danger">Cancel</sl-button>
+    </sl-dialog>
+
+    <sl-dialog class="edit_kategori_dialog" label="Edit Kategori">
+        <div class="form_container">
+            <form class="edit_kategori_form">
+                <input id="edit_kategori_id" name="id" hidden>
+                <sl-input placeholder="Label" id="edit_kategori_label" name="label" type="text" autocomplete="off">
+                    <label slot="label">Label</label>
+                    <sl-icon name="bookmark" slot="prefix"></sl-icon>
+                </sl-input>
+                <sl-input placeholder="Nama" id="edit_kategori_nama" name="nama" type="text" autocomplete="off">
+                    <label slot="label">Nama</label>
+                    <sl-icon name="card-text" slot="prefix"></sl-icon>
+                </sl-input>
+            </form>
+        </div>
+        <sl-button id="edit_produk_button" class="edit_button" slot="footer">Edit</sl-button>
+        <sl-button id="cancel_edit_produk_button" class="cancel_button" slot="footer" variant="danger">Cancel</sl-button>
     </sl-dialog>
 
     <script type="module" src="<?php echo auto_version("table_menu.js"); ?>"></script>

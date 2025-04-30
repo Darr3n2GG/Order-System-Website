@@ -86,7 +86,6 @@ const editFormValidity = {
 };
 
 editDialog.querySelector(".edit_button").addEventListener("click", () => {
-    console.log("detected")
     if (FormValidator.validateForm(editFormValidity)) {
         const data = new FormData(editForm);
         patchPelangganData(data, "Data pelanggan sudah diedit.");

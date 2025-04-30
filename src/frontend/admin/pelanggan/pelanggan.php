@@ -77,7 +77,7 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
         </div>
     </div>
 
-    <sl-dialog class="edit_dialog" label="Edit Dialog">
+    <sl-dialog class="edit_dialog" label="Edit Pelanggan">
         <div class="form_container">
             <form class="edit_form">
                 <input id="edit_id" name="id" type="text" hidden>
