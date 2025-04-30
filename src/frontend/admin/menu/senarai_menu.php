@@ -172,6 +172,8 @@ $Database = createDatabaseConn();
     <?php
     echoTabulator();
     echoShoelaceAutoloader();
+    echoNavBarJavascript();
+    echoNoScript();
     ?>
 </body>
 

@@ -19,7 +19,6 @@ try {
     if (check_account_exists($nama)) {
         insert_new_account($nama, $no_phone, $password);
     }
-
 } catch (Exception $e) {
     error_log($e->getMessage() . PHP_EOL, dirname(__FILE__, 2) . "/log/error_log.log");
     exit($e->getMessage());
@@ -47,12 +46,10 @@ function check_nama_exists(string $nama): bool {
 }
 
 function insert_new_account($nama, $no_phone, $password) {
-    $redirect_url = "/Order-System-Website/src/frontend/menu/menu.php";
+    $redirect_url = "/Order-System-Website/src/frontend/login/login.php";
 
     global $Pelanggan;
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-    $Pelanggan->addPelanggan($nama, $hashed_password, $no_phone);
+    $Pelanggan->addPelanggan($nama, $password, $no_phone);
 
     echo "<script type='text/javascript'>
             alert('Pelanggan didaftar! Redirecting...');

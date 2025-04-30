@@ -98,6 +98,8 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
     <?php
     echoTabulator();
     echoShoelaceAutoloader();
+    echoNavBarJavascript();
+    echoNoScript();
     ?>
 </body>
 

@@ -30,12 +30,9 @@ $pesanan_count = getPesananCount();
     <?php
     echoNavBarStylesheet();
     echoAdminHeaderStylesheet();
+    echoTabulatorStyle();
+    echoShoelaceStyle();
     ?>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
-    <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Dashboard</title>
 </head>
 
@@ -74,7 +71,13 @@ $pesanan_count = getPesananCount();
 
     <script type="module" src="table_pesanan.js"></script>
     <script type="module" src="carta_revenue.js"></script>
-    <noscript>Your browser does not support JavaScript!</noscript>
+    <?php
+    echoTabulator();
+    echoShoelaceAutoloader();
+    echoChartJS();
+    echoNavBarJavascript();
+    echoNoScript();
+    ?>
 </body>
 
 </html>

@@ -62,3 +62,8 @@ function echoNavBar(int $selected): void {
     </ul>
     NAV;
 }
+
+function echoNavBarJavascript(): void {
+    $url = auto_version("/Order-System-Website/src/frontend/admin/nav_bar/nav_bar.js");
+    echo "<script type='module' src='$url'></script>";
+}
