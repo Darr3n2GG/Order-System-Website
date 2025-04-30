@@ -14,13 +14,26 @@ function echoHeaderStylesheet(): void {
 function echoHeader(): void {
     global $Session;
 
-    if ($Session->sudahLogMasuk()) {
+    $html = "";
+    if ($Session->sudahLogMasuk() and $_SERVER['REQUEST_URI'] == "/Order-System-Website/src/frontend/pelanggan/pelanggan.php") {
+        $html = <<<PELANGGAN
+        <div class="nav_registered">
+            <ul class="nav_list">
+                <li class="nav_item">
+                    <sl-button variant="text" href="../menu/menu.php">Balik ke Menu</sl-button>
+                </li>
+            </ul>
+        </div>
+        PELANGGAN;
+    } else if ($Session->sudahLogMasuk()) {
         $html = <<<DAFTAR
         <div class="nav_registered">
             <ul class="nav_list">
                 <li class="nav_item">
-                    <a href=#>
-                        <sl-avatar class="user_button" label="user button"></sl-avatar>
+                    <a href="../pelanggan/pelanggan.php">
+                        <sl-tooltip content="Pelanggan">
+                            <sl-avatar class="user_button" label="user button"></sl-avatar>
+                        </sl-tooltip>
                     </a>
                 </li>
             </ul>
