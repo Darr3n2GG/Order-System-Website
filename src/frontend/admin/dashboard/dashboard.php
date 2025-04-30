@@ -5,6 +5,7 @@ require_once dirname(__FILE__, 4) . "/backend/Masa.php";
 require_once dirname(__FILE__, 4) . "/backend/Autoloader.php";
 
 $Database = createDatabaseConn();
+$Session = new lib\Session;
 
 $array_pesanan_id = getArrayPesananIDThisWeek();
 if ($array_pesanan_id != []) {
@@ -45,14 +46,14 @@ $pesanan_count = getPesananCount();
     ?>
     <div class="content container">
         <div class="dashboard_container">
-            <h2>Minggu ini :</h2>
+            <h2>Selamat datang <?php echo $Session->getNama(); ?>! Minggu ini :</h2>
             <div class="row_kecil">
                 <div class="item_kecil">
-                    <h2>Most ordered food / drink</h2>
+                    <h2>Produk yang sering dipesan: </h2>
                     <h1><?php echo $nama_produk; ?></h1>
                 </div>
                 <div class="item_kecil">
-                    <h2>Number of orders this week</h2>
+                    <h2>Kuantiti Pesanan: </h2>
                     <h1><?php echo $pesanan_count; ?></h1>
                 </div>
             </div>

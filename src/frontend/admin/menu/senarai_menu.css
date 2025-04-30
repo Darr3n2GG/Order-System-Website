@@ -38,7 +38,7 @@
     margin-right: 0.5rem;
 }
 
-#table_menu {
+#table_menu, #table_kategori {
     border-radius: 10px;
     float: left;
 }
@@ -47,7 +47,7 @@
     float: left;
 }
 
-.form_menu > sl-input, sl-select, sl-textarea {
+.form_produk, .form_kategori > sl-input, sl-select, sl-textarea {
     margin: 8px 0;
 }
 
@@ -67,6 +67,6 @@
     justify-content: center;
 }
 
-.edit_form {
+.edit_produk_form, .edit_kategori_form {
     width: 75%;
 }

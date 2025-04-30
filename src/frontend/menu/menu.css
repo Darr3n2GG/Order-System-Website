@@ -25,6 +25,7 @@
 .menu {
   width: 100%;
   margin-bottom: 5vw;
+  margin-top: 2rem;
 }
 
 .food_item_container {
@@ -138,6 +139,10 @@ sl-dialog::part(footer) {
   .search_container {
     width: 100%;
     margin-right: auto;
+  }
+
+  .menu {
+    margin-top: 1rem;
   }
 
   .cart_button {

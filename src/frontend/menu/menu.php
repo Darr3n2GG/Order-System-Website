@@ -6,7 +6,10 @@ require_once dirname(__FILE__, 2) . "/dependencies.php";
 
 $Session = new lib\Session;
 if ($Session->isAdmin()) {
-    header("Location: ../admin/dashboard/dashboard.php");
+    echo "<script type='text/javascript'>
+            alert('Sila log keluar dari akaun admin untuk mengguna menu.');
+            window.location.href = '/Order-System-Website/src/frontend/admin/dashboard/dashboard.php';
+        </script>";
 }
 
 $Database = createDatabaseConn();

@@ -43,3 +43,15 @@
     background-color: #555;
     color: white;
 }
+
+.log_keluar {
+    position: relative;
+    display: flex;
+    bottom: -50vh;
+    justify-content: center;
+}
+
+.log_keluar > sl-button {
+    width: 90%;
+}
+

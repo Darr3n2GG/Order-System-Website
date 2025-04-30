@@ -15,7 +15,7 @@ const tablePelanggan = new Tabulator("#table_kategori", {
     columns: [
         { title: "ID", field: "id", },
         { title: "Label", field: "label" },
-        { title: "Nama", field: "nama", },
+        { title: "Nama", field: "nama", width: "65%" },
         {
             title: "",
             field: "update",

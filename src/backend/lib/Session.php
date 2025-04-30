@@ -5,11 +5,16 @@ namespace lib;
 require_once dirname(__FILE__) . "/Pelanggan.php";
 
 class Session {
-    private $log_masuk = false;
-    private $admin = false;
-    private $id_pelanggan;
+    private bool $log_masuk = false;
+    private bool $admin = false;
+    private int $id_pelanggan;
+    private string $nama;
+
+    private Pelanggan $Pelanggan;
 
     public function __construct() {
+        $this->Pelanggan = new Pelanggan;
+
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
@@ -18,14 +23,14 @@ class Session {
 
         if ($this->log_masuk) {
             $this->id_pelanggan = $_SESSION["id_pelanggan"];
+            $this->nama = $this->Pelanggan->findPelanggan($this->id_pelanggan)["nama"];
             $this->setAdmin();
         }
     }
 
     private function checkIdPelangganValid(): bool {
-        $Pelanggan = new Pelanggan;
 
-        if ($Pelanggan->checkPelangganExists($_SESSION["id_pelanggan"])) {
+        if ($this->Pelanggan->checkPelangganExists($_SESSION["id_pelanggan"])) {
             return true;
         } else {
             session_destroy();
@@ -34,8 +39,7 @@ class Session {
     }
 
     private function setAdmin(): void {
-        $Pelanggan = new Pelanggan;
-        $this->admin = $Pelanggan->getTahapPelanggan($this->id_pelanggan) === "admin";
+        $this->admin = $this->Pelanggan->getTahapPelanggan($this->id_pelanggan) === "admin";
     }
 
     public function sudahLogMasuk() {
@@ -44,6 +48,10 @@ class Session {
 
     public function isAdmin(): bool {
         return $this->admin;
+    }
+
+    public function getNama(): string {
+        return $this->nama;
     }
 
     public function getPelangganIDFromSession() {

@@ -1,16 +1,18 @@
 <?php
 require_once dirname(__FILE__, 2) . "/Database.php";
+require_once dirname(__FILE__, 2) . "/Autoloader.php";
 
 session_start();
 
 $Database = createDatabaseConn();
-$redirect_url = "../../frontend/menu/menu.php";
 
 if (!isset($_POST["nama"], $_POST["password"])) {
     exit("Sila masukkan field nama dan password.");
 }
 
 try {
+    $Pelanggan = new lib\Pelanggan;
+
     $nama = $_POST["nama"];
     $password = $_POST["password"];
 
@@ -21,7 +23,11 @@ try {
             session_regenerate_id();
             $_SESSION["nama"] = $nama;
             $_SESSION["id_pelanggan"] = $id;
-            header("Location: " . $redirect_url);
+            if ($Pelanggan->getTahapPelanggan($id) === "admin") {
+                header("Location: ../../frontend/admin/dashboard/dashboard.php");
+            } else {
+                header("Location: ../../frontend/menu/menu.php");
+            }
         } else {
             echo "<script type='text/javascript'>
                     alert('Password tidak betul.');

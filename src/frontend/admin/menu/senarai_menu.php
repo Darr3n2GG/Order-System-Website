@@ -26,7 +26,7 @@ $Database = createDatabaseConn();
 <body>
     <?php
     echoNavBar(NAVBAR_MENU);
-    echoAdminHeader("Senarai Produk");
+    echoAdminHeader("Menu");
     ?>
     <div class="content container">
         <div class="menu_tab_group">

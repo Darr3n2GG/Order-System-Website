@@ -56,6 +56,9 @@ function echoNavBar(int $selected): void {
                 Pesanan
             </a>
         </li>
+        <li class="log_keluar">
+            <sl-button id="log_keluar_button" variant="danger">Log Keluar</sl-button>
+        </li>
     </ul>
     NAV;
 }

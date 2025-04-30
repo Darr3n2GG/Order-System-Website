@@ -15,7 +15,7 @@ class Pelanggan {
         return $this->Database->readQuery(
             "SELECT pelanggan.id, pelanggan.nama, pelanggan.no_phone, tahap.tahap
             FROM pelanggan INNER JOIN tahap ON pelanggan.tahap = tahap.id
-            WHERE searchable = 1 ORDER BY id ASC"
+            WHERE pelanggan.searchable = 1 ORDER BY pelanggan.id ASC"
         );
     }
 
@@ -23,7 +23,7 @@ class Pelanggan {
         return $this->Database->readQuery(
             "SELECT pelanggan.id, pelanggan.nama, pelanggan.no_phone, tahap.tahap
             FROM pelanggan INNER JOIN tahap ON pelanggan.tahap = tahap.id
-            WHERE searchable = 1 AND id = ?",
+            WHERE pelanggan.searchable = 1 AND pelanggan.id = ?",
             "i",
             [$id]
         )[0];
@@ -33,7 +33,7 @@ class Pelanggan {
         return $this->Database->readQuery(
             "SELECT pelanggan.id, pelanggan.nama, pelanggan.no_phone, tahap.tahap
             FROM pelanggan INNER JOIN tahap ON pelanggan.tahap = tahap.id
-            WHERE searchable = 1 AND pelanggan.nama = ? AND pelanggan.no_phone = ?",
+            WHERE pelanggan.searchable = 1 AND pelanggan.nama = ? AND pelanggan.no_phone = ?",
             "ss",
             [$nama, $no_phone]
         );
