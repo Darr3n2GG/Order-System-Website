@@ -41,9 +41,15 @@ $Database = createDatabaseConn();
                             <div class="filter">
                                 <div class="filter_item">
                                     <span>Nama:</span>
-                                    <sl-input size="small"></sl-input>
+                                    <sl-input id="filter_nama" size="small" placeholder="Cari Nama..."></sl-input>
                                 </div>
                             </div>
+<div>
+<sl-button size="small" variant="primary" id="print_button" style="margin-left: auto;">
+    <sl-icon slot="prefix" name="printer"></sl-icon>
+    Cetak
+</sl-button>
+</div>
                             <div id="table_menu"></div>
                         </div>
                         <div class="toolbar">

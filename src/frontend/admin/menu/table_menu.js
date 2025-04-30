@@ -3,6 +3,8 @@ import FetchHelper from "../../../scripts/FetchHelper.js";
 const ApiUrl = "/Order-System-Website/src/backend/api/ProdukAPI.php"
 
 const editProdukDialog = document.querySelector(".edit_produk_dialog");
+// === Global Filter Variable ===
+let filterNama = "";
 
 const tablePelanggan = new Tabulator("#table_menu", {
     ajaxURL: ApiUrl + "?" + new URLSearchParams({
@@ -55,19 +57,80 @@ const tablePelanggan = new Tabulator("#table_menu", {
     ],
 });
 
+// === Print Button Logic ===
+document.getElementById("print_button").addEventListener("click", () => {
+    const rows = tablePelanggan.getRows(); // All currently displayed (filtered) rows
+    const data = rows.map(row => row.getData());
+
+    const printWindow = window.open('', '', 'width=800,height=600');
+    if (!printWindow) return;
+
+    const tableHTML = `
+        <html>
+        <head>
+            <title>Cetak Menu</title>
+            <style>
+                table { border-collapse: collapse; width: 100%; }
+                th, td { border: 1px solid #333; padding: 8px; text-align: left; vertical-align: top; }
+                th { background-color: #f2f2f2; }
+                body { font-family: sans-serif; padding: 20px; }
+                img { max-width: 100px; height: auto; }
+            </style>
+        </head>
+        <body>
+            <h2>Senarai Menu</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Harga</th>
+                        <th>Kategori</th>
+                        <th>Gambar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${data.map(row => `
+                        <tr>
+                            <td>${row.id}</td>
+                            <td>${row.nama}</td>
+                            <td>${row.harga}</td>
+                            <td>${row.kategori_nama}</td>
+                            <td><img src="${row.gambar}" alt="Gambar Produk"></td>
+                        </tr>
+                    `).join("")}
+                </tbody>
+            </table>
+        </body>
+        </html>
+    `;
+
+    printWindow.document.write(tableHTML);
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+});
+
+// === Filtering by Nama ===
+document.getElementById("filter_nama").addEventListener("input", (e) => {
+    filterNama = e.target.value.trim().toLowerCase();
+    // Update the URL to include type=data and the filterNama parameter if provided
+    const filteredApiUrl = `${ApiUrl}?type=data&keyword=${encodeURIComponent(filterNama)}`;
+    
+    // Triggers reload + filtering
+    tablePelanggan.setData(filteredApiUrl);
+});
+
 async function getTableData(url, config) {
     try {
         const response = await fetch(url, config);
         const data = await FetchHelper.onFulfilled(response);
-        if (data.details === undefined) {
-            return [];
-        } else {
-            const tableData = data.details
-            for (let row in tableData) {
-                tableData[row]._editable = false;
-            }
-            return tableData;
-        }
+        if (data.details === undefined) return [];
+
+        return data.details.filter(item => {
+            const matchNama = item.nama.toLowerCase().includes(filterNama);
+            return matchNama;
+        });
     } catch (error) {
         return FetchHelper.onRejected(error);
     }

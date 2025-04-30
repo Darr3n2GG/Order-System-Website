@@ -6,6 +6,9 @@ const ApiUrl = "/Order-System-Website/src/backend/api/PelangganAPI.php"
 const editDialog = document.querySelector(".edit_dialog");
 const editForm = editDialog.querySelector(".edit_form");
 
+let filterNama = "";
+let filterPhone = "";
+
 const tablePelanggan = new Tabulator("#table_pelanggan", {
     ajaxURL: ApiUrl,
     ajaxConfig: { method: "GET" },
@@ -43,19 +46,76 @@ const tablePelanggan = new Tabulator("#table_pelanggan", {
     ],
 });
 
+document.getElementById("print_button").addEventListener("click", () => {
+    const data = tablePelanggan.getData();
+
+    const printWindow = window.open('', '', 'width=800,height=600');
+    if (!printWindow) return;
+
+    const tableHTML = `
+        <html>
+        <head>
+            <title>Cetak Pelanggan</title>
+            <style>
+                table { border-collapse: collapse; width: 100%; }
+                th, td { border: 1px solid #333; padding: 8px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                body { font-family: sans-serif; padding: 20px; }
+            </style>
+        </head>
+        <body>
+            <h2>Senarai Pelanggan</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>No. Phone</th>
+                        <th>Tahap</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${data.map(row => `
+                        <tr>
+                            <td>${row.id}</td>
+                            <td>${row.nama}</td>
+                            <td>${row.no_phone}</td>
+                            <td>${row.tahap}</td>
+                        </tr>
+                    `).join("")}
+                </tbody>
+            </table>
+        </body>
+        </html>
+    `;
+
+    printWindow.document.write(tableHTML);
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+});
+
+document.getElementById("filter_nama").addEventListener("input", (e) => {
+    filterNama = e.target.value.trim().toLowerCase();
+    tablePelanggan.setData(ApiUrl);
+});
+
+document.getElementById("filter_no_phone").addEventListener("input", (e) => {
+    filterPhone = e.target.value.trim().toLowerCase();
+    tablePelanggan.setData(ApiUrl);
+});
+
 async function getTableData(url, config) {
     try {
         const response = await fetch(url, config);
         const data = await FetchHelper.onFulfilled(response);
-        if (data.details === undefined) {
-            return [];
-        } else {
-            const tableData = data.details
-            for (let row in tableData) {
-                tableData[row]._editable = false;
-            }
-            return tableData;
-        }
+        if (data.details === undefined) return [];
+
+        return data.details.filter(item => {
+            const matchNama = item.nama.toLowerCase().includes(filterNama);
+            const matchPhone = item.no_phone.toLowerCase().includes(filterPhone);
+            return matchNama && matchPhone;
+        });
     } catch (error) {
         return FetchHelper.onRejected(error);
     }
@@ -81,14 +141,14 @@ function showEditDialog(e, cell) {
 const editFormValidity = {
     edit_id: { condition: (value) => { return "" } },
     edit_nama: { condition: (value) => handleNamaValidation(value) },
-    edit_nombor_phone: { condition: (value) => handlePhoneValidation(value) },
+    edit_nombor_phone: { condition: (value) => handleNoPasswordValidation(value) },
     edit_tahap: { condition: (value) => handleTahapValidation(value) }
 };
 
 editDialog.querySelector(".edit_button").addEventListener("click", () => {
     if (FormValidator.validateForm(editFormValidity)) {
         const data = new FormData(editForm);
-        patchPelangganData(data, "Data pelanggan sudah ditukar.");
+        patchPelangganData(data, "Data pelanggan sudah diedit.");
     }
 })
 
@@ -157,11 +217,11 @@ function handleNamaValidation(value) {
     }
 }
 
-function handlePhoneValidation(value) {
+function handleNoPasswordValidation(value) {
     if (value === "") {
-        return "Input nombor phone kosong.";
+        return "Field nombor phone kosong.";
     } else if (!isValidPhoneNumber(value)) {
-        return "Input password tidak sah.";
+        return "Field password invalid.";
     } else {
         return "";
     }
