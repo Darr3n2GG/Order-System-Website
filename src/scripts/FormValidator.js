@@ -1,7 +1,7 @@
 /**
  *  Note : formValidity must be an object with the structure below
  *          {
- *             id: condition (value) => function(value),
+ *             fieldId: condition (value) => function(value),
  *             ...
  *          }
  */
