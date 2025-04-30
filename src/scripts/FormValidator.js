@@ -1,3 +1,12 @@
+/**
+ *  Note : formValidity must be an object with the structure below
+ *          {
+ *             id: condition (value) => function(value),
+ *             ...
+ *          }
+ */
+
+
 export default class FormValidator {
     static validateForm(formValidity) {
         for (const fieldId in formValidity) {
