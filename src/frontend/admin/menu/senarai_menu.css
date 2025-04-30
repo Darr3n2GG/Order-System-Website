@@ -38,6 +38,10 @@
     margin-right: 0.5rem;
 }
 
+.filter_item {
+    width: 40%;
+}
+
 #table_menu, #table_kategori {
     border-radius: 10px;
     float: left;

@@ -1,7 +1,5 @@
 <?php
-require_once dirname(__FILE__, 2) . "/Autoloader.php";
-
-$Session = new lib\Session;
+session_start();
 
 // Unset all of the session variables.
 $_SESSION = [];

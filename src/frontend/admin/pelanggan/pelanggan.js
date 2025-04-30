@@ -59,7 +59,7 @@ formPelanggan.addEventListener("input", (event) => {
 
 const tambahFormValidity = {
     tambah_nama: { condition: (value) => handleNamaValidation(value) },
-    tambah_no_phone: { condition: (value) => handleNoPasswordValidation(value) },
+    tambah_no_phone: { condition: (value) => handlePhoneValidation(value) },
     tambah_password: { condition: (value) => handlePasswordValidation(value) },
     tambah_tahap: { condition: (value) => handleTahapValidation(value) }
 };
@@ -88,11 +88,11 @@ function handlePasswordValidation(value) {
     }
 }
 
-function handleNoPasswordValidation(value) {
+function handlePhoneValidation(value) {
     if (value === "") {
-        return "Field nombor phone kosong.";
+        return "Input nombor phone kosong.";
     } else if (!isValidPhoneNumber(value)) {
-        return "Field password invalid.";
+        return "Input nombor phone tidak sah.";
     } else {
         return "";
     }

@@ -81,14 +81,14 @@ function showEditDialog(e, cell) {
 const editFormValidity = {
     edit_id: { condition: (value) => { return "" } },
     edit_nama: { condition: (value) => handleNamaValidation(value) },
-    edit_nombor_phone: { condition: (value) => handleNoPasswordValidation(value) },
+    edit_nombor_phone: { condition: (value) => handlePhoneValidation(value) },
     edit_tahap: { condition: (value) => handleTahapValidation(value) }
 };
 
 editDialog.querySelector(".edit_button").addEventListener("click", () => {
     if (FormValidator.validateForm(editFormValidity)) {
         const data = new FormData(editForm);
-        patchPelangganData(data, "Data pelanggan sudah diedit.");
+        patchPelangganData(data, "Data pelanggan sudah ditukar.");
     }
 })
 
@@ -157,11 +157,11 @@ function handleNamaValidation(value) {
     }
 }
 
-function handleNoPasswordValidation(value) {
+function handlePhoneValidation(value) {
     if (value === "") {
-        return "Field nombor phone kosong.";
+        return "Input nombor phone kosong.";
     } else if (!isValidPhoneNumber(value)) {
-        return "Field password invalid.";
+        return "Input password tidak sah.";
     } else {
         return "";
     }

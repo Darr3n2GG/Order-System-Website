@@ -26,6 +26,10 @@
     gap: 5px;
 }
 
+.filter_item {
+    width: 40%;
+}
+
 .filter_item > span {
     margin-right: 0.5rem;
 }
