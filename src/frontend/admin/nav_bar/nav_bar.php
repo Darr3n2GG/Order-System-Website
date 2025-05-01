@@ -51,7 +51,7 @@ function echoNavBar(int $selected): void {
             </a>
         </li>
         <li class="nav_link">
-            <a class="$pesanan" href="#">
+            <a class="$pesanan" href="/Order-System-Website/src/frontend/admin/pesanan/pesanan.php">
                 <sl-icon name="book"></sl-icon>
                 Pesanan
             </a>

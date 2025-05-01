@@ -69,4 +69,17 @@ class Pesanan {
     public function getLastInsertedIDOfPesanan(): int {
         return $this->Database->readLastInsertedID();
     }
+    
+    public function getPesananByPelanggan(string $pelanggan): array {
+        return $this->Database->readQuery(
+            "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
+            status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
+            FROM pesanan
+            INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
+            INNER JOIN status ON pesanan.id_status = status.id
+            WHERE pelanggan.nama LIKE ?",
+            "s", // 's' for string
+            ['%' . $pelanggan . '%'] // Use wildcards for partial matching
+        );
+    }
 }
