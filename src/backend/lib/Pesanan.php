@@ -8,6 +8,12 @@ require_once dirname(__FILE__, 2) . "/Masa.php";
 class Pesanan {
     private $Database;
 
+    const PESANAN_OPEN = 1;
+    const PESANAN_PREPARING = 2;
+    const PESANAN_COMPLETED = 3;
+    const PESANAN_CANCEL = 4;
+
+
     public function __construct() {
         $this->Database = createDatabaseConn();
     }
@@ -69,7 +75,7 @@ class Pesanan {
     public function getLastInsertedIDOfPesanan(): int {
         return $this->Database->readLastInsertedID();
     }
-    
+
     public function getPesananByPelanggan(string $pelanggan): array {
         return $this->Database->readQuery(
             "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,

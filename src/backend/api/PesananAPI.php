@@ -1,4 +1,5 @@
 <?php
+
 header("Content-Type: application/json");
 
 require_once dirname(__FILE__, 2) . "/lib/Pesanan.php";
@@ -27,19 +28,17 @@ try {
             }
             echoJsonResponse(true, "PesananAPI GET request processed.", $data);
         }
-    } else {
-        throw new Exception("Invalid request method", 405); // Handle unsupported request methods
-    }
-
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Handle POST request to create a new pesanan
-        if (isset($_POST["id_pelanggan"], $_POST["tarikh"], $_POST["pesanan_detail"])) {
-            handlePostPesanan($_POST["id_pelanggan"], $_POST["tarikh"], $_POST["pesanan_detail"]);
+        $post_condition = isset($_POST["id_pelanggan"], $_POST["tarikh"], $_POST["nombor_meja"], $_POST["cara"]);
+        if ($post_condition) {
+            handlePostPesanan($_POST["id_pelanggan"], $_POST["tarikh"],  $_POST["nombor_meja"], $_POST["cara"]);
         } else {
             throw new Exception("Missing parameters in POST request", 400);
         }
+    } else {
+        throw new Exception("Invalid request method", 405); // Handle unsupported request methods
     }
-
 } catch (Exception $e) {
     error_log($e->getMessage());
     echoJsonException($e->getCode(), "PesananAPI request failed: " . $e->getMessage());
@@ -57,11 +56,10 @@ function handleGetPesanan($range): array {
     }
 }
 
-function handlePostPesanan($id_pelanggan, $tarikh, $pesanan_detail): void {
+function handlePostPesanan($id_pelanggan, $tarikh, $nombor_meja, $cara): void {
     global $Pesanan;
 
-    // Assuming addPesanan takes these three parameters
-    $Pesanan->addPesanan($id_pelanggan, $tarikh, $pesanan_detail);
+    $Pesanan->addPesanan($id_pelanggan, lib\Pesanan::PESANAN_OPEN, $nombor_meja, $tarikh, $cara);
 
     echoJsonResponse(true, "PesananAPI POST request processed.");
 }
