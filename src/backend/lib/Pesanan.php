@@ -8,11 +8,6 @@ require_once dirname(__FILE__, 2) . "/Masa.php";
 class Pesanan {
     private $Database;
 
-    const PESANAN_OPEN = 1;
-    const PESANAN_PREPARING = 2;
-    const PESANAN_COMPLETED = 3;
-    const PESANAN_CANCEL = 4;
-
 
     public function __construct() {
         $this->Database = createDatabaseConn();
@@ -85,7 +80,7 @@ class Pesanan {
             INNER JOIN status ON pesanan.id_status = status.id
             WHERE pelanggan.nama LIKE ?",
             "s", // 's' for string
-            ['%' . $pelanggan . '%'] // Use wildcards for partial matching
+            ["%$pelanggan%"] // Use wildcards for partial matching
         );
     }
 }

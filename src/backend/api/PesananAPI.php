@@ -59,7 +59,7 @@ function handleGetPesanan($range): array {
 function handlePostPesanan($id_pelanggan, $tarikh, $nombor_meja, $cara): void {
     global $Pesanan;
 
-    $Pesanan->addPesanan($id_pelanggan, lib\Pesanan::PESANAN_OPEN, $nombor_meja, $tarikh, $cara);
+    $Pesanan->addPesanan($id_pelanggan, 1, $nombor_meja, $tarikh, $cara);
 
     echoJsonResponse(true, "PesananAPI POST request processed.");
 }
