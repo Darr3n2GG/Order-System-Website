@@ -20,7 +20,10 @@ function echoHeader(): void {
         <div class="nav_registered">
             <ul class="nav_list">
                 <li class="nav_item">
-                    <sl-button variant="text" href="../menu/menu.php">Balik ke Menu</sl-button>
+                    <sl-button variant="text" href="../menu/menu.php">
+                        <sl-icon slot="prefix" name="house"></sl-icon>
+                        Balik ke Menu
+                    </sl-button>
                 </li>
             </ul>
         </div>
