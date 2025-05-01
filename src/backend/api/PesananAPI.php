@@ -7,18 +7,22 @@ require_once dirname(__FILE__, 2) . "/JsonResponseHandler.php";
 try {
     $Pesanan = new lib\Pesanan;
 
-    if (isset($_GET["range"])) {
-        $range = htmlspecialchars($_GET["range"]);
-        $array_pesanan = handleGetPesanan($range);
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        if (isset($_GET["range"])) {
+            $range = htmlspecialchars($_GET["range"]);
+            $array_pesanan = handleGetPesanan($range);
 
-        echoJsonResponse(true, "PesananAPI GET request processed.", $array_pesanan);
+            echoJsonResponse(true, "PesananAPI GET request processed.", $array_pesanan);
+        }
+    } else {
+        throw new Exception("Invalid PesananAPI request method.", 400);
     }
 } catch (Exception $e) {
     error_log($e->getMessage());
     echoJsonException($e->getCode(), "PesananAPI request failed : " . $e->getMessage());
 }
 
-function handleGetPesanan($range): array | bool {
+function handleGetPesanan($range): array {
     global $Pesanan;
 
     if ($range == "*") {
@@ -26,6 +30,6 @@ function handleGetPesanan($range): array | bool {
     } else if ($range == "week") {
         return $Pesanan->getArrayPesananThisWeek();
     } else {
-        return false;
+        return [];
     }
 }

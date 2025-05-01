@@ -34,6 +34,24 @@ require_once dirname(__FILE__, 2) . "/dependencies.php";
             <sl-button id="log_keluar_button" variant="danger">Log Keluar</sl-button>
         </div>
         <div class="table_container">
+            <aside id="filter_sidebar">
+                <h2>Senarai Pesanan</h2>
+                <div class="filter">
+                    <div id="time_range">
+                        <span>Julat Masa</span>
+                        <div id="time_range_filter" class="filter">
+                            <div class="filter_item">
+                                <span>Dari:</span>
+                                <sl-input size="small" type="date"></sl-input>
+                            </div>
+                            <div class="filter_item">
+                                <span>Hingga:</span>
+                                <sl-input size="small" type="date"></sl-input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
             <div id="table_senarai_pesanan"></div>
         </div>
     </div>
@@ -42,7 +60,8 @@ require_once dirname(__FILE__, 2) . "/dependencies.php";
 
     </sl-dialog>
 
-    <script type="module" src="table_pelanggan.js"></script>
+    <script type="module" src="<?php echo auto_version("pelanggan.js"); ?>"></script>
+    <script type="module" src="<?php echo auto_version("table_pelanggan.js"); ?>"></script>
     <?php
     echoShoelaceAutoloader();
     echoTabulator();

@@ -39,6 +39,8 @@ try {
 
         $Pelanggan->updatePelanggan($id, $data);
         echoJsonResponse(true, "PelangganAPI PATCH request processed.");
+    } else {
+        throw new Exception("Invalid PelangganAPI request method", 400);
     }
 } catch (Exception $e) {
     error_log($e->getMessage());
