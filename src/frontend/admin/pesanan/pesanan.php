@@ -57,9 +57,11 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
                         <label slot="label">Status</label>
                         <sl-icon name="info-circle" slot="prefix"></sl-icon>
                     </sl-input>
-                    <sl-input id="tambah_jumlah" name="jumlah" type="number" placeholder="Jumlah (RM)" required>
-                        <label slot="label">Jumlah</label>
-                        <sl-icon name="cash-stack" slot="prefix"></sl-icon>
+                    <sl-input id="tambah_cara" name="cara" placeholder="Cara" required>
+                        <label slot="label">Cara</label>
+                    </sl-input>
+                    <sl-input id="tambah_meja" name="meja" placeholder="Meja" required>
+                        <label slot="label">Meja</label>
                     </sl-input>
                     <div class="form_buttons">
                         <sl-button type="submit">
@@ -78,11 +80,11 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
     <sl-dialog class="edit_dialog" label="Edit Pesanan">
         <div class="form_container">
             <form class="edit_form">
-                <input id="edit_id_pesanan" name="id_pesanan" type="hidden">
-                <sl-input id="edit_id_pelanggan" name="id_pelanggan" label="ID Pelanggan"></sl-input>
+                <input id="edit_id_pesanan" name="id" type="hidden">
                 <sl-input id="edit_tarikh" name="tarikh" type="date" label="Tarikh"></sl-input>
-                <sl-input id="edit_status" name="status" label="Status"></sl-input>
-                <sl-input id="edit_jumlah" name="jumlah" type="number" label="Jumlah (RM)"></sl-input>
+                <sl-input id="edit_status" name="id_status" label="Status"></sl-input>
+                <sl-input id="edit_cara" name="cara" label="Cara"></sl-input>
+                <sl-input id="edit_meja" name="no_meja" label="Meja"></sl-input>
             </form>
         </div>
         <sl-button class="edit_button" slot="footer">Edit</sl-button>

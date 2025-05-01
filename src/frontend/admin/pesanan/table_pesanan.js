@@ -100,6 +100,46 @@ document.getElementById("filter_id_pelanggan").addEventListener("input", (e) => 
     tablePesanan.setData(ApiUrl);
 });
 
+document.querySelector(".form_pesanan").addEventListener("submit", async (e) => {
+    e.preventDefault(); // Prevent the form from submitting normally
+
+    const idPelanggan = parseInt(document.getElementById("tambah_id_pelanggan").value, 10); // integer
+    const tarikh = document.getElementById("tambah_tarikh").value;                          // string (YYYY-MM-DD)
+    const status = document.getElementById("tambah_status").value.trim();                   // string
+    const cara = document.getElementById("tambah_cara").value.trim();                       // string
+    const meja = parseInt(document.getElementById("tambah_meja").value, 10);                // integer
+
+    // Check for empty fields
+    if (!idPelanggan || !tarikh || !status || !cara || !meja) {
+        alert("Sila isi semua ruangan wajib.");
+        return; // Stop submission
+    }
+    
+    try {
+        // Send data to the server via POST
+        const response = await fetch(ApiUrl + "?" + new URLSearchParams({
+            type: "insert"
+        }), {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ idPelanggan, tarikh, status, cara, meja })
+        });
+
+        const result = await FetchHelper.onFulfilled(response);
+
+        if (result.ok) {
+            alert("Pesanan berjaya ditambah!");
+            tablePesanan.setData(ApiUrl + "?type=data"); // Refresh table
+            // Optionally, clear the form
+            document.querySelector(".form_pesanan").reset();
+        } else {
+            alert("Gagal menambah pesanan.");
+        }
+    } catch (error) {
+        FetchHelper.onRejected(error);
+    }
+});
+
 async function getTableData(url, config) {
     // Append the filter parameters to the URL for server-side filtering
     const filteredUrl = `${url}?pelanggan=${encodeURIComponent(filterPelanggan)}`;
@@ -116,20 +156,21 @@ async function getTableData(url, config) {
 
 function showEditDialog(e, cell) {
     const data = cell.getRow().getData();
-
-    document.getElementById("edit_id").value = data.id;
-    document.getElementById("edit_pelanggan").value = data.nama;
+    document.getElementById("edit_id_pesanan").value = data.id;
     document.getElementById("edit_tarikh").value = data.tarikh;
-    document.getElementById("edit_status").value = data.status;
+    document.getElementById("edit_status").value = 1;
+    document.getElementById("edit_cara").value = data.cara;
+    document.getElementById("edit_meja").value = data.no_meja;
 
     editDialog.show();
 }
 
 const editFormValidity = {
-    edit_id: { condition: () => "" },
-    edit_pelanggan: { condition: (value) => value === "" ? "Field pelanggan kosong." : "" },
-    edit_tarikh: { condition: (value) => value === "" ? "Field tarikh kosong." : "" },
-    edit_status: { condition: (value) => value === "" ? "Field status kosong." : "" },
+    edit_tarikh: { condition: (value) => value === "" ? "Field tarikh kosong." : "" }
+//    edit_id: { condition: () => "" },
+//    edit_pelanggan: { condition: (value) => value === "" ? "Field pelanggan kosong." : "" },
+//    edit_tarikh: { condition: (value) => value === "" ? "Field tarikh kosong." : "" },
+//    edit_status: { condition: (value) => value === "" ? "Field status kosong." : "" },
 };
 
 editDialog.querySelector(".edit_button").addEventListener("click", () => {
@@ -142,6 +183,7 @@ editDialog.querySelector(".edit_button").addEventListener("click", () => {
 async function patchPesananData(formData, message) {
     try {
         const data = Object.fromEntries(formData);
+        console.log(data);
         const response = await fetch(ApiUrl, {
             method: "PATCH",
             body: JSON.stringify(data),

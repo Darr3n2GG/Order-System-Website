@@ -83,4 +83,33 @@ class Pesanan {
             ["%$pelanggan%"] // Use wildcards for partial matching
         );
     }
+    
+    public function updatePesanan(int $id, array $data): void {
+        $fields = [];
+        $values = [];
+        $types = "";
+
+        foreach ($data as $key => $value) {
+            $fields[] = "$key = ?";
+            $values[] = $value;
+            $types .= $this->Database->getMysqliType($value);
+        }
+        $set = implode(', ', $fields);
+        $values[] = $id;
+        $types .= "i";
+
+        $this->Database->executeQuery(
+            "UPDATE pesanan SET $set WHERE id = ?",
+            $types,
+            $values
+        );
+    }
+
+    public function deletePesanan(int $id): bool {
+        return $this->Database->executeQuery(
+            "DELETE FROM pesanan WHERE id = ?",
+            "i",
+            [$id]
+        );
+    }
 }
