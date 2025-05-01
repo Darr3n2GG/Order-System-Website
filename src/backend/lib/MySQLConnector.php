@@ -33,11 +33,12 @@ class MySQLConnector {
         return $result;
     }
 
-    public function executeQuery(string $query, string $types, array $array_of_params): void {
+    public function executeQuery(string $query, string $types, array $array_of_params): bool {
         $stmt = $this->prepareStatement($query);
         $stmt->bind_param($types, ...$array_of_params);
-        $stmt->execute();
+        $result = $stmt->execute();
         $stmt->close();
+        return $result;
     }
 
     public function readLastInsertedID(): int {

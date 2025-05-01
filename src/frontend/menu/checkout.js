@@ -21,7 +21,8 @@ function checkout(cart) {
         .then(FetchHelper.onFulfilled)
         .then(response => {
             if (response.ok) {
-                window.location.href = redirectUrl;
+                alert("Pesanan kamu sedang disediakan. Terima kasih!")
+                location.reload();
             }
         })
         .catch(FetchHelper.onRejected);

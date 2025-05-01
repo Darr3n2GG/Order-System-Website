@@ -1,5 +1,6 @@
 import FetchHelper from "../../../scripts/FetchHelper.js";
 import { FileInput } from "../../../scripts/FileInput.js";
+import FormValidator from "../../../scripts/FormValidator.js";
 
 let files_received = null;
 globalThis.logFiles = () => {
@@ -15,7 +16,7 @@ formPelanggan.addEventListener("submit", (event) => {
     event.preventDefault();
     if (files_received != null) {
         postCSVFile();
-    } else if (validateForm()) {
+    } else if (FormValidator.validateForm(tambahFormValidity)) {
         const data = new FormData(formPelanggan);
         postPelangganData(data, "Pelanggan ditambah.");
     }
@@ -52,37 +53,16 @@ async function postPelangganData(formData, message) {
 
 formPelanggan.addEventListener("input", (event) => {
     const id = event.target.id;
-    validateField(id);
+    FormValidator.validateField(tambahFormValidity, id);
 })
 
 
-const formValidity = {
-    nama: { condition: (value) => handleNamaValidation(value) },
-    no_phone: { condition: (value) => handleNoPasswordValidation(value) },
-    password: { condition: (value) => handlePasswordValidation(value) }
+const tambahFormValidity = {
+    tambah_nama: { condition: (value) => handleNamaValidation(value) },
+    tambah_no_phone: { condition: (value) => handlePhoneValidation(value) },
+    tambah_password: { condition: (value) => handlePasswordValidation(value) },
+    tambah_tahap: { condition: (value) => handleTahapValidation(value) }
 };
-
-function validateField(fieldId) {
-    const { condition } = formValidity[fieldId];
-    const field = document.getElementById(fieldId);
-
-    const message = condition(field.value.trim())
-    if (message === "") {
-        field.setCustomValidity("");
-        return true;
-    } else {
-        field.setCustomValidity(message);
-        field.reportValidity();
-        return false;
-    }
-}
-
-function validateForm() {
-    for (const fieldId in formValidity) {
-        if (validateField(fieldId) === false) { return false; }
-    }
-    return true;
-}
 
 function handleNamaValidation(value) {
     if (value === "") {
@@ -108,11 +88,19 @@ function handlePasswordValidation(value) {
     }
 }
 
-function handleNoPasswordValidation(value) {
+function handlePhoneValidation(value) {
     if (value === "") {
-        return "Field nombor phone kosong.";
+        return "Input nombor phone kosong.";
     } else if (!isValidPhoneNumber(value)) {
-        return "Field password invalid.";
+        return "Input nombor phone tidak sah.";
+    } else {
+        return "";
+    }
+}
+
+function handleTahapValidation(value) {
+    if (value === "") {
+        return "Field tahap kosong.";
     } else {
         return "";
     }
@@ -155,3 +143,10 @@ fileInput.getInput().addEventListener("change", ({ target }) => {
         }
     }
 });
+
+
+const editDialog = document.querySelector(".edit_dialog");
+
+editDialog.querySelector(".cancel_button").addEventListener("click", () => {
+    editDialog.hide()
+})

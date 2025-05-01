@@ -24,6 +24,12 @@ function echoNavBar(int $selected): void {
         case NAVBAR_PELANGGAN:
             $pelanggan = "active";
             break;
+        case NAVBAR_MENU:
+            $menu = "active";
+            break;
+        case NAVBAR_PESANAN;
+            $pesanan = "active";
+            break;
     }
 
     echo <<<NAV
@@ -38,21 +44,29 @@ function echoNavBar(int $selected): void {
         <li class="nav_link">
             <a class="$pelanggan" href="/Order-System-Website/src/frontend/admin/pelanggan/pelanggan.php">
                 <sl-icon name="person-gear"></sl-icon>
-                Pengguna
+                Pelanggan
             </a>
         </li>
         <li class="nav_link">
-            <a class="$menu" href="#">
+            <a class="$menu" href="/Order-System-Website/src/frontend/admin/menu/senarai_menu.php">
                 <sl-icon name="menu-button-wide"></sl-icon>
                 Menu
             </a>
         </li>
         <li class="nav_link">
-            <a class="$pesanan" href="#">
+            <a class="$pesanan" href="/Order-System-Website/src/frontend/admin/pesanan/pesanan.php">
                 <sl-icon name="book"></sl-icon>
                 Pesanan
             </a>
         </li>
+        <li class="log_keluar">
+            <sl-button id="log_keluar_button" variant="danger">Log Keluar</sl-button>
+        </li>
     </ul>
     NAV;
+}
+
+function echoNavBarJavascript(): void {
+    $url = auto_version("/Order-System-Website/src/frontend/admin/nav_bar/nav_bar.js");
+    echo "<script type='module' src='$url'></script>";
 }

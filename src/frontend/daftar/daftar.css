@@ -1,0 +1,69 @@
+html, body {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--first-color);
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    position: absolute;
+    height: 70%;
+}
+
+.image_container {
+    display: none;
+}
+
+.form_container {
+    background-color: peachpuff;
+    border-radius: 20px;
+    padding: 2rem;
+}
+
+.form_container h2 {
+    margin: 0;
+}
+
+.form_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.balik_menu_button > span, sl-icon {
+    font-size: medium;
+}
+
+.form_daftar {
+    width: 20rem;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form_input > sl-input > label {
+    display: inline-block;
+    font-size: medium;
+    margin-bottom: 0.5rem;
+}
+
+@media screen and (min-width: 1150px) {
+    .content {
+        padding: 2rem;
+        gap: 5%;
+        background-color: var(--body-color);
+        border-radius: var(--radius-x-large);
+        position: relative;
+    }
+
+    .image_container {
+        display: block;
+        margin: 2rem;
+    }
+}

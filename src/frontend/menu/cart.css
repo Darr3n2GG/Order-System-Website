@@ -128,7 +128,7 @@
         border-color: grey;
         border-style: solid;
         border-width: 1px;
-        border-radius: var(--default-border-radius);
+        border-radius: var(--sl-border-radius-x-large);
     }
 
     .cart_dialog {

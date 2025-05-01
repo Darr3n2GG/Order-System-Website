@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2025 at 02:24 PM
+-- Generation Time: Apr 30, 2025 at 01:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `belian` (
   `id` int(11) NOT NULL,
   `id_pesanan` int(11) NOT NULL,
-  `id_makanan` int(11) NOT NULL,
+  `id_produk` int(11) NOT NULL,
   `kuantiti` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -38,18 +38,16 @@ CREATE TABLE `belian` (
 -- Dumping data for table `belian`
 --
 
-INSERT INTO `belian` (`id`, `id_pesanan`, `id_makanan`, `kuantiti`) VALUES
-(1, 1, 1, 1),
-(8, 2, 1, 1),
-(9, 3, 1, 1),
-(10, 7, 1, 1),
-(11, 8, 1, 1),
-(12, 9, 1, 1),
-(13, 11, 1, 1),
-(14, 11, 21, 1),
-(15, 12, 19, 138),
-(16, 14, 1, 1),
-(17, 15, 1, 1);
+INSERT INTO `belian` (`id`, `id_pesanan`, `id_produk`, `kuantiti`) VALUES
+(18, 24, 1, 2),
+(19, 25, 1, 1),
+(20, 26, 2, 1),
+(23, 29, 1, 5),
+(24, 29, 4, 16),
+(25, 30, 1, 1),
+(26, 31, 2, 1),
+(27, 31, 19, 1),
+(28, 32, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -102,17 +100,21 @@ INSERT INTO `meja` (`no_meja`, `info`, `tersedia`) VALUES
 CREATE TABLE `pelanggan` (
   `id` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
-  `password` char(60) NOT NULL,
-  `no_phone` varchar(15) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `no_phone` varchar(15) NOT NULL,
+  `tahap` int(11) NOT NULL DEFAULT 1,
+  `searchable` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pelanggan`
 --
 
-INSERT INTO `pelanggan` (`id`, `nama`, `password`, `no_phone`) VALUES
-(0, 'Guest', '', ''),
-(1, 'test', '$2y$10$Iwq4fqiwI3v0n3vt4ETOFeRHkPycoFHHGcAVKF3xPFpKZw/l4b3LS', '0123456789');
+INSERT INTO `pelanggan` (`id`, `nama`, `password`, `no_phone`, `tahap`, `searchable`) VALUES
+(0, 'Guest', '', '', 1, 0),
+(1, 'test', '$2y$10$Iwq4fqiwI3v0n3vt4ETOFeRHkPycoFHHGcAVKF3xPFpKZw/l4b3LS', '0123456789', 1, 1),
+(21, 'admin', '$2y$10$1o7IcyhanhddKtxPoGW1..0zORzucPlyCQtY1y1/X1HdYZcGDaQlC', '0116664444', 2, 1),
+(22, 'Henry', '$2y$10$XnKg.DPR3epk0nhudRj7R.V5xYE/It.ElHf8PAwWPFKDskM./VxF2', '0123456789', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -134,21 +136,13 @@ CREATE TABLE `pesanan` (
 --
 
 INSERT INTO `pesanan` (`id`, `id_pelanggan`, `id_status`, `no_meja`, `tarikh`, `cara`) VALUES
-(1, 1, 1, 1, '2025-02-04', ''),
-(2, 0, 1, 1, '2025-03-06', 'dine-in'),
-(3, 0, 1, 1, '2025-03-06', 'dine-in'),
-(4, 0, 1, 1, '2025-03-07', 'dine-in'),
-(5, 0, 1, 1, '2025-03-07', 'dine-in'),
-(6, 0, 1, 1, '2025-03-07', 'dine-in'),
-(7, 0, 1, 1, '2025-03-07', 'dine-in'),
-(8, 0, 1, 1, '2025-03-07', 'dine-in'),
-(9, 0, 1, 1, '2025-03-07', 'dine-in'),
-(10, 0, 1, 1, '2025-03-10', 'dine-in'),
-(11, 0, 1, 1, '2025-03-10', 'dine-in'),
-(12, 0, 1, 1, '2025-03-18', 'dine-in'),
-(13, 0, 1, 1, '2025-03-19', 'dine-in'),
-(14, 0, 1, 1, '2025-03-19', 'dine-in'),
-(15, 0, 1, 1, '2025-03-20', 'dine-in');
+(24, 0, 1, 1, '2025-04-10', 'dine-in'),
+(25, 0, 1, 1, '2025-04-10', 'dine-in'),
+(26, 1, 1, 1, '2025-04-16', 'dine-in'),
+(29, 0, 1, 1, '2025-04-26', 'dine-in'),
+(30, 0, 1, 1, '2025-04-29', 'dine-in'),
+(31, 22, 1, 1, '2025-04-30', 'dine-in'),
+(32, 22, 1, 1, '2025-04-30', 'dine-in');
 
 -- --------------------------------------------------------
 
@@ -170,25 +164,25 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id`, `nama`, `id_kategori`, `detail`, `harga`, `gambar`) VALUES
-(1, 'Chicken Taco', 1, '', 10, '/Order-System-Website/src/assets/makanan/1.png'),
-(2, 'Spicy Chicken Taco', 1, '', 11, '/Order-System-Website/src/assets/makanan/2.png'),
-(3, 'Taco Salad', 1, '', 15, '/Order-System-Website/src/assets/makanan/3.png'),
-(4, 'Tacos de barbacoa', 1, '', 15, '/Order-System-Website/src/assets/makanan/4.png'),
-(5, 'Wonton', 2, '', 8, '/Order-System-Website/src/assets/makanan/5.png'),
-(6, 'Spicy Wonton', 2, '', 9, '/Order-System-Website/src/assets/makanan/6.png'),
-(7, 'Potstickers', 2, '', 10, '/Order-System-Website/src/assets/makanan/7.png'),
-(8, 'Wonton Mee', 3, '', 10, '/Order-System-Website/src/assets/makanan/8.png'),
-(9, 'Cheesy Taco Pasta', 3, '', 14, '/Order-System-Website/src/assets/makanan/9.png'),
-(10, 'Mexican fries', 4, '', 3, '/Order-System-Website/src/assets/makanan/10.png'),
-(11, 'Tortilla Chips', 4, '', 3.5, '/Order-System-Website/src/assets/makanan/11.png'),
-(12, 'Popiah', 4, '', 3, '/Order-System-Website/src/assets/makanan/12.png'),
-(13, 'Bò Bía', 4, '', 5, '/Order-System-Website/src/assets/makanan/13.png'),
+(1, 'Chicken Taco', 1, 'taco yum', 10, '/Order-System-Website/src/assets/produk/1.png'),
+(2, 'Spicy Chicken Taco', 1, '', 11, '/Order-System-Website/src/assets/produk/2.png'),
+(3, 'Taco Salad', 1, '', 15, '/Order-System-Website/src/assets/produk/3.png'),
+(4, 'Tacos de barbacoa', 1, '', 15, '/Order-System-Website/src/assets/produk/4.png'),
+(5, 'Wonton', 2, '', 8, '/Order-System-Website/src/assets/produk/5.png'),
+(6, 'Spicy Wonton', 2, '', 9, '/Order-System-Website/src/assets/produk/6.png'),
+(7, 'Potstickers', 2, '', 10, '/Order-System-Website/src/assets/produk/7.png'),
+(8, 'Wonton Mee', 3, '', 10, '/Order-System-Website/src/assets/produk/8.png'),
+(9, 'Cheesy Taco Pasta', 3, '', 14, '/Order-System-Website/src/assets/produk/9.png'),
+(10, 'Mexican fries', 4, '', 3, '/Order-System-Website/src/assets/produk/10.png'),
+(11, 'Tortilla Chips', 4, '', 3.5, '/Order-System-Website/src/assets/produk/11.png'),
+(12, 'Popiah', 4, '', 3, '/Order-System-Website/src/assets/produk/12.png'),
+(13, 'Bò Bía', 4, '', 5, '/Order-System-Website/src/assets/produk/13.png'),
 (14, 'Lemon Tea', 5, '', 4, ''),
 (15, 'Coke', 5, '', 2, ''),
 (16, '100-plus', 5, '', 2, ''),
 (17, 'Sprite', 5, '', 2, ''),
 (18, 'Pepsi', 5, '', 2, ''),
-(19, 'Chrysanthemum tea', 5, '', 3, ''),
+(19, 'Kekwa tea', 5, '', 3, ''),
 (20, 'Hibiscus tea', 5, '', 4, ''),
 (21, 'Water', 5, '', 0.5, '');
 
@@ -213,6 +207,25 @@ INSERT INTO `status` (`id`, `status`) VALUES
 (3, 'completed'),
 (4, 'cancelled');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tahap`
+--
+
+CREATE TABLE `tahap` (
+  `id` int(11) NOT NULL,
+  `tahap` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tahap`
+--
+
+INSERT INTO `tahap` (`id`, `tahap`) VALUES
+(1, 'user'),
+(2, 'admin');
+
 --
 -- Indexes for dumped tables
 --
@@ -222,7 +235,7 @@ INSERT INTO `status` (`id`, `status`) VALUES
 --
 ALTER TABLE `belian`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_makanan` (`id_makanan`),
+  ADD KEY `id_makanan` (`id_produk`),
   ADD KEY `id_pesanan` (`id_pesanan`);
 
 --
@@ -241,7 +254,8 @@ ALTER TABLE `meja`
 -- Indexes for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pelanggan_fk1` (`tahap`);
 
 --
 -- Indexes for table `pesanan`
@@ -266,6 +280,12 @@ ALTER TABLE `status`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tahap`
+--
+ALTER TABLE `tahap`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -273,7 +293,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `belian`
 --
 ALTER TABLE `belian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -291,13 +311,13 @@ ALTER TABLE `meja`
 -- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `produk`
@@ -312,6 +332,12 @@ ALTER TABLE `status`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `tahap`
+--
+ALTER TABLE `tahap`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -319,8 +345,22 @@ ALTER TABLE `status`
 -- Constraints for table `belian`
 --
 ALTER TABLE `belian`
-  ADD CONSTRAINT `belian_fk_1` FOREIGN KEY (`id_makanan`) REFERENCES `produk` (`id`),
-  ADD CONSTRAINT `belian_fk_2` FOREIGN KEY (`id_pesanan`) REFERENCES `pesanan` (`id`);
+  ADD CONSTRAINT `belian_fk_1` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id`),
+  ADD CONSTRAINT `belian_fk_2` FOREIGN KEY (`id_pesanan`) REFERENCES `pesanan` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `pelanggan`
+--
+ALTER TABLE `pelanggan`
+  ADD CONSTRAINT `pelanggan_fk1` FOREIGN KEY (`tahap`) REFERENCES `tahap` (`id`);
+
+--
+-- Constraints for table `pesanan`
+--
+ALTER TABLE `pesanan`
+  ADD CONSTRAINT `pesanan_fk1` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pesanan_fk2` FOREIGN KEY (`id_status`) REFERENCES `status` (`id`),
+  ADD CONSTRAINT `pesanan_fk3` FOREIGN KEY (`no_meja`) REFERENCES `meja` (`no_meja`);
 
 --
 -- Constraints for table `produk`

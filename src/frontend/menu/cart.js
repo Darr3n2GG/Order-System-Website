@@ -50,7 +50,7 @@ function checkout() {
     if (cart.getCart().length !== 0) {
         eventBus.emit("checkout", cart.getCart());
     } else {
-        alert("No items in cart! Can't checkout.")
+        alert("Tiada produk di cart. Tidak boleh checkout.")
     }
 }
 

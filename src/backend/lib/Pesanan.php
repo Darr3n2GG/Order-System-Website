@@ -8,13 +8,14 @@ require_once dirname(__FILE__, 2) . "/Masa.php";
 class Pesanan {
     private $Database;
 
+
     public function __construct() {
         $this->Database = createDatabaseConn();
     }
 
     public function getSemuaPesanan(): array {
         return $this->Database->readQuery(
-            "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
+            "SELECT pesanan.id as id, pesanan.id_pelanggan as id_pelanggan, pelanggan.nama as nama, pesanan.tarikh as tarikh,
             status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
             FROM pesanan
             INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
@@ -22,12 +23,9 @@ class Pesanan {
         );
     }
 
-    public function getArrayPesananThisWeek(): array {
-        $week_start = getWeekStart();
-        $week_end = getWeekEnd();
-
+    public function getArrayPesananFromRange(string $from, string $to): array {
         return $this->Database->readQuery(
-            "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
+            "SELECT pesanan.id as id, pesanan.id_pelanggan as id_pelanggan, pelanggan.nama as nama, pesanan.tarikh as tarikh,
             status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
             FROM pesanan
             INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
@@ -35,15 +33,54 @@ class Pesanan {
             WHERE tarikh >= ? and tarikh <= ?
             ORDER BY tarikh ASC",
             "ss",
-            [$week_start, $week_end]
+            [$from, $to]
         );
+    }
+
+    public function getArrayPesananThisWeek(): array {
+        $week_start = getWeekStart();
+        $week_end = getWeekEnd();
+
+        return $this->getArrayPesananFromRange($week_start, $week_end);
     }
 
     public function getPesananByID(int $id): array {
         return $this->Database->readQuery(
-            "SELECT * FROM pesanan WHERE id = ? ORDER BY id ASC",
+            "SELECT pesanan.id as id, pesanan.id_pelanggan as id_pelanggan, pelanggan.nama as nama, pesanan.tarikh as tarikh,
+            status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
+            FROM pesanan
+            INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
+            INNER JOIN status ON pesanan.id_status = status.id
+            WHERE id = ? ORDER BY id ASC",
             "i",
             [$id]
+        );
+    }
+
+    public function getPesananByIDPelanggan(int $id): array {
+        return $this->Database->readQuery(
+            "SELECT pesanan.id as id, pesanan.id_pelanggan as id_pelanggan, pelanggan.nama as nama, pesanan.tarikh as tarikh,
+            status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
+            FROM pesanan
+            INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
+            INNER JOIN status ON pesanan.id_status = status.id
+            WHERE id_pelanggan = ? ORDER BY id ASC",
+            "i",
+            [$id]
+        );
+    }
+
+    public function getPesananByIDPelangganWithFilter(int $id, string $from, string $to): array {
+        return $this->Database->readQuery(
+            "SELECT pesanan.id as id, pesanan.id_pelanggan as id_pelanggan, pelanggan.nama as nama, pesanan.tarikh as tarikh,
+            status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
+            FROM pesanan 
+            INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
+            INNER JOIN status ON pesanan.id_status = status.id
+            WHERE id_pelanggan = ? and tarikh >= ? and tarikh <= ?
+            ORDER BY id ASC",
+            "iss",
+            [$id, $from, $to]
         );
     }
 
@@ -68,5 +105,47 @@ class Pesanan {
 
     public function getLastInsertedIDOfPesanan(): int {
         return $this->Database->readLastInsertedID();
+    }
+
+    public function getPesananByNamaPelanggan(string $pelanggan): array {
+        return $this->Database->readQuery(
+            "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
+            status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
+            FROM pesanan
+            INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
+            INNER JOIN status ON pesanan.id_status = status.id
+            WHERE pelanggan.nama LIKE ?",
+            "s", // 's' for string
+            ["%$pelanggan%"] // Use wildcards for partial matching
+        );
+    }
+
+    public function updatePesanan(int $id, array $data): void {
+        $fields = [];
+        $values = [];
+        $types = "";
+
+        foreach ($data as $key => $value) {
+            $fields[] = "$key = ?";
+            $values[] = $value;
+            $types .= $this->Database->getMysqliType($value);
+        }
+        $set = implode(', ', $fields);
+        $values[] = $id;
+        $types .= "i";
+
+        $this->Database->executeQuery(
+            "UPDATE pesanan SET $set WHERE id = ?",
+            $types,
+            $values
+        );
+    }
+
+    public function deletePesanan(int $id): bool {
+        return $this->Database->executeQuery(
+            "DELETE FROM pesanan WHERE id = ?",
+            "i",
+            [$id]
+        );
     }
 }

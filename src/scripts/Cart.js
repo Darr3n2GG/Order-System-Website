@@ -2,10 +2,9 @@ import { eventBus } from "./EventBus.js";
 
 
 export class Cart {
-    #cart;
+    #cart = [];
 
     constructor() {
-        this.#cart = [];
         eventBus.addEventListener("addItemToCart", ({ detail }) => {
             this.updateCart(detail.item);
         });

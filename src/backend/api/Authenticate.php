@@ -1,16 +1,18 @@
 <?php
 require_once dirname(__FILE__, 2) . "/Database.php";
+require_once dirname(__FILE__, 2) . "/Autoloader.php";
 
 session_start();
 
 $Database = createDatabaseConn();
-$redirect_url = "../../frontend/menu/menu.php";
 
 if (!isset($_POST["nama"], $_POST["password"])) {
-    exit("Please fill both the name and password fields!");
+    exit("Sila masukkan field nama dan password.");
 }
 
 try {
+    $Pelanggan = new lib\Pelanggan;
+
     $nama = $_POST["nama"];
     $password = $_POST["password"];
 
@@ -21,11 +23,25 @@ try {
             session_regenerate_id();
             $_SESSION["nama"] = $nama;
             $_SESSION["id_pelanggan"] = $id;
-            header("Location: " . $redirect_url);
+            if ($Pelanggan->getTahapPelanggan($id) === "admin") {
+                header("Location: ../../frontend/admin/dashboard/dashboard.php");
+            } else {
+                header("Location: ../../frontend/menu/menu.php");
+            }
+        } else {
+            echo "<script type='text/javascript'>
+                    alert('Password tidak betul.');
+                    window.location.href = '/Order-System-Website/src/frontend/login/login.php';
+                </script>";
         }
+    } else {
+        echo "<script type='text/javascript'>
+                alert('Nama tidak wujud.');
+                window.location.href = '/Order-System-Website/src/frontend/login/login.php';
+            </script>";
     }
 } catch (Exception $e) {
-    error_log($e->getMessage() . PHP_EOL, dirname(__FILE__, 2) . "/log/error_log.log");
+    error_log($e->getMessage() . PHP_EOL, 3, dirname(__FILE__, 2) . "/log/error_log.log");
     exit($e->getMessage());
 }
 

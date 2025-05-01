@@ -6,7 +6,10 @@ require_once dirname(__FILE__, 2) . "/dependencies.php";
 
 $Session = new lib\Session;
 if ($Session->isAdmin()) {
-    header("Location: ../admin/dashboard/dashboard.php");
+    echo "<script type='text/javascript'>
+            alert('Sila log keluar dari akaun admin untuk mengguna menu.');
+            window.location.href = '/Order-System-Website/src/frontend/admin/dashboard/dashboard.php';
+        </script>";
 }
 
 $Database = createDatabaseConn();
@@ -77,7 +80,7 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
         <img class="dialog_image" src="" alt="food image">
         <div>
             <h2 class="dialog_price">Harga : RM</h2>
-            <h2>Description :</h2>
+            <h2>Penerangan :</h2>
             <span class="dialog_description"></span>
         </div>
         <sl-button-group class="spinbox" slot="footer">

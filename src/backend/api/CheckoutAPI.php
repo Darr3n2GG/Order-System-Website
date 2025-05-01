@@ -13,7 +13,7 @@ try {
     $Session = new lib\Session;
     $Database = createDatabaseConn();
 
-    $id_pelanggan = $Session->getPelangganIDFromSession();
+    $id_pelanggan = $Session->getIDPelanggan();
     $nombor_meja = 1;
     $tarikh = date(DATE_FORMAT);
     $cara = "dine-in";

@@ -9,15 +9,19 @@ function echoShoelaceAutoloader(): void {
 }
 
 function echoTabulatorStyle(): void {
-    echo '<link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">';
+    echo '<link href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/6.3.1/css/tabulator.min.css" rel="stylesheet">';
 }
 
 function echoTabulator(): void {
-    echo '<script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>';
+    echo '<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/6.3.1/js/tabulator.min.js"></script>';
 }
 
 function echoChartJS(): void {
     echo '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>';
+}
+
+function echoScreenTransition(): void {
+    echo '<script type="module" src="../../../scripts/ScreenTransition.js"></script>';
 }
 
 function echoNoScript(): void {
@@ -27,8 +31,6 @@ function echoNoScript(): void {
 /**
  *  Given a file, i.e. /css/base.css, replaces it with a string containing the
  *  file's mtime, i.e. /css/base.1221534296.css.
- *
- *  Updates browser cache ( I think ) when file is updated.
  *
  *  @param $file  The file to be loaded. works on all type of paths.
  */

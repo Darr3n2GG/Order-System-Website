@@ -5,6 +5,7 @@ require_once dirname(__FILE__, 4) . "/backend/Masa.php";
 require_once dirname(__FILE__, 4) . "/backend/Autoloader.php";
 
 $Database = createDatabaseConn();
+$Session = new lib\Session;
 
 $array_pesanan_id = getArrayPesananIDThisWeek();
 if ($array_pesanan_id != []) {
@@ -24,18 +25,15 @@ $pesanan_count = getPesananCount();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="<?php echo auto_version("../../style.css"); ?>">
+    <link rel="stylesheet" href="<?php echo auto_version("dashboard.css"); ?>">
     <?php
     echoNavBarStylesheet();
     echoAdminHeaderStylesheet();
+    echoTabulatorStyle();
+    echoShoelaceStyle();
     ?>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/themes/light.css" />
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/shoelace-autoloader.js"></script>
-    <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>Admin</title>
+    <title>Dashboard</title>
 </head>
 
 <body>
@@ -44,34 +42,42 @@ $pesanan_count = getPesananCount();
     echoAdminHeader("Dashboard");
     ?>
     <div class="content container">
-        Minggu ini :
-        <div class="row_kecil">
-            <div class="item_kecil">
-                <h2>Most ordered food / drink</h2>
-                <h1><?php echo $nama_produk; ?></h1>
+        <div class="dashboard_container">
+            <h2>Selamat datang <?php echo $Session->getNama(); ?>! Minggu ini :</h2>
+            <div class="row_kecil">
+                <div class="item_kecil">
+                    <h2>Produk yang sering dipesan: </h2>
+                    <h1><?php echo $nama_produk; ?></h1>
+                </div>
+                <div class="item_kecil">
+                    <h2>Kuantiti Pesanan: </h2>
+                    <h1><?php echo $pesanan_count; ?></h1>
+                </div>
             </div>
-            <div class="item_kecil">
-                <h2>Number of orders this week</h2>
-                <h1><?php echo $pesanan_count; ?></h1>
-            </div>
-        </div>
-        <div class="row_besar">
-            <div class="item_besar">
-                <h2>Table Pesanan</h2>
-                <div id="table_pesanan"></div>
-            </div>
-            <div class="item_besar">
-                <div class="container_carta">
-                    <h2>Carta Revenue</h2>
-                    <canvas id="carta_revenue"></canvas>
+            <div class="row_besar">
+                <div class="item_besar">
+                    <h2>Table Pesanan</h2>
+                    <div id="table_pesanan"></div>
+                </div>
+                <div class="item_besar">
+                    <div class="container_carta">
+                        <h2>Carta Revenue</h2>
+                        <canvas id="carta_revenue"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script type="module" src="table_pesanan.js"></script>
+    <script type="module" src="<?php echo auto_version("table_pesanan.js"); ?>"></script>
     <script type="module" src="carta_revenue.js"></script>
-    <noscript>Your browser does not support JavaScript!</noscript>
+    <?php
+    echoTabulator();
+    echoShoelaceAutoloader();
+    echoChartJS();
+    echoNavBarJavascript();
+    echoNoScript();
+    ?>
 </body>
 
 </html>

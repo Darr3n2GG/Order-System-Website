@@ -11,8 +11,11 @@ try {
     $Pelanggan = new lib\Pelanggan;
 
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
-        $array_pelanggan = $Pelanggan->getSemuaSearchablePelanggan();
-        echoJsonResponse(true, "PelangganAPI GET request processed.", $array_pelanggan);
+        if (isset($_GET)) {
+            $array_pelanggan = $Pelanggan->getSemuaSearchablePelanggan();
+            echoJsonResponse(true, "PelangganAPI GET request processed.", $array_pelanggan);
+        } else if (isset($_GET["nama"]) or isset($_GET["no_phone"])) {
+        }
     } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_FILES["files"])) {
             postCSVFiles($_FILES["files"]);
@@ -30,11 +33,14 @@ try {
             throw new Exception("No parameters attached to DELETE request.", 400);
         }
     } else if ($_SERVER["REQUEST_METHOD"] == "PATCH") {
-        $body = getPatchBody();
-        $id = $body["id"];
-        $data = $body["data"];
+        $data = getPatchBody();
+        $id = $data["id"];
+        unset($data["id"]);
 
         $Pelanggan->updatePelanggan($id, $data);
+        echoJsonResponse(true, "PelangganAPI PATCH request processed.");
+    } else {
+        throw new Exception("Invalid PelangganAPI request method", 400);
     }
 } catch (Exception $e) {
     error_log($e->getMessage());
@@ -93,6 +99,7 @@ function parseCSVFile(array $files): void {
             $nama = $data[0];
             $password = $data[1];
             $no_phone = $data[2];
+            $tahap = $data[3];
 
             $Pelanggan->addPelanggan($nama, $password, $no_phone);
         }
@@ -125,8 +132,12 @@ function getPatchBody(): array {
     $rawInput = file_get_contents('php://input');
     $body = json_decode($rawInput, true);
 
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        throw new Exception("Invalid JSON input:" . json_last_error_msg());
+    }
+
     if (!is_array($body)) {
-        throw new Exception("Invalid JSON input.");
+        throw new Exception("Expected JSON object as associative array.");
     }
 
     return $body;

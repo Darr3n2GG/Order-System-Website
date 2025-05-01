@@ -1,3 +1,7 @@
+.dashboard_container {
+    padding: 2rem;
+}
+
 #table_pesanan {
     width: auto;
     max-width: 100%;

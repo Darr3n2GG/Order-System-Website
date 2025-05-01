@@ -183,3 +183,70 @@ Stack trace:
 [21-Apr-2025 17:44:53 Asia/Kuala_Lumpur] No connection could be made because the target machine actively refused it
 [23-Apr-2025 20:48:22 Asia/Kuala_Lumpur] The number of elements in the type definition string must match the number of bind variables
 
+[29-Apr-2025 20:53:11 Asia/Kuala_Lumpur] Invalid JSON input.
+[29-Apr-2025 20:54:17 Asia/Kuala_Lumpur] Invalid JSON input.
+[29-Apr-2025 20:59:49 Asia/Kuala_Lumpur] Invalid JSON input:Syntax error
+[29-Apr-2025 21:11:34 Asia/Kuala_Lumpur] Invalid JSON input:Syntax error
+[29-Apr-2025 21:13:05 Asia/Kuala_Lumpur] Invalid JSON input:Syntax error
+[29-Apr-2025 21:13:43 Asia/Kuala_Lumpur] implode(): Argument #1 ($array) must be of type array, string given
+
+[29-Apr-2025 21:15:07 Asia/Kuala_Lumpur] ------WebKitFormBoundarySLhujxEjt9yhMCxs
+Content-Disposition: form-data; name="id"
+
+1
+------WebKitFormBoundarySLhujxEjt9yhMCxs
+Content-Disposition: form-data; name="nama"
+
+test
+------WebKitFormBoundarySLhujxEjt9yhMCxs
+Content-Disposition: form-data; name="no_phone"
+
+0123456789
+------WebKitFormBoundarySLhujxEjt9yhMCxs
+Content-Disposition: form-data; name="tahap"
+
+1
+------WebKitFormBoundarySLhujxEjt9yhMCxs--
+
+[29-Apr-2025 21:15:07 Asia/Kuala_Lumpur] Invalid JSON input:Syntax error
+[29-Apr-2025 21:20:27 Asia/Kuala_Lumpur] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?nama= ?no_phone= ? WHERE id = ?' at line 1
+[29-Apr-2025 21:22:14 Asia/Kuala_Lumpur] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE id = ?' at line 1
+[29-Apr-2025 22:53:57 Asia/Kuala_Lumpur] No parameters attached to GET request.
+[29-Apr-2025 22:55:11 Asia/Kuala_Lumpur] No parameters attached to GET request.
+[01-May-2025 21:54:52 Asia/Kuala_Lumpur] Class "lib\Belian" not found
+
+[01-May-2025 21:54:53 Asia/Kuala_Lumpur] Class "lib\Belian" not found
+
+[01-May-2025 21:55:39 Asia/Kuala_Lumpur] Call to undefined function getHargaFromIDProduk()
+
+[01-May-2025 22:00:16 Asia/Kuala_Lumpur] Undefined variable $range
+[01-May-2025 22:08:49 Asia/Kuala_Lumpur] Undefined variable $range
+[01-May-2025 22:10:01 Asia/Kuala_Lumpur] Undefined variable $range
+[01-May-2025 22:10:22 Asia/Kuala_Lumpur] Undefined variable $range
+[01-May-2025 22:29:21 Asia/Kuala_Lumpur] Undefined variable $range
+[01-May-2025 22:29:36 Asia/Kuala_Lumpur] Undefined variable $range
+[01-May-2025 22:29:45 Asia/Kuala_Lumpur] Undefined variable $range
+[01-May-2025 22:30:10 Asia/Kuala_Lumpur] Undefined variable $range
+[01-May-2025 22:31:28 Asia/Kuala_Lumpur] Undefined variable $range
+[01-May-2025 22:32:07 Asia/Kuala_Lumpur] Undefined variable $range
+[01-May-2025 22:32:59 Asia/Kuala_Lumpur] Undefined variable $range
+[01-May-2025 22:36:28 Asia/Kuala_Lumpur] Undefined variable $range
+[01-May-2025 23:09:02 Asia/Kuala_Lumpur] Unknown column 'pelanggan.nama' in 'field list'
+[01-May-2025 23:12:32 Asia/Kuala_Lumpur] Unknown column 'pelanggan.nama' in 'field list'
+[01-May-2025 23:16:06 Asia/Kuala_Lumpur] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
+            INNE...' at line 3
+[01-May-2025 23:41:26 Asia/Kuala_Lumpur] Missing parameters in POST request
+[01-May-2025 23:41:28 Asia/Kuala_Lumpur] Missing parameters in POST request
+[01-May-2025 23:41:43 Asia/Kuala_Lumpur] Missing parameters in POST request
+[02-May-2025 00:17:16 Asia/Kuala_Lumpur] lib\Pesanan::getPesananByIDPelanggan(): Argument #1 ($id) must be of type int, string given, called in C:\xampp\htdocs\Order-System-Website\src\backend\api\PesananAPI.php on line 74
+
+[02-May-2025 00:17:59 Asia/Kuala_Lumpur] lib\Pesanan::getPesananByIDPelanggan(): Argument #1 ($id) must be of type int, string given, called in C:\xampp\htdocs\Order-System-Website\src\backend\api\PesananAPI.php on line 74
+
+[02-May-2025 00:39:29 Asia/Kuala_Lumpur] Missing parameters in POST request
+[02-May-2025 00:39:30 Asia/Kuala_Lumpur] Missing parameters in POST request
+[02-May-2025 00:39:30 Asia/Kuala_Lumpur] Missing parameters in POST request
+[02-May-2025 00:39:31 Asia/Kuala_Lumpur] Missing parameters in POST request
+[02-May-2025 00:39:31 Asia/Kuala_Lumpur] Missing parameters in POST request
+[02-May-2025 00:39:32 Asia/Kuala_Lumpur] Missing parameters in POST request
+[02-May-2025 00:39:32 Asia/Kuala_Lumpur] Missing parameters in POST request
+[02-May-2025 00:39:32 Asia/Kuala_Lumpur] Missing parameters in POST request

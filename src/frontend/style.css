@@ -25,7 +25,9 @@
   --z-fixed: 699;
   --z-modal: 10000;
 
-  --default-border-radius: var(--sl-border-radius-x-large)
+  --shadow-medium: var(--sl-shadow-medium);
+
+  --radius-x-large: var(--sl-border-radius-x-large);
 }
 
 /*=============== BASE ===============*/
@@ -33,6 +35,19 @@
     box-sizing: border-box;
 }
   
+:not(:defined) {
+    visibility: hidden;
+}
+
+/* body {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+  
+body.loaded {
+    opacity: 1;
+} */
+
 html {
     scroll-behavior: smooth;
 }
@@ -71,7 +86,7 @@ img {
 }
 
 .content {
-    margin-top: 5rem;
+    margin-top: var(--header-height);
 }
 
 .container {

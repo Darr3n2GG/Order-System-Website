@@ -1,14 +1,28 @@
+html, body {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--first-color);
+}
+
 .content {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    margin: 0;
+    position: absolute;
+    height: 60%;
+}
+
+.image_container {
+    display: none;
 }
 
 .form_container {
     background-color: peachpuff;
     border-radius: 20px;
     padding: 2rem;
-    margin-top: 5%;
 }
 
 .form_container h2 {
@@ -37,4 +51,19 @@
     display: inline-block;
     font-size: medium;
     margin-bottom: 0.5rem;
+}
+
+@media screen and (min-width: 1150px) {
+    .content {
+        padding: 2rem;
+        gap: 5%;
+        background-color: var(--body-color);
+        border-radius: var(--radius-x-large);
+        position: relative;
+    }
+
+    .image_container {
+        display: block;
+        margin: 2rem;
+    }
 }
