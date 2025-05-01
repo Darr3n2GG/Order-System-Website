@@ -26,11 +26,15 @@ try {
             throw new Exception("No parameters attached to GET request.", 400);
         }
     } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        return;
+        if (isset($_GET["type"]) && $_GET["type"] == "insert") {
+            handleInsertProduk();
+        } else {
+            throw new Exception("Invalid POST request type.", 400);
+        }
     }
 } catch (Exception $e) {
     error_log($e->getMessage());
-    echoJsonException($e->getCode(), "ProdukAPI request failed : " . $e->getMessage());
+    echoJsonException($e->getCode(), "ProdukAPI request failed: " . $e->getMessage());
 }
 
 function handleGetProdukData(): void {
@@ -57,6 +61,37 @@ function handleGetProdukHtml(): void {
     }
 }
 
+// New function to handle inserting products
+function handleInsertProduk(): void {
+    global $Produk;
+
+    // Get the POST data
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    if (!isset($data['nama']) || !isset($data['kategori']) || !isset($data['harga']) || !isset($data['detail'])) {
+        echoJsonResponse(false, "Missing required fields.", null);
+        return;
+    }
+
+    // Sanitize and validate the input
+    $nama = htmlspecialchars($data['nama']);
+    $kategori = htmlspecialchars($data['kategori']);
+    $harga = (float) $data['harga'];
+    $detail = htmlspecialchars($data['detail']);
+
+    try {
+        // Insert the product into the database
+        $insertSuccess = $Produk->insertProduk($nama, $kategori, $harga, $detail);
+
+        if ($insertSuccess) {
+            echoJsonResponse(true, "Product successfully added.", null);
+        } else {
+            echoJsonResponse(false, "Failed to insert product.", null);
+        }
+    } catch (Exception $e) {
+        echoJsonException($e->getCode(), "Error inserting product: " . $e->getMessage());
+    }
+}
 
 function returnSemuaProduk(): void {
     global $Produk;

@@ -43,4 +43,21 @@ class Produk {
         );
         return $arrayProduk;
     }
+
+    public function insertProduk($nama, $kategori, $harga, $detail, $gambar = '/'): bool {
+        // Prepare SQL query
+        $query = "INSERT INTO produk (nama, id_kategori, harga, detail, gambar) 
+                  VALUES (?, ?, ?, ?, ?)";
+
+        // Prepare the statement
+        $stmt = $this->Database->prepareStatement($query);
+
+        // Bind parameters (note that we have 5 parameters and 5 placeholders in the query)
+        // "ssdss" -> s for string (nama, kategori), d for double (harga), s for string (detail), s for string (gambar)
+        $stmt->bind_param("ssdss", $nama, $kategori, $harga, $detail, $gambar);
+
+        // Execute the query
+        return $stmt->execute();
+    }
+
 }

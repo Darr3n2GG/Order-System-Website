@@ -55,20 +55,20 @@ $Database = createDatabaseConn();
                         <div class="toolbar">
                             <h2>Tambah Produk</h2>
                             <form class="form_produk" autocomplete="off">
-                                <sl-input placeholder="Nama" id="tambah_produk_nama" name="nama" type="text" autocomplete="off">
+                                <sl-input placeholder="Nama" id="tambah_produk_nama" name="nama" type="text" autocomplete="off" required>
                                     <label slot="label">Nama</label>
                                     <sl-icon name="card-text" slot="prefix"></sl-icon>
                                 </sl-input>
-                                <sl-select placeholder="Kategori" id="tambah_produk_kategori" placement="bottom">
+                                <sl-select placeholder="Kategori" id="tambah_produk_kategori" placement="bottom" required>
                                     <sl-icon name="tag" slot="prefix"></sl-icon>
                                     <label slot="label">Kategori</label>
                                     <?php loadKategoriOptionHTML(); ?>
                                 </sl-select>
-                                <sl-input placeholder="Harga" id="tambah_produk_harga" name="harga" type="number" autocomplete="off">
+                                <sl-input placeholder="Harga" id="tambah_produk_harga" name="harga" type="number" autocomplete="off" required>
                                     <label slot="label">Harga</label>
                                     <sl-icon name="cash" slot="prefix"></sl-icon>
                                 </sl-input>
-                                <sl-textarea id="tambah_produk_detail" label="Detail" resize="auto"></sl-textarea>
+                                <sl-textarea id="tambah_produk_detail" label="Detail" resize="auto" required></sl-textarea>
                                 <div class="form_buttons">
                                     <sl-button id="tambah_gambar">
                                         <sl-icon slot="prefix" name="card-image"></sl-icon>

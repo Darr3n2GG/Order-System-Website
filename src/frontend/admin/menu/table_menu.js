@@ -121,6 +121,46 @@ document.getElementById("filter_nama").addEventListener("input", (e) => {
     tablePelanggan.setData(filteredApiUrl);
 });
 
+document.querySelector(".form_produk").addEventListener("submit", async (e) => {
+    e.preventDefault(); // Prevent the form from submitting normally
+    
+    const nama = document.getElementById("tambah_produk_nama").value;
+    const kategori = document.getElementById("tambah_produk_kategori").value;
+    const harga = document.getElementById("tambah_produk_harga").value;
+    const detail = document.getElementById("tambah_produk_detail").value;
+
+    // Check for empty fields
+    if (!nama || !kategori || !harga || !detail) {
+        alert("Sila isi semua ruangan wajib.");
+        return; // Stop submission
+    }
+    
+    try {
+        // Send data to the server via POST
+        const response = await fetch(ApiUrl + "?" + new URLSearchParams({
+            type: "insert"
+        }), {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nama, kategori, harga, detail })
+        });
+
+        const result = await FetchHelper.onFulfilled(response);
+
+        if (result.ok) {
+            alert("Produk berjaya ditambah!");
+            tablePelanggan.setData(ApiUrl + "?type=data"); // Refresh table
+            // Optionally, clear the form
+            document.querySelector(".form_produk").reset();
+        } else {
+            alert("Gagal menambah produk.");
+        }
+    } catch (error) {
+        FetchHelper.onRejected(error);
+    }
+});
+
+
 async function getTableData(url, config) {
     try {
         const response = await fetch(url, config);
