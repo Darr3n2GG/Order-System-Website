@@ -129,7 +129,7 @@ document.querySelector(".form_pesanan").addEventListener("submit", async (e) => 
 
         if (result.ok) {
             alert("Pesanan berjaya ditambah!");
-            tablePesanan.setData(ApiUrl + "?type=data"); // Refresh table
+            tablePesanan.setData(ApiUrl + "?filter=y"); // Refresh table
             // Optionally, clear the form
             document.querySelector(".form_pesanan").reset();
         } else {
@@ -142,7 +142,7 @@ document.querySelector(".form_pesanan").addEventListener("submit", async (e) => 
 
 async function getTableData(url, config) {
     // Append the filter parameters to the URL for server-side filtering
-    const filteredUrl = `${url}?pelanggan=${encodeURIComponent(filterPelanggan)}`;
+    const filteredUrl = `${url}?filter=y&pelanggan=${encodeURIComponent(filterPelanggan)}`;
     try {
         const response = await fetch(filteredUrl, config);
         const data = await FetchHelper.onFulfilled(response);

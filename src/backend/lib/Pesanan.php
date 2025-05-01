@@ -15,7 +15,7 @@ class Pesanan {
 
     public function getSemuaPesanan(): array {
         return $this->Database->readQuery(
-            "SELECT pesanan.id as id,pesanan, pesanan.id_pelanggan as id_pelanggan, pelanggan.nama as nama, pesanan.tarikh as tarikh,
+            "SELECT pesanan.id as id, pesanan.id_pelanggan as id_pelanggan, pelanggan.nama as nama, pesanan.tarikh as tarikh,
             status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
             FROM pesanan
             INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
