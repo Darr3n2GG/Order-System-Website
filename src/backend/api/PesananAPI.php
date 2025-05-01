@@ -10,9 +10,7 @@ try {
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
         if (isset($_GET["range"])) {
             $range = htmlspecialchars($_GET["range"]);
-            $array_pesanan = handleGetPesanan($range);
-
-            echoJsonResponse(true, "PesananAPI GET request processed.", $array_pesanan);
+            handleGetPesanan($range);
         }
     } else {
         throw new Exception("Invalid PesananAPI request method.", 400);
@@ -22,14 +20,18 @@ try {
     echoJsonException($e->getCode(), "PesananAPI request failed : " . $e->getMessage());
 }
 
-function handleGetPesanan($range): array {
+function handleGetPesanan(string $range): void {
     global $Pesanan;
 
     if ($range == "*") {
-        return $Pesanan->getSemuaPesanan();
+        $array_pesanan = $Pesanan->getSemuaPesanan();
+        echoJsonResponse(true, "PesananAPI GET request processed.", $array_pesanan);
     } else if ($range == "week") {
-        return $Pesanan->getArrayPesananThisWeek();
+        $array_pesanan =  $Pesanan->getArrayPesananThisWeek();
+        echoJsonResponse(true, "PesananAPI GET request processed.", $array_pesanan);
+    } else if ($range == "date") {
+        $from = date(DATE_FORMAT, strtotime($from));
     } else {
-        return [];
+        return;
     }
 }

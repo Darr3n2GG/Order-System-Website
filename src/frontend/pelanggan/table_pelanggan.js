@@ -1,6 +1,9 @@
 const ApiUrl = "/Order-System-Website/src/backend/api/PesananAPI.php";
 
 const tableSenaraiPelanggan = new Tabulator("#table_senarai_pesanan", {
+    ajaxURL: ApiUrl,
+    ajaxConfig: { method: "GET" },
+    ajaxRequestFunc: (url, config) => getTableData(url, config),
     layout: "fitData",
     height: 550,
     columns: [
@@ -23,3 +26,18 @@ const tableSenaraiPelanggan = new Tabulator("#table_senarai_pesanan", {
         }
     ],
 })
+
+async function getTableData(url, config) {
+    try {
+        const response = await fetch(url, config);
+        const data = await FetchHelper.onFulfilled(response);
+        if (data.details === undefined) {
+            return [];
+        } else {
+            const tableData = data.details
+            return tableData;
+        }
+    } catch (error) {
+        return FetchHelper.onRejected(error);
+    }
+}

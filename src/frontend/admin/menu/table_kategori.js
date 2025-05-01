@@ -49,9 +49,6 @@ async function getTableData(url, config) {
             return [];
         } else {
             const tableData = data.details
-            for (let row in tableData) {
-                tableData[row]._editable = false;
-            }
             return tableData;
         }
     } catch (error) {
