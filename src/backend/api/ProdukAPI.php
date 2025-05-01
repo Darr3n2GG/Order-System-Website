@@ -31,7 +31,23 @@ try {
         } else {
             throw new Exception("Invalid POST request type.", 400);
         }
+    }  else if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
+        if (isset($_GET["id"])) {
+            $id = htmlspecialchars($_GET["id"]);
+            $Produk->deleteProduk($id);
+            echoJsonResponse(true, "ProdukAPI DELETE request processed.");
+        } else {
+            throw new Exception("No parameters attached to DELETE request.", 400);
+        }
+    } else if ($_SERVER["REQUEST_METHOD"] == "PATCH") {
+        $data = getPatchBody();
+        $id = $data["id"];
+        unset($data["id"]);
+
+        $Produk->updateProduk($id, $data);
+        echoJsonResponse(true, "ProdukAPI PATCH request processed.");
     }
+
 } catch (Exception $e) {
     error_log($e->getMessage());
     echoJsonException($e->getCode(), "ProdukAPI request failed: " . $e->getMessage());
@@ -144,3 +160,18 @@ function generateProdukHTML(array $array_produk): array {
 
     return $array_item_produk;
 }
+
+    function getPatchBody(): array {
+        $rawInput = file_get_contents('php://input');
+        $body = json_decode($rawInput, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new Exception("Invalid JSON input:" . json_last_error_msg());
+        }
+
+        if (!is_array($body)) {
+            throw new Exception("Expected JSON object as associative array.");
+        }
+
+        return $body;
+    }

@@ -1,8 +1,11 @@
 import FetchHelper from "../../../scripts/FetchHelper.js";
+import FormValidator from "../../../scripts/FormValidator.js";
 
 const ApiUrl = "/Order-System-Website/src/backend/api/ProdukAPI.php"
 
 const editProdukDialog = document.querySelector(".edit_produk_dialog");
+const editForm = editProdukDialog.querySelector(".edit_produk_form");
+
 // === Global Filter Variable ===
 let filterNama = "";
 
@@ -52,7 +55,7 @@ const tablePelanggan = new Tabulator("#table_menu", {
             formatter: function () {
                 return '<sl-icon-button name="trash"></sl-icon-button>';
             },
-            cellClick: (e, cell) => deletePelanggan(e, cell)
+            cellClick: (e, cell) => deleteProduk(e, cell)
         },
     ],
 });
@@ -189,6 +192,81 @@ function showEditDialog(e, cell) {
     editProdukDialog.show()
 }
 
+const editFormValidity = {
+//    edit_produk_id: { condition: (value) => { return "" } },
+//    edit_produk_nama: { condition: (value) => handleNamaValidation(value) },
+//    edit_nombor_phone: { condition: (value) => handlePhoneValidation(value) },
+//    edit_tahap: { condition: (value) => handleTahapValidation(value) }
+};
+
+editProdukDialog.querySelector(".edit_button").addEventListener("click", () => {
+    if (FormValidator.validateForm(editFormValidity)) {
+        const data = new FormData(editForm);
+        patchProdukData(data, "Data produk sudah diedit.");
+    }
+})
+
+async function patchProdukData(formData, message) {
+    try {
+        const data = Object.fromEntries(formData);
+
+        const response = await fetch(ApiUrl, {
+            method: "PATCH",
+            body: JSON.stringify(data)
+        })
+
+        const responseMessage = await FetchHelper.onFulfilled(response)
+        if (responseMessage.ok) {
+            alert(message);
+            setTimeout(location.reload(), 500)
+        } else {
+            console.error(responseMessage.message);
+        }
+    } catch (error) {
+        FetchHelper.onRejected(error);
+    }
+}
+
+async function deleteProduk(e, cell) {
+    const row = cell.getRow();
+    const id = row.getData().id;
+
+    const url = ApiUrl + "?" + new URLSearchParams({
+        id: id
+    }).toString();
+
+    try {
+        const response = await fetch(url, { method: "DELETE" });
+        const data = await FetchHelper.onFulfilled(response);
+
+        if (response.ok) {
+            row.delete();
+        }
+    } catch (error) {
+        FetchHelper.onRejected(error);
+    }
+
+    alert("Produk dengan ID : " + id + " sudah dipadamkan.")
+}
+
 tablePelanggan.on("tableBuilt", () => {
     // tablePelanggan.print();
 });
+
+function handleNamaValidation(value) {
+    if (value === "") {
+        return "Field nama kosong.";
+    } else if (!isValidCharacters(value)) {
+        return "Field nama terdapat character invalid.";
+    } else if (value.length >= 100) {
+        return "Field nama mesti kurang daripada 100.";
+    } else {
+        return "";
+    }
+}
+
+function isValidCharacters(value) {
+    const whitelistPattern = /^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]+$/;
+    return whitelistPattern.test(value);
+}
+

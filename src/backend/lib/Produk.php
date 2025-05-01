@@ -51,4 +51,33 @@ class Produk {
             [$nama, $kategori, $harga, $detail, $gambar]
         );
     }
+    
+    public function updateProduk(int $id, array $data): void {
+        $fields = [];
+        $values = [];
+        $types = "";
+
+        foreach ($data as $key => $value) {
+            $fields[] = "$key = ?";
+            $values[] = $value;
+            $types .= $this->Database->getMysqliType($value);
+        }
+        $set = implode(', ', $fields);
+        $values[] = $id;
+        $types .= "i";
+
+        $this->Database->executeQuery(
+            "UPDATE produk SET $set WHERE id = ?",
+            $types,
+            $values
+        );
+    }
+
+    public function deleteProduk(int $id): void {
+        $this->Database->executeQuery(
+            "DELETE FROM produk WHERE id = ?",
+            "i",
+            [$id]
+        );
+    }
 }

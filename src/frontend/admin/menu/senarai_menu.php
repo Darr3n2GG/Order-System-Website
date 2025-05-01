@@ -144,7 +144,7 @@ $Database = createDatabaseConn();
                     <label slot="label">Harga</label>
                     <sl-icon name="cash" slot="prefix"></sl-icon>
                 </sl-input>
-                <sl-textarea id="edit_produk_detail" label="Detail" resize="auto"></sl-textarea>
+                <sl-textarea id="edit_produk_detail" label="Detail" name="detail" resize="auto"></sl-textarea>
                 <sl-button id="tambah_gambar">
                     <sl-icon slot="prefix" name="card-image"></sl-icon>
                     Tukar Gambar
