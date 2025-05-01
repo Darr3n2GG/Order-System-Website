@@ -1,3 +1,5 @@
+import FetchHelper from "../../scripts/FetchHelper.js";
+
 const ApiUrl = "/Order-System-Website/src/backend/api/PesananAPI.php";
 
 const tableSenaraiPelanggan = new Tabulator("#table_senarai_pesanan", {

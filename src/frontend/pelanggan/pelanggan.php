@@ -5,6 +5,7 @@ require_once dirname(__FILE__, 2) . "/header/header.php";
 require_once dirname(__FILE__, 2) . "/dependencies.php";
 ?>
 
+<!DOCTYPE html>
 <html lang="en">
 
 <head>

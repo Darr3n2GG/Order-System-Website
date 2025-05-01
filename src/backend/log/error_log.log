@@ -219,3 +219,7 @@ Content-Disposition: form-data; name="tahap"
 
 [01-May-2025 21:55:39 Asia/Kuala_Lumpur] Call to undefined function getHargaFromIDProduk()
 
+[01-May-2025 22:00:16 Asia/Kuala_Lumpur] Undefined variable $range
+[01-May-2025 22:08:49 Asia/Kuala_Lumpur] Undefined variable $range
+[01-May-2025 22:10:01 Asia/Kuala_Lumpur] Undefined variable $range
+[01-May-2025 22:10:22 Asia/Kuala_Lumpur] Undefined variable $range
