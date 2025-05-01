@@ -9,6 +9,7 @@ class Session {
     private bool $admin = false;
     private int $id_pelanggan;
     private string $nama;
+    private string $no_phone;
 
     private Pelanggan $Pelanggan;
 
@@ -24,6 +25,7 @@ class Session {
         if ($this->log_masuk) {
             $this->id_pelanggan = $_SESSION["id_pelanggan"];
             $this->nama = $this->Pelanggan->findPelanggan($this->id_pelanggan)["nama"];
+            $this->no_phone = $this->Pelanggan->findPelanggan($this->id_pelanggan)["no_phone"];
             $this->setAdmin();
         }
     }
@@ -54,7 +56,11 @@ class Session {
         return $this->nama;
     }
 
-    public function getPelangganIDFromSession() {
+    public function getNomborPhone(): string {
+        return $this->no_phone;
+    }
+
+    public function getIDPelanggan() {
         if ($this->log_masuk) {
             return $this->id_pelanggan;
         } else {

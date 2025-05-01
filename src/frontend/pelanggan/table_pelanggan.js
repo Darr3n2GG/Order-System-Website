@@ -1,15 +1,19 @@
 import FetchHelper from "../../scripts/FetchHelper.js";
 
 const ApiUrl = "/Order-System-Website/src/backend/api/PesananAPI.php";
+const id_pelanggan = document.getElementById("table_senarai_pesanan").dataset.id_pelanggan
 
 const tableSenaraiPelanggan = new Tabulator("#table_senarai_pesanan", {
-    ajaxURL: ApiUrl,
+    ajaxURL: ApiUrl + "?" + new URLSearchParams({
+        range: "*",
+        id_pelanggan: id_pelanggan
+    }),
     ajaxConfig: { method: "GET" },
     ajaxRequestFunc: (url, config) => getTableData(url, config),
     layout: "fitData",
     height: 550,
     columns: [
-        { title: "No.", field: "id", },
+        { title: "No.", formatter: "rownum", width: 60 },
         { title: "Tarikh", field: "tarikh", },
         { title: "Status", field: "status" },
         { title: "Jumlah Harga (RM)", field: "jumlah_harga" },

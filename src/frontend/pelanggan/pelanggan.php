@@ -35,8 +35,8 @@ if (!$Session->sudahLogMasuk()) {
             <div class="user_info_container">
                 <sl-avatar></sl-avatar>
                 <div class="user_info">
-                    <h1>Nama</h1>
-                    <span>0123456789</span>
+                    <h1><?php echo $Session->getNama(); ?></h1>
+                    <span><?php echo $Session->getNomborPhone(); ?></span>
                 </div>
             </div>
             <sl-button id="log_keluar_button" variant="danger">Log Keluar</sl-button>
@@ -60,7 +60,7 @@ if (!$Session->sudahLogMasuk()) {
                     </div>
                 </div>
             </aside>
-            <div id="table_senarai_pesanan"></div>
+            <div data-id_pelanggan="<?php echo $Session->getIDPelanggan(); ?>" id="table_senarai_pesanan"></div>
         </div>
     </div>
 

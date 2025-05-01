@@ -15,7 +15,7 @@ class Pesanan {
 
     public function getSemuaPesanan(): array {
         return $this->Database->readQuery(
-            "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
+            "SELECT pesanan.id as id,pesanan, pesanan.id_pelanggan as id_pelanggan, pelanggan.nama as nama, pesanan.tarikh as tarikh,
             status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
             FROM pesanan
             INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
@@ -25,7 +25,7 @@ class Pesanan {
 
     public function getArrayPesananFromRange(string $from, string $to): array {
         return $this->Database->readQuery(
-            "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
+            "SELECT pesanan.id as id, pesanan.id_pelanggan as id_pelanggan, pelanggan.nama as nama, pesanan.tarikh as tarikh,
             status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
             FROM pesanan
             INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
@@ -46,9 +46,12 @@ class Pesanan {
 
     public function getPesananByID(int $id): array {
         return $this->Database->readQuery(
-            "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
+            "SELECT pesanan.id as id, pesanan.id_pelanggan as id_pelanggan, pelanggan.nama as nama, pesanan.tarikh as tarikh,
             status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
-            FROM pesanan WHERE id = ? ORDER BY id ASC",
+            FROM pesanan
+            INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
+            INNER JOIN status ON pesanan.id_status = status.id
+            WHERE id = ? ORDER BY id ASC",
             "i",
             [$id]
         );
@@ -56,9 +59,12 @@ class Pesanan {
 
     public function getPesananByIDPelanggan(int $id): array {
         return $this->Database->readQuery(
-            "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
+            "SELECT pesanan.id as id, pesanan.id_pelanggan as id_pelanggan, pelanggan.nama as nama, pesanan.tarikh as tarikh,
             status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
-            FROM pesanan WHERE id_pelanggan = ? ORDER BY id ASC",
+            FROM pesanan
+            INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
+            INNER JOIN status ON pesanan.id_status = status.id
+            WHERE id_pelanggan = ? ORDER BY id ASC",
             "i",
             [$id]
         );
@@ -66,9 +72,12 @@ class Pesanan {
 
     public function getPesananByIDPelangganWithFilter(int $id, string $from, string $to): array {
         return $this->Database->readQuery(
-            "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
+            "SELECT pesanan.id as id, pesanan.id_pelanggan as id_pelanggan, pelanggan.nama as nama, pesanan.tarikh as tarikh,
             status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
-            FROM pesanan WHERE id_pelanggan = ? and tarikh >= ? and tarikh <= ?
+            FROM pesanan 
+            INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
+            INNER JOIN status ON pesanan.id_status = status.id
+            WHERE id_pelanggan = ? and tarikh >= ? and tarikh <= ?
             ORDER BY id ASC",
             "iss",
             [$id, $from, $to]

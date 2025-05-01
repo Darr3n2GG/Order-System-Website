@@ -29,12 +29,18 @@ function echoHeader(): void {
         </div>
         PELANGGAN;
     } else if ($Session->sudahLogMasuk()) {
+        $nama = $Session->getNama();
+
         $html = <<<DAFTAR
         <div class="nav_registered">
             <ul class="nav_list">
                 <li class="nav_item">
                     <a href="../pelanggan/pelanggan.php">
-                        <sl-tooltip content="Pelanggan">
+                        <sl-tooltip>
+                            <span slot="content">
+                                Pelanggan
+                                </br>Nama: $nama
+                            </span>
                             <sl-avatar class="user_button" label="user button"></sl-avatar>
                         </sl-tooltip>
                     </a>
