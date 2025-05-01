@@ -99,11 +99,11 @@ $Database = createDatabaseConn();
                         <div class="toolbar">
                             <h2>Tambah Kategori</h2>
                             <form class="form_kategori" autocomplete="off">
-                                <sl-input placeholder="Label" id="tambah_kategori_label" name="label" type="text" autocomplete="off">
+                                <sl-input placeholder="Label" id="tambah_kategori_label" name="label" type="text" autocomplete="off" maxlength="1" required>
                                     <label slot="label">Label</label>
                                     <sl-icon name="bookmark" slot="prefix"></sl-icon>
                                 </sl-input>
-                                <sl-input placeholder="Nama" id="tambah_kategori_nama" name="nama" type="text" autocomplete="off">
+                                <sl-input placeholder="Nama" id="tambah_kategori_nama" name="nama" type="text" autocomplete="off" required>>
                                     <label slot="label">Nama</label>
                                     <sl-icon name="card-text" slot="prefix"></sl-icon>
                                 </sl-input>
