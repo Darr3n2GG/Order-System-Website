@@ -115,7 +115,7 @@ document.getElementById("print_button").addEventListener("click", () => {
 });
 
 // === Filtering by Nama ===
-document.getElementById("filter_nama").addEventListener("input", (e) => {
+document.getElementById("filter_nama").addEventListener("sl-change", (e) => {
     filterNama = e.target.value.trim().toLowerCase();
     // Update the URL to include type=data and the filterNama parameter if provided
     const filteredApiUrl = `${ApiUrl}?type=data&keyword=${encodeURIComponent(filterNama)}`;

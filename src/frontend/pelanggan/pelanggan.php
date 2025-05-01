@@ -50,11 +50,11 @@ if (!$Session->sudahLogMasuk()) {
                         <div id="time_range_filter" class="filter">
                             <div class="filter_item">
                                 <span>Dari:</span>
-                                <sl-input size="small" type="date"></sl-input>
+                                <sl-input id="time_dari" size="small" type="date"></sl-input>
                             </div>
                             <div class="filter_item">
                                 <span>Hingga:</span>
-                                <sl-input size="small" type="date"></sl-input>
+                                <sl-input id="time_hingga" size="small" type="date"></sl-input>
                             </div>
                         </div>
                     </div>

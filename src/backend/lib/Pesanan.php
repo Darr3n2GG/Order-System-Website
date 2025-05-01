@@ -107,8 +107,7 @@ class Pesanan {
         return $this->Database->readLastInsertedID();
     }
 
-    // Same functionality as getPesananByIDPelanggan()
-    public function getPesananByPelanggan(string $pelanggan): array {
+    public function getPesananByNamaPelanggan(string $pelanggan): array {
         return $this->Database->readQuery(
             "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
             status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja

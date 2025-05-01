@@ -6,21 +6,21 @@ require_once dirname(__FILE__, 2) . "/JsonResponseHandler.php";
 
 try {
     $Pesanan = new lib\Pesanan;
-    
+
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
         if (isset($_GET["filter"])) {
             $filterPelanggan = isset($_GET["pelanggan"]) ? htmlspecialchars($_GET["pelanggan"]) : '';
             // Normal GET request to fetch all pesanan, apply filter if present
             if (!empty($filterPelanggan)) {
                 // Fetch filtered Pesanan based on filterPelanggan
-                $data = $Pesanan->getPesananByPelanggan($filterPelanggan);
+                $data = $Pesanan->getPesananByNamaPelanggan($filterPelanggan);
             } else {
                 // Fetch all Pesanan if no filter is provided
                 $data = $Pesanan->getSemuaPesanan();
             }
             echoJsonResponse(true, "PesananAPI GET request processed.", $data);
-    } else {
-        handleGetPesanan($_GET);
+        } else {
+            handleGetPesanan($_GET);
         }
     } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Handle POST request to create a new pesanan
@@ -29,8 +29,8 @@ try {
             handlePostPesanan($_POST["id_pelanggan"], $_POST["tarikh"],  $_POST["nombor_meja"], $_POST["cara"]);
         } else
             if (isset($_GET["type"]) && $_GET["type"] == "insert") {
-                handleInsertPesanan();
-            } else {
+            handleInsertPesanan();
+        } else {
             throw new Exception("Missing parameters in POST request", 400);
         }
     } else if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
@@ -53,8 +53,7 @@ try {
 
         $Pesanan->updatePesanan($id, $data);
         echoJsonResponse(true, "PesananAPI PATCH request processed.");
-    }
-    else {
+    } else {
         throw new Exception("Invalid PesananAPI request method.", 400);
     }
 } catch (Exception $e) {
@@ -155,15 +154,15 @@ function handleInsertPesanan(): void {
 
     // Sanitize and validate the input
     $id_pelanggan = (int) $data['idPelanggan'];
-//    $id_pelanggan = 1;
+    //    $id_pelanggan = 1;
     $id_status = 1; // assuming default status
     $no_meja = (int) $data['meja'];
     $tarikh = htmlspecialchars(trim($data['tarikh']));
     $cara = htmlspecialchars(trim($data['cara']));
-    
+
     try {
         // Insert the product into the database
-        $Pesanan->addPesanan( $id_pelanggan, $id_status, $no_meja, $tarikh, $cara);
+        $Pesanan->addPesanan($id_pelanggan, $id_status, $no_meja, $tarikh, $cara);
         echoJsonResponse(true, "Pesanan successfully added.", null);
     } catch (Exception $e) {
         echoJsonException($e->getCode(), "Error inserting pesanan: " . $e->getMessage());

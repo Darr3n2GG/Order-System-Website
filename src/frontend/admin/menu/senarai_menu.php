@@ -44,12 +44,12 @@ $Database = createDatabaseConn();
                                     <sl-input id="filter_nama" size="small" placeholder="Cari Nama..."></sl-input>
                                 </div>
                             </div>
-<div>
-<sl-button size="small" variant="primary" id="print_button" style="margin-left: auto;">
-    <sl-icon slot="prefix" name="printer"></sl-icon>
-    Cetak
-</sl-button>
-</div>
+                            <div>
+                                <sl-button size="small" variant="primary" id="print_button" style="margin-left: auto;">
+                                    <sl-icon slot="prefix" name="printer"></sl-icon>
+                                    Cetak
+                                </sl-button>
+                            </div>
                             <div id="table_menu"></div>
                         </div>
                         <div class="toolbar">

@@ -15,7 +15,7 @@ formPesanan.addEventListener("submit", (event) => {
     event.preventDefault();
     if (files_received != null) {
         postCSVFile();
-    } else if (FormValidator.validateForm(pesananFormValidity)) {
+    } else {
         const data = new FormData(formPesanan);
         postPesananData(data, "Pesanan berjaya dihantar.");
     }
@@ -47,17 +47,6 @@ async function postPesananData(formData, message) {
         FetchHelper.onRejected(error);
     }
 }
-
-formPesanan.addEventListener("input", (event) => {
-    const id = event.target.id;
-    FormValidator.validateField(pesananFormValidity, id);
-});
-
-const pesananFormValidity = {
-    pesanan_nama_produk: { condition: (value) => validateProduk(value) },
-    pesanan_kuantiti: { condition: (value) => validateKuantiti(value) },
-    pesanan_tarikh: { condition: (value) => validateTarikh(value) },
-};
 
 function validateProduk(value) {
     if (value === "") {

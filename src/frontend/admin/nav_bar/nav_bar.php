@@ -27,6 +27,9 @@ function echoNavBar(int $selected): void {
         case NAVBAR_MENU:
             $menu = "active";
             break;
+        case NAVBAR_PESANAN;
+            $pesanan = "active";
+            break;
     }
 
     echo <<<NAV

@@ -95,12 +95,12 @@ document.getElementById("print_button").addEventListener("click", () => {
     printWindow.print();
 });
 
-document.getElementById("filter_nama").addEventListener("input", (e) => {
+document.getElementById("filter_nama").addEventListener("sl-change", (e) => {
     filterNama = e.target.value.trim().toLowerCase();
     tablePelanggan.setData(ApiUrl);
 });
 
-document.getElementById("filter_no_phone").addEventListener("input", (e) => {
+document.getElementById("filter_no_phone").addEventListener("sl-change", (e) => {
     filterPhone = e.target.value.trim().toLowerCase();
     tablePelanggan.setData(ApiUrl);
 });
@@ -148,7 +148,7 @@ const editFormValidity = {
 editDialog.querySelector(".edit_button").addEventListener("click", () => {
     if (FormValidator.validateForm(editFormValidity)) {
         const data = new FormData(editForm);
-        patchPelangganData(data, "Data pelanggan sudah diedit.");
+        patchPelangganData(data, "Data pelanggan berjaya dikemaskini.");
     }
 })
 

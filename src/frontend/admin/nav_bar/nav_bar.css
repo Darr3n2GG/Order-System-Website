@@ -34,14 +34,14 @@
 }
 
 .nav_link a.active {
-    background-color: #04AA6D;
-    color: white;
+    background-color: var(--sl-color-primary-600);
+    color: var(--body-color);
 }
   
 .nav_link a:hover:not(.active) {
     transition: background 0.5s, color 0.5s;
     background-color: #555;
-    color: white;
+    color: var(--body-color);
 }
 
 .log_keluar {

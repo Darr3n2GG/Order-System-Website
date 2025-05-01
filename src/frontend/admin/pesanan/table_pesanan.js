@@ -95,7 +95,7 @@ document.getElementById("print_button").addEventListener("click", () => {
     printWindow.print();
 });
 
-document.getElementById("filter_id_pelanggan").addEventListener("input", (e) => {
+document.getElementById("filter_id_pelanggan").addEventListener("sl-change", (e) => {
     filterPelanggan = e.target.value.trim().toLowerCase();
     tablePesanan.setData(ApiUrl);
 });
@@ -114,7 +114,7 @@ document.querySelector(".form_pesanan").addEventListener("submit", async (e) => 
         alert("Sila isi semua ruangan wajib.");
         return; // Stop submission
     }
-    
+
     try {
         // Send data to the server via POST
         const response = await fetch(ApiUrl + "?" + new URLSearchParams({
@@ -166,11 +166,11 @@ function showEditDialog(e, cell) {
 }
 
 const editFormValidity = {
-    edit_tarikh: { condition: (value) => value === "" ? "Field tarikh kosong." : "" }
-//    edit_id: { condition: () => "" },
-//    edit_pelanggan: { condition: (value) => value === "" ? "Field pelanggan kosong." : "" },
-//    edit_tarikh: { condition: (value) => value === "" ? "Field tarikh kosong." : "" },
-//    edit_status: { condition: (value) => value === "" ? "Field status kosong." : "" },
+    // edit_tarikh: { condition: (value) => value === "" ? "Field tarikh kosong." : "" }
+    //    edit_id: { condition: () => "" },
+    //    edit_pelanggan: { condition: (value) => value === "" ? "Field pelanggan kosong." : "" },
+    //    edit_tarikh: { condition: (value) => value === "" ? "Field tarikh kosong." : "" },
+    //    edit_status: { condition: (value) => value === "" ? "Field status kosong." : "" },
 };
 
 editDialog.querySelector(".edit_button").addEventListener("click", () => {

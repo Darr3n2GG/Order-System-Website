@@ -45,22 +45,22 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
             <div class="toolbar">
                 <h2>Tambah Pesanan</h2>
                 <form class="form_pesanan" autocomplete="off">
-                    <sl-input id="tambah_id_pelanggan" name="id_pelanggan" placeholder="ID Pelanggan" required>
+                    <sl-input id="tambah_id_pelanggan" name="id_pelanggan" placeholder="ID Pelanggan">
                         <label slot="label">ID Pelanggan</label>
                         <sl-icon name="person" slot="prefix"></sl-icon>
                     </sl-input>
-                    <sl-input id="tambah_tarikh" name="tarikh" type="date" required>
+                    <sl-input id="tambah_tarikh" name="tarikh" type="date">
                         <label slot="label">Tarikh</label>
                         <sl-icon name="calendar" slot="prefix"></sl-icon>
                     </sl-input>
-                    <sl-input id="tambah_status" name="status" placeholder="Status" required>
+                    <sl-input id="tambah_status" name="status" placeholder="Status (1,2,3,4)">
                         <label slot="label">Status</label>
                         <sl-icon name="info-circle" slot="prefix"></sl-icon>
                     </sl-input>
-                    <sl-input id="tambah_cara" name="cara" placeholder="Cara" required>
+                    <sl-input id="tambah_cara" name="cara" placeholder="Cara">
                         <label slot="label">Cara</label>
                     </sl-input>
-                    <sl-input id="tambah_meja" name="meja" placeholder="Meja" required>
+                    <sl-input id="tambah_meja" name="meja" placeholder="Meja">
                         <label slot="label">Meja</label>
                     </sl-input>
                     <div class="form_buttons">
@@ -96,6 +96,7 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
     <?php
     echoTabulator();
     echoShoelaceAutoloader();
+    echoNavBarJavascript();
     ?>
 </body>
 
