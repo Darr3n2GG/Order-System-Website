@@ -98,6 +98,7 @@ class Pesanan {
         return $this->Database->readLastInsertedID();
     }
 
+    // Same functionality as getPesananByIDPelanggan()
     public function getPesananByPelanggan(string $pelanggan): array {
         return $this->Database->readQuery(
             "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
@@ -110,7 +111,7 @@ class Pesanan {
             ["%$pelanggan%"] // Use wildcards for partial matching
         );
     }
-    
+
     public function updatePesanan(int $id, array $data): void {
         $fields = [];
         $values = [];
