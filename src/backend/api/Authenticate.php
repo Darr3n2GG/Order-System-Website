@@ -41,7 +41,7 @@ try {
             </script>";
     }
 } catch (Exception $e) {
-    error_log($e->getMessage() . PHP_EOL, dirname(__FILE__, 2) . "/log/error_log.log");
+    error_log($e->getMessage() . PHP_EOL, 3, dirname(__FILE__, 2) . "/log/error_log.log");
     exit($e->getMessage());
 }
 

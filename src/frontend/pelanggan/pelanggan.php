@@ -3,6 +3,13 @@ require_once dirname(__FILE__, 3) .  "/backend/Database.php";
 require_once dirname(__FILE__, 3) . "/backend/Autoloader.php";
 require_once dirname(__FILE__, 2) . "/header/header.php";
 require_once dirname(__FILE__, 2) . "/dependencies.php";
+
+$Session = new lib\Session;
+
+if (!$Session->sudahLogMasuk()) {
+    header("Location: /Order-System-Website/src/frontend/menu/menu.php");
+}
+
 ?>
 
 <!DOCTYPE html>

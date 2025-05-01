@@ -43,4 +43,41 @@ class Produk {
         );
         return $arrayProduk;
     }
+
+    public function insertProduk($nama, $kategori, $harga, $detail, $gambar = '/'): bool {
+        return $this->Database->executeQuery(
+            "INSERT INTO produk (nama, id_kategori, harga, detail, gambar) VALUES (?, ?, ?, ?, ?)",
+            "ssdss",
+            [$nama, $kategori, $harga, $detail, $gambar]
+        );
+    }
+    
+    public function updateProduk(int $id, array $data): void {
+        $fields = [];
+        $values = [];
+        $types = "";
+
+        foreach ($data as $key => $value) {
+            $fields[] = "$key = ?";
+            $values[] = $value;
+            $types .= $this->Database->getMysqliType($value);
+        }
+        $set = implode(', ', $fields);
+        $values[] = $id;
+        $types .= "i";
+
+        $this->Database->executeQuery(
+            "UPDATE produk SET $set WHERE id = ?",
+            $types,
+            $values
+        );
+    }
+
+    public function deleteProduk(int $id): void {
+        $this->Database->executeQuery(
+            "DELETE FROM produk WHERE id = ?",
+            "i",
+            [$id]
+        );
+    }
 }

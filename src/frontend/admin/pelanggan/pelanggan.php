@@ -31,13 +31,19 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
                 <div class="filter">
                     <div class="filter_item">
                         <span>Nama:</span>
-                        <sl-input size="small"></sl-input>
+                        <sl-input id="filter_nama" size="small" placeholder="Cari nama..."></sl-input>
                     </div>
                     <div class="filter_item">
                         <span>No.Phone:</span>
-                        <sl-input size="small"></sl-input>
+                        <sl-input id="filter_no_phone" size="small" placeholder="Cari phone..."></sl-input>
                     </div>
                 </div>
+<div class="print_button_container" style="margin-top: 12px;">
+    <sl-button size="small" id="print_button" variant="primary">
+        <sl-icon slot="prefix" name="printer"></sl-icon>
+        Cetak
+    </sl-button>
+</div>
                 <div id="table_pelanggan"></div>
             </div>
             <div class="toolbar">
@@ -98,8 +104,6 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
     <?php
     echoTabulator();
     echoShoelaceAutoloader();
-    echoNavBarJavascript();
-    echoNoScript();
     ?>
 </body>
 
