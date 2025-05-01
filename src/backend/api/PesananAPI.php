@@ -22,7 +22,7 @@ try {
         } else {
             handleGetPesanan($_GET);
         }
-    } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Handle POST request to create a new pesanan
         $post_condition = isset($_POST["id_pelanggan"], $_POST["tarikh"], $_POST["nombor_meja"], $_POST["cara"]);
         if ($post_condition) {

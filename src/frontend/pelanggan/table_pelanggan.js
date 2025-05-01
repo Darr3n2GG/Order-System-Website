@@ -10,10 +10,7 @@ let dariFilter = "";
 let hinggaFilter = "";
 
 const tableSenaraiPelanggan = new Tabulator("#table_senarai_pesanan", {
-    ajaxURL: ApiUrl + "?" + new URLSearchParams({
-        range: "*",
-        id_pelanggan: id_pelanggan
-    }),
+    ajaxURL: ApiUrl,
     ajaxConfig: { method: "GET" },
     ajaxRequestFunc: (url, config) => getTableData(url, config),
     layout: "fitData",
@@ -50,6 +47,11 @@ async function getTableData(url, config) {
                 to: hinggaFilter,
                 id_pelanggan: id_pelanggan
             }).toString();
+        } else {
+            params = "?" + new URLSearchParams({
+                range: "*",
+                id_pelanggan: id_pelanggan
+            })
         }
 
         const response = await fetch(url + params, config);
