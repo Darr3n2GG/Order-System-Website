@@ -22,3 +22,7 @@
 .user_info > h1 {
     margin-bottom: 0.5rem;
 }
+
+#table_senarai_pesanan {
+    border-radius: 10px;
+}
