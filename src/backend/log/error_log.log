@@ -213,3 +213,9 @@ Content-Disposition: form-data; name="tahap"
 [29-Apr-2025 21:22:14 Asia/Kuala_Lumpur] You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE id = ?' at line 1
 [29-Apr-2025 22:53:57 Asia/Kuala_Lumpur] No parameters attached to GET request.
 [29-Apr-2025 22:55:11 Asia/Kuala_Lumpur] No parameters attached to GET request.
+[01-May-2025 21:54:52 Asia/Kuala_Lumpur] Class "lib\Belian" not found
+
+[01-May-2025 21:54:53 Asia/Kuala_Lumpur] Class "lib\Belian" not found
+
+[01-May-2025 21:55:39 Asia/Kuala_Lumpur] Call to undefined function getHargaFromIDProduk()
+

@@ -1,17 +1,12 @@
 <?php
 header("Content-Type: application/json");
 
-require_once dirname(__FILE__, 2) . "/lib/Pesanan.php";
+require_once dirname(__FILE__, 2) . "/Autoloader.php";
 require_once dirname(__FILE__, 2) . "/JsonResponseHandler.php";
 
 try {
-    $Pesanan = new lib\Pesanan;
-
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
-        if (isset($_GET["range"])) {
-            $range = htmlspecialchars($_GET["range"]);
-            handleGetPesanan($range);
-        }
+        handleGetPesanan($_GET);
     } else {
         throw new Exception("Invalid PesananAPI request method.", 400);
     }
@@ -20,18 +15,49 @@ try {
     echoJsonException($e->getCode(), "PesananAPI request failed : " . $e->getMessage());
 }
 
-function handleGetPesanan(string $range): void {
-    global $Pesanan;
+function handleGetPesanan(array $get): void {
+    $Pesanan = new lib\Pesanan;
+    $Belian = new lib\Belian;
+
+    if (isset($get["id_pelanggan"])) {
+        $id_pelanggan = htmlspecialchars($get["id_pelanggan"]);
+    }
+
+    if (isset($get["range"])) {
+        $range = htmlspecialchars($get["range"]);
+    }
 
     if ($range == "*") {
         $array_pesanan = $Pesanan->getSemuaPesanan();
-        echoJsonResponse(true, "PesananAPI GET request processed.", $array_pesanan);
     } else if ($range == "week") {
         $array_pesanan =  $Pesanan->getArrayPesananThisWeek();
-        echoJsonResponse(true, "PesananAPI GET request processed.", $array_pesanan);
-    } else if ($range == "date") {
-        $from = date(DATE_FORMAT, strtotime($from));
+    } else if ($range == "date" and isset($get["from"]) and isset($get["to"])) {
+        $from = htmlspecialchars($get["from"]);
+        $to = htmlspecialchars($get["to"]);
     } else {
         return;
     }
+
+    foreach ($array_pesanan as &$pesanan) {
+        $jumlah_harga = 0;
+
+        $array_belian = $Belian->getBelianFromIDPesanan($pesanan["id"]);
+        foreach ($array_belian as $belian) {
+            $harga = getHargaFromIDProduk($belian["id_produk"]);
+            $kuantiti = $belian["kuantiti"];
+
+            $jumlah_harga += $harga * $kuantiti;
+
+            $pesanan["jumlah_harga"] = $jumlah_harga;
+        }
+    }
+
+
+    echoJsonResponse(true, "PesananAPI GET request processed.", $array_pesanan);
+}
+
+function getHargaFromIDProduk($id): float {
+    $Produk = new lib\Produk;
+    $produk = $Produk->getProdukFromID($id);
+    return $produk["harga"];
 }

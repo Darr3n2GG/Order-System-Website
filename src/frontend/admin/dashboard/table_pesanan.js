@@ -27,10 +27,11 @@ new Tabulator("#table_pesanan", {
     rowHeight: 40,
     layout: "fitData",
     columns: [
-        { title: "Nama", field: "nama", width: 150 },
+        { title: "Nama", field: "nama" },
         { title: "Tarikh", field: "tarikh" },
         { title: "Cara", field: "cara" },
         { title: "Nombor Meja", field: "no_meja" },
+        { title: "Jumlah Harga (RM)", field: "jumlah_harga" },
     ],
 });
 

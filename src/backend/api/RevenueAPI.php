@@ -13,8 +13,10 @@ require_once dirname(__FILE__, 2) . "/Masa.php";
 
 try {
     $Database = createDatabaseConn();
+    $Belian = new lib\Belian;
+    $Pesanan = new lib\Pesanan;
 
-    $array_pesanan = getArrayPesananThisWeek();
+    $array_pesanan = $Pesanan->getArrayPesananThisWeek();
 
     // The array is arranged like this: [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
     $jumlah_harga_mingguan = [0, 0, 0, 0, 0, 0, 0];
@@ -28,7 +30,7 @@ try {
 
     foreach ($array_pesanan as $pesanan) {
         $jumlah_harga_pesanan = 0;
-        $array_belian = getArrayBelianFromID($pesanan["id"]);
+        $array_belian = $Belian->getBelianFromIDPesanan($pesanan["id"]);
 
         foreach ($array_belian as $belian) {
             $harga = getHargaFromIDProduk($belian["id_produk"]);
@@ -54,33 +56,6 @@ try {
 } catch (Exception $e) {
     error_log($e->getMessage());
     echoJsonException($e->getCode(), "RevenueAPI request failed : " . $e->getMessage());
-}
-
-function getArrayPesananThisWeek(): array {
-    global $Database;
-
-    $week_start = getWeekStart();
-    $week_end = getWeekEnd();
-
-    return $Database->readQuery(
-        "SELECT id, tarikh FROM pesanan
-        WHERE tarikh >= ? and tarikh <= ?
-        ORDER BY tarikh ASC",
-        "ss",
-        [$week_start, $week_end]
-    );
-}
-
-function getArrayBelianFromID(int $id): array {
-    global $Database;
-
-    return $Database->readQuery(
-        "SELECT id_produk, kuantiti
-        FROM belian
-        WHERE id_pesanan = ?",
-        "i",
-        [$id]
-    );
 }
 
 function getHargaFromIDProduk($id): float {

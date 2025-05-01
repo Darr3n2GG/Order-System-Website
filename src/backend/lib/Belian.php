@@ -27,16 +27,6 @@ class Belian {
         );
     }
 
-    public function getBelianFromArrayIDPesanan(array $array_id_pesanan): array {
-        $in = join(',', array_fill(0, count($array_id_pesanan), '?'));
-
-        return $this->Database->readQuery(
-            "SELECT * FROM belian WHERE id_pesanan IN ( $in ) ORDER BY id ASC",
-            str_repeat('i', count($array_id_pesanan)),
-            $array_id_pesanan
-        );
-    }
-
     public function addBelian(int $id_pesanan, array $cart_assoc_array): void {
         $stmt = $this->Database->prepareStatement("INSERT INTO belian (id_pesanan, id_produk, kuantiti) VALUES (?, ?, ?)");
         foreach ($cart_assoc_array as $cart_item) {

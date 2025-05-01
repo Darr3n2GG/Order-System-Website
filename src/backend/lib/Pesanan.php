@@ -22,10 +22,7 @@ class Pesanan {
         );
     }
 
-    public function getArrayPesananThisWeek(): array {
-        $week_start = getWeekStart();
-        $week_end = getWeekEnd();
-
+    public function getArrayPesananFromRange(string $from, string $to): array {
         return $this->Database->readQuery(
             "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
             status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
@@ -35,15 +32,45 @@ class Pesanan {
             WHERE tarikh >= ? and tarikh <= ?
             ORDER BY tarikh ASC",
             "ss",
-            [$week_start, $week_end]
+            [$from, $to]
         );
+    }
+
+    public function getArrayPesananThisWeek(): array {
+        $week_start = getWeekStart();
+        $week_end = getWeekEnd();
+
+        return $this->getArrayPesananFromRange($week_start, $week_end);
     }
 
     public function getPesananByID(int $id): array {
         return $this->Database->readQuery(
-            "SELECT * FROM pesanan WHERE id = ? ORDER BY id ASC",
+            "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
+            status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
+            FROM pesanan WHERE id = ? ORDER BY id ASC",
             "i",
             [$id]
+        );
+    }
+
+    public function getPesananByIDPelanggan(int $id): array {
+        return $this->Database->readQuery(
+            "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
+            status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
+            FROM pesanan WHERE id_pelanggan = ? ORDER BY id ASC",
+            "i",
+            [$id]
+        );
+    }
+
+    public function getPesananByIDPelangganWithFilter(int $id, string $from, string $to): array {
+        return $this->Database->readQuery(
+            "SELECT pesanan.id as id, pelanggan.nama as nama, pesanan.tarikh as tarikh,
+            status.status as status, pesanan.cara as cara, pesanan.no_meja as no_meja
+            FROM pesanan WHERE id_pelanggan = ? and tarikh >= ? and tarikh <= ?
+            ORDER BY id ASC",
+            "iss",
+            [$id, $from, $to]
         );
     }
 
