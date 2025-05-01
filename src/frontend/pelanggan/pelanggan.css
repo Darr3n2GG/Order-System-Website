@@ -1,0 +1,24 @@
+.container {
+    display: grid;
+    grid-template-columns: 47.5% 47.5%;
+    gap: 5%;
+}
+
+.main_content {
+    padding: 2rem;
+}
+
+.user_info_container {
+    display: grid;
+    grid-template-columns: 150px 50%;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.user_info_container > sl-avatar {
+    --size: 150px;
+}
+
+.user_info > h1 {
+    margin-bottom: 0.5rem;
+}
