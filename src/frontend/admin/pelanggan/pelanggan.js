@@ -10,17 +10,17 @@ globalThis.logFiles = () => {
 const ApiUrl = "/Order-System-Website/src/backend/api/PelangganAPI.php";
 
 
-const formPelanggan = document.querySelector(".form_pelanggan");
+// const formPelanggan = document.querySelector(".form_pelanggan");
 
-formPelanggan.addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (files_received != null) {
-        postCSVFile();
-    } else if (FormValidator.validateForm(tambahFormValidity)) {
-        const data = new FormData(formPelanggan);
-        postPelangganData(data, "Pelanggan ditambah.");
-    }
-});
+// formPelanggan.addEventListener("submit", (event) => {
+//     event.preventDefault();
+//     if (files_received != null) {
+//         postCSVFile();
+//     } else if (FormValidator.validateForm(tambahFormValidity)) {
+//         const data = new FormData(formPelanggan);
+//         postPelangganData(data, "Pelanggan ditambah.");
+//     }
+// });
 
 function postCSVFile() {
     const data = new FormData;
@@ -51,10 +51,10 @@ async function postPelangganData(formData, message) {
 }
 
 
-formPelanggan.addEventListener("input", (event) => {
-    const id = event.target.id;
-    FormValidator.validateField(tambahFormValidity, id);
-})
+// formPelanggan.addEventListener("input", (event) => {
+//     const id = event.target.id;
+//     FormValidator.validateField(tambahFormValidity, id);
+// })
 
 
 const tambahFormValidity = {

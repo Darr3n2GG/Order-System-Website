@@ -1,246 +1,167 @@
-import FetchHelper from "../../../scripts/FetchHelper.js";
+// table_pelanggan.js
+import ViewModel from "./PelangganViewModel.js";
 import FormValidator from "../../../scripts/FormValidator.js";
-
 const ApiUrl = "/Order-System-Website/src/backend/api/PelangganAPI.php"
 
 const editDialog = document.querySelector(".edit_dialog");
 const editForm = editDialog.querySelector(".edit_form");
-
-let filterNama = "";
-let filterPhone = "";
+const formPelanggan = document.querySelector(".form_pelanggan");
 
 const tablePelanggan = new Tabulator("#table_pelanggan", {
     ajaxURL: ApiUrl,
-    ajaxConfig: { method: "GET" },
-    ajaxRequestFunc: (url, config) => getTableData(url, config),
     height: 510,
     rowHeight: 40,
     layout: "fitData",
+    ajaxRequestFunc: () => ViewModel.getData(),
     columns: [
-        { title: "ID", field: "id", },
-        { title: "Nama", field: "nama", width: 177.8 + 73 },
-        { title: "Nombor Phone", field: "no_phone", },
-        { title: "Tahap", field: "tahap" },
-        {
-            title: "",
-            field: "update",
-            hozAlign: "center",
-            resizable: false,
-            headerSort: false,
-            formatter: function () {
-                return '<sl-icon-button name="pencil"></sl-icon-button>';
-            },
-            cellClick: (e, cell) => showEditDialog(e, cell)
+        { title: "ID", field: "id" },
+        { title: "Nama", field: "nama", width: 250 },
+        { title: "Nombor Phone", field: "no_phone" },
+        { title: "Tahap", field: "tahap" ,
+            formatter: (cell) => {
+                // Convert 1 to "User" and 2 to "Admin"
+                const tahapEnum = {
+                    "1": "User",
+                    "2": "Admin"
+                };
+                return tahapEnum[cell.getValue()] || cell.getValue(); 
+            }
         },
         {
-            title: "",
-            field: "delete",
-            hozAlign: "center",
-            resizable: false,
-            headerSort: false,
-            formatter: function () {
-                return '<sl-icon-button name="trash"></sl-icon-button>';
-            },
-            cellClick: (e, cell) => deletePelanggan(e, cell)
+            title: "", field: "update", hozAlign: "center", headerSort: false,
+            formatter: () => '<sl-icon-button name="pencil"></sl-icon-button>',
+            cellClick: (e, cell) => showEditDialog(cell.getData())
         },
-    ],
+        {
+            title: "", field: "delete", hozAlign: "center", headerSort: false,
+            formatter: () => '<sl-icon-button name="trash"></sl-icon-button>',
+            cellClick: async (e, cell) => {
+                const id = cell.getData().id;
+                const result = await ViewModel.deleteData(id);
+            
+                if (result.ok) {
+                    cell.getRow().delete();
+                    alert("Pelanggan dipadam.");
+                } else {
+                    alert("Gagal memadam pelanggan. Sila cuba lagi.");
+                    console.error("Delete failed:", result);
+                }
+            }
+            
+        }
+    ]
 });
 
-document.getElementById("print_button").addEventListener("click", () => {
-    const data = tablePelanggan.getData();
+// Add New
+const tambahFormValidity = {
+    tambah_nama: { condition: (value) => ViewModel.validateNama(value) },
+    tambah_no_phone: { condition: (value) => ViewModel.validatePhone(value) },
+    tambah_password: { condition: (value) => ViewModel.validatePassword(value) },
+    tambah_tahap: { condition: (value) => ViewModel.validateTahap(value) }
+};
 
-    const printWindow = window.open('', '', 'width=800,height=600');
-    if (!printWindow) return;
 
-    const tableHTML = `
-        <html>
-        <head>
-            <title>Cetak Pelanggan</title>
-            <style>
-                table { border-collapse: collapse; width: 100%; }
-                th, td { border: 1px solid #333; padding: 8px; text-align: left; }
-                th { background-color: #f2f2f2; }
-                body { font-family: sans-serif; padding: 20px; }
-            </style>
-        </head>
-        <body>
-            <h2>Senarai Pelanggan</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nama</th>
-                        <th>No. Phone</th>
-                        <th>Tahap</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${data.map(row => `
-                        <tr>
-                            <td>${row.id}</td>
-                            <td>${row.nama}</td>
-                            <td>${row.no_phone}</td>
-                            <td>${row.tahap}</td>
-                        </tr>
-                    `).join("")}
-                </tbody>
-            </table>
-        </body>
-        </html>
-    `;
+formPelanggan.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const nama = document.getElementById("tambah_nama").value;
+    const no_phone = document.getElementById("tambah_no_phone").value;
+    const password = document.getElementById("tambah_password").value;
+    const tahap = document.getElementById("tambah_tahap").value;
+    
+    // Check for empty fields
+    if (!nama || !no_phone || !password || !tahap) {
+        alert("Sila isi semua ruangan wajib.");
+        return; // Stop submission
+    }
+    const formData = new FormData(formPelanggan);
+    try {
+        // Call insertData and await the result
+        const result = await ViewModel.insertData(formData);
+        
+        if (result.ok) {
+            // If insertion is successful, update the table
+            tablePelanggan.setData(ApiUrl);
+            alert("Pelanggan added successfully.");
 
-    printWindow.document.write(tableHTML);
-    printWindow.document.close();
-    printWindow.focus();
-    printWindow.print();
+            // Clear the form after successful submission
+            formPelanggan.reset();
+        } else {
+            // If there's an error (non-2xx status)
+            alert("Failed to add Pelanggan. Please try again.");
+            console.error("Insert failed:", result);
+        }
+    } catch (error) {
+        // Handle any unexpected errors
+        alert("An error occurred. Please try again.");
+        console.error("Error during insert:", error);
+    }
 });
 
+formPelanggan.addEventListener("input", (event) => {
+    const id = event.target.id;
+    FormValidator.validateField(tambahFormValidity, id);
+});
+
+const tahapSelect = document.getElementById("tambah_tahap");
+const hiddenTahapInput = document.getElementById("hidden_tambah_tahap");
+
+tahapSelect.addEventListener("sl-change", (event) => {
+    hiddenTahapInput.value = event.target.value;
+});
+
+// Optional: sync on page load if needed
+hiddenTahapInput.value = tahapSelect.value;
+
+// Filter
 document.getElementById("filter_nama").addEventListener("sl-change", (e) => {
-    filterNama = e.target.value.trim().toLowerCase();
-    tablePelanggan.setData(ApiUrl);
+    console.log("FILTER NAMA");
+    ViewModel.filterNama = e.target.value.trim().toLowerCase();
+    tablePelanggan.setData("abc");
 });
 
 document.getElementById("filter_no_phone").addEventListener("sl-change", (e) => {
-    filterPhone = e.target.value.trim().toLowerCase();
-    tablePelanggan.setData(ApiUrl);
+    ViewModel.filterPhone = e.target.value.trim().toLowerCase();
+    tablePelanggan.setData();
 });
 
-async function getTableData(url, config) {
-    try {
-        const response = await fetch(url, config);
-        const data = await FetchHelper.onFulfilled(response);
-        if (data.details === undefined) return [];
-
-        return data.details.filter(item => {
-            const matchNama = item.nama.toLowerCase().includes(filterNama);
-            const matchPhone = item.no_phone.toLowerCase().includes(filterPhone);
-            return matchNama && matchPhone;
-        });
-    } catch (error) {
-        return FetchHelper.onRejected(error);
-    }
-}
-
-const tahap_enum = {
-    user: "1",
-    admin: "2"
-}
-
-function showEditDialog(e, cell) {
-    const row = cell.getRow();
-    const data = row.getData();
-
+// Edit
+function showEditDialog(data) {
     document.getElementById("edit_id").value = data.id;
     document.getElementById("edit_nama").value = data.nama;
     document.getElementById("edit_nombor_phone").value = data.no_phone;
-    document.getElementById("edit_tahap").value = tahap_enum[data.tahap];
-
-    editDialog.show()
+    
+    // Set the value of the sl-select dropdown and trigger the change event
+    const tahapSelect = document.getElementById("edit_tahap");
+    tahapSelect.value = String(data.tahap);
+    editDialog.show();
 }
+
+editDialog.querySelector(".edit_button").addEventListener("click", async () => {
+    if (FormValidator.validateForm(editFormValidity)) {
+        const formData = new FormData(editForm);
+        console.log(formData)
+        const result = await ViewModel.updateData(formData);
+
+        if (result.ok) {
+            alert("Berjaya kemaskini.");
+            tablePelanggan.setData();
+            editDialog.hide();
+        }
+    }
+});
 
 const editFormValidity = {
-    edit_id: { condition: (value) => { return "" } },
-    edit_nama: { condition: (value) => handleNamaValidation(value) },
-    edit_nombor_phone: { condition: (value) => handlePhoneValidation(value) },
-    edit_tahap: { condition: (value) => handleTahapValidation(value) }
+    edit_id: { condition: () => "" },
+    edit_nama: { condition: ViewModel.validateNama },
+    edit_nombor_phone: { condition: ViewModel.validatePhone },
+    edit_tahap: { condition: ViewModel.validateTahap }
 };
 
-editDialog.querySelector(".edit_button").addEventListener("click", () => {
-    if (FormValidator.validateForm(editFormValidity)) {
-        const data = new FormData(editForm);
-        patchPelangganData(data, "Data pelanggan berjaya dikemaskini.");
-    }
-})
 
-async function patchPelangganData(formData, message) {
-    try {
-        const data = Object.fromEntries(formData);
-
-        const response = await fetch(ApiUrl, {
-            method: "PATCH",
-            body: JSON.stringify(data)
-        })
-
-        const responseMessage = await FetchHelper.onFulfilled(response)
-        if (responseMessage.ok) {
-            alert(message);
-            setTimeout(location.reload(), 500)
-        } else {
-            console.error(responseMessage.message);
-        }
-    } catch (error) {
-        FetchHelper.onRejected(error);
-    }
-}
 
 editForm.addEventListener("input", (event) => {
     const id = event.target.id;
     FormValidator.validateField(editFormValidity, id);
-})
-
-async function deletePelanggan(e, cell) {
-    const row = cell.getRow();
-    const id = row.getData().id;
-
-    const url = ApiUrl + "?" + new URLSearchParams({
-        id: id
-    }).toString();
-
-    try {
-        const response = await fetch(url, { method: "DELETE" });
-        const data = await FetchHelper.onFulfilled(response);
-
-        if (response.ok) {
-            row.delete();
-        }
-    } catch (error) {
-        FetchHelper.onRejected(error);
-    }
-
-    alert("Pelanggan dengan ID : " + id + " sudah dipadamkan.")
-}
-
-function returnNoContent() {
-    console.log("No content in table : table_pengguna.");
-}
+});
 
 
-function handleNamaValidation(value) {
-    if (value === "") {
-        return "Field nama kosong.";
-    } else if (!isValidCharacters(value)) {
-        return "Field nama terdapat character invalid.";
-    } else if (value.length >= 100) {
-        return "Field nama mesti kurang daripada 100.";
-    } else {
-        return "";
-    }
-}
-
-function handlePhoneValidation(value) {
-    if (value === "") {
-        return "Input nombor phone kosong.";
-    } else if (!isValidPhoneNumber(value)) {
-        return "Input password tidak sah.";
-    } else {
-        return "";
-    }
-}
-
-function handleTahapValidation(value) {
-    if (value === "") {
-        return "Field tahap kosong.";
-    } else {
-        return "";
-    }
-}
-
-function isValidCharacters(value) {
-    const whitelistPattern = /^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]+$/;
-    return whitelistPattern.test(value);
-}
-
-function isValidPhoneNumber(value) {
-    const whitelistPattern = /^(\+?6?01)[02-46-9]-*[0-9]{7}$|^(\+?6?01)[1]-*[0-9]{8}$/;
-    return whitelistPattern.test(value);
-}
