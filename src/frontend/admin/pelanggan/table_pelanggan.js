@@ -1,167 +1,208 @@
 // table_pelanggan.js
+import TableManager from "../shared/TableManager.js";
 import ViewModel from "./PelangganViewModel.js";
-import FormValidator from "../../../scripts/FormValidator.js";
-const ApiUrl = "/Order-System-Website/src/backend/api/PelangganAPI.php"
+// import { FileInput } from "../../../scripts/FileInput.js"
 
-const editDialog = document.querySelector(".edit_dialog");
-const editForm = editDialog.querySelector(".edit_form");
-const formPelanggan = document.querySelector(".form_pelanggan");
+const ApiUrl = "/Order-System-Website/src/backend/api/PelangganAPI.php";
 
-const tablePelanggan = new Tabulator("#table_pelanggan", {
-    ajaxURL: ApiUrl,
-    height: 510,
-    rowHeight: 40,
-    layout: "fitData",
-    ajaxRequestFunc: () => ViewModel.getData(),
-    columns: [
-        { title: "ID", field: "id" },
-        { title: "Nama", field: "nama", width: 250 },
-        { title: "Nombor Phone", field: "no_phone" },
-        { title: "Tahap", field: "tahap" ,
-            formatter: (cell) => {
-                // Convert 1 to "User" and 2 to "Admin"
-                const tahapEnum = {
-                    "1": "User",
-                    "2": "Admin"
-                };
-                return tahapEnum[cell.getValue()] || cell.getValue(); 
-            }
-        },
-        {
-            title: "", field: "update", hozAlign: "center", headerSort: false,
-            formatter: () => '<sl-icon-button name="pencil"></sl-icon-button>',
-            cellClick: (e, cell) => showEditDialog(cell.getData())
-        },
-        {
-            title: "", field: "delete", hozAlign: "center", headerSort: false,
-            formatter: () => '<sl-icon-button name="trash"></sl-icon-button>',
-            cellClick: async (e, cell) => {
-                const id = cell.getData().id;
-                const result = await ViewModel.deleteData(id);
-            
-                if (result.ok) {
-                    cell.getRow().delete();
-                    alert("Pelanggan dipadam.");
-                } else {
-                    alert("Gagal memadam pelanggan. Sila cuba lagi.");
-                    console.error("Delete failed:", result);
-                }
-            }
-            
-        }
-    ]
-});
-
-// Add New
-const tambahFormValidity = {
-    tambah_nama: { condition: (value) => ViewModel.validateNama(value) },
-    tambah_no_phone: { condition: (value) => ViewModel.validatePhone(value) },
-    tambah_password: { condition: (value) => ViewModel.validatePassword(value) },
-    tambah_tahap: { condition: (value) => ViewModel.validateTahap(value) }
+const TahapEnum = {
+    "1": "User",
+    "2": "Admin"
 };
 
+// let files_received = null;
+// globalThis.logFiles = () => {
+//     return files_received;
+// };
 
-formPelanggan.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const nama = document.getElementById("tambah_nama").value;
-    const no_phone = document.getElementById("tambah_no_phone").value;
-    const password = document.getElementById("tambah_password").value;
-    const tahap = document.getElementById("tambah_tahap").value;
-    
-    // Check for empty fields
-    if (!nama || !no_phone || !password || !tahap) {
-        alert("Sila isi semua ruangan wajib.");
-        return; // Stop submission
-    }
-    const formData = new FormData(formPelanggan);
-    try {
-        // Call insertData and await the result
-        const result = await ViewModel.insertData(formData);
-        
-        if (result.ok) {
-            // If insertion is successful, update the table
-            tablePelanggan.setData(ApiUrl);
-            alert("Pelanggan added successfully.");
+// const CSVInput = document.querySelector(".csv_input");
+// const filesList = document.querySelector(".files_list");
+// const CSVUpload = document.querySelector(".csv_upload");
 
-            // Clear the form after successful submission
-            formPelanggan.reset();
-        } else {
-            // If there's an error (non-2xx status)
-            alert("Failed to add Pelanggan. Please try again.");
-            console.error("Insert failed:", result);
+// const fileInput = new FileInput(true, ".csv");
+
+// 🔸 Columns
+const columns = [
+    { title: "ID", field: "id" },
+    { title: "Nama", field: "nama", width: 250 },
+    { title: "Nombor Phone", field: "no_phone" },
+    {
+        title: "Tahap",
+        field: "tahap",
+        formatter: (cell) => TahapEnum[cell.getValue()] || cell.getValue()
+    },
+    {
+        title: "",
+        field: "update",
+        hozAlign: "center",
+        headerSort: false,
+        formatter: () => '<sl-icon-button name="pencil"></sl-icon-button>',
+        cellClick: (e, cell) => {
+            pelangganTable.showEditDialog(cell.getData(), {
+                id: "edit_id",
+                nama: "edit_nama",
+                no_phone: "edit_nombor_phone",
+                tahap: "edit_tahap"
+            });
         }
-    } catch (error) {
-        // Handle any unexpected errors
-        alert("An error occurred. Please try again.");
-        console.error("Error during insert:", error);
-    }
-});
-
-formPelanggan.addEventListener("input", (event) => {
-    const id = event.target.id;
-    FormValidator.validateField(tambahFormValidity, id);
-});
-
-const tahapSelect = document.getElementById("tambah_tahap");
-const hiddenTahapInput = document.getElementById("hidden_tambah_tahap");
-
-tahapSelect.addEventListener("sl-change", (event) => {
-    hiddenTahapInput.value = event.target.value;
-});
-
-// Optional: sync on page load if needed
-hiddenTahapInput.value = tahapSelect.value;
-
-// Filter
-document.getElementById("filter_nama").addEventListener("sl-change", (e) => {
-    console.log("FILTER NAMA");
-    ViewModel.filterNama = e.target.value.trim().toLowerCase();
-    tablePelanggan.setData("abc");
-});
-
-document.getElementById("filter_no_phone").addEventListener("sl-change", (e) => {
-    ViewModel.filterPhone = e.target.value.trim().toLowerCase();
-    tablePelanggan.setData();
-});
-
-// Edit
-function showEditDialog(data) {
-    document.getElementById("edit_id").value = data.id;
-    document.getElementById("edit_nama").value = data.nama;
-    document.getElementById("edit_nombor_phone").value = data.no_phone;
-    
-    // Set the value of the sl-select dropdown and trigger the change event
-    const tahapSelect = document.getElementById("edit_tahap");
-    tahapSelect.value = String(data.tahap);
-    editDialog.show();
-}
-
-editDialog.querySelector(".edit_button").addEventListener("click", async () => {
-    if (FormValidator.validateForm(editFormValidity)) {
-        const formData = new FormData(editForm);
-        console.log(formData)
-        const result = await ViewModel.updateData(formData);
-
-        if (result.ok) {
-            alert("Berjaya kemaskini.");
-            tablePelanggan.setData();
-            editDialog.hide();
+    },
+    {
+        title: "",
+        field: "delete",
+        hozAlign: "center",
+        headerSort: false,
+        formatter: () => '<sl-icon-button name="trash"></sl-icon-button>',
+        cellClick: async (e, cell) => {
+            const result = await ViewModel.deleteData(cell.getData().id);
+            if (result.ok) {
+                cell.getRow().delete();
+                alert("Pelanggan dipadam.");
+            } else {
+                alert("Gagal memadam pelanggan.");
+            }
         }
     }
-});
+];
 
-const editFormValidity = {
-    edit_id: { condition: () => "" },
-    edit_nama: { condition: ViewModel.validateNama },
-    edit_nombor_phone: { condition: ViewModel.validatePhone },
-    edit_tahap: { condition: ViewModel.validateTahap }
+// 🔸 Filters
+const filters = {
+    nama: document.getElementById("filter_nama"),
+    no_phone: document.getElementById("filter_no_phone")
 };
 
+// 🔸 Dialog Config
+const dialogConfig = {
+    editDialog: document.querySelector(".edit_dialog"),
+    editForm: document.querySelector(".edit_form"),
+    buttonSelector: ".edit_button",
+    formValidity: {
+        edit_id: { condition: () => "" },
+        edit_nama: { condition: (v) => ViewModel.validateField("nama", v) },
+        edit_nombor_phone: { condition: (v) => ViewModel.validateField("no_phone", v) },
+        edit_tahap: { condition: (v) => ViewModel.validateField("tahap", v) }
+    },
+    onSubmit: (formData) => ViewModel.updateData(formData)
+};
 
+// 🔸 Form Config
+const formConfig = {
+    formElement: document.querySelector(".form_pelanggan"),
+    formValidity: {
+        tambah_nama: { condition: (v) => ViewModel.validateField("nama", v) },
+        tambah_no_phone: { condition: (v) => ViewModel.validateField("no_phone", v) },
+        tambah_password: { condition: (v) => ViewModel.validateField("password", v) },
+        tambah_tahap: { condition: (v) => ViewModel.validateField("tahap", v) }
+    },
+    onSubmit: (formData) => ViewModel.insertData(formData)
+};
 
-editForm.addEventListener("input", (event) => {
-    const id = event.target.id;
-    FormValidator.validateField(editFormValidity, id);
+// 🔸 Initialize Table Manager
+const pelangganTable = new TableManager({
+    tableId: "#table_pelanggan",
+    apiUrl: ApiUrl,
+    viewModel: ViewModel,
+    columns,
+    filters,
+    dialogConfig,
+    formConfig
 });
 
+pelangganTable.setupCSVImport({
+    inputSelector: ".csv_input",
+    listSelector: ".files_list",
+    uploadSelector: ".csv_upload"
+});
 
+// 🔸 Sync Hidden Dropdown
+document.getElementById("hidden_tambah_tahap").value = document.getElementById("tambah_tahap").value;
+
+document.getElementById("tambah_tahap").addEventListener("sl-change", (event) => {
+    document.getElementById("hidden_tambah_tahap").value = event.target.value;
+});
+
+document.getElementById("print_button").addEventListener("click", async () => {
+    const data = await ViewModel.getData();
+
+    const printWindow = window.open('', '', 'width=800,height=600');
+    if (!printWindow) return;
+
+    const tableHTML = `
+        <html>
+        <head>
+            <title>Cetak Pelanggan</title>
+            <style>
+                table { border-collapse: collapse; width: 100%; }
+                th, td { border: 1px solid #333; padding: 8px; text-align: left; }
+                th { background-color: #f2f2f2; }
+                body { font-family: sans-serif; padding: 20px; }
+            </style>
+        </head>
+        <body>
+            <h2>Senarai Pelanggan</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>No. Phone</th>
+                        <th>Tahap</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${data.map(row => `
+                        <tr>
+                            <td>${row.id}</td>
+                            <td>${row.nama}</td>
+                            <td>${row.no_phone}</td>
+                            <td>${TahapEnum[row.tahap] || row.tahap}</td>
+                        </tr>
+                    `).join("")}
+                </tbody>
+            </table>
+        </body>
+        </html>
+    `;
+
+    printWindow.document.write(tableHTML);
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+});
+
+// Import CSV
+// CSVInput.addEventListener("click", () => {
+//     fileInput.clickInput();
+//     filesList.innerHTML = "<p class='include_tag hide'>Files included :</p>";
+//     files_received = null;
+// });
+
+// fileInput.getInput().addEventListener("change", ({ target }) => {
+//     files_received = target.files;
+
+//     const includeTag = filesList.querySelector(".include_tag");
+//     if (files_received.length === 0) {
+//         includeTag.classList.add("hide");
+//     } else {
+//         includeTag.classList.remove("hide");
+//         for (const file of files_received) {
+//             filesList.insertAdjacentHTML("beforeend",
+//                 `<li>${file.name}</li>`
+//             );
+//         }
+//     }
+// });
+
+// CSVUpload.addEventListener("click", async () => {
+//     if (files_received != null) {
+//         const data = new FormData;
+//         for (const file of files_received) {
+//             data.append("files[]", file)
+//         }
+//         const result = await ViewModel.postCSV(data);
+//         if (result.ok) {
+//             alert("File CSV dihantar.");
+//         } else {
+//             alert("File CSV gagal dihantar.");
+//         }
+//     }
+// });

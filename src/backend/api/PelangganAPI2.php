@@ -61,7 +61,7 @@ function handlePostRequest($Pelanggan): void {
     try {
         if (isset($_FILES["files"])) {
             // Process uploaded CSV file
-            processUploadedCSV($_FILES["files"], $Pelanggan);
+            postCSVFiles($_FILES["files"], $Pelanggan);
         } elseif (!empty($_POST)) {
             // Flexibly add pelanggan using all POST fields
             $Pelanggan->addPelanggan($_POST);
@@ -125,6 +125,48 @@ function handlePatchRequest($Pelanggan): void {
 
     // Send a success response
     echoJsonResponse(true, "Pelanggan updated successfully.");
+}
+
+// CSV
+function postCSVFiles(array $files, $Pelanggan): void {
+    foreach ($files["name"] as $index => $name) {
+        $file = [
+            "name" => $name,
+            "tmp_name" => $files["tmp_name"][$index],
+            "type" => $files["type"][$index],
+            "size" => $files["size"][$index],
+            "error" => $files["error"][$index]
+        ];
+        parseCSVFile($file, $Pelanggan);
+    }
+}
+
+function parseCSVFile(array $files, $Pelanggan): void {
+    if ($files['error'] !== UPLOAD_ERR_OK) {
+        throw new Exception("PelangganAPI POST request failed, file upload error: " . $files["error"], 422);
+    }
+
+    $handle = fopen($files["tmp_name"], "r");
+    if (!$handle) {
+        throw new Exception("Unable to open uploaded CSV file.", 422);
+    }
+
+    $header = fgetcsv($handle, 1000); // read the header row
+    if (!$header) {
+        throw new Exception("CSV header is missing or invalid.", 422);
+    }
+
+    while (($row = fgetcsv($handle, 1000)) !== false) {
+        $rowData = array_combine($header, $row);
+        if ($rowData === false) {
+            continue; // skip malformed rows
+        }
+
+        $Pelanggan->addPelanggan($rowData);
+    }
+
+    fclose($handle);
+    echoJsonResponse(true, "PelangganAPI POST request processed.");
 }
 
 

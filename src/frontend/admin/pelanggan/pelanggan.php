@@ -75,6 +75,7 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
                         <sl-tooltip content="CSV mesti ada header">
                             <sl-button class="csv_input">Import CSV</sl-button>
                         </sl-tooltip>
+                        <sl-button class="csv_upload">Upload CSV</sl-button>
                     </div>
                 </form>
                 <ul class="files_list">
@@ -101,7 +102,6 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
     </sl-dialog>
 
     <script type="module" src="<?php echo auto_version("table_pelanggan.js"); ?>"></script>
-    <script type="module" src="<?php echo auto_version("pelanggan.js"); ?>"></script>
     <?php
     echoTabulator();
     echoShoelaceAutoloader();
