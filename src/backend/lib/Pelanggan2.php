@@ -9,26 +9,20 @@ class Pelanggan2 {
     public function __construct($Database) {
         $this->Database = $Database;
     }
-    
+
     public function searchPelanggan(array $filters): array {
         $sql = "SELECT * FROM pelanggan WHERE 1=1";
         $types = "";
         $params = [];
-    
+
         foreach ($filters as $field => $value) {
-            if (is_numeric($value)) {
-                $sql .= " AND `$field` = ?";
-                $types .= "i";
-                $params[] = (int)$value;
-            } else {
-                $sql .= " AND `$field` LIKE ?";
-                $types .= "s";
-                $params[] = "%" . $value . "%";
-            }
+            $sql .= " AND `$field` LIKE ?";
+            $types .= "s";
+            $params[] = "%" . $value . "%";
         }
-    
+
         return $this->Database->readQuery($sql, $types, $params);
-    }    
+    }  
 
     public function addPelanggan(array $data): void {
         try {

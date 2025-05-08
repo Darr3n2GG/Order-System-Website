@@ -60,19 +60,6 @@ class BaseModel {
             return { ok: false, error };
         }
     }
-
-    async insertCSV(data) {
-        try {
-            const response = await fetch(this.apiUrl, {
-                method: "POST",
-                body: data
-            });
-            return await FetchHelper.onFulfilled(response);
-        } catch (error) {
-            console.error(`INSERT request failed for ${this.apiUrl}:`, error);
-            return { ok: false, error };
-        }
-    }
 }
 
 export default BaseModel;

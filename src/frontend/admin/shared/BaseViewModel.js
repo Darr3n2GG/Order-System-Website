@@ -28,10 +28,6 @@ class BaseViewModel {
         }
         return ""; // No error by default
     }
-
-    postCSV(data) {
-        return this.model.insertCSV(data);
-    }
 }
 
 export default BaseViewModel;
