@@ -4,12 +4,11 @@ import { FileInput } from "../../../scripts/FileInput.js"
 
 class TableManager {
     constructor({ tableId, viewModel, columns, filters = {}}) {
-        this.apiUrl = viewModel.getApiUrl();
         this.viewModel = viewModel;
         this.columns = columns;
 
         this.table = new Tabulator(tableId, {
-            ajaxURL: apiUrl,
+            ajaxURL: viewModel.getApiUrl(),
             height: 510,
             rowHeight: 40,
             layout: "fitData",
