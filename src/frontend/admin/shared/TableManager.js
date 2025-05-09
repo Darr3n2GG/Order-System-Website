@@ -3,8 +3,8 @@ import FormValidator from "../../../scripts/FormValidator.js";
 import { FileInput } from "../../../scripts/FileInput.js"
 
 class TableManager {
-    constructor({ tableId, apiUrl, viewModel, columns, filters = {}}) {
-        this.apiUrl = apiUrl;
+    constructor({ tableId, viewModel, columns, filters = {}}) {
+        this.apiUrl = viewModel.getApiUrl();
         this.viewModel = viewModel;
         this.columns = columns;
 
@@ -79,7 +79,7 @@ class TableManager {
             const result = await this.viewModel.insertData(formData);
 
             if (result.ok) {
-                this.table.setData(this.apiUrl);
+                this.table.setData();
                 form.reset();
                 alert("Operation successful.");
             } else {

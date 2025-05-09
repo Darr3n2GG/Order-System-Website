@@ -5,6 +5,10 @@ class BaseViewModel {
         this.validators = {}; // { fieldName: (value) => errorMsg }
     }
 
+    getApiUrl() {
+        return this.model.getApiUrl();
+    }
+    
     async getData() {
         const data = await this.model.get(this.filters);
         return data.details || [];

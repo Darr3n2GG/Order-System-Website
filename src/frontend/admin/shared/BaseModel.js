@@ -5,6 +5,10 @@ class BaseModel {
         this.apiUrl = apiUrl;
     }
 
+    getApiUrl() {
+        return this.apiUrl;
+    }
+
     async get(params = {}) {
         try {
             const url = new URL(this.apiUrl, window.location.origin);

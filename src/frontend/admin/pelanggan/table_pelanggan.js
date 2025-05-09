@@ -2,8 +2,6 @@
 import TableManager from "../shared/TableManager.js";
 import ViewModel from "./PelangganViewModel.js";
 
-const ApiUrl = "/Order-System-Website/src/backend/api/PelangganAPI.php";
-
 const TahapEnum = {
     "1": "User",
     "2": "Admin"
@@ -61,7 +59,6 @@ const filters = {
 // 🔸 Initialize Table Manager
 const pelangganTable = new TableManager({
     tableId: "#table_pelanggan",
-    apiUrl: ApiUrl,
     viewModel: ViewModel,
     columns,
     filters
