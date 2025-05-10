@@ -94,6 +94,12 @@ $Database = createDatabaseConn();
                 <sl-tab-panel name="kategori">
                     <div class="container_menu">
                         <div class="table_container">
+                        <div class="print_button_container" style="margin-top: 12px;">
+                        <sl-button size="small" id="print_kategori_button" variant="primary">
+                        <sl-icon slot="prefix" name="printer"></sl-icon>
+                        Cetak
+                        </sl-button>
+                        </div>
                             <div id="table_kategori"></div>
                         </div>
                         <div class="toolbar">
@@ -113,11 +119,12 @@ $Database = createDatabaseConn();
                                         Tambah Kategori
                                     </sl-button>
                                     <sl-tooltip content="CSV mesti ada header dan gambar">
-                                        <sl-button id="kategori_csv_input" class="csv_input">Import CSV</sl-button>
+                                        <sl-button id="kategori_csv_input" class="kategori_csv_input">Import CSV</sl-button>
                                     </sl-tooltip>
+                                    <sl-button class="csv_upload">Upload CSV</sl-button>
                                 </div>
                             </form>
-                            <ul id="kategori_files_list" class="files_list">
+                            <ul id="kategori_files_list" class="kategori_files_list">
                                 <p class="include_tag hide">Files included :</p>
                             </ul>
                         </div>
@@ -159,7 +166,7 @@ $Database = createDatabaseConn();
         <div class="form_container">
             <form class="edit_kategori_form">
                 <input id="edit_kategori_id" name="id" hidden>
-                <sl-input placeholder="Label" id="edit_kategori_label" name="label" type="text" autocomplete="off">
+                <sl-input placeholder="Label" id="edit_kategori_label" name="label" type="text" autocomplete="off" maxlength="1">
                     <label slot="label">Label</label>
                     <sl-icon name="bookmark" slot="prefix"></sl-icon>
                 </sl-input>
@@ -169,8 +176,8 @@ $Database = createDatabaseConn();
                 </sl-input>
             </form>
         </div>
-        <sl-button id="edit_produk_button" class="edit_button" slot="footer">Edit</sl-button>
-        <sl-button id="cancel_edit_produk_button" class="cancel_button" slot="footer" variant="danger">Cancel</sl-button>
+        <sl-button id="edit_button" class="edit_button" slot="footer">Edit</sl-button>
+        <sl-button id="cancel_button" class="cancel_button" slot="footer" variant="danger">Cancel</sl-button>
     </sl-dialog>
 
     <script type="module" src="<?php echo auto_version("table_menu.js"); ?>"></script>
