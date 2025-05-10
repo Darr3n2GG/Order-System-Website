@@ -30,8 +30,8 @@ class TableManager {
     }
 
     setupEditDialog(dialogConfig) {
-        const editForm = dialogConfig.formElement;
-        const editDialog = dialogConfig.dialogElement;
+        const editForm = dialogConfig.formElement || document.querySelector(".edit_form");
+        const editDialog = dialogConfig.dialogElement || document.querySelector(".edit_dialog");
         this.editDialog = editDialog;
         const editButton = editDialog.querySelector(".edit_button");
         const cancelButton = editDialog.querySelector(".cancel_button");
@@ -93,12 +93,11 @@ class TableManager {
         });
     }
 
-    setupCSVImport(csvConfig) {
+    setupCSVImport(csvConfig = {}) {
         const fileInput = new FileInput(true, ".csv");
-        const CSVInput = csvConfig.csvInput;
-        const filesList = csvConfig.filesList;
-        const CSVUpload = csvConfig.csvUpload;
-        console.log(filesList);
+        const CSVInput = csvConfig.csvInput || document.querySelector(".csv_input");
+        const filesList = csvConfig.filesList || document.querySelector(".files_list");
+        const CSVUpload = csvConfig.csvUpload || document.querySelector(".csv_upload");
         let files_received = null;
     
         globalThis.logFiles = () => files_received;
