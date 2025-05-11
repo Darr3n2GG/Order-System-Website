@@ -59,16 +59,22 @@ $Database = createDatabaseConn();
                                     <label slot="label">Nama</label>
                                     <sl-icon name="card-text" slot="prefix"></sl-icon>
                                 </sl-input>
-                                <sl-select placeholder="Kategori" id="tambah_produk_kategori" placement="bottom" required>
+                                <sl-select placeholder="Kategori" id="tambah_produk_id_kategori" placement="bottom" required>
                                     <sl-icon name="tag" slot="prefix"></sl-icon>
                                     <label slot="label">Kategori</label>
-                                    <?php loadKategoriOptionHTML(); ?>
                                 </sl-select>
+                                <input type="hidden" name="id_kategori" id="hidden_tambah_produk_id_kategori">
                                 <sl-input placeholder="Harga" id="tambah_produk_harga" name="harga" type="number" autocomplete="off" required>
                                     <label slot="label">Harga</label>
                                     <sl-icon name="cash" slot="prefix"></sl-icon>
                                 </sl-input>
-                                <sl-textarea id="tambah_produk_detail" label="Detail" resize="auto" required></sl-textarea>
+                                <input type="file" id="tambah_produk_gambar" accept="image/*" style="display: none;">
+                                <input type="hidden" id="hidden_tambah_produk_gambar" name="gambar"/>
+                                <sl-textarea id="tambah_produk_detail" name="detail" label="Detail" resize="auto" required></sl-textarea>
+                                <div id="imagePreviewContainer" style="display:none;">
+                                <label for="imagePreview" id="imagePreviewLabel">Preview Gambar</label>
+                                <img id="imagePreview" src="" alt="Image Preview" style="max-width: 100px; max-height: 100px;">
+                                </div>
                                 <div class="form_buttons">
                                     <sl-button id="tambah_gambar">
                                         <sl-icon slot="prefix" name="card-image"></sl-icon>
@@ -81,9 +87,10 @@ $Database = createDatabaseConn();
                                     <sl-tooltip content="CSV mesti ada header dan gambar">
                                         <sl-button id="produk_csv_input" class="csv_input">Import CSV</sl-button>
                                     </sl-tooltip>
+                                    <sl-button class="csv_upload">Upload CSV</sl-button>
                                 </div>
                             </form>
-                            <ul id="menu_files_list" class="files_list">
+                            <ul id="produk_files_list" class="produk_files_list">
                                 <p class="include_tag hide">Files included :</p>
                             </ul>
                         </div>
@@ -142,17 +149,22 @@ $Database = createDatabaseConn();
                     <label slot="label">Nama</label>
                     <sl-icon name="card-text" slot="prefix"></sl-icon>
                 </sl-input>
-                <sl-select placeholder="Kategori" id="edit_produk_kategori" placement="bottom">
+                <sl-select placeholder="Kategori" id="edit_produk_id_kategori" name="id_kategori" placement="bottom">
                     <sl-icon name="tag" slot="prefix"></sl-icon>
                     <label slot="label">Kategori</label>
-                    <?php loadKategoriOptionHTML(); ?>
                 </sl-select>
                 <sl-input placeholder="Harga" id="edit_produk_harga" name="harga" type="number" autocomplete="off">
                     <label slot="label">Harga</label>
                     <sl-icon name="cash" slot="prefix"></sl-icon>
                 </sl-input>
                 <sl-textarea id="edit_produk_detail" label="Detail" name="detail" resize="auto"></sl-textarea>
-                <sl-button id="tambah_gambar">
+                <div id="editImagePreviewContainer" style="display:none;">
+                <label for="imagePreview" id="imagePreviewLabel">Preview Gambar</label>
+                <img id="editImagePreview" src="" alt="Image Preview" style="max-width: 100px; max-height: 100px;">
+                </div>
+                <input id="edit_produk_gambar" name="gambar" hidden>
+                <input type="file" id="edit_file_produk_gambar" accept="image/*" style="display: none;">
+                <sl-button id="edit_gambar">
                     <sl-icon slot="prefix" name="card-image"></sl-icon>
                     Tukar Gambar
                 </sl-button>
@@ -191,16 +203,3 @@ $Database = createDatabaseConn();
 </body>
 
 </html>
-
-<?php
-function loadKategoriOptionHTML(): void {
-    global $Database;
-    $array_kategori = $Database->readQuery("SELECT id, label, nama from kategori");
-
-    foreach ($array_kategori as $kategori) {
-        $id = $kategori["id"];
-        $nama = $kategori["nama"];
-        echo "<sl-option value='$id'>$nama</sl-option>";
-    }
-}
-?>

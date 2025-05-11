@@ -25,6 +25,9 @@ class BaseModel {
     }
 
     async insert(data) {
+        // for (const [key, value] of data.entries()) {
+        //     console.log(`${key}:`, value);
+        // }
         try {
             const response = await fetch(this.apiUrl, {
                 method: "POST",

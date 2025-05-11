@@ -53,8 +53,12 @@ class TableManager {
             editDialog.hide()
         })
 
+
         editForm.addEventListener("input", (event) => {
-            FormValidator.validateField(dialogConfig.formValidity, event.target.id);
+            const fieldId = event.target.id;
+            if (dialogConfig.formValidity.hasOwnProperty(fieldId)) {
+                FormValidator.validateField(dialogConfig.formValidity, fieldId);
+            }
         });
     }
 
@@ -89,7 +93,10 @@ class TableManager {
         });
 
         form.addEventListener("input", (event) => {
-            FormValidator.validateField(formConfig.formValidity, event.target.id);
+            const fieldId = event.target.id;
+            if (formConfig.formValidity.hasOwnProperty(fieldId)) {
+                FormValidator.validateField(formConfig.formValidity, fieldId);
+            }
         });
     }
 

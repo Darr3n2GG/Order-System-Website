@@ -86,7 +86,6 @@ const csvConfig = {
     filesList: document.querySelector(".kategori_files_list"),
     csvUpload: document.querySelector(".csv_upload")
 };     
-console.log(csvConfig);
 kategoriTable.setupCSVImport(csvConfig);
 
 // Call print method

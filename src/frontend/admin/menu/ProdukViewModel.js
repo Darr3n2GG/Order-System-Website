@@ -1,0 +1,26 @@
+import BaseViewModel from "../shared/BaseViewModel.js";
+import produkModel from "./ProdukModel.js";
+
+class ProdukViewModel extends BaseViewModel {
+    constructor() {
+        super(produkModel);
+
+        this.validators = {
+            // whatever defined in formValidity must define here
+            // database field => message
+            nama: (value) => (!value ? "Field nama kosong." : ""),
+            id_kategori: (value) => (!value ? "Field kategori kosong." : ""),
+            detail: (value) => (!value ? "Field detail kosong." : ""),
+            harga: (value) => (!value ? "Field harga kosong." : ""),
+            gambar: (value) => (!value ? "Field gambar kosong." : "")       
+         };
+    }
+
+    // Custom functions
+    async uploadPhoto(data) {
+        const result = await this.model.uploadPhoto(data);
+        return result.details || [];
+    }
+}
+
+export default new ProdukViewModel();
