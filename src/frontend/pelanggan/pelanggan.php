@@ -68,6 +68,7 @@ if (!$Session->sudahLogMasuk()) {
 
     </sl-dialog>
 
+    <script type="module" src="<?php echo auto_version("pelanggan.js"); ?>"></script>
     <script type="module" src="<?php echo auto_version("table_pelanggan.js"); ?>"></script>
     <?php
     echoShoelaceAutoloader();
