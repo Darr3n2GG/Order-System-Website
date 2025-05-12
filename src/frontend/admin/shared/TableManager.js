@@ -3,7 +3,7 @@ import FormValidator from "../../../scripts/FormValidator.js";
 import { FileInput } from "../../../scripts/FileInput.js"
 
 class TableManager {
-    constructor({ tableId, viewModel, columns, filters = {}}) {
+    constructor({ tableId, viewModel, columns, filters = {}}, displayName = "Data") {
         this.viewModel = viewModel;
         this.columns = columns;
 
@@ -43,7 +43,7 @@ class TableManager {
             const result = await this.viewModel.updateData(formData);
 
             if (result.ok) {
-                alert("Berjaya kemaskini.");
+                alert(`Data ${this.viewModel.resourceName} berjaya dikemaskini.`);
                 this.table.setData();
                 editDialog.hide();
             }
@@ -85,9 +85,9 @@ class TableManager {
             if (result.ok) {
                 this.table.setData();
                 form.reset();
-                alert("Operation successful.");
+                alert(`${this.viewModel.resourceName} ditambah.`);
             } else {
-                alert("Operation failed. Please try again.");
+                alert(`${this.viewModel.resourceName} gagal ditambah.`);
                 console.error("Operation failed:", result);
             }
         });
@@ -167,7 +167,7 @@ class TableManager {
                 </style>
             </head>
             <body>
-                <h2>Senarai Data</h2>
+                <h2>Senarai ${this.viewModel.resourceName}</h2>
                 <table>
                     <thead>
                         <tr>

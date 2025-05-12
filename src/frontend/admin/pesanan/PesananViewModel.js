@@ -4,7 +4,7 @@ import pesananModel from "./PesananModel.js";
 class PesananViewModel extends BaseViewModel {
     constructor() {
         super(pesananModel);
-
+        this.resourceName = "Pesanan";
         this.validators = {
             // database field => message
             id_pelanggan: (value) => (!value ? "Field pelanggan kosong." : ""),

@@ -47,9 +47,9 @@ const columns = [
             const result = await ViewModel.deleteData(cell.getData().id);
             if (result.ok) {
                 cell.getRow().delete();
-                alert("Pesanan dipadam.");
+                alert(`${ViewModel.resourceName} dengan ID: ${cell.getData().id} sudah dipadamkan.`);
             } else {
-                alert("Gagal memadam pesanan.");
+                alert(`${ViewModel.resourceName} dengan ID: ${cell.getData().id} gagal dipadamkan.`);
             }
         }
     }

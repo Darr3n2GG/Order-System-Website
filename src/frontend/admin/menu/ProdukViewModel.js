@@ -4,7 +4,7 @@ import produkModel from "./ProdukModel.js";
 class ProdukViewModel extends BaseViewModel {
     constructor() {
         super(produkModel);
-
+        this.resourceName = "Produk";
         this.validators = {
             // whatever defined in formValidity must define here
             // database field => message

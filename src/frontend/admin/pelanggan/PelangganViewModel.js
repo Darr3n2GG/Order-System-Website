@@ -7,6 +7,7 @@ const PHONE_REGEX = /^(\+?6?01)[02-46-9]-*\d{7}$|^(\+?6?01)[1]-*\d{8}$/;
 class PelangganViewModel extends BaseViewModel {
     constructor() {
         super(PelangganModel);
+        this.resourceName = "Pelanggan";
         this.filters = {
             nama: "",
             no_phone: ""

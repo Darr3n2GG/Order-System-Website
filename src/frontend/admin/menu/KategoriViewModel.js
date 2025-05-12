@@ -4,7 +4,7 @@ import kategoriModel from "./KategoriModel.js";
 class KategoriViewModel extends BaseViewModel {
     constructor() {
         super(kategoriModel);
-
+        this.resourceName = "Kategori";
         this.validators = {
             // database field => message
             label: (value) => (!value ? "Field label kosong." : ""),
