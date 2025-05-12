@@ -191,6 +191,9 @@ class TableManager {
         printWindow.document.write(tableHTML);
         printWindow.document.close();
         printWindow.focus();
+        printWindow.addEventListener('afterprint', () => {
+            printWindow.close();
+        });
         printWindow.print();
     }
 
