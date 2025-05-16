@@ -10,13 +10,14 @@ require_once dirname(__FILE__, 2) . "/Autoloader.php";
 require_once dirname(__FILE__, 2) . "/Database.php";
 require_once dirname(__FILE__, 2) . "/JsonResponseHandler.php";
 require_once dirname(__FILE__, 2) . "/Masa.php";
+$Database = createDatabaseConn();
 
 try {
-    $Database = createDatabaseConn();
+    
     $Belian = new lib\Belian;
-    $Pesanan = new lib\Pesanan;
-
-    $array_pesanan = $Pesanan->getArrayPesananThisWeek();
+    $Pesanan = new lib\Pesanan2($Database);
+    $filters["range"] = "week";
+    $array_pesanan = $Pesanan->searchPesanan($filters);
 
     // The array is arranged like this: [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
     $jumlah_harga_mingguan = [0, 0, 0, 0, 0, 0, 0];
@@ -59,7 +60,9 @@ try {
 }
 
 function getHargaFromIDProduk($id): float {
-    $Produk = new lib\Produk;
-    $produk = $Produk->getProdukFromID($id);
-    return $produk["harga"];
+    global $Database; 
+    $Produk = new lib\Produk2($Database);
+    $filters['id'] = $id;
+    $produk = $Produk->searchProduk($filters);
+    return $produk[0]["harga"];
 }

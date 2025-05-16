@@ -50,11 +50,20 @@ class Pesanan2 {
             $types .= "s";
             $params[] = $filters['to'];
         }
+
         // Remove the date keys to avoid re-processing
         unset($filters['from'], $filters['to'], $filters['range'], $filters['week']);
 
         foreach ($filters as $field => $value) {
-            $sql .= " AND `$field` LIKE ?";
+            if (strtoupper($field) === "NAMA") {
+                $field = "pelanggan.nama";
+            }
+
+            if (strpos($field, '.') === false) {
+                $sql .= " AND `$field` LIKE ?";
+            } else {
+                $sql .= " AND $field LIKE ?";
+            }
             $types .= "s";
             $params[] = "%" . $value . "%";
         }
@@ -127,7 +136,9 @@ class Pesanan2 {
         }
     }
 
-
+    public function getLastInsertedIDOfPesanan(): int {
+        return $this->Database->readLastInsertedID();
+    }
 
     public function deletePesanan(int $id): void {
         $this->Database->executeQuery(

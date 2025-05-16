@@ -10,7 +10,7 @@ if (!isset($_POST["nama"], $_POST["phone"], $_POST["password"])) {
 
 try {
     $Database = createDatabaseConn();
-    $Pelanggan = new lib\Pelanggan;
+    $Pelanggan = new lib\Pelanggan2($Database);
 
     $nama = $_POST["nama"];
     $no_phone = $_POST["phone"];
@@ -49,7 +49,11 @@ function insert_new_account($nama, $no_phone, $password) {
     $redirect_url = "/Order-System-Website/src/frontend/login/login.php";
 
     global $Pelanggan;
-    $Pelanggan->addPelanggan($nama, $password, $no_phone);
+    $Pelanggan->addPelanggan([
+        'nama' => $nama,
+        'password' => $password,
+        'no_phone' => $no_phone
+    ]);
 
     echo "<script type='text/javascript'>
             alert('Pelanggan didaftar! Redirecting...');
