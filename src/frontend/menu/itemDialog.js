@@ -1,7 +1,7 @@
 import { eventBus } from "../../scripts/EventBus.js";
 import FetchHelper from "../../scripts/FetchHelper.js";
 
-const apiUrl = "/Order-System-Website/src/backend/api/ProdukAPI.php"
+const apiUrl = "/Order-System-Website/src/backend/api/ProdukAPI2.php"
 let selectedItem = {};
 // selectedItem logger in console, type "logSelectedItem()"
 globalThis.logSelectedItem = () => selectedItem;
@@ -59,8 +59,9 @@ function fetchItemDialogData(itemID) {
     fetch(url)
         .then(FetchHelper.onFulfilled)
         .then(({ details }) => {
-            setSelectedItem(details);
-            showItemDialog(details);
+            const item = details[0];
+            setSelectedItem(item);
+            showItemDialog(item);
         })
         .catch(FetchHelper.onRejected);
 }

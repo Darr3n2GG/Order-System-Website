@@ -1,6 +1,6 @@
 import FetchHelper from "../../scripts/FetchHelper.js";
 
-const apiUrl = "/Order-System-Website/src/backend/api/ProdukAPI.php";
+const apiUrl = "/Order-System-Website/src/backend/api/ProdukAPI2.php";
 const searchBar = document.querySelector(".search_bar");
 
 const startFetching = debounce(fetchFoodData, 1000)
@@ -27,12 +27,13 @@ function debounce(callback, delay) {
 function fetchFoodData() {
     const url = apiUrl + "?" + new URLSearchParams({
         type: "html",
-        keyword: searchBar.value
+        nama: searchBar.value
     }).toString()
 
     fetch(url)
         .then(FetchHelper.onFulfilled)
         .then(({ details }) => {
+            console.log(details);
             renderFoodItems(details)
         })
         .catch(FetchHelper.onRejected);

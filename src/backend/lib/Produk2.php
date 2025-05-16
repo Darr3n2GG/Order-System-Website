@@ -29,15 +29,23 @@ class Produk2 {
         foreach ($filters as $field => $value) {
             if (strtoupper($field) === "NAMA") {
                 $field = "produk.nama";
-            }
-            // Use backticks only if the field is not table-qualified
-            if (strpos($field, '.') === false) {
-                $sql .= " AND `$field` LIKE ?";
-            } else {
                 $sql .= " AND $field LIKE ?";
+                $types .= "s";
+                $params[] = "%" . $value . "%";
+            } elseif (strtoupper($field) === "ID") {
+                $field = "produk.id";
+                $sql .= " AND $field = ?";
+                $types .= "i";
+                $params[] = $value;
+            } else {
+                // Generic fallback for other fields
+                if (strpos($field, '.') === false) {
+                    $sql .= " AND `$field` LIKE ?";
+                } else {
+                    $sql .= " AND $field LIKE ?";
+                }
+                $types .= "s";
             }
-            $types .= "s";
-            $params[] = "%" . $value . "%";
         }
 
         // Add ordering at the end of the query

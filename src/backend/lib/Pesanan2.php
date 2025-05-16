@@ -3,6 +3,7 @@
 namespace lib;
 
 require_once dirname(__FILE__, 2) . "/Database.php";
+require_once dirname(__FILE__, 2) . "/Masa.php";
 
 class Pesanan2 {
     private $Database;
@@ -12,27 +13,60 @@ class Pesanan2 {
 
     public function searchPesanan(array $filters): array {
         $sql = "SELECT 
-        pesanan.id AS id, 
-        pesanan.id_pelanggan AS id_pelanggan, 
-        pelanggan.nama AS nama, 
-        pesanan.tarikh AS tarikh,
-        pesanan.id_status AS id_status, 
-        status.status AS status, 
-        pesanan.cara AS cara, 
-        pesanan.no_meja AS no_meja
+    pesanan.id AS id, 
+    pesanan.id_pelanggan AS id_pelanggan, 
+    pelanggan.nama AS nama, 
+    pesanan.tarikh AS tarikh,
+    pesanan.id_status AS id_status, 
+    status.status AS status, 
+    pesanan.cara AS cara, 
+    pesanan.no_meja AS no_meja,
+    COALESCE(SUM(belian.kuantiti * produk.harga), 0) AS jumlah_harga
     FROM pesanan
     INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
     INNER JOIN status ON pesanan.id_status = status.id
+    LEFT JOIN belian ON pesanan.id = belian.id_pesanan
+    LEFT JOIN produk ON belian.id_produk = produk.id
     WHERE 1=1";
 
         $types = "";
         $params = [];
+
+        // Handle week
+        if (!empty($filters['range']) && $filters['range'] === 'week') {
+            $filters['from'] = getWeekStart();
+            $filters['to'] = getWeekEnd();
+        }
+        
+        // Handle special date filters first
+        if (!empty($filters['from'])) {
+            $sql .= " AND pesanan.tarikh >= ?";
+            $types .= "s";
+            $params[] = $filters['from'];
+        }
+
+        if (!empty($filters['to'])) {
+            $sql .= " AND pesanan.tarikh <= ?";
+            $types .= "s";
+            $params[] = $filters['to'];
+        }
+        // Remove the date keys to avoid re-processing
+        unset($filters['from'], $filters['to'], $filters['range'], $filters['week']);
 
         foreach ($filters as $field => $value) {
             $sql .= " AND `$field` LIKE ?";
             $types .= "s";
             $params[] = "%" . $value . "%";
         }
+        $sql .= " GROUP BY 
+            pesanan.id, 
+            pesanan.id_pelanggan, 
+            pelanggan.nama, 
+            pesanan.tarikh,
+            pesanan.id_status, 
+            status.status, 
+            pesanan.cara, 
+            pesanan.no_meja";
 
         return $this->Database->readQuery($sql, $types, $params);
     }  

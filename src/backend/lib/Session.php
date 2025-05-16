@@ -2,7 +2,8 @@
 
 namespace lib;
 
-require_once dirname(__FILE__) . "/Pelanggan.php";
+require_once dirname(__FILE__) . "/Pelanggan2.php";
+require_once dirname(__FILE__, 2) . "/Database.php";
 
 class Session {
     private bool $log_masuk = false;
@@ -11,10 +12,11 @@ class Session {
     private string $nama;
     private string $no_phone;
 
-    private Pelanggan $Pelanggan;
+    private Pelanggan2 $Pelanggan;
 
     public function __construct() {
-        $this->Pelanggan = new Pelanggan;
+        $Database = createDatabaseConn();
+        $this->Pelanggan = new Pelanggan2($Database);
 
         if (session_status() == PHP_SESSION_NONE) {
             session_start();

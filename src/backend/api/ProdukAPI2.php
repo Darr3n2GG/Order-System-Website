@@ -8,11 +8,11 @@ require_once dirname(__FILE__) . "/BaseAPIController.php";
 class ProdukAPIController extends BaseAPIController {
     protected function handlePost(): void {
         $requestUri = $_SERVER["REQUEST_URI"];
-            if (str_contains($requestUri, "/upload-image")) {
-                $this->handleImageUpload();
-            } else {
-                parent::handlePost();
-            }
+        if (str_contains($requestUri, "/upload-image")) {
+            $this->handleImageUpload();
+        } else {
+            parent::handlePost();
+        }
     }
     // Method to handle image uploads
     private function handleImageUpload(): void {
@@ -21,6 +21,18 @@ class ProdukAPIController extends BaseAPIController {
         }
         $imagePath = $this->model->uploadImage($_FILES["image"]);
         echoJsonResponse(true, "Image uploaded successfully.", ["imagePath" => $imagePath]);
+    }
+
+    function generateProdukHTML(array $array_produk): array
+    {
+        $array_item_produk = [];
+
+        foreach ($array_produk as $produk) {
+            $item_produk = lib\MenuLoader::createItemProdukHTML($produk);
+            $array_item_produk[] = ["html" => $item_produk, "kategori" => $produk["label"]];
+        }
+
+        return $array_item_produk;
     }
 }
 

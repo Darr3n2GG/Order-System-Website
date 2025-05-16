@@ -94,4 +94,34 @@ class Pelanggan2 {
             [$id]
         );
     }
+
+    public function findPelanggan(string $id): array {
+        return $this->Database->readQuery(
+            "SELECT pelanggan.id, pelanggan.nama, pelanggan.no_phone, tahap.tahap
+            FROM pelanggan INNER JOIN tahap ON pelanggan.tahap = tahap.id
+            WHERE pelanggan.searchable = 1 AND pelanggan.id = ?",
+            "i",
+            [$id]
+        )[0];
+    }
+
+    public function checkPelangganExists(string $id): bool {
+        $stmt = $this->Database->prepareStatement("SELECT id FROM pelanggan WHERE searchable = 1 AND id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $stmt->store_result();
+
+        return ($stmt->num_rows > 0);
+    }
+
+    public function getTahapPelanggan(string $id): string {
+        return $this->Database->readQuery(
+            "SELECT tahap.tahap AS tahap 
+            FROM pelanggan INNER JOIN tahap ON pelanggan.tahap = tahap.id
+            WHERE pelanggan.id = ?",
+            "i",
+            [$id]
+        )[0]["tahap"];
+    }
+
 }
