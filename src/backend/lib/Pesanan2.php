@@ -69,7 +69,7 @@ class Pesanan2 {
             pesanan.no_meja";
 
         return $this->Database->readQuery($sql, $types, $params);
-    }  
+    }
 
     public function addPesanan(array $data): void {
         try {
@@ -79,55 +79,55 @@ class Pesanan2 {
             foreach ($data as $value) {
                 $types .= $this->Database->getMysqliType($value);
             }
-    
+
             $this->Database->executeQuery(
                 "INSERT INTO pesanan ($columns) VALUES ($placeholders)",
                 $types,
                 array_values($data)
             );
-        } catch (Exception $e) {
-            throw new Exception("Failed to add pesanan: " . $e->getMessage(), 500);
+        } catch (\Exception $e) {
+            throw new \Exception("Failed to add pesanan: " . $e->getMessage(), 500);
         }
     }
-    
-    
+
+
     public function updatePesanan(int $id, array $data): void {
         $fields = [];
         $values = [];
         $types = "";
-    
+
         foreach ($data as $key => $value) {
             // Skip fields that should never be updated directly
             if ($key === "id") {
                 continue;
             }
-    
+
             $fields[] = "$key = ?";
             $values[] = $value;
             $types .= $this->Database->getMysqliType($value);
         }
-    
+
         if (empty($fields)) {
-            throw new Exception("No valid fields provided to update.", 400);
+            throw new \Exception("No valid fields provided to update.", 400);
         }
-    
+
         $set = implode(', ', $fields);
         $values[] = $id;
         $types .= "i";
-    
+
         try {
             $this->Database->executeQuery(
                 "UPDATE pesanan SET $set WHERE id = ?",
                 $types,
                 $values
             );
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log($e->getMessage());
-            throw new Exception("Failed to update pesanan: " . $e->getMessage(), 500);
+            throw new \Exception("Failed to update pesanan: " . $e->getMessage(), 500);
         }
     }
-    
-    
+
+
 
     public function deletePesanan(int $id): void {
         $this->Database->executeQuery(
@@ -142,11 +142,11 @@ class Pesanan2 {
         $types = "";
         $params = [];
         return $this->Database->readQuery($sql, $types, $params);
-    } 
+    }
     public function getMeja(): array {
         $sql = "SELECT * FROM meja WHERE 1=1";
         $types = "";
         $params = [];
         return $this->Database->readQuery($sql, $types, $params);
-    } 
+    }
 }

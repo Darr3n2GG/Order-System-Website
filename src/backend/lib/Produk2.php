@@ -52,7 +52,7 @@ class Produk2 {
         $sql .= " ORDER BY produk.id ASC";
 
         return $this->Database->readQuery($sql, $types, $params);
-    }  
+    }
 
     public function addProduk(array $data): void {
         try {
@@ -62,51 +62,51 @@ class Produk2 {
             foreach ($data as $value) {
                 $types .= $this->Database->getMysqliType($value);
             }
-    
+
             $this->Database->executeQuery(
                 "INSERT INTO produk ($columns) VALUES ($placeholders)",
                 $types,
                 array_values($data)
             );
-        } catch (Exception $e) {
-            throw new Exception("Failed to add produk]: " . $e->getMessage(), 500);
+        } catch (\Exception $e) {
+            throw new \Exception("Failed to add produk]: " . $e->getMessage(), 500);
         }
     }
-    
-    
+
+
     public function updateProduk(int $id, array $data): void {
         $fields = [];
         $values = [];
         $types = "";
-    
+
         foreach ($data as $key => $value) {
             // Skip fields that should never be updated directly
             if ($key === "id") {
                 continue;
             }
-    
+
             $fields[] = "$key = ?";
             $values[] = $value;
             $types .= $this->Database->getMysqliType($value);
         }
-    
+
         if (empty($fields)) {
-            throw new Exception("No valid fields provided to update.", 400);
+            throw new \Exception("No valid fields provided to update.", 400);
         }
-    
+
         $set = implode(', ', $fields);
         $values[] = $id;
         $types .= "i";
-    
+
         try {
             $this->Database->executeQuery(
                 "UPDATE produk SET $set WHERE id = ?",
                 $types,
                 $values
             );
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log($e->getMessage());
-            throw new Exception("Failed to update produk: " . $e->getMessage(), 500);
+            throw new \Exception("Failed to update produk: " . $e->getMessage(), 500);
         }
     }
 
@@ -120,7 +120,7 @@ class Produk2 {
 
     public function uploadImage(array $file): string {
         if ($file['error'] !== UPLOAD_ERR_OK) {
-            throw new Exception("Image upload failed with error: " . $file["error"], 422);
+            throw new \Exception("Image upload failed with error: " . $file["error"], 422);
         }
 
         $targetDir = $_SERVER['DOCUMENT_ROOT'] . "/Order-System-Website/src/assets/produk/";
@@ -133,11 +133,10 @@ class Produk2 {
         $targetPath = $targetDir . $filename;
 
         if (!move_uploaded_file($file["tmp_name"], $targetPath)) {
-            throw new Exception("Failed to save uploaded image.", 500);
+            throw new \Exception("Failed to save uploaded image.", 500);
         }
 
         // Return web-accessible path
         return "/Order-System-Website/src/assets/produk/" . $filename;
     }
-
 }

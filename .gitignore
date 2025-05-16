@@ -1,1 +1,2 @@
 vendor/
+src/backend/log/error_log.log
