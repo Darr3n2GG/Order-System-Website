@@ -8,11 +8,11 @@ require_once dirname(__FILE__) . "/BaseAPIController.php";
 class ProdukAPIController extends BaseAPIController {
     protected function handlePost(): void {
         $requestUri = $_SERVER["REQUEST_URI"];
-        if (str_contains($requestUri, "/upload-image")) {
-            $this->handleImageUpload();
-        } else {
-            parent::handlePost();
-        }
+            if (str_contains($requestUri, "/upload-image")) {
+                $this->handleImageUpload();
+            } else {
+                parent::handlePost();
+            }
     }
     // Method to handle image uploads
     private function handleImageUpload(): void {

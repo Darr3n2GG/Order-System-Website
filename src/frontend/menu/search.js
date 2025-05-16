@@ -33,7 +33,6 @@ function fetchFoodData() {
     fetch(url)
         .then(FetchHelper.onFulfilled)
         .then(({ details }) => {
-            console.log(details);
             renderFoodItems(details)
         })
         .catch(FetchHelper.onRejected);

@@ -13,21 +13,21 @@ class Pesanan2 {
 
     public function searchPesanan(array $filters): array {
         $sql = "SELECT 
-    pesanan.id AS id, 
-    pesanan.id_pelanggan AS id_pelanggan, 
-    pelanggan.nama AS nama, 
-    pesanan.tarikh AS tarikh,
-    pesanan.id_status AS id_status, 
-    status.status AS status, 
-    pesanan.cara AS cara, 
-    pesanan.no_meja AS no_meja,
-    COALESCE(SUM(belian.kuantiti * produk.harga), 0) AS jumlah_harga
-    FROM pesanan
-    INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
-    INNER JOIN status ON pesanan.id_status = status.id
-    LEFT JOIN belian ON pesanan.id = belian.id_pesanan
-    LEFT JOIN produk ON belian.id_produk = produk.id
-    WHERE 1=1";
+        pesanan.id AS id, 
+        pesanan.id_pelanggan AS id_pelanggan, 
+        pelanggan.nama AS nama, 
+        pesanan.tarikh AS tarikh,
+        pesanan.id_status AS id_status, 
+        status.status AS status, 
+        pesanan.cara AS cara, 
+        pesanan.no_meja AS no_meja,
+        COALESCE(SUM(belian.kuantiti * produk.harga), 0) AS jumlah_harga
+        FROM pesanan
+        INNER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id
+        INNER JOIN status ON pesanan.id_status = status.id
+        LEFT JOIN belian ON pesanan.id = belian.id_pesanan
+        LEFT JOIN produk ON belian.id_produk = produk.id
+        WHERE 1=1";
 
         $types = "";
         $params = [];
