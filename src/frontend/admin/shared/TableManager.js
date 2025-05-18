@@ -80,6 +80,12 @@ class TableManager {
             if (!isValid) return;
 
             const formData = new FormData(form);
+
+            // Allow hook to modify or handle submission
+            if (typeof formConfig.onSubmit === 'function') {
+                await formConfig.onSubmit(formData);
+            }
+
             const result = await this.viewModel.insertData(formData);
 
             if (result.ok) {

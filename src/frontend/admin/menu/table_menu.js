@@ -86,8 +86,26 @@ const formConfig = {
         tambah_produk_id_kategori: { condition: (v) => ViewModel.validateField("id_kategori", v) },
         tambah_produk_detail: { condition: (v) => ViewModel.validateField("detail", v) },
         tambah_produk_harga: { condition: (v) => ViewModel.validateField("harga", v) }
+    },
+    onSubmit: async (formData) => {
+        // If a photo was selected earlier
+        if (selectedFormData) {
+            const uploadResult = await ViewModel.uploadPhoto(selectedFormData);
+            if (!uploadResult || !uploadResult.imagePath) {
+                alert("Image upload failed.");
+                return;
+            }
+
+            // Replace the file with the image path string in formData
+            formData.set('gambar', uploadResult.imagePath);
+            document.getElementById('imagePreviewContainer').style.display = 'none';
+
+            // Optionally reset the selectedFormData
+            selectedFormData = null;
+        }
     }
 };
+
 produkTable.setupFormSubmit(formConfig);
 
 // Setup Edit Form
@@ -139,24 +157,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 document.getElementById('tambah_gambar').addEventListener('click', () => {
   document.getElementById('tambah_produk_gambar').click();
 });
-
+let selectedFormData = null;
 document.getElementById('tambah_produk_gambar').addEventListener('change', async (event) => {
     const file = event.target.files[0];
     if (!file) return;
 
-    // Show the loading preview immediately after selection
+    // Preview the image
     const imagePreview = document.getElementById('imagePreview');
     imagePreview.src = URL.createObjectURL(file);
     document.getElementById('imagePreviewContainer').style.display = 'block';
 
+    // Prepare FormData but don't upload yet
     const formData = new FormData();
     formData.append('image', file);
-
-    const data = await ViewModel.uploadPhoto(formData);
-    const imagePath = data.imagePath;
-    document.getElementById('hidden_tambah_produk_gambar').value = imagePath;
-    // Update the image preview with the image path from the server
-    imagePreview.src = imagePath;
+    selectedFormData = formData;
 });
 
 document.getElementById('edit_gambar').addEventListener('click', () => {
