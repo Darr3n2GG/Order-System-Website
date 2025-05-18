@@ -6,6 +6,24 @@ require_once dirname(__FILE__, 2) . "/Database.php";
 require_once dirname(__FILE__) . "/BaseAPIController.php";
 
 class ProdukAPIController extends BaseAPIController {
+    protected function handleGet(): void {
+        $action = $_GET['type'] ?? 'default';
+        unset($_GET['type']);
+        switch ($action) {
+            case 'html':
+                $filters = $_GET;
+                
+                $produkList = $this->model->search($filters);
+
+                $htmlResult = $this->generateProdukHTML($produkList); 
+                echoJsonResponse(true, "HTML generated successfully.", $htmlResult);
+                break;
+
+            default:
+                parent::handleGet();
+                break;
+        }
+    }
     protected function handlePost(): void {
         $requestUri = $_SERVER["REQUEST_URI"];
             if (str_contains($requestUri, "/upload-image")) {

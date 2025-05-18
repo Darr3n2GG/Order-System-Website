@@ -20,8 +20,14 @@ try {
 
     $cart_assoc_array = json_decode($_POST["cart"], true);
 
-    $Pesanan = new lib\Pesanan;
-    $Pesanan->addPesanan($id_pelanggan, 1, $nombor_meja, $tarikh, $cara);
+    $Pesanan = new lib\Pesanan2($Database);
+    $Pesanan->addPesanan([
+        'id_pelanggan' => $id_pelanggan,
+        'id_status' => 1,
+        'no_meja' => $nombor_meja,
+        'tarikh' => $tarikh,
+        'cara' => $cara
+    ]);
 
     $Belian = new lib\Belian;
     $id_pesanan = $Pesanan->getLastInsertedIDOfPesanan();

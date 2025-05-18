@@ -11,7 +11,7 @@ if (!isset($_POST["nama"], $_POST["password"])) {
 }
 
 try {
-    $Pelanggan = new lib\Pelanggan;
+    $Pelanggan = new lib\Pelanggan2($Database);
 
     $nama = $_POST["nama"];
     $password = $_POST["password"];
