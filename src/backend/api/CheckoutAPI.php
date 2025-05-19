@@ -20,7 +20,7 @@ try {
 
     $cart_assoc_array = json_decode($_POST["cart"], true);
 
-    $Pesanan = new lib\Pesanan2($Database);
+    $Pesanan = new lib\Pesanan($Database);
     $Pesanan->addPesanan([
         'id_pelanggan' => $id_pelanggan,
         'id_status' => 1,

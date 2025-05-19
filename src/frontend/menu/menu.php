@@ -15,7 +15,7 @@ if ($Session->isAdmin()) {
 $Database = createDatabaseConn();
 
 $array_kategori = $Database->readQuery("SELECT kategori.label, kategori.nama from kategori");
-$Produk = new lib\Produk2($Database);
+$Produk = new lib\Produk($Database);
 $filters = [];
 $array_produk = $Produk->searchProduk($filters);
 $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);

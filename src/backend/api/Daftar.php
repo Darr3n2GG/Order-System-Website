@@ -10,7 +10,7 @@ if (!isset($_POST["nama"], $_POST["phone"], $_POST["password"])) {
 
 try {
     $Database = createDatabaseConn();
-    $Pelanggan = new lib\Pelanggan2($Database);
+    $Pelanggan = new lib\Pelanggan($Database);
 
     $nama = $_POST["nama"];
     $no_phone = $_POST["phone"];

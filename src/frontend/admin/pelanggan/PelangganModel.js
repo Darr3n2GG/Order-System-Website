@@ -1,6 +1,6 @@
 import BaseModel from "../shared/BaseModel.js";
 
-const ApiUrl = "/Order-System-Website/src/backend/api/PelangganAPI2.php";
+const ApiUrl = "/Order-System-Website/src/backend/api/PelangganAPI.php";
 
 class PelangganModel extends BaseModel {
     constructor() {

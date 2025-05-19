@@ -1,7 +1,7 @@
 import BaseModel from "../shared/BaseModel.js";
 import FetchHelper from "../../../scripts/FetchHelper.js";
 
-const ApiUrl = "/Order-System-Website/src/backend/api/KategoriAPI2.php";
+const ApiUrl = "/Order-System-Website/src/backend/api/KategoriAPI.php";
 
 class KategoriModel extends BaseModel {
     constructor() {

@@ -18,7 +18,7 @@ const columns = [
         formatter: function (cell) {
             const value = cell.getValue();
 
-            return `<img class="gambar_produk" src="${value}"></img>`;
+            return `<img class="gambar_produk" src="${value}" onerror="this.onerror=null; this.src='/Order-System-Website/src/assets/produk/placeholder.png';">`;
         }
     },
     {
@@ -124,11 +124,11 @@ const dialogConfig = {
 produkTable.setupEditDialog(dialogConfig);
 
 // Setup CSV Import
-const csvConfig = {   
+const csvConfig = {
     csvInput: document.querySelector(".produk_csv_input"),
     filesList: document.querySelector(".produk_files_list"),
     csvUpload: document.querySelector(".csv_upload")
-};     
+};
 produkTable.setupCSVImport(csvConfig);
 
 // Call print method
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 document.getElementById('tambah_gambar').addEventListener('click', () => {
-  document.getElementById('tambah_produk_gambar').click();
+    document.getElementById('tambah_produk_gambar').click();
 });
 let selectedFormData = null;
 document.getElementById('tambah_produk_gambar').addEventListener('change', async (event) => {
@@ -174,7 +174,7 @@ document.getElementById('tambah_produk_gambar').addEventListener('change', async
 });
 
 document.getElementById('edit_gambar').addEventListener('click', () => {
-  document.getElementById('edit_file_produk_gambar').click();
+    document.getElementById('edit_file_produk_gambar').click();
 });
 
 document.getElementById('edit_file_produk_gambar').addEventListener('change', async (event) => {

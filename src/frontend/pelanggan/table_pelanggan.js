@@ -1,6 +1,6 @@
 import FetchHelper from "../../scripts/FetchHelper.js";
 
-const ApiUrl = "/Order-System-Website/src/backend/api/PesananAPI2.php";
+const ApiUrl = "/Order-System-Website/src/backend/api/PesananAPI.php";
 const id_pelanggan = document.getElementById("table_senarai_pesanan").dataset.id_pelanggan
 
 const timeDariFilter = document.getElementById("time_dari");

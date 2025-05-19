@@ -84,8 +84,8 @@ $pesanan_count = getPesananCount();
 
 <?php
 function getArrayPesananIDThisWeek(): array {
-    global $Database; 
-    $Pesanan = new lib\Pesanan2($Database);
+    global $Database;
+    $Pesanan = new lib\Pesanan($Database);
     $filters["range"] = "week";
     $array_pesanan = $Pesanan->searchPesanan($filters);
 

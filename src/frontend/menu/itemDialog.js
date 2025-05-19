@@ -1,7 +1,7 @@
 import { eventBus } from "../../scripts/EventBus.js";
 import FetchHelper from "../../scripts/FetchHelper.js";
 
-const apiUrl = "/Order-System-Website/src/backend/api/ProdukAPI2.php"
+const apiUrl = "/Order-System-Website/src/backend/api/ProdukAPI.php"
 let selectedItem = {};
 // selectedItem logger in console, type "logSelectedItem()"
 globalThis.logSelectedItem = () => selectedItem;

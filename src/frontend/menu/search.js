@@ -1,6 +1,6 @@
 import FetchHelper from "../../scripts/FetchHelper.js";
 
-const apiUrl = "/Order-System-Website/src/backend/api/ProdukAPI2.php";
+const apiUrl = "/Order-System-Website/src/backend/api/ProdukAPI.php";
 const searchBar = document.querySelector(".search_bar");
 
 const startFetching = debounce(fetchFoodData, 1000)

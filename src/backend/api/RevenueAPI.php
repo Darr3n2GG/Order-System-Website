@@ -13,9 +13,9 @@ require_once dirname(__FILE__, 2) . "/Masa.php";
 $Database = createDatabaseConn();
 
 try {
-    
+
     $Belian = new lib\Belian;
-    $Pesanan = new lib\Pesanan2($Database);
+    $Pesanan = new lib\Pesanan($Database);
     $filters["range"] = "week";
     $array_pesanan = $Pesanan->searchPesanan($filters);
 
@@ -60,8 +60,8 @@ try {
 }
 
 function getHargaFromIDProduk($id): float {
-    global $Database; 
-    $Produk = new lib\Produk2($Database);
+    global $Database;
+    $Produk = new lib\Produk($Database);
     $filters['id'] = $id;
     $produk = $Produk->searchProduk($filters);
     return $produk[0]["harga"];

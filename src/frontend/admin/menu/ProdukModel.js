@@ -1,7 +1,7 @@
 import BaseModel from "../shared/BaseModel.js";
 import FetchHelper from "../../../scripts/FetchHelper.js";
 
-const ApiUrl = "/Order-System-Website/src/backend/api/ProdukAPI2.php";
+const ApiUrl = "/Order-System-Website/src/backend/api/ProdukAPI.php";
 
 class ProdukModel extends BaseModel {
     constructor() {

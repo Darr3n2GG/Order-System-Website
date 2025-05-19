@@ -3,7 +3,7 @@ import FormValidator from "../../../scripts/FormValidator.js";
 import { FileInput } from "../../../scripts/FileInput.js"
 
 class TableManager {
-    constructor({ tableId, viewModel, columns, filters = {}}, displayName = "Data") {
+    constructor({ tableId, viewModel, columns, filters = {} }, displayName = "Data") {
         this.viewModel = viewModel;
         this.columns = columns;
 
@@ -112,18 +112,18 @@ class TableManager {
         const filesList = csvConfig.filesList || document.querySelector(".files_list");
         const CSVUpload = csvConfig.csvUpload || document.querySelector(".csv_upload");
         let files_received = null;
-    
+
         globalThis.logFiles = () => files_received;
-    
+
         CSVInput.addEventListener("click", () => {
             fileInput.clickInput();
             filesList.innerHTML = "<p class='include_tag hide'>Files included :</p>";
             files_received = null;
         });
-    
+
         fileInput.getInput().addEventListener("change", ({ target }) => {
             files_received = target.files;
-    
+
             const includeTag = filesList.querySelector(".include_tag");
             if (files_received.length === 0) {
                 includeTag.classList.add("hide");
@@ -134,7 +134,7 @@ class TableManager {
                 }
             }
         });
-    
+
         CSVUpload.addEventListener("click", async () => {
             if (files_received != null) {
                 const data = new FormData();
@@ -170,6 +170,7 @@ class TableManager {
                     th, td { border: 1px solid #333; padding: 8px; text-align: left; }
                     th { background-color: #f2f2f2; }
                     body { font-family: sans-serif; padding: 20px; }
+                    img { width: 32px; height: 32px; }
                 </style>
             </head>
             <body>
@@ -211,7 +212,7 @@ class TableManager {
         // Default case: just return the raw value
         return row[col.field] || '';
     }
-    
+
 }
 
 export default TableManager;
