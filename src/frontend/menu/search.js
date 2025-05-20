@@ -5,10 +5,6 @@ const searchBar = document.querySelector(".search_bar");
 
 const startFetching = debounce(fetchFoodData, 1000)
 
-searchBar.addEventListener("sl-change", () => {
-    fetchFoodData()
-})
-
 // TODO : change mode based on action
 // searchBar.addEventListener("sl-input", () => {
 //     startFetching()
@@ -23,6 +19,10 @@ function debounce(callback, delay) {
         }, delay)
     }
 }
+
+searchBar.addEventListener("sl-change", () => {
+    fetchFoodData()
+})
 
 function fetchFoodData() {
     const url = apiUrl + "?" + new URLSearchParams({

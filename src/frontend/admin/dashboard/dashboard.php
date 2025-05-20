@@ -70,7 +70,7 @@ $pesanan_count = getPesananCount();
     </div>
 
     <script type="module" src="<?php echo auto_version("table_pesanan.js"); ?>"></script>
-    <script type="module" src="carta_revenue.js"></script>
+    <script type="module" src="<?php echo auto_version("carta_revenue.js"); ?>"></script>
     <?php
     echoTabulator();
     echoShoelaceAutoloader();

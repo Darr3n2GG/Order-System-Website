@@ -9,8 +9,7 @@ const response = await fetch(ApiUrl)
     })
     .catch(FetchHelper.onRejected)
 
-// The array is arranged like this: [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
-const xValues = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+const xValues = ["Ahad", "Isnin", "Selasa", "Rabtu", "Khamis", "Jumaat", "Sabtu"]
 const yValues = []
 
 await response.data.forEach(incomeByDay => {

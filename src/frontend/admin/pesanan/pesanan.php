@@ -45,10 +45,10 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
             <div class="toolbar">
                 <h2>Tambah Pesanan</h2>
                 <form class="form_pesanan" autocomplete="off">
-                <sl-select id="tambah_id_pelanggan" placeholder="Pilih Pelanggan">
-                    <label slot="label">ID Pelanggan</label>
-                    <sl-icon name="person" slot="prefix"></sl-icon>
-                    <!-- Options will be added dynamically -->
+                    <sl-select id="tambah_id_pelanggan" placeholder="Pilih Pelanggan">
+                        <label slot="label">ID Pelanggan</label>
+                        <sl-icon name="person" slot="prefix"></sl-icon>
+                        <!-- Options will be added dynamically -->
                     </sl-select>
                     <input type="hidden" name="id_pelanggan" id="hidden_tambah_id_pelanggan">
                     <sl-input id="tambah_tarikh" name="tarikh" type="date">
@@ -56,18 +56,18 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
                         <sl-icon name="calendar" slot="prefix"></sl-icon>
                     </sl-input>
                     <sl-select id="tambah_id_status" placeholder="Pilih Status">
-                    <label slot="label">Status</label>
-                    <sl-icon name="info-circle" slot="prefix"></sl-icon>
-                    <!-- Options will be added dynamically -->
+                        <label slot="label">Status</label>
+                        <sl-icon name="info-circle" slot="prefix"></sl-icon>
+                        <!-- Options will be added dynamically -->
                     </sl-select>
                     <input type="hidden" name="id_status" id="hidden_tambah_id_status">
                     <sl-select placeholder="Pilih Cara" name="cara" id="tambah_cara" placement="bottom">
-                    <label slot="label">Cara</label>
-                    <!-- Options will be added dynamically -->
+                        <label slot="label">Cara</label>
+                        <!-- Options will be added dynamically -->
                     </sl-select>
                     <sl-select id="tambah_no_meja" placeholder="Pilih Meja">
-                    <label slot="label">Meja</label>
-                    <!-- Options will be added dynamically -->
+                        <label slot="label">Meja</label>
+                        <!-- Options will be added dynamically -->
                     </sl-select>
                     <input type="hidden" name="no_meja" id="hidden_tambah_no_meja">
                     <div class="form_buttons">
@@ -75,6 +75,7 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
                             <sl-icon slot="prefix" name="plus-square"></sl-icon>
                             Tambah Pesanan
                         </sl-button>
+                        <sl-divider></sl-divider>
                         <sl-tooltip content="CSV mesti ada header">
                             <sl-button class="csv_input">Import CSV</sl-button>
                         </sl-tooltip>

@@ -10,10 +10,10 @@ class ProdukViewModel extends BaseViewModel {
             // database field => message
             nama: (value) => (!value ? "Field nama kosong." : ""),
             id_kategori: (value) => (!value ? "Field kategori kosong." : ""),
-            detail: (value) => (!value ? "Field detail kosong." : ""),
+            maklumat: (value) => (!value ? "Field maklumat kosong." : ""),
             harga: (value) => (!value ? "Field harga kosong." : ""),
-            gambar: (value) => (!value ? "Field gambar kosong." : "")       
-         };
+            gambar: (value) => (!value ? "Field gambar kosong." : "")
+        };
     }
 
     // Custom functions

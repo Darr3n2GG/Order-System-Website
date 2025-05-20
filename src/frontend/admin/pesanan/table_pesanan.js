@@ -20,7 +20,17 @@ const columns = [
     { title: "No Meja", field: "no_meja" },
     {
         title: "",
-        field: "update",
+        field: "view",
+        hozAlign: "center",
+        headerSort: false,
+        formatter: () => '<sl-icon-button name="eye"></sl-icon-button>',
+        cellClick: async (e, cell) => {
+            return
+        }
+    },
+    {
+        title: "",
+        field: "view",
         hozAlign: "center",
         headerSort: false,
         formatter: () => '<sl-icon-button name="pencil"></sl-icon-button>',
@@ -117,7 +127,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     );
     DropdownManager.setupHiddenFieldBinding('tambah_id_pelanggan', 'hidden_tambah_id_pelanggan');
 
-    const statusList = await ViewModel.getStatus(); 
+    const statusList = await ViewModel.getStatus();
     await DropdownManager.populateDropdown(
         document.getElementById('tambah_id_status'),
         statusList,

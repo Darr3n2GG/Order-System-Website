@@ -15,14 +15,14 @@ class Produk {
         produk.id AS id, 
         produk.nama AS nama, 
         kategori.label AS label,
-        produk.detail AS detail, 
+        produk.maklumat AS maklumat, 
         kategori.id AS id_kategori,
         kategori.nama AS kategori_nama, 
         produk.harga AS harga, 
         produk.gambar AS gambar
-    FROM produk
-    INNER JOIN kategori ON produk.id_kategori=kategori.id
-    WHERE 1=1";
+        FROM produk
+        INNER JOIN kategori ON produk.id_kategori=kategori.id
+        WHERE 1=1";
         $types = "";
         $params = [];
 

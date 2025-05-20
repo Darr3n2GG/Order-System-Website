@@ -56,7 +56,7 @@ function insert_new_account($nama, $no_phone, $password) {
     ]);
 
     echo "<script type='text/javascript'>
-            alert('Pelanggan didaftar! Redirecting...');
+            alert('Pelanggan didaftar! Klik ok untuk balik ke menu.');
             window.location.href = '$redirect_url';
         </script>";
 }

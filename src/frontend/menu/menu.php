@@ -81,7 +81,7 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
         <img class="dialog_image" src="" alt="food image">
         <div>
             <h2 class="dialog_price">Harga : RM</h2>
-            <h2>Penerangan :</h2>
+            <h2>Maklumat :</h2>
             <span class="dialog_description"></span>
         </div>
         <sl-button-group class="spinbox" slot="footer">

@@ -69,11 +69,10 @@ $Database = createDatabaseConn();
                                     <sl-icon name="cash" slot="prefix"></sl-icon>
                                 </sl-input>
                                 <input type="file" id="tambah_produk_gambar" accept="image/*" style="display: none;">
-                                <input type="hidden" id="hidden_tambah_produk_gambar" name="gambar"/>
-                                <sl-textarea id="tambah_produk_detail" name="detail" label="Detail" resize="auto" required></sl-textarea>
+                                <sl-textarea id="tambah_produk_maklumat" name="maklumat" label="Maklumat" placeholder="Tulis maklumat produk di situ." resize="auto" required></sl-textarea>
                                 <div id="imagePreviewContainer" style="display:none;">
-                                <label for="imagePreview" id="imagePreviewLabel">Preview Gambar</label>
-                                <img id="imagePreview" src="" alt="Image Preview" style="max-width: 100px; max-height: 100px;">
+                                    <label for="imagePreview" id="imagePreviewLabel">Preview Gambar</label>
+                                    <img id="imagePreview" src="" alt="Image Preview" style="max-width: 100px; max-height: 100px;">
                                 </div>
                                 <div class="form_buttons">
                                     <sl-button id="tambah_gambar">
@@ -84,6 +83,7 @@ $Database = createDatabaseConn();
                                         <sl-icon slot="prefix" name="plus-square"></sl-icon>
                                         Tambah Produk
                                     </sl-button>
+                                    <sl-divider></sl-divider>
                                     <sl-tooltip content="CSV mesti ada header dan gambar">
                                         <sl-button id="produk_csv_input" class="csv_input">Import CSV</sl-button>
                                     </sl-tooltip>
@@ -101,12 +101,12 @@ $Database = createDatabaseConn();
                 <sl-tab-panel name="kategori">
                     <div class="container_menu">
                         <div class="table_container">
-                        <div class="print_button_container" style="margin-top: 12px;">
-                        <sl-button size="small" id="print_kategori_button" variant="primary">
-                        <sl-icon slot="prefix" name="printer"></sl-icon>
-                        Cetak
-                        </sl-button>
-                        </div>
+                            <div class="print_button_container" style="margin-top: 12px;">
+                                <sl-button size="small" id="print_kategori_button" variant="primary">
+                                    <sl-icon slot="prefix" name="printer"></sl-icon>
+                                    Cetak
+                                </sl-button>
+                            </div>
                             <div id="table_kategori"></div>
                         </div>
                         <div class="toolbar">
@@ -125,6 +125,7 @@ $Database = createDatabaseConn();
                                         <sl-icon slot="prefix" name="plus-square"></sl-icon>
                                         Tambah Kategori
                                     </sl-button>
+                                    <sl-divider></sl-divider>
                                     <sl-tooltip content="CSV mesti ada header dan gambar">
                                         <sl-button id="kategori_csv_input" class="kategori_csv_input">Import CSV</sl-button>
                                     </sl-tooltip>
@@ -157,10 +158,10 @@ $Database = createDatabaseConn();
                     <label slot="label">Harga</label>
                     <sl-icon name="cash" slot="prefix"></sl-icon>
                 </sl-input>
-                <sl-textarea id="edit_produk_detail" label="Detail" name="detail" resize="auto"></sl-textarea>
+                <sl-textarea id="edit_produk_maklumat" name="maklumat" label="Maklumat" resize="auto"></sl-textarea>
                 <div id="editImagePreviewContainer" style="display:none;">
-                <label for="imagePreview" id="imagePreviewLabel">Preview Gambar</label>
-                <img id="editImagePreview" src="" alt="Image Preview" style="max-width: 100px; max-height: 100px;">
+                    <label for="imagePreview" id="imagePreviewLabel">Preview Gambar</label>
+                    <img id="editImagePreview" src="" alt="Image Preview" style="max-width: 100px; max-height: 100px;">
                 </div>
                 <input id="edit_produk_gambar" name="gambar" hidden>
                 <input type="file" id="edit_file_produk_gambar" accept="image/*" style="display: none;">

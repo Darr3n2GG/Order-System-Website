@@ -39,7 +39,7 @@ const columns = [
                 nama: "edit_produk_nama",
                 id_kategori: "edit_produk_id_kategori",
                 harga: "edit_produk_harga",
-                detail: "edit_produk_detail",
+                maklumat: "edit_produk_maklumat",
                 gambar: "edit_produk_gambar"
             });
         }
@@ -84,7 +84,7 @@ const formConfig = {
         // element id: database field
         tambah_produk_nama: { condition: (v) => ViewModel.validateField("nama", v) },
         tambah_produk_id_kategori: { condition: (v) => ViewModel.validateField("id_kategori", v) },
-        tambah_produk_detail: { condition: (v) => ViewModel.validateField("detail", v) },
+        tambah_produk_maklumat: { condition: (v) => ViewModel.validateField("maklumat", v) },
         tambah_produk_harga: { condition: (v) => ViewModel.validateField("harga", v) }
     },
     onSubmit: async (formData) => {
@@ -117,7 +117,7 @@ const dialogConfig = {
         // element id: database field
         edit_produk_nama: { condition: (v) => ViewModel.validateField("nama", v) },
         edit_produk_id_kategori: { condition: (v) => ViewModel.validateField("id_kategori", v) },
-        edit_produk_detail: { condition: (v) => ViewModel.validateField("detail", v) },
+        edit_produk_maklumat: { condition: (v) => ViewModel.validateField("maklumat", v) },
         edit_produk_harga: { condition: (v) => ViewModel.validateField("harga", v) }
     }
 };

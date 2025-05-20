@@ -126,7 +126,7 @@ function addCartDialogItemUI({ id, label, nama, kuantiti, harga }) {
 function addCartItemUI({ id, label, nama, kuantiti, harga, gambar }) {
     cartItemList.insertAdjacentHTML("beforeend",
         `<div data-id="${id}" class="cart_item">
-            <img src="${gambar}" alt="${nama}">
+            <img src="${gambar}" alt="${nama}" onerror="this.onerror=null; this.src='/Order-System-Website/src/assets/produk/placeholder.png';">
             <div class="cart_item_data">
                 <div class="cart_item_label">
                     <span class="cart_item_name">${label + id} ${nama}</span>

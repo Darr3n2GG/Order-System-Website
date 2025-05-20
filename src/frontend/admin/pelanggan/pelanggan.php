@@ -72,6 +72,7 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
                             <sl-icon slot="prefix" name="plus-square"></sl-icon>
                             Tambah pelanggan
                         </sl-button>
+                        <sl-divider></sl-divider>
                         <sl-tooltip content="CSV mesti ada header">
                             <sl-button class="csv_input">Import CSV</sl-button>
                         </sl-tooltip>
