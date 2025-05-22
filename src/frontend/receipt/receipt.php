@@ -21,7 +21,7 @@ if (!$receipt) {
     exit;
 }
 
-$toggle = true
+$toggle = false
 ?>
 
 <!DOCTYPE html>
