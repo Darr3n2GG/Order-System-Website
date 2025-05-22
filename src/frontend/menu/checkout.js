@@ -21,9 +21,16 @@ function checkout(cart) {
         .then(FetchHelper.onFulfilled)
         .then(response => {
             if (response.ok) {
-                alert("Pesanan kamu sedang disediakan. Terima kasih!")
-                location.reload();
+                showViewDialog(response.details.id)
             }
         })
         .catch(FetchHelper.onRejected);
+}
+
+function showViewDialog(id) {
+    const url = '../receipt/receipt.php?' + new URLSearchParams({ id: id }).toString();
+
+    // Set iframe src and show modal
+    document.getElementById('receiptFrame').src = url;
+    document.getElementById('receiptModal').style.display = 'block';
 }

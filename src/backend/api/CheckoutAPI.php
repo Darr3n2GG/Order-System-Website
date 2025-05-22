@@ -33,7 +33,7 @@ try {
     $id_pesanan = $Pesanan->getLastInsertedIDOfPesanan();
     $Belian->addBelian($id_pesanan, $cart_assoc_array);
 
-    echoJsonResponse(true, "CheckoutAPI request processed.");
+    echoJsonResponse(true, "CheckoutAPI request processed.", ["id" => $id_pesanan]);
 } catch (Exception $e) {
     error_log($e->getMessage());
     echoJsonException($e->getCode(), "CheckoutAPI request failed : " . $e->getMessage());

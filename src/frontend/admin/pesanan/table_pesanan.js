@@ -25,7 +25,7 @@ const columns = [
         headerSort: false,
         formatter: () => '<sl-icon-button name="eye"></sl-icon-button>',
         cellClick: async (e, cell) => {
-            return
+            showReceiptDialog(e, cell)
         }
     },
     {
@@ -171,3 +171,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         null
     );
 });
+
+const closeReceiptButton = document.getElementById("close_receipt_button");
+closeReceiptButton.onclick = function () {
+    closeReceiptDialog();
+};
+function showReceiptDialog(e, cell) {
+    const id = cell.getData().id;
+    const url = '../../receipt/receipt.php?id=' + encodeURIComponent(id);
+
+    // Set iframe src and show modal
+    document.getElementById('receiptFrame').src = url;
+    document.getElementById('receiptModal').style.display = 'block';
+    document.getElementById('modalBackdrop').style.display = 'block';
+}
+
+function closeReceiptDialog() {
+    document.getElementById('receiptModal').style.display = 'none';
+    document.getElementById('modalBackdrop').style.display = 'none';
+    document.getElementById('receiptFrame').src = ''; // optional: reset
+}

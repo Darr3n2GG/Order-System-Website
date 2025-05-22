@@ -104,7 +104,15 @@ $MenuLoader = new MenuLoader($array_kategori, $array_produk);
         <sl-button class="dialog_checkout_button" slot="footer" variant="primary">Checkout</sl-button>
     </sl-dialog>
 
-    <script type="module" src="<?= auto_version("menu.js"); ?>"></script>
+    <div id="receiptModal" style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); width:80%; max-width:600px; background:white; padding:20px; border:1px solid #ccc; box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:9999;">
+        <div style="text-align:right;">
+            <button id="close_receipt_button">Tutup</button>
+        </div>
+        <iframe id="receiptFrame" src="" style="width:100%; height:400px; border:none;"></iframe>
+        <button id="cetak_button">Cetak</button>
+    </div>
+
+    <script type="module" src="<?php echo auto_version("menu.js"); ?>"></script>
     <script type="module" src="<?php echo auto_version("itemDialog.js"); ?>"></script>
     <script type="module" src="<?php echo auto_version("cart.js"); ?>"></script>
     <script type="module" src="<?php echo auto_version("checkout.js"); ?>"></script>

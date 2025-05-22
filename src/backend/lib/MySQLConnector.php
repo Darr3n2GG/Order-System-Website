@@ -44,7 +44,7 @@ class MySQLConnector {
     public function readLastInsertedID(): int {
         $last_inserted_id = $this->conn->insert_id;
         if ($last_inserted_id == 0) {
-            throw new MySQLConnectorException("No previous query on the connection or query did not update an AUTO_INCREMENT value.");
+            throw new MySQLConnectorException("No previous query on the connection or query updated an AUTO_INCREMENT value.");
         }
         return $last_inserted_id;
     }
