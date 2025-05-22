@@ -5,6 +5,7 @@ const id_pelanggan = document.getElementById("table_senarai_pesanan").dataset.id
 
 const timeDariFilter = document.getElementById("time_dari");
 const timeHinggaFilter = document.getElementById("time_hingga");
+const closeReceiptButton = document.getElementById("close_receipt_button");
 
 let dariFilter = "";
 let hinggaFilter = "";
@@ -85,6 +86,10 @@ timeHinggaFilter.addEventListener("input", (e) => {
     setTimeFilter(dari, hingga)
 })
 
+closeReceiptButton.onclick = function () {
+    closeReceiptDialog();
+};
+
 function setTimeFilter(from, to) {
     dariFilter = from;
     hinggaFilter = to
@@ -100,6 +105,17 @@ function getCurrentDate() {
 }
 
 function showViewDialog(e, cell) {
-    const data = cell.getRow().getData();
+    const id = cell.getData().id;
+    const url = '../menu/receipt.php?id=' + encodeURIComponent(id);
 
+    // Set iframe src and show modal
+    document.getElementById('receiptFrame').src = url;
+    document.getElementById('receiptModal').style.display = 'block';
+    document.getElementById('modalBackdrop').style.display = 'block';
+}
+
+function closeReceiptDialog() {
+    document.getElementById('receiptModal').style.display = 'none';
+    document.getElementById('modalBackdrop').style.display = 'none';
+    document.getElementById('receiptFrame').src = ''; // optional: reset
 }

@@ -160,4 +160,29 @@ class Pesanan {
         $params = [];
         return $this->Database->readQuery($sql, $types, $params);
     }
+
+    public function getReceipt(int $pesananId): ?array {
+        $summaryList = $this->searchPesanan(['pesanan.id' => $pesananId]);
+        if (empty($summaryList)) return null;
+
+        $pesanan = $summaryList[0];
+
+        // Get belian items
+        $sql = "SELECT 
+                    belian.id AS id_belian,
+                    belian.kuantiti,
+                    produk.nama,
+                    produk.harga,
+                    (belian.kuantiti * produk.harga) AS jumlah
+                FROM belian
+                INNER JOIN produk ON belian.id_produk = produk.id
+                WHERE belian.id_pesanan = ?";
+
+        $belianItems = $this->Database->readQuery($sql, "i", [$pesananId]);
+
+        $pesanan['belian'] = $belianItems;
+
+        return $pesanan;
+    }
+
 }
