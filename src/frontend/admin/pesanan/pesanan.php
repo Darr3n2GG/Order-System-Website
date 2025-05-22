@@ -113,6 +113,15 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
         <sl-button class="cancel_button" slot="footer" variant="danger">Cancel</sl-button>
     </sl-dialog>
 
+    <div id="receiptModal" style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); width:80%; max-width:600px; background:white; padding:20px; border:1px solid #ccc; box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:9999;">
+    <div style="text-align:right;">
+        <button id="close_receipt_button">Tutup</button>
+    </div>
+    <iframe id="receiptFrame" src="" style="width:100%; height:400px; border:none;"></iframe>
+    </div>
+
+    <div id="modalBackdrop" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9998;"></div>
+
     <script type="module" src="<?php echo auto_version("table_pesanan.js"); ?>"></script>
     <?php
     echoTabulator();
