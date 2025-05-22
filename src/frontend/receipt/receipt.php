@@ -20,6 +20,8 @@ if (!$receipt) {
     echo "Resit tidak dijumpai.";
     exit;
 }
+
+$toggle = true
 ?>
 
 <!DOCTYPE html>
@@ -38,10 +40,12 @@ if (!$receipt) {
         <p><strong>ID Pesanan:</strong> <?= htmlspecialchars($receipt['id']) ?></p>
         <p><strong>Nama Pelanggan:</strong> <?= htmlspecialchars($receipt['nama']) ?></p>
         <p><strong>Tarikh:</strong> <?= htmlspecialchars($receipt['tarikh']) ?></p>
-        <p><strong>Cara:</strong> <?= htmlspecialchars($receipt['cara']) ?></p>
-        <?php if (!empty($receipt['no_meja'])): ?>
-            <p><strong>No Meja:</strong> <?= htmlspecialchars($receipt['no_meja']) ?></p>
-        <?php endif; ?>
+        <?php if ($toggle) { ?>
+            <p><strong>Cara:</strong> <?= htmlspecialchars($receipt['cara']) ?></p>
+            <?php if (!empty($receipt['no_meja'])) { ?>
+                <p><strong>No Meja:</strong> <?= htmlspecialchars($receipt['no_meja']) ?></p>
+            <?php } ?>
+        <?php } ?>
         <p><strong>Status:</strong> <?= htmlspecialchars($receipt['status']) ?></p>
     </div>
 
