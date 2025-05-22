@@ -1,8 +1,9 @@
 <?php
-require_once dirname(__FILE__, 3) .  "/backend/Database.php";
+require_once dirname(__FILE__, 3) . "/backend/Database.php";
 require_once dirname(__FILE__, 3) . "/backend/Autoloader.php";
 require_once dirname(__FILE__, 2) . "/header/header.php";
 require_once dirname(__FILE__, 2) . "/dependencies.php";
+require_once dirname(__FILE__, 3) . "/scripts/MenuLoader.php";
 
 $Session = new lib\Session;
 if ($Session->isAdmin()) {
@@ -18,7 +19,7 @@ $array_kategori = $Database->readQuery("SELECT kategori.label, kategori.nama fro
 $Produk = new lib\Produk($Database);
 $filters = [];
 $array_produk = $Produk->searchProduk($filters);
-$MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
+$MenuLoader = new MenuLoader($array_kategori, $array_produk);
 ?>
 
 <!DOCTYPE html>
@@ -103,7 +104,7 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
         <sl-button class="dialog_checkout_button" slot="footer" variant="primary">Checkout</sl-button>
     </sl-dialog>
 
-    <script type="module" src="<?php echo auto_version("menu.js"); ?>"></script>
+    <script type="module" src="<?= auto_version("menu.js"); ?>"></script>
     <script type="module" src="<?php echo auto_version("itemDialog.js"); ?>"></script>
     <script type="module" src="<?php echo auto_version("cart.js"); ?>"></script>
     <script type="module" src="<?php echo auto_version("checkout.js"); ?>"></script>

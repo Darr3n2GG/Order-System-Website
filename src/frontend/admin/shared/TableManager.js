@@ -117,7 +117,7 @@ class TableManager {
 
         CSVInput.addEventListener("click", () => {
             fileInput.clickInput();
-            filesList.innerHTML = "<p class='include_tag hide'>Files included :</p>";
+            filesList.innerHTML = "<p class='include_tag hide'>Fail-fail yang dimasuk: </p>";
             files_received = null;
         });
 

@@ -80,7 +80,7 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
                     </div>
                 </form>
                 <ul class="files_list">
-                    <p class="include_tag hide">Files included :</p>
+                    <p class="include_tag hide">Fail-fail yang dimasuk :</p>
                 </ul>
             </div>
         </div>

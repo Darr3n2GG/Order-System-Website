@@ -44,7 +44,7 @@ class Pelanggan {
                 array_values($data)
             );
         } catch (\Exception $e) {
-            throw new \Exception("Failed to add pelanggan: " . $e->getMessage(), 500);
+            throw new \Exception("Pelanggan gagal ditambah: " . $e->getMessage(), 500);
         }
     }
 

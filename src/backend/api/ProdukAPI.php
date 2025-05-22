@@ -4,6 +4,7 @@ require_once dirname(__FILE__, 2) . "/JsonResponseHandler.php";
 require_once dirname(__FILE__, 2) . "/Autoloader.php";
 require_once dirname(__FILE__, 2) . "/Database.php";
 require_once dirname(__FILE__) . "/BaseAPIController.php";
+require_once dirname(__FILE__, 3) . "/scripts/MenuLoader.php";
 
 class ProdukAPIController extends BaseAPIController {
     protected function handleGet(): void {
@@ -45,7 +46,7 @@ class ProdukAPIController extends BaseAPIController {
         $array_item_produk = [];
 
         foreach ($array_produk as $produk) {
-            $item_produk = lib\MenuLoader::createItemProdukHTML($produk);
+            $item_produk = MenuLoader::createItemProdukHTML($produk);
             $array_item_produk[] = ["html" => $item_produk, "kategori" => $produk["label"]];
         }
 

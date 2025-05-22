@@ -95,7 +95,7 @@ abstract class BaseAPIController {
             ];
             $this->parseCSV($file);
         }
-        echoJsonResponse(true, "CSV processed successfully.");
+        echoJsonResponse(true, "Fail CSV berjaya diproses.");
     }
 
     protected function parseCSV(array $file): void {
@@ -105,12 +105,12 @@ abstract class BaseAPIController {
 
         $handle = fopen($file["tmp_name"], "r");
         if (!$handle) {
-            throw new Exception("Unable to open CSV file.", 422);
+            throw new Exception("Tidak boleh membuka fail CSV.", 422);
         }
 
         $header = fgetcsv($handle, 1000);
         if (!$header) {
-            throw new Exception("CSV header is missing or invalid.", 422);
+            throw new Exception("Fail CSV tidak ada header atau tidak sah.", 422);
         }
 
         while (($row = fgetcsv($handle, 1000)) !== false) {

@@ -1,7 +1,5 @@
 <?php
 
-namespace lib;
-
 class MenuLoader {
     private $array_kategori;
     private $array_produk;

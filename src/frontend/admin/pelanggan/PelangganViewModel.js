@@ -17,8 +17,8 @@ class PelangganViewModel extends BaseViewModel {
             nama: (value) => {
                 const trimmed = value?.trim() ?? "";
                 if (!trimmed) return "Field nama kosong.";
-                if (!VALID_CHAR_REGEX.test(trimmed)) return "Field nama mengandungi karakter tidak sah.";
-                if (trimmed.length >= 100) return "Field nama mesti kurang daripada 100 karakter.";
+                if (!VALID_CHAR_REGEX.test(trimmed)) return "Field nama mengandungi character tidak sah.";
+                if (trimmed.length >= 100) return "Field nama mesti kurang daripada 100 character.";
                 return "";
             },
             no_phone: (value) => {
@@ -31,9 +31,9 @@ class PelangganViewModel extends BaseViewModel {
             password: (value) => {
                 const trimmed = value?.trim() ?? "";
                 if (!trimmed) return "Field kata laluan kosong.";
-                if (!VALID_CHAR_REGEX.test(trimmed)) return "Field kata laluan mengandungi karakter tidak sah.";
+                if (!VALID_CHAR_REGEX.test(trimmed)) return "Field kata laluan mengandungi character tidak sah.";
                 if (trimmed.length <= 8 || trimmed.length >= 128)
-                    return "Field kata laluan mesti melebihi 8 dan kurang daripada 128 karakter.";
+                    return "Field kata laluan mesti melebihi 8 dan kurang daripada 128 character.";
                 return "";
             }
         };
