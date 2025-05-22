@@ -106,7 +106,7 @@ function getCurrentDate() {
 
 function showViewDialog(e, cell) {
     const id = cell.getData().id;
-    const url = '../menu/receipt.php?id=' + encodeURIComponent(id);
+    const url = '../receipt/receipt.php?id=' + encodeURIComponent(id);
 
     // Set iframe src and show modal
     document.getElementById('receiptFrame').src = url;

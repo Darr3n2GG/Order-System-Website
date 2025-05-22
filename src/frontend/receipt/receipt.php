@@ -24,31 +24,13 @@ if (!$receipt) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Resit Pesanan</title>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        .receipt-header { margin-bottom: 20px; }
-        .receipt-header h2 { margin: 0; }
-        .receipt-table, .receipt-table th, .receipt-table td {
-            border: 1px solid #ddd;
-            border-collapse: collapse;
-        }
-        .receipt-table th, .receipt-table td {
-            padding: 8px 12px;
-        }
-        .receipt-table {
-            width: 100%;
-            margin-top: 20px;
-        }
-        .total {
-            text-align: right;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="receipt.css">
 </head>
+
 <body>
 
     <div class="receipt-header">
@@ -89,4 +71,5 @@ if (!$receipt) {
     </div>
 
 </body>
+
 </html>
