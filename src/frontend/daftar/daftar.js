@@ -34,7 +34,7 @@ function handlePhoneValidation(value) {
     if (value === "") {
         return "Input nombor phone kosong.";
     } else if (!isValidPhoneNumber(value)) {
-        return "Input password tidak sah.";
+        return "Input nombor phone tidak sah.";
     } else {
         return "";
     }

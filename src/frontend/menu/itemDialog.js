@@ -59,17 +59,18 @@ function fetchItemDialogData(itemID) {
     fetch(url)
         .then(FetchHelper.onFulfilled)
         .then(({ details }) => {
-            setSelectedItem(details);
-            showItemDialog(details);
+            const item = details[0];
+            setSelectedItem(item);
+            showItemDialog(item);
         })
         .catch(FetchHelper.onRejected);
 }
 
-function showItemDialog({ label, id, nama, gambar, harga, detail }) {
+function showItemDialog({ label, id, nama, gambar, harga, maklumat }) {
     itemDialog.label = label + id + " : " + nama;
     itemDialog.querySelector(".dialog_image").src = gambar;
     itemDialog.querySelector(".dialog_price").innerHTML = "Harga : RM " + harga;
-    itemDialog.querySelector(".dialog_description").innerHTML = detail;
+    itemDialog.querySelector(".dialog_description").innerHTML = maklumat;
     itemDialog.show();
 }
 

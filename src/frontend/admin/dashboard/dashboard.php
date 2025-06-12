@@ -70,7 +70,7 @@ $pesanan_count = getPesananCount();
     </div>
 
     <script type="module" src="<?php echo auto_version("table_pesanan.js"); ?>"></script>
-    <script type="module" src="carta_revenue.js"></script>
+    <script type="module" src="<?php echo auto_version("carta_revenue.js"); ?>"></script>
     <?php
     echoTabulator();
     echoShoelaceAutoloader();
@@ -84,8 +84,10 @@ $pesanan_count = getPesananCount();
 
 <?php
 function getArrayPesananIDThisWeek(): array {
-    $Pesanan = new lib\Pesanan;
-    $array_pesanan = $Pesanan->getArrayPesananThisWeek();
+    global $Database;
+    $Pesanan = new lib\Pesanan($Database);
+    $filters["range"] = "week";
+    $array_pesanan = $Pesanan->searchPesanan($filters);
 
     $array_pesanan_id = [];
 

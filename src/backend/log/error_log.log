@@ -250,3 +250,6 @@ Content-Disposition: form-data; name="tahap"
 [02-May-2025 00:39:32 Asia/Kuala_Lumpur] Missing parameters in POST request
 [02-May-2025 00:39:32 Asia/Kuala_Lumpur] Missing parameters in POST request
 [02-May-2025 00:39:32 Asia/Kuala_Lumpur] Missing parameters in POST request
+[18-May-2025 15:00:25 Asia/Kuala_Lumpur] Unknown column 'type' in 'where clause'
+[18-May-2025 15:00:26 Asia/Kuala_Lumpur] Unknown column 'type' in 'where clause'
+[19-May-2025 22:08:48 Asia/Kuala_Lumpur] Unknown column 'qty' in 'where clause'

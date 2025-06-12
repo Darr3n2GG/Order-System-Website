@@ -16,7 +16,6 @@ if ($Session->sudahLogMasuk()) {
 <html lang="en">
 
 <head>
-    <meta http-equiv="refresh" content="300">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log Masuk</title>
@@ -28,6 +27,7 @@ if ($Session->sudahLogMasuk()) {
 <body>
     <div class="content">
         <div class="image_container">
+            <h2>Sistem TacoGong</h2>
             <img src="../../assets/gong.png" alt="Logo">
         </div>
         <div class="form_container">

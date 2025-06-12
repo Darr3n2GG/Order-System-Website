@@ -66,18 +66,21 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
                         <sl-option value="1">User</sl-option>
                         <sl-option value="2">Admin</sl-option>
                     </sl-select>
+                    <input type="hidden" name="tahap" id="hidden_tambah_tahap">
                     <div class="form_buttons">
                         <sl-button type="submit">
                             <sl-icon slot="prefix" name="plus-square"></sl-icon>
                             Tambah pelanggan
                         </sl-button>
+                        <sl-divider></sl-divider>
                         <sl-tooltip content="CSV mesti ada header">
                             <sl-button class="csv_input">Import CSV</sl-button>
                         </sl-tooltip>
+                        <sl-button class="csv_upload">Upload CSV</sl-button>
                     </div>
                 </form>
                 <ul class="files_list">
-                    <p class="include_tag hide">Files included :</p>
+                    <p class="include_tag hide">Fail-fail yang dimasuk :</p>
                 </ul>
             </div>
         </div>
@@ -89,7 +92,7 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
                 <input id="edit_id" name="id" type="text" hidden>
                 <sl-input id="edit_nama" name="nama" label="Nama" placeholder="Masukkan Nama" required></sl-input>
                 <sl-input id="edit_nombor_phone" name="no_phone" label="Nombor Phone" placeholder="Masukkan Nombor Phone" required></sl-input>
-                <sl-select id="edit_tahap" name="tahap" value="1" placement="bottom">
+                <sl-select id="edit_tahap" name="tahap" value="2" placement="bottom">
                     <sl-option value="1">User</sl-option>
                     <sl-option value="2">Admin</sl-option>
                 </sl-select>
@@ -100,7 +103,6 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
     </sl-dialog>
 
     <script type="module" src="<?php echo auto_version("table_pelanggan.js"); ?>"></script>
-    <script type="module" src="<?php echo auto_version("pelanggan.js"); ?>"></script>
     <?php
     echoTabulator();
     echoShoelaceAutoloader();

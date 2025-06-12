@@ -11,7 +11,7 @@ if (!isset($_POST["nama"], $_POST["password"])) {
 }
 
 try {
-    $Pelanggan = new lib\Pelanggan;
+    $Pelanggan = new lib\Pelanggan($Database);
 
     $nama = $_POST["nama"];
     $password = $_POST["password"];
@@ -24,10 +24,14 @@ try {
             $_SESSION["nama"] = $nama;
             $_SESSION["id_pelanggan"] = $id;
             if ($Pelanggan->getTahapPelanggan($id) === "admin") {
-                header("Location: ../../frontend/admin/dashboard/dashboard.php");
+                $redirect_url = "/Order-System-Website/src/frontend/admin/dashboard/dashboard.php";
             } else {
-                header("Location: ../../frontend/menu/menu.php");
+                $redirect_url = "/Order-System-Website/src/frontend/menu/menu.php";
             }
+            echo "<script type='text/javascript'>
+                alert('Berjaya log masuk!');
+                window.location.href = '$redirect_url'
+            </script>";
         } else {
             echo "<script type='text/javascript'>
                     alert('Password tidak betul.');

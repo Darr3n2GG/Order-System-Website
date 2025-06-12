@@ -1,7 +1,5 @@
 <?php
 
-namespace lib;
-
 class MenuLoader {
     private $array_kategori;
     private $array_produk;
@@ -98,7 +96,7 @@ class MenuLoader {
 
         return <<<ITEM
         <div class='food_item' data-id='$id'>
-            <img src='$gambar' alt='$nama'>
+            <img src='$gambar' alt='$nama' onerror="this.onerror=null; this.src='/Order-System-Website/src/assets/produk/placeholder.png';">
             <div class='food_info'>
                 <div class='food_row'>
                     <h3>$nama</h3>

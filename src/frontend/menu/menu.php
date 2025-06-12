@@ -1,8 +1,9 @@
 <?php
-require_once dirname(__FILE__, 3) .  "/backend/Database.php";
+require_once dirname(__FILE__, 3) . "/backend/Database.php";
 require_once dirname(__FILE__, 3) . "/backend/Autoloader.php";
 require_once dirname(__FILE__, 2) . "/header/header.php";
 require_once dirname(__FILE__, 2) . "/dependencies.php";
+require_once dirname(__FILE__, 3) . "/scripts/MenuLoader.php";
 
 $Session = new lib\Session;
 if ($Session->isAdmin()) {
@@ -15,9 +16,10 @@ if ($Session->isAdmin()) {
 $Database = createDatabaseConn();
 
 $array_kategori = $Database->readQuery("SELECT kategori.label, kategori.nama from kategori");
-$Produk = new lib\Produk;
-$array_produk = $Produk->getSemuaProduk();
-$MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
+$Produk = new lib\Produk($Database);
+$filters = [];
+$array_produk = $Produk->searchProduk($filters);
+$MenuLoader = new MenuLoader($array_kategori, $array_produk);
 ?>
 
 <!DOCTYPE html>
@@ -80,7 +82,7 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
         <img class="dialog_image" src="" alt="food image">
         <div>
             <h2 class="dialog_price">Harga : RM</h2>
-            <h2>Penerangan :</h2>
+            <h2>Maklumat :</h2>
             <span class="dialog_description"></span>
         </div>
         <sl-button-group class="spinbox" slot="footer">
@@ -101,6 +103,14 @@ $MenuLoader = new lib\MenuLoader($array_kategori, $array_produk);
         <h2 class="cart_dialog_total_price" slot="footer">Jumlah Harga : RM 0</h2>
         <sl-button class="dialog_checkout_button" slot="footer" variant="primary">Checkout</sl-button>
     </sl-dialog>
+
+    <div id="receiptModal" style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); width:80%; max-width:600px; background:white; padding:20px; border:1px solid #ccc; box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:9999;">
+        <div style="text-align:right;">
+            <button id="close_receipt_button">Tutup</button>
+        </div>
+        <iframe id="receiptFrame" src="" style="width:100%; height:400px; border:none;"></iframe>
+        <button id="cetak_button">Cetak</button>
+    </div>
 
     <script type="module" src="<?php echo auto_version("menu.js"); ?>"></script>
     <script type="module" src="<?php echo auto_version("itemDialog.js"); ?>"></script>

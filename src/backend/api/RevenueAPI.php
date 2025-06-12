@@ -4,28 +4,29 @@
  * RevenueAPI returns an array of total revenue based on a weekly basis.
  */
 
+
 header("Content-Type: application/json");
 
 require_once dirname(__FILE__, 2) . "/Autoloader.php";
 require_once dirname(__FILE__, 2) . "/Database.php";
 require_once dirname(__FILE__, 2) . "/JsonResponseHandler.php";
 require_once dirname(__FILE__, 2) . "/Masa.php";
+$Database = createDatabaseConn();
 
 try {
-    $Database = createDatabaseConn();
+
     $Belian = new lib\Belian;
-    $Pesanan = new lib\Pesanan;
+    $Pesanan = new lib\Pesanan($Database);
+    $filters["range"] = "week";
+    $array_pesanan = $Pesanan->searchPesanan($filters);
 
-    $array_pesanan = $Pesanan->getArrayPesananThisWeek();
-
-    // The array is arranged like this: [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
+    // Array di bawah disusun seperti ini: [ahad, isnin, selasa, rabu, khamis, jumaat, sabtu]
     $jumlah_harga_mingguan = [0, 0, 0, 0, 0, 0, 0];
 
     $jumlah_harga = 0.0;
 
     /**
-     * It gets the price of the product ordered and the quantity of that ordered product
-     * and multiplies it to get the total revenue for that order.
+     * Algoritma mendarab harga dan kuantiti produk untuk mendapat jumlah hasil pesanan
      */
 
     foreach ($array_pesanan as $pesanan) {
@@ -39,11 +40,11 @@ try {
             $jumlah_harga_pesanan += $harga * $kuantiti;
         }
 
-        // Arrange income based on when the order was added
+        // Menyusun hasil mengikuti tarikh pesanan
         $current_day = strtotime($pesanan["tarikh"]);
         $week_start = strtotime(getWeekStart());
 
-        $day = ($current_day - $week_start) / 86400; // Seconds in a day
+        $day = ($current_day - $week_start) / 86400; // saat dalam satu hari
         if (gettype($day) != "integer") {
             throw new Exception("Value of variable (day) must be an integer");
         }
@@ -59,7 +60,9 @@ try {
 }
 
 function getHargaFromIDProduk($id): float {
-    $Produk = new lib\Produk;
-    $produk = $Produk->getProdukFromID($id);
-    return $produk["harga"];
+    global $Database;
+    $Produk = new lib\Produk($Database);
+    $filters['id'] = $id;
+    $produk = $Produk->searchProduk($filters);
+    return $produk[0]["harga"];
 }

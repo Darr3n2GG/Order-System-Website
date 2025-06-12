@@ -1,177 +1,86 @@
 <?php
-header("Content-Type: application/json");
 
-require_once dirname(__FILE__, 2) . "/Autoloader.php";
 require_once dirname(__FILE__, 2) . "/JsonResponseHandler.php";
+require_once dirname(__FILE__, 2) . "/Autoloader.php";
+require_once dirname(__FILE__, 2) . "/Database.php";
+require_once dirname(__FILE__) . "/BaseAPIController.php";
+require_once dirname(__FILE__, 3) . "/scripts/MenuLoader.php";
 
-/**
- * Parameters :
- *  - type ( data/ html )
- *  - Optional :
- *      - id ( return product of id )
- *      - keyword ( return products which contains keyword )
- *  If optional is not used, it will return all products
- */
+class ProdukAPIController extends BaseAPIController {
+    protected function handleGet(): void {
+        $action = $_GET['type'] ?? 'default';
+        unset($_GET['type']);
+        switch ($action) {
+            case 'html':
+                $filters = $_GET;
 
-try {
-    $Produk = new lib\Produk;
-    if ($_SERVER["REQUEST_METHOD"] == "GET") {
-        if (isset($_GET["type"])) {
-            if ($_GET["type"] == "data") {
-                handleGetProdukData();
-            } else if ($_GET["type"] == "html") {
-                handleGetProdukHtml();
-            }
+                $produkList = $this->model->search($filters);
+
+                $htmlResult = $this->generateProdukHTML($produkList);
+                echoJsonResponse(true, "HTML generated successfully.", $htmlResult);
+                break;
+
+            default:
+                parent::handleGet();
+                break;
+        }
+    }
+    protected function handlePost(): void {
+        $requestUri = $_SERVER["REQUEST_URI"];
+        if (str_contains($requestUri, "/upload-image")) {
+            $this->handleImageUpload();
         } else {
-            throw new Exception("No parameters attached to GET request.", 400);
+            parent::handlePost();
         }
-    } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (isset($_GET["type"]) && $_GET["type"] == "insert") {
-            handleInsertProduk();
-        } else {
-            throw new Exception("Invalid POST request type.", 400);
+    }
+    // Method to handle image uploads
+    private function handleImageUpload(): void {
+        if (empty($_FILES["image"])) {
+            throw new Exception("No image file uploaded.", 400);
         }
-    }  else if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
-        if (isset($_GET["id"])) {
-            $id = htmlspecialchars($_GET["id"]);
-            $Produk->deleteProduk($id);
-            echoJsonResponse(true, "ProdukAPI DELETE request processed.");
-        } else {
-            throw new Exception("No parameters attached to DELETE request.", 400);
-        }
-    } else if ($_SERVER["REQUEST_METHOD"] == "PATCH") {
-        $data = getPatchBody();
-        $id = $data["id"];
-        unset($data["id"]);
-
-        $Produk->updateProduk($id, $data);
-        echoJsonResponse(true, "ProdukAPI PATCH request processed.");
+        $imagePath = $this->model->uploadImage($_FILES["image"]);
+        echoJsonResponse(true, "Image uploaded successfully.", ["imagePath" => $imagePath]);
     }
 
-} catch (Exception $e) {
-    error_log($e->getMessage());
-    echoJsonException($e->getCode(), "ProdukAPI request failed: " . $e->getMessage());
-}
+    function generateProdukHTML(array $array_produk): array {
+        $array_item_produk = [];
 
-function handleGetProdukData(): void {
-    if (isset($_GET["id"])) {
-        $id = htmlspecialchars($_GET["id"]);
-        returnProdukFromID($id);
-    } else if (isset($_GET["keyword"])) {
-        $keyword = htmlspecialchars($_GET["keyword"]);
-        returnProdukFromKeyword($keyword);
-    } else {
-        returnSemuaProduk();
-    }
-}
-
-function handleGetProdukHtml(): void {
-    if (isset($_GET["id"])) {
-        $id = htmlspecialchars($_GET["id"]);
-        returnProdukHTMLFromId($id);
-    } else if (isset($_GET["keyword"])) {
-        $keyword = htmlspecialchars($_GET["keyword"]);
-        returnProdukHTMLFromKeyword($keyword);
-    } else {
-        returnSemuaProdukHTML();
-    }
-}
-
-// New function to handle inserting products
-function handleInsertProduk(): void {
-    global $Produk;
-
-    // Get the POST data
-    $data = json_decode(file_get_contents("php://input"), true);
-
-    if (!isset($data['nama']) || !isset($data['kategori']) || !isset($data['harga']) || !isset($data['detail'])) {
-        echoJsonResponse(false, "Missing required fields.", null);
-        return;
-    }
-
-    // Sanitize and validate the input
-    $nama = htmlspecialchars($data['nama']);
-    $kategori = htmlspecialchars($data['kategori']);
-    $harga = (float) $data['harga'];
-    $detail = htmlspecialchars($data['detail']);
-
-    try {
-        // Insert the product into the database
-        $insertSuccess = $Produk->insertProduk($nama, $kategori, $harga, $detail);
-
-        if ($insertSuccess) {
-            echoJsonResponse(true, "Product successfully added.", null);
-        } else {
-            echoJsonResponse(false, "Failed to insert product.", null);
-        }
-    } catch (Exception $e) {
-        echoJsonException($e->getCode(), "Error inserting product: " . $e->getMessage());
-    }
-}
-
-function returnSemuaProduk(): void {
-    global $Produk;
-
-    $array_item_produk = $Produk->getSemuaProduk();
-    echoJsonResponse(true, "ProdukAPI request processed.", $array_item_produk);
-}
-
-function returnSemuaProdukHTML(): void {
-    returnProdukHTMLFromKeyword("");
-}
-
-function returnProdukFromID(int $id): void {
-    global $Produk;
-
-    $item_produk = $Produk->getProdukFromID($id);
-    echoJsonResponse(true, "ProdukAPI request processed.", $item_produk);
-}
-
-function returnProdukHTMLFromId(int $id): void {
-    global $Produk;
-
-    $produk = $Produk->getProdukFromID($id);
-    $html = generateProdukHTML([$produk]);
-    echoJsonResponse(true, "ProdukAPI request processed.", $html[0]);
-}
-
-function returnProdukFromKeyword(string $keyword): void {
-    global $Produk;
-
-    $array_produk = $Produk->getProdukFromKeyword($keyword);
-    echoJsonResponse(true, "ProdukAPI request processed.", $array_produk);
-}
-
-function returnProdukHTMLFromKeyword(string $keyword): void {
-    global $Produk;
-
-    $array_produk = ($keyword == "") ? $Produk->getSemuaProduk() : $Produk->getProdukFromKeyword($keyword);
-    $html = generateProdukHTML($array_produk);
-    echoJsonResponse(true, "ProdukAPI request processed.", $html);
-}
-
-function generateProdukHTML(array $array_produk): array {
-    $array_item_produk = [];
-
-    foreach ($array_produk as $produk) {
-        $item_produk = lib\MenuLoader::createItemProdukHTML($produk);
-        $array_item_produk[] = ["html" => $item_produk, "kategori" => $produk["label"]];
-    }
-
-    return $array_item_produk;
-}
-
-    function getPatchBody(): array {
-        $rawInput = file_get_contents('php://input');
-        $body = json_decode($rawInput, true);
-
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new Exception("Invalid JSON input:" . json_last_error_msg());
+        foreach ($array_produk as $produk) {
+            $item_produk = MenuLoader::createItemProdukHTML($produk);
+            $array_item_produk[] = ["html" => $item_produk, "kategori" => $produk["label"]];
         }
 
-        if (!is_array($body)) {
-            throw new Exception("Expected JSON object as associative array.");
-        }
-
-        return $body;
+        return $array_item_produk;
     }
+}
+
+$Database = createDatabaseConn();
+$ProdukModel = new lib\Produk($Database);
+
+$controller = new ProdukAPIController(new class($ProdukModel) {
+    private $model;
+    public function __construct($model) {
+        $this->model = $model;
+    }
+    public function search($filters) {
+        return $this->model->searchProduk($filters);
+    }
+    public function add($data) {
+        return $this->model->addProduk($data);
+    }
+    public function delete($id) {
+        return $this->model->deleteProduk($id);
+    }
+    public function update($id, $data) {
+        return $this->model->updateProduk($id, $data);
+    }
+    public function getKategori() {
+        return $this->model->getKategori();
+    }
+    // expose public function of Produk Model
+    public function uploadImage($file) {
+        return $this->model->uploadImage($file);
+    }
+});
+
+$controller->handleRequest();
