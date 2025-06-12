@@ -183,11 +183,16 @@ function showReceiptDialog(e, cell) {
     // Set iframe src and show modal
     document.getElementById('receiptFrame').src = url;
     document.getElementById('receiptModal').style.display = 'block';
-    document.getElementById('modalBackdrop').style.display = 'block';
 }
 
 function closeReceiptDialog() {
     document.getElementById('receiptModal').style.display = 'none';
-    document.getElementById('modalBackdrop').style.display = 'none';
-    document.getElementById('receiptFrame').src = ''; // optional: reset
+    document.getElementById('receiptFrame').src = '';
 }
+
+const receiptPrintButton = document.getElementById('print_receipt_button')
+
+receiptPrintButton.addEventListener('click', function () {
+    window.frames["receiptFrame"].focus();
+    window.frames["receiptFrame"].print();
+})

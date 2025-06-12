@@ -111,11 +111,9 @@ function showViewDialog(e, cell) {
     // Set iframe src and show modal
     document.getElementById('receiptFrame').src = url;
     document.getElementById('receiptModal').style.display = 'block';
-    document.getElementById('modalBackdrop').style.display = 'block';
 }
 
 function closeReceiptDialog() {
     document.getElementById('receiptModal').style.display = 'none';
-    document.getElementById('modalBackdrop').style.display = 'none';
     document.getElementById('receiptFrame').src = ''; // optional: reset
 }

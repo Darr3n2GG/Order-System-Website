@@ -162,7 +162,6 @@ class TableManager {
         if (!printWindow) return;
 
         const tableHTML = `
-            <html>
             <head>
                 <title>Cetak Data</title>
                 <style>
@@ -192,10 +191,9 @@ class TableManager {
                     </tbody>
                 </table>
             </body>
-            </html>
         `;
 
-        printWindow.innerHTML = tableHTML;
+        printWindow.document.body.innerHTML = tableHTML;
         printWindow.document.close();
         printWindow.focus();
         printWindow.addEventListener('afterprint', () => {
