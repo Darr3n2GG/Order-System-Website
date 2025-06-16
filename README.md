@@ -6,7 +6,3 @@ THIS IS FOR PROJECT PURPOSES BEWARE OF MULTIPLE LANGUAGES CURSE!
 - Shoelace
 - Tabulator
 - Chart.js
-
-## Dependencies ( not required )
-- Composer
-- PHPUnit
