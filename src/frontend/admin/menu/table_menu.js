@@ -145,13 +145,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         'id',
         'nama'
     );
-    DropdownManager.setupHiddenFieldBinding('tambah_produk_id_kategori', 'hidden_tambah_produk_id_kategori');
-    await DropdownManager.populateDropdown(
-        document.getElementById('edit_produk_id_kategori'),
-        kategoriList,
-        'id',
-        'nama'
-    );
 });
 
 document.getElementById('tambah_gambar').addEventListener('click', () => {

@@ -43,6 +43,7 @@ $Database = createDatabaseConn();
                                     <span>Nama:</span>
                                     <sl-input id="filter_nama" size="small" placeholder="Cari Nama..."></sl-input>
                                 </div>
+                                <sl-button size="small">Cari</sl-button>
                             </div>
                             <div>
                                 <sl-button size="small" variant="primary" id="print_button" style="margin-left: auto;">
@@ -59,11 +60,10 @@ $Database = createDatabaseConn();
                                     <label slot="label">Nama</label>
                                     <sl-icon name="card-text" slot="prefix"></sl-icon>
                                 </sl-input>
-                                <sl-select placeholder="Kategori" id="tambah_produk_id_kategori" placement="bottom" required>
+                                <sl-select placeholder="Kategori" id="tambah_produk_id_kategori" name="id_kategori" placement="bottom" required>
                                     <sl-icon name="tag" slot="prefix"></sl-icon>
                                     <label slot="label">Kategori</label>
                                 </sl-select>
-                                <input type="hidden" name="id_kategori" id="hidden_tambah_produk_id_kategori">
                                 <sl-input placeholder="Harga" id="tambah_produk_harga" name="harga" type="number" autocomplete="off" required>
                                     <label slot="label">Harga</label>
                                     <sl-icon name="cash" slot="prefix"></sl-icon>

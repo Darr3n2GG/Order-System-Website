@@ -41,18 +41,12 @@ const columns = [
     }
 ];
 
-// 🔸 Filters
-const filters = {
-    // database field to filter: element id of filter input box
-   // NO FILTER FOR KATEGORI
-};
-
 // 🔸 Initialize Table Manager
 const kategoriTable = new TableManager({
     tableId: "#table_kategori",
     viewModel: ViewModel,
     columns,
-    filters
+    filters: {}
 });
 
 // Setup Tambah Form
@@ -81,11 +75,11 @@ const dialogConfig = {
 kategoriTable.setupEditDialog(dialogConfig);
 
 // Setup CSV Import
-const csvConfig = {   
+const csvConfig = {
     csvInput: document.querySelector(".kategori_csv_input"),
     filesList: document.querySelector(".kategori_files_list"),
     csvUpload: document.querySelector(".csv_upload")
-};     
+};
 kategoriTable.setupCSVImport(csvConfig);
 
 // Call print method

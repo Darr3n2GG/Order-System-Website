@@ -94,9 +94,3 @@ pelangganTable.setupCSVImport();
 document.getElementById("print_button").addEventListener("click", () => {
     pelangganTable.printReport();  // This will print the table, ignoring columns with empty titles
 });
-
-// 🔸 Sync Hidden Dropdown
-document.getElementById("hidden_tambah_tahap").value = document.getElementById("tambah_tahap").value;
-document.getElementById("tambah_tahap").addEventListener("sl-change", (event) => {
-    document.getElementById("hidden_tambah_tahap").value = event.target.value;
-});

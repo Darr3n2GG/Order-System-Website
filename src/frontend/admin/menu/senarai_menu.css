@@ -34,12 +34,15 @@
     gap: 5px;
 }
 
-.filter_item > span {
-    margin-right: 0.5rem;
+.filter_item {
+    gap: 8px;
+    width: 40%;
+    min-width: 0;
 }
 
-.filter_item {
-    width: 40%;
+.filter_item > sl-input {
+    min-width: 0;
+    width: 100%;
 }
 
 #table_menu, #table_kategori {

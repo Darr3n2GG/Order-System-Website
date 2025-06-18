@@ -45,10 +45,11 @@
 }
 
 .log_keluar {
-    position: relative;
+    position: absolute;
     display: flex;
-    bottom: -50vh;
     justify-content: center;
+    bottom: 10px;
+    width: 100%;
 }
 
 .log_keluar > sl-button {

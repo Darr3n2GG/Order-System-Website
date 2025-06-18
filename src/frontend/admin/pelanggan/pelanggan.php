@@ -37,6 +37,7 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
                         <span>No.Phone:</span>
                         <sl-input id="filter_no_phone" size="small" placeholder="Cari phone..."></sl-input>
                     </div>
+                    <sl-button size="small">Cari</sl-button>
                 </div>
                 <div class="print_button_container" style="margin-top: 12px;">
                     <sl-button size="small" id="print_button" variant="primary">
@@ -61,12 +62,11 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
                         <label slot="label">Password</label>
                         <sl-icon name="key" slot="prefix"></sl-icon>
                     </sl-input>
-                    <sl-select placeholder="Tahap" id="tambah_tahap" placement="bottom">
+                    <sl-select placeholder="Tahap" name="tahap" id="tambah_tahap" placement="bottom">
                         <label slot="label">Tahap</label>
                         <sl-option value="1">User</sl-option>
                         <sl-option value="2">Admin</sl-option>
                     </sl-select>
-                    <input type="hidden" name="tahap" id="hidden_tambah_tahap">
                     <div class="form_buttons">
                         <sl-button type="submit">
                             <sl-icon slot="prefix" name="plus-square"></sl-icon>

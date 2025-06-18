@@ -33,6 +33,7 @@ require_once dirname(__FILE__, 3) . "/dependencies.php";
                         <span>Pelanggan:</span>
                         <sl-input id="filter_id_pelanggan" size="small" placeholder="Cari pelanggan..."></sl-input>
                     </div>
+                    <sl-button size="small">Cari</sl-button>
                 </div>
                 <div class="print_button_container" style="margin-top: 12px;">
                     <sl-button size="small" id="print_button" variant="primary">

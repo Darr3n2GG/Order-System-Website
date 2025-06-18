@@ -12,26 +12,25 @@
     gap: 1rem;
 }
 
-.table_container sl-input {
-    width: 75%;
-}
-
 .filter, .filter_item {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
+.filter_item {
+    gap: 8px;
+    width: 40%;
+    min-width: 0;
+}
+
+.filter_item > sl-input {
+    min-width: 0;
+    width: 100%;
+}
+
 .filter {
     gap: 5px;
-}
-
-.filter_item {
-    width: 40%;
-}
-
-.filter_item > span {
-    margin-right: 0.5rem;
 }
 
 #table_pelanggan {
