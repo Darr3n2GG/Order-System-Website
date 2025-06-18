@@ -17,6 +17,10 @@
   box-shadow: var(--shadow-medium);
 }
 
+.cari_button {
+  display: none;
+}
+
 .search_container {
   width: 70%;
   box-shadow: var(--shadow-medium);
@@ -147,6 +151,10 @@ sl-dialog::part(footer) {
 
   .cart_button {
     display: none;
+  }
+
+  .cari_button {
+    display: block;
   }
 
   .food_item_container {

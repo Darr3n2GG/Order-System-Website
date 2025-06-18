@@ -57,6 +57,7 @@ $MenuLoader = new MenuLoader($array_kategori, $array_produk);
                         <sl-icon name="search" slot="prefix"></sl-icon>
                     </sl-input>
                 </div>
+                <sl-button class="cari_button">Cari</sl-button>
                 <sl-icon-button class="cart_button icon_border" name="bag"></sl-icon-button>
             </div>
 

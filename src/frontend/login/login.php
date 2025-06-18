@@ -65,7 +65,7 @@ if ($Session->sudahLogMasuk()) {
                 </div>
                 <div>
                     <sl-button class="login_button" type="submit">Log Masuk</sl-button>
-                    <sl-button href="../daftar/daftar.php" variant="text">Daftar</sl-button>
+                    <sl-button href="../daftar/daftar.php" variant="text">Tiada akaun?</sl-button>
                 </div>
             </form>
         </div>
